@@ -1,0 +1,16 @@
+{
+	"APP_NAME":"Accreditation",
+	
+	"MENU_OTHER_SYSTEMS": "Other Systems",
+	"SYSTEM_REGO": "Registrations",
+	"SYSTEM_EVENTS": "Events",
+	"SYSTEM_AUTH": "Auth Admin",
+	"SYSTEM_GLOSSARY": "Glossary",
+	"SYSTEM_PEOPLE": "People",
+	"SYSTEM_RESOURCES": "Resource Manager",
+	
+	"EventListHeading":"Events",
+	"Name": "Name",
+	"StartDate": "Start Date",
+	"EndDate": "End Date"
+}
