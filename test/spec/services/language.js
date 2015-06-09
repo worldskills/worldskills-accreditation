@@ -3,7 +3,7 @@
 describe('Service: Language', function () {
 
   // load the service's module
-  beforeEach(module('accreditationApp'));
+  beforeEach(module('worldSkillsApp'));
 
   // instantiate service
   var Language;

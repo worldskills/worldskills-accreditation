@@ -3,7 +3,7 @@
 describe('Controller: TranslateCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('accreditationApp'));
+  beforeEach(module('worldSkillsApp'));
 
   var TranslateCtrl,
     scope;
@@ -16,4 +16,7 @@ describe('Controller: TranslateCtrl', function () {
     });
   }));
 
+  it('should attach a list of awesomeThings to the scope', function () {
+    expect(scope.awesomeThings.length).toBe(3);
+  });
 });

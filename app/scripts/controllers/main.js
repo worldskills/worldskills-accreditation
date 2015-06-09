@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('accreditationApp')
-  .controller('MainCtrl', function ($scope, $rootScope, $state, $translate, Language, auth, user, API_AUTH_CODE, alert, Restangular, $http) {
+function MainController ($scope, $rootScope, $state, $translate, Language, auth, user, API_AUTH_CODE, alert, Restangular, $http) {
     $scope.selectedLanguage = Language.selectedLanguage;
     
     $scope.auth = auth;
@@ -60,4 +59,4 @@ angular.module('accreditationApp')
     
     
 	  
-  });
+  };

@@ -9,24 +9,24 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css styles/vendor.css -->
+    <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
     <!-- endbower -->
     <!-- endbuild -->
-    <!-- build:css({.tmp,app}) styles/main.css -->
+    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <link href="accreditation.css" rel="stylesheet">
   </head>
-  <body ng-app="accreditationApp" ng-controller='MainCtrl'>
+  <body ng-app="accreditationApp" ng-controller='MainController'>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-     <div class="navbar navbar-worldskills navbar-static-top">
+    <div class="navbar navbar-worldskills navbar-static-top">
         <div class="cube-container">
             <div class="cube-right-bottom-blue">&nbsp;</div>
         </div>
@@ -38,17 +38,15 @@
                 <a class="navbar-brand" href="#" ng-cloak translate>APP_NAME</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-            
                 <ul class="nav navbar-nav navbar-right">
-                	<li ng-show="!auth.loggedIn"><a href="{{auth.loginUrl}}" translate>LOGIN</a></li>
+                    <li ng-show="!auth.loggedIn"><a href="{{auth.loginUrl}}" translate>LOGIN</a></li>
                     <li class="dropdown" ng-show="auth.loggedIn">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                            {{auth.user.first_name}} {{auth.user.last_name}} <b class="caret"></b>
+                            <span ng-bind="auth.user.first_name + ' ' + auth.user.last_name"></span> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="" ng-click="logout()" translate>LOGOUT</a></li>
-                        </ul>
-                    </li>
+                        </ul></li>
                 </ul>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
@@ -116,27 +114,46 @@
     </div>
     <!-- <konami/> -->
 
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <!-- End your site or application content here -->
+    
 
-    <!-- build:js scripts/vendor.js -->
+    <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-translate/angular-translate.js"></script>
-    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/json3/lib/json3.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
     <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
     <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/angular-ui-select/dist/select.js"></script>
@@ -148,7 +165,7 @@
         <script src="scripts/config.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/services/language.js"></script>
-        <script src="scripts/services/language.js"></script>
+        <script src="scripts/controllers/translate.js"></script>
         <script src="scripts/directives/spinner.js"></script>
         <script src="scripts/directives/alerts.js"></script>
         <script src="scripts/services/user.js"></script>

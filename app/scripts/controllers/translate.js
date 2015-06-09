@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('accreditationApp')
-	.controller('TranslateCtrl', ['$translate', '$translateLocalStorage', '$scope', 'Language', function ($translate, $translateLocalStorage, $scope, Language) {
+function TranslateCtrl($translate, $translateLocalStorage, $scope, Language) {
 
 		//get current language from local storage		
 		Language.selectedLanguage = $translateLocalStorage.get('NG_TRANSLATE_LANG_KEY');
@@ -13,4 +12,4 @@ angular.module('accreditationApp')
 			$scope.selectedLanguage = langKey;
 		};		
 
-	}]);
+	};

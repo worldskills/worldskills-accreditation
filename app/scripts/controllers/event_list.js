@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('accreditationApp')
-  .controller('EventListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular, REST_BASE_URL, user, API_AUTH_CODE) {
+function EventListCtrl($scope, $rootScope, $stateParams, $translate, alert, Restangular, REST_BASE_URL, user, API_AUTH_CODE) {
 	  
 	  $scope.current_page = $rootScope.currentPage;
 	  $scope.items_per_page = 10;
@@ -29,5 +28,5 @@ angular.module('accreditationApp')
 	  }
 	  
 	  $scope.changePage($scope.current_page);
-  });
+  };
  
