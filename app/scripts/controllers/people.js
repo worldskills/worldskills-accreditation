@@ -2,6 +2,8 @@
 
 function PeopleListCtrl($scope, $rootScope, $stateParams, $translate, alert, Restangular) {
 	
+	$scope.loading = true;
+	
 	$scope.eventId = $stateParams.event_id;
 	
 	$scope.current_page = $rootScope.currentPeoplePage;
@@ -30,17 +32,18 @@ function PeopleListCtrl($scope, $rootScope, $stateParams, $translate, alert, Res
 
 	$scope.changePage = function() 
 	{
-		$rootScope.loading = true;
+		$scope.loading = true;
 
 		$rootScope.currentPeoplePage = $scope.current_page;
 		Restangular.one('accreditation/events', $scope.eventId).one('people').get({fn: $scope.filter.firstName, 
 			ln: $scope.filter.lastName, pos_name: $scope.filter.position, country: $scope.filter.country,
 			skill: $scope.filter.skill, sort: $scope.filter.sort, limit: $scope.items_per_page, offset: $scope.items_per_page * ($scope.current_page-1), 
 		}).then( function(result) 
-				{
+		{
 			$scope.people = result;
 			$rootScope.loading = false;
-				}, $rootScope.errorHandler);
+			$scope.loading = false;
+		}, $rootScope.errorHandler);
 	};
 
 	$scope.filterResults = function()

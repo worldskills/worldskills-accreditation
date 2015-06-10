@@ -24,6 +24,7 @@
 	"FirstName": "First Name",
 	"LastName": "Last Name",
 	"FirstNameDesc": "First Name descending",
-	"LastNameDesc": "Last Name descending"
+	"LastNameDesc": "Last Name descending",
+	"SetFilter": "Set Filter"
 
 }

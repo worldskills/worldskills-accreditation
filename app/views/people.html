@@ -14,7 +14,8 @@
 				items-per-page='items_per_page' class="pagination-sm pull-right"
 				boundary-links="true" max-size="5" rotate="false"
 				ng-change="changePage()"></pagination>
-			<table class="table table-striped resource_list">
+			<ws-spinner ng-show='loading' class='bigSpinner col-sm-12'></ws-spinner>
+			<table ng-show='!loading' class="table table-striped resource_list">
 				<colgroup>
 					<col width="30%" />
 					<col width="20%" />
@@ -55,7 +56,7 @@
 		</div>
 	</div>
 	<div class="col-md-3 sidebar" role="navigation">
-		<form name="form" novalidate ng-controller="PeopleFilterController">
+		<form name="form" novalidate ng-controller="PeopleFilterController" ng-disabled="loading">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a class="pull-right" href="" ng-click="clear()" translate>Clear</a>

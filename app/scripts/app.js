@@ -21,15 +21,36 @@ angular
     'ui.bootstrap',
     'pascalprecht.translate',
     'restangular',
-    'ui.select2'
+    'ui.select2',
+    'worldskills.utils'
   ])
     .config(function ($controllerProvider, $routeProvider, $translateProvider, $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, REST_BASE_URL, API_ORG) {
     
     $controllerProvider.allowGlobals();
     	
     $urlRouterProvider.otherwise('/');
+    /*$urlRouterProvider.otherwise(function ($injector, $location) {
+    	console.log('checking redirect');
+        // check for existing redirect
+        var $state = $injector.get('$state');
+        var redirectToState = sessionStorage.getItem('redirect_to_state');
+        var redirectToParams = sessionStorage.getItem('redirect_to_params');
+        sessionStorage.removeItem('redirect_to_state');
+        sessionStorage.removeItem('redirect_to_params');
+        console.log('state: ' + redirectToState);
+        if (redirectToState) {
+            if (redirectToParams) {
+                redirectToParams = angular.fromJson(redirectToParams);
+            } else {
+                redirectToParams = {};
+            }
+            $state.go(redirectToState, redirectToParams);
+        } else {
+            $state.go('event_list');
+        }
+    });*/
 
-    $routeProvider
+    /*$routeProvider
       .when('/', {
         templateUrl: 'views/event_list.html',
         controller: 'EventListCtrl'
@@ -40,7 +61,7 @@ angular
       //})
       .otherwise({
         redirectTo: '/'
-      });
+      });*/
 
   $translateProvider.useStaticFilesLoader({
     prefix: 'languages/',
@@ -59,17 +80,26 @@ angular
     .state('index', {
       url: '/',
       templateUrl: 'views/event_list.html',
-      controller: 'EventListCtrl'
+      controller: 'EventListCtrl',
+      data: {
+          requireLoggedIn: true
+      }
     })
     .state('event_list', {
     	url: '/events',
     	templateUrl: 'views/event_list.html',
-    	controller: 'EventListCtrl'
+    	controller: 'EventListCtrl',
+    	data: {
+            requireLoggedIn: true
+        }
     })
     .state('people', {
     	url: '/events/{event_id}/people',
     	templateUrl: 'views/people.html',
-    	controller: 'PeopleListCtrl'
+    	controller: 'PeopleListCtrl',
+    	data: {
+            requireLoggedIn: true
+        }
     })
    ;
 
