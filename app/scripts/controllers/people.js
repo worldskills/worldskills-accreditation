@@ -4,8 +4,6 @@ function PeopleListCtrl($scope, $rootScope, $stateParams, $translate, alert, Res
 	
 	$scope.eventId = $stateParams.event_id;
 	
-	console.log($rootScope.countries);
-	
 	$scope.current_page = $rootScope.currentPeoplePage;
 	$scope.items_per_page = 10;
 	

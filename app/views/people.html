@@ -53,7 +53,6 @@
 				boundary-links="true" max-size="5" rotate="false"
 				ng-change="changePage(page)"></pagination>
 		</div>
-		{{countries}}
 	</div>
 	<div class="col-md-3 sidebar" role="navigation">
 		<form name="form" novalidate ng-controller="PeopleFilterController">
@@ -76,16 +75,12 @@
                             <label for="position" translate>Position</label>
                             <input ng-model="filter.position" class="form-control input-sm" id="position"/>
                         </div>
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label for="country" translate>Country</label>
-                            <ui-select name="country" id="country" ng-model="filter.country" theme="bootstrap">
-                            	<ui-select-match >{{$select.selected.code}}</ui-select-match>
-                            	<ui-select-choices repeat="country in countries">
-                            	<span ng-bind-html="country.code | highlight: $select.search"></span>
-								<small ng-bind-html="country.name.text | highlight: $select.search"></small>
-								</ui-select-choices>
-                            </ui-select>
-                        </div> -->
+                        	<select ui-select2 ng-model="filter.country" class="filterSelect">
+							    <option ng-repeat="country in countries" value="{{country.code}}">{{country.code}} - {{country.name.text}}</option>
+							</select>
+						</div>
                         <!-- <div class="form-group">
 							<label for="resType" translate>ResourceType</label>
 							<select multiple ui-select2 ng-model="filterResourceType" id="resType" class="resourceTypeSelect" >

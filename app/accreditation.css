@@ -12,3 +12,7 @@
 .datePicker {
 	width: 140px;
 }
+
+.filterSelect {
+	min-width: 230px;
+}

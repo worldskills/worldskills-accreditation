@@ -21,7 +21,7 @@ angular
     'ui.bootstrap',
     'pascalprecht.translate',
     'restangular',
-    'ui.select'
+    'ui.select2'
   ])
     .config(function ($controllerProvider, $routeProvider, $translateProvider, $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, REST_BASE_URL, API_ORG) {
     
