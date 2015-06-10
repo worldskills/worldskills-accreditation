@@ -62,7 +62,7 @@
                     <h3 class="panel-title" translate>Filter</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form role="form" wsi-enter="filterResults()">
                     	<div class="form-group">
                             <label for="name" translate>FirstName</label>
                             <input ng-model="filter.firstName" class="form-control input-sm" id="name"/>
@@ -77,22 +77,16 @@
                         </div>
                         <div class="form-group">
                             <label for="country" translate>Country</label>
-                        	<select ui-select2 ng-model="filter.country" class="filterSelect">
+                        	<select ui-select2 ng-model="filter.country" class="filterSelect" name="country" id="country">
 							    <option ng-repeat="country in countries" value="{{country.code}}">{{country.code}} - {{country.name.text}}</option>
 							</select>
 						</div>
-                        <!-- <div class="form-group">
-							<label for="resType" translate>ResourceType</label>
-							<select multiple ui-select2 ng-model="filterResourceType" id="resType" class="resourceTypeSelect" >
-							    <option ng-repeat="type in resourceTypes" value="{{type.id}}">{{type.name}}</option>
+						<div class="form-group">
+                            <label for="skill" translate>Skill</label>
+                        	<select ui-select2 ng-model="filter.skill" class="filterSelect" name="skill" id="skill">
+							    <option ng-repeat="skill in skills" value="{{skill.id}}">{{skill.skill_number}} {{skill.name.text}}</option>
 							</select>
 						</div>
-						<div class="form-group">
-							<label for="wse" translate>WSEntity</label>
-							<select ui-select2 ng-model="filterWSEntity" class="wsEntitySelect">
-							    <option ng-repeat="entity in wsEntities" value="{{entity.id}}">{{entity.name.text}} {{entity.public_download ? "(public)" : ""}}</option>
-							</select>
-						</div>-->
                         <div class="form-group">
                             <label for="sort" translate>Sort</label>
                             <select ng-model="filter.sort" class="form-control input-sm" id="sort">

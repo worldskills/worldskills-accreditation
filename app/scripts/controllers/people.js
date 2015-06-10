@@ -49,6 +49,16 @@ function PeopleListCtrl($scope, $rootScope, $stateParams, $translate, alert, Res
 		$scope.changePage();
 	}
 	
+	// function for retrieving list of skills
+	$scope.getSkills = function()
+	{
+		Restangular.one('accreditation/events', $scope.eventId).one('skills').get().then( function(result) 
+				{
+			$scope.skills = result.skills;
+			$rootScope.loading = false;
+				}, $rootScope.errorHandler);
+	}
+	
 	// load the event info
 	Restangular.one('accreditation/events', $scope.eventId).get().then(function(result) 
 			{
@@ -56,12 +66,20 @@ function PeopleListCtrl($scope, $rootScope, $stateParams, $translate, alert, Res
 		$rootScope.loading = false;
 			}, $rootScope.errorHandler);
 
+	$scope.getSkills();
 	$scope.changePage();
 }
 
-function PeopleFilterController($scope, $rootScope, $stateParams, $translate, alert, Restangular, REST_BASE_URL, user, API_AUTH_CODE)
+function PeopleFilterController($scope, $rootScope, $element)
 {
-
+	// filter the results when enter pressed in form
+	$element.bind('keydown keypress', function (event) {
+		if (event.keyCode === 13) { // enter key
+			$scope.$apply(function() {
+				$scope.filterResults();
+			});
+		}
+	});
 }
 
 

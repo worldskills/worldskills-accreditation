@@ -3,7 +3,7 @@
 
     var restBaseUrl = 'http://localhost:9991';
     var authBaseUrl = 'http://localhost:8088';
-    var orgBaseUrl = 'http://localhost:9090';
+    var orgBaseUrl = 'https://api.worldskills.org';
     var loginApp = 'http://worldskillsdevauth.com';
     
     var wsApp = angular.module('accreditationApp'); 
