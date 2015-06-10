@@ -1,0 +1,116 @@
+<ol class="breadcrumb">
+	<li><a ui-sref="event_list" translate>EventListHeading</a></li>
+    <li class="active">{{event.name.text}}</li>
+</ol>
+
+<h1><span translate>PeopleListHeading</span> {{event.name.text}}</h1>
+
+<alerts></alerts>
+
+<div class="row">
+	<div class="col-md-9 ">
+		<div class="table-responsive">
+			<pagination total-items="people.total_count" ng-model="current_page"
+				items-per-page='items_per_page' class="pagination-sm pull-right"
+				boundary-links="true" max-size="5" rotate="false"
+				ng-change="changePage()"></pagination>
+			<table class="table table-striped resource_list">
+				<colgroup>
+					<col width="30%" />
+					<col width="20%" />
+					<col width="25%" />
+					<col width="25%" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th><span translate>Name</span></th>
+						<th><span translate>Position</span></th>
+						<th><span translate>Skills</span></th>
+						<th><span translate>Country</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="person in people.people">
+						<td>{{person.first_name}} {{person.last_name}}</td>
+						<td><div ng-repeat="pos in person.positions">{{pos}}</div></td>
+						<td><div ng-repeat="skill in person.skills">{{skill.skill_number}} {{skill.name.text}}</div></td>
+						<td>{{person.country.name.text}}</td>
+					</tr>
+					<tr ng-show="people.total_count == 0">
+						<td colspan="8"><span translate>NoPeople</span></td>
+					</tr>
+
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="8"></td>
+					</tr>
+				</tfoot>
+			</table>
+
+			<pagination total-items="people.total_count" ng-model="current_page"
+				items-per-page='items_per_page' class="pagination-sm pull-right"
+				boundary-links="true" max-size="5" rotate="false"
+				ng-change="changePage(page)"></pagination>
+		</div>
+		{{countries}}
+	</div>
+	<div class="col-md-3 sidebar" role="navigation">
+		<form name="form" novalidate ng-controller="PeopleFilterController">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="pull-right" href="" ng-click="clear()" translate>Clear</a>
+                    <h3 class="panel-title" translate>Filter</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                    	<div class="form-group">
+                            <label for="name" translate>FirstName</label>
+                            <input ng-model="filter.firstName" class="form-control input-sm" id="name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" translate>LastName</label>
+                            <input ng-model="filter.lastName" class="form-control input-sm" id="name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="position" translate>Position</label>
+                            <input ng-model="filter.position" class="form-control input-sm" id="position"/>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="country" translate>Country</label>
+                            <ui-select name="country" id="country" ng-model="filter.country" theme="bootstrap">
+                            	<ui-select-match >{{$select.selected.code}}</ui-select-match>
+                            	<ui-select-choices repeat="country in countries">
+                            	<span ng-bind-html="country.code | highlight: $select.search"></span>
+								<small ng-bind-html="country.name.text | highlight: $select.search"></small>
+								</ui-select-choices>
+                            </ui-select>
+                        </div> -->
+                        <!-- <div class="form-group">
+							<label for="resType" translate>ResourceType</label>
+							<select multiple ui-select2 ng-model="filterResourceType" id="resType" class="resourceTypeSelect" >
+							    <option ng-repeat="type in resourceTypes" value="{{type.id}}">{{type.name}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="wse" translate>WSEntity</label>
+							<select ui-select2 ng-model="filterWSEntity" class="wsEntitySelect">
+							    <option ng-repeat="entity in wsEntities" value="{{entity.id}}">{{entity.name.text}} {{entity.public_download ? "(public)" : ""}}</option>
+							</select>
+						</div>-->
+                        <div class="form-group">
+                            <label for="sort" translate>Sort</label>
+                            <select ng-model="filter.sort" class="form-control input-sm" id="sort">
+		        				<option value="fn" translate>FirstName</option>
+		        				<option value="fn_desc" translate>FirstNameDesc</option>
+		        				<option value="ln" translate>LastName</option>
+		        				<option value="ln_desc" translate>LastNameDesc</option>
+		        			</select>
+                        </div>
+                        <a ng-click="filterResults()" class="btn btn-primary pull-right" ng-disabled="loading || deleting"><span translate>SetFilter</span><spinner ng-show="loading" class="ng-hide"></spinner></a>
+                    </form>
+                </div>
+            </div>
+        </form>
+	</div>
+</div>

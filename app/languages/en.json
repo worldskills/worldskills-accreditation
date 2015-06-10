@@ -12,5 +12,18 @@
 	"EventListHeading":"Events",
 	"Name": "Name",
 	"StartDate": "Start Date",
-	"EndDate": "End Date"
+	"EndDate": "End Date",
+	
+	"PeopleListHeading": "Accredited People for",
+	"Position": "Position",
+	"Skills": "Skills",
+	"Country": "Country",
+	"NoPeople": "No people found matching your search criteria",
+	"Filter": "Filter",
+	"Clear": "Clear",
+	"FirstName": "First Name",
+	"LastName": "Last Name",
+	"FirstNameDesc": "First Name descending",
+	"LastNameDesc": "Last Name descending"
+
 }

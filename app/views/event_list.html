@@ -24,7 +24,7 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="event in events.events">
-						<td>{{event.name.text}}</a></td>
+						<td><a ui-sref="people({event_id: event.id})" >{{event.name.text}}</a></td>
 						<td>{{event.start_date | date:'yyyy-MM-dd'}}</td>
 						<td>{{event.end_date | date:'yyyy-MM-dd'}}</td>
 					</tr>

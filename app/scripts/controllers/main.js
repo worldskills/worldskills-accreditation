@@ -1,6 +1,6 @@
 'use strict';
 
-function MainController ($scope, $rootScope, $state, $translate, Language, auth, user, API_AUTH_CODE, alert, Restangular, $http) {
+function MainCtrl ($scope, $rootScope, $state, $translate, Language, auth, user, API_AUTH_CODE, alert, Restangular, $http, OrgRestangular) {
     $scope.selectedLanguage = Language.selectedLanguage;
     
     $scope.auth = auth;
@@ -9,6 +9,7 @@ function MainController ($scope, $rootScope, $state, $translate, Language, auth,
     $scope.API_AUTH_CODE = API_AUTH_CODE;
     
     $rootScope.currentPage = 1;
+    $rootScope.currentPeoplePage = 1;
     $rootScope.filterTags = [];
     
     $scope.logout = function (e) {
@@ -29,34 +30,15 @@ function MainController ($scope, $rootScope, $state, $translate, Language, auth,
     	});
     	document.body.scrollTop = document.documentElement.scrollTop = 0;
     };
-    
-    $rootScope.tagOptions = {
-    		'multiple': true,
-    		'simple_tags': true,
-    		'maximumInputLength': 100,
-    		'tokenSeparators': [','],
-    		'tags': ['blah']
-    }
 
-    $scope.exSearch = function()
+    $rootScope.getCountries = function()
     {
-    	$rootScope.searchTerm = $scope.searchTerm;
-    	if ($state.current.name == 'search')
+    	OrgRestangular.one('countries').get().then( function(result)
     	{
-    		$scope.runSearch();
-    	}
-    	else
-    	{
-    		$state.go('search');
-    	}
+    		$rootScope.countries = result.country_list;
+    	}, $rootScope.errorHandler);
     }
-    
-    $scope.runSearch = function() {
-		  Restangular.one('resources/search').get({text: $scope.searchTerm}).then(function(result) {
-			  $scope.searchResults = result;
-		  }, $rootScope.errorHandler);
-	  };
-    
-    
 	  
+    $rootScope.getCountries();
+    
   };
