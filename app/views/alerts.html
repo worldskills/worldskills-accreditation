@@ -1,1 +1,1 @@
-<alert ng-repeat="message in alert.messages" type="message.type" close="close($index)" class="alert-elem">{{message.text}}</alert>
+<alert ng-repeat="message in alert.messages" type="message.type" close="close($index)" class="alert-elem alert-{{message.type}}">{{message.text}}</alert>

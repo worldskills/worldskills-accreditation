@@ -16,3 +16,5 @@
 .filterSelect {
 	min-width: 230px;
 }
+
+.personImage img{ max-width: 100%; min-height: 100px; }

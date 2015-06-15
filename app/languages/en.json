@@ -25,6 +25,16 @@
 	"LastName": "Last Name",
 	"FirstNameDesc": "First Name descending",
 	"LastNameDesc": "Last Name descending",
-	"SetFilter": "Set Filter"
+	"SetFilter": "Set Filter",
+	
+	"AccSpecHeading": "Accreditation-Specific Information",
+	"Organization": "Organization",
+	"HideCountry": "Hide Country",
+	"PeopleDataHeading": "Data from People Service",
+	"Positions": "Positions",
+	"Pacman": "Pacman ID",
+	"Save": "Save",
+	"PersonSaveMsg": "Accreditation data saved"
+	
 
 }

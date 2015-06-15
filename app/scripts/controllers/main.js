@@ -41,4 +41,12 @@ function MainCtrl ($scope, $rootScope, $state, $translate, Language, auth, user,
 	  
     $rootScope.getCountries();
     
+    $rootScope.filter = {
+			firstName: '',
+			lastName: '',
+			position: '',
+			country: '',
+			skill: undefined,
+			sort: ''
+	}
   };

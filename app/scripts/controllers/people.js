@@ -9,15 +9,6 @@ function PeopleListCtrl($scope, $rootScope, $stateParams, $translate, alert, Res
 	$scope.current_page = $rootScope.currentPeoplePage;
 	$scope.items_per_page = 10;
 	
-	$scope.filter = {
-			firstName: '',
-			lastName: '',
-			position: '',
-			country: '',
-			skill: undefined,
-			sort: ''
-	}
-	  
 	$scope.clear = function() {
 		$scope.current_page = 1;
 		$scope.filter.firstName = '';
@@ -41,7 +32,7 @@ function PeopleListCtrl($scope, $rootScope, $stateParams, $translate, alert, Res
 		}).then( function(result) 
 		{
 			$scope.people = result;
-			$rootScope.loading = false;
+			$scope.loading = false;
 			$scope.loading = false;
 		}, $rootScope.errorHandler);
 	};
@@ -58,16 +49,14 @@ function PeopleListCtrl($scope, $rootScope, $stateParams, $translate, alert, Res
 		Restangular.one('accreditation/events', $scope.eventId).one('skills').get().then( function(result) 
 				{
 			$scope.skills = result.skills;
-			$rootScope.loading = false;
 				}, $rootScope.errorHandler);
 	}
 	
 	// load the event info
 	Restangular.one('accreditation/events', $scope.eventId).get().then(function(result) 
-			{
-		$scope.event = result;
-		$rootScope.loading = false;
-			}, $rootScope.errorHandler);
+		{
+			$scope.event = result;
+		}, $rootScope.errorHandler);
 
 	$scope.getSkills();
 	$scope.changePage();
