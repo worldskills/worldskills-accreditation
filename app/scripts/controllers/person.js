@@ -1,11 +1,12 @@
 'use strict';
 
-function PersonCtrl($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular) {
+function PersonCtrl($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, PEOPLE_APP) {
 	
 	$scope.loading = true;
 	
 	$scope.eventId = $stateParams.event_id;
 	$scope.personId = $stateParams.person_id;
+	$scope.peopleApp = PEOPLE_APP;
 	
 	// load the event info
 	Restangular.one('accreditation/events', $scope.eventId).get().then(function(result) 

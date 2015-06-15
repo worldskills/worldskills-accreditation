@@ -5,6 +5,7 @@
     var authBaseUrl = 'http://diaz.worldskills.org:8080';
     var orgBaseUrl = 'http://diaz.worldskills.org:8080';
     var loginApp = 'http://auth.diaz.worldskills.org';
+    var peopleApp = 'http://staging-people.worldskills.org';
     
     var wsApp = angular.module('accreditationApp'); 
     wsApp.constant('REST_BASE_URL', restBaseUrl);
@@ -14,5 +15,6 @@
     wsApp.constant('AUTHORIZE_URL', loginApp + '/oauth/authorize');
     wsApp.constant('LOGOUT_URL', loginApp + '/logout');
     wsApp.constant('API_AUTH_CODE', 2100);
+    wsApp.constant('PEOPLE_APP', peopleApp);
 
 })();

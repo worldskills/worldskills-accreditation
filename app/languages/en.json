@@ -34,7 +34,8 @@
 	"Positions": "Positions",
 	"Pacman": "Pacman ID",
 	"Save": "Save",
-	"PersonSaveMsg": "Accreditation data saved"
+	"PersonSaveMsg": "Accreditation data saved",
+	"ViewInPeople": "View in People"
 	
 
 }

@@ -5,6 +5,7 @@
     var authBaseUrl = 'http://localhost:8088';
     var orgBaseUrl = 'https://api.worldskills.org';
     var loginApp = 'http://worldskillsdevauth.com';
+    var peopleApp = 'http://people.worldskills.org';
     
     var wsApp = angular.module('accreditationApp'); 
     wsApp.constant('REST_BASE_URL', restBaseUrl);
@@ -17,5 +18,6 @@
     wsApp.constant('WORLDSKILLS_AUTHORIZE_URL', loginApp + '/oauth/authorize');
     wsApp.constant('LOGOUT_URL', loginApp + '/logout');
     wsApp.constant('API_AUTH_CODE', 2100);
+    wsApp.constant('PEOPLE_APP', peopleApp);
 
 })();
