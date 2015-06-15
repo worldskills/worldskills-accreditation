@@ -1,6 +1,7 @@
 'use strict';
 
-function PersonCtrl($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, PEOPLE_APP) {
+angular.module('accreditationApp')
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, PEOPLE_APP) {
 	
 	$scope.loading = true;
 	
@@ -22,7 +23,7 @@ function PersonCtrl($scope, $rootScope, $state, $stateParams, $translate, alert,
 			$scope.person = result;
 			$scope.loading = false;
 		}, $rootScope.errorHandler);
-	}
+	};
 	
 	// handler for a successful save
 	var successHandler = function()
@@ -45,7 +46,7 @@ function PersonCtrl($scope, $rootScope, $state, $stateParams, $translate, alert,
 		};
 		Restangular.one('accreditation/events', $scope.eventId).one('people', $scope.personId).one('accreditation')
 			.customPUT(data).then(successHandler, $rootScope.errorHandler);
-	}
+	};
 	
 	$scope.getPerson();
-}
+});

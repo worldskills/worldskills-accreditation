@@ -24,7 +24,8 @@ angular
     'ui.select2',
     'worldskills.utils'
   ])
-    .config(function ($controllerProvider, $routeProvider, $translateProvider, $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, REST_BASE_URL, API_ORG) {
+    .config(['$controllerProvider', '$routeProvider', '$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', 'RestangularProvider', 'REST_BASE_URL', 'API_ORG',
+             function ($controllerProvider, $routeProvider, $translateProvider, $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, REST_BASE_URL, API_ORG) {
     
     $controllerProvider.allowGlobals();
     	
@@ -111,14 +112,15 @@ angular
     })
    ;
 
-  })
+  }])
   // set up a restangular object for the org service
   .factory('OrgRestangular', function(Restangular, API_ORG) {
 	  return Restangular.withConfig(function(RestangularConfigurer) {
 		  RestangularConfigurer.setBaseUrl(API_ORG);
 	  });
   })
-  .run(function($rootScope, $state, $stateParams, $window, Restangular, auth, user, API_AUTH_CODE){
+  .run(['$rootScope', '$state', '$stateParams', '$window', 'Restangular', 'auth', 'user', 'API_AUTH_CODE',
+        function($rootScope, $state, $stateParams, $window, Restangular, auth, user, API_AUTH_CODE){
 	
 	  $rootScope.available_languages = {"en":"English"};
 	
@@ -145,4 +147,4 @@ angular
 	  // to active whenever 'contacts.list' or one of its decendents is active.
 	  $rootScope.$state = $state;
 	  $rootScope.$stateParams = $stateParams;
-});
+}]);

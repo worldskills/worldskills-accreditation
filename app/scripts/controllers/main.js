@@ -1,6 +1,7 @@
 'use strict';
 
-function MainCtrl ($scope, $rootScope, $state, $translate, Language, auth, user, API_AUTH_CODE, alert, Restangular, $http, OrgRestangular) {
+angular.module('accreditationApp')
+.controller('MainCtrl', function ($scope, $rootScope, $state, $translate, Language, auth, user, API_AUTH_CODE, alert, Restangular, $http, OrgRestangular) {
     $scope.selectedLanguage = Language.selectedLanguage;
     
     $scope.auth = auth;
@@ -37,7 +38,7 @@ function MainCtrl ($scope, $rootScope, $state, $translate, Language, auth, user,
     	{
     		$rootScope.countries = result.country_list;
     	}, $rootScope.errorHandler);
-    }
+    };
 	  
     $rootScope.getCountries();
     
@@ -48,5 +49,5 @@ function MainCtrl ($scope, $rootScope, $state, $translate, Language, auth, user,
 			country: '',
 			skill: undefined,
 			sort: ''
-	}
-  };
+	};
+  });

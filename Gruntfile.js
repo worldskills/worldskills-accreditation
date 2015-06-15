@@ -301,6 +301,12 @@ module.exports = function (grunt) {
     // concat: {
     //   dist: {}
     // },
+    
+    cssmin: {
+        options: {
+          root: '<%= yeoman.app %>'
+        }
+      },
 
     imagemin: {
       dist: {
@@ -380,7 +386,7 @@ module.exports = function (grunt) {
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*',
             '*.css',
-            'bower_components/**/*'
+            '../bower_components/**/*'
           ]
         }, {
           expand: true,
@@ -476,7 +482,7 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'filerev',
-    //'usemin',
+    'usemin',
     'htmlmin'
   ]);
 
