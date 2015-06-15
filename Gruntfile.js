@@ -375,8 +375,12 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
+            'languages/{,*/}*.json',
+            'template/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'styles/fonts/{,*/}*.*',
+            '*.css',
+            'bower_components/**/*'
           ]
         }, {
           expand: true,
@@ -459,17 +463,20 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    //'bowerInstall',
+    'copy:config',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
     'concat',
     'ngAnnotate',
+    //'ngmin',
     'copy:dist',
     'cdnify',
     'cssmin',
     'uglify',
     'filerev',
-    'usemin',
+    //'usemin',
     'htmlmin'
   ]);
 
@@ -477,5 +484,9 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
+  ]);
+  
+  grunt.registerTask('config', [
+    'copy:config'
   ]);
 };
