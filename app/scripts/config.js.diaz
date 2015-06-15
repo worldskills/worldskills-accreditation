@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    var restBaseUrl = 'http://diaz.worldskills.org:8080';
-    var authBaseUrl = 'http://diaz.worldskills.org:8080';
-    var orgBaseUrl = 'http://diaz.worldskills.org:8080';
-    var loginApp = 'http://auth.diaz.worldskills.org';
-    var peopleApp = 'http://staging-people.worldskills.org';
+    var restBaseUrl = 'https://staging-api.worldskills.org';
+    var authBaseUrl = 'https://staging-api.worldskills.org';
+    var orgBaseUrl = 'https://staging-api.worldskills.org';
+    var loginApp = 'https://staging-auth.worldskills.org';
+    var peopleApp = 'https://staging-people.worldskills.org';
     
     var wsApp = angular.module('accreditationApp'); 
     wsApp.constant('REST_BASE_URL', restBaseUrl);
