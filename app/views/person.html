@@ -22,6 +22,21 @@
 				<form class="form-horizontal" name="form.accData" novalidate
 					focus-error>
 					<div class="form-group">
+						<label for="dt" class="col-md-2 control-label" translate>DelegateType</label>
+						<div class="col-md-6">
+							<select ui-select2 ng-model="person.accreditation.delegate_type.id" class="filterSelect" name="dt" id="dt">
+								<option ng-repeat="dt in delegate_types" value="{{dt.id}}">{{dt.name}}</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<!-- error message here? -->
+							<!-- <span class="help-block"
+									ng-show="form.basic.country.$dirty && form.basic.country.$error.required">Please
+									select a country!</span> -->
+						</div>
+					</div>
+					
+					<div class="form-group">
 						<label for="name" class="col-md-2 control-label" translate>Position</label>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="position"

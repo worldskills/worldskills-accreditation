@@ -42,8 +42,12 @@ angular.module('accreditationApp')
 				"position": $scope.person.accreditation.position,
 				"organization_name": $scope.person.accreditation.organization_name,
 				"hide_country": $scope.person.accreditation.hide_country,
-				"country_id": $scope.person.accreditation.country.id
+				"delegate_type_id": $scope.person.accreditation.delegate_type.id
 		};
+		if ($scope.person.accreditation.country)
+		{
+			data.country_id = $scope.person.accreditation.country.id;
+		}
 		Restangular.one('accreditation/events', $scope.eventId).one('people', $scope.personId).one('accreditation')
 			.customPUT(data).then(successHandler, $rootScope.errorHandler);
 	};

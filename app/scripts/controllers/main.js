@@ -39,8 +39,17 @@ angular.module('accreditationApp')
     		$rootScope.countries = result.country_list;
     	}, $rootScope.errorHandler);
     };
+    
+    $rootScope.getDelegateTypes = function()
+    {
+    	Restangular.one('accreditation/delegate_types').get().then( function(result)
+    	{
+    		$rootScope.delegate_types = result.delegate_types;
+    	}, $rootScope.errorHandler);
+    };
 	  
     $rootScope.getCountries();
+    $rootScope.getDelegateTypes();
     
     $rootScope.filter = {
 			firstName: '',

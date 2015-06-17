@@ -14,6 +14,7 @@ angular.module('accreditationApp')
 		$scope.current_page = 1;
 		$scope.filter.firstName = '';
 		$scope.filter.lastName = '';
+		$scope.filter.delegateTypes = [];
 		$scope.filter.position = '';
 		$scope.filter.country = '';
 		$scope.filter.skill = undefined;
@@ -29,7 +30,8 @@ angular.module('accreditationApp')
 		$rootScope.currentPeoplePage = $scope.current_page;
 		Restangular.one('accreditation/events', $scope.eventId).one('people').get({fn: $scope.filter.firstName, 
 			ln: $scope.filter.lastName, pos_name: $scope.filter.position, country: $scope.filter.country,
-			skill: $scope.filter.skill, sort: $scope.filter.sort, limit: $scope.items_per_page, offset: $scope.items_per_page * ($scope.current_page-1), 
+			skill: $scope.filter.skill, del_types: $scope.filter.delegateTypes, sort: $scope.filter.sort, 
+			limit: $scope.items_per_page, offset: $scope.items_per_page * ($scope.current_page-1), 
 		}).then( function(result) 
 		{
 			$scope.people = result;

@@ -35,7 +35,8 @@
 	"Pacman": "Pacman ID",
 	"Save": "Save",
 	"PersonSaveMsg": "Accreditation data saved",
-	"ViewInPeople": "View in People"
+	"ViewInPeople": "View in People",
+	"DelegateType": "Delegate Type"
 	
 
 }
