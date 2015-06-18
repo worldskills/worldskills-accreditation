@@ -29,8 +29,8 @@ angular
     
     $controllerProvider.allowGlobals();
     	
-    $urlRouterProvider.otherwise('/');
-    /*$urlRouterProvider.otherwise(function ($injector, $location) {
+    //$urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise(function ($injector, $location) {
     	console.log('checking redirect');
         // check for existing redirect
         var $state = $injector.get('$state');
@@ -49,7 +49,7 @@ angular
         } else {
             $state.go('event_list');
         }
-    });*/
+    });
 
     /*$routeProvider
       .when('/', {

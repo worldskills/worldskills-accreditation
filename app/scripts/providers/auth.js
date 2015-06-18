@@ -120,6 +120,9 @@
                 	var authenticator = $injector.get('authenticator');
                     if (!authenticator.authenticate(data))
                     {
+                    	sessionStorage.setItem('redirect_to_state', toState.name);
+                        sessionStorage.setItem('redirect_to_params', angular.toJson(toParams));
+                        
                     	document.location.href = auth.loginUrl;
                     }
                 }).
@@ -133,6 +136,9 @@
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
                 if (typeof toState.data != 'undefined' && !!toState.data.requireLoggedIn) {
                     user.error(function () {
+                    	sessionStorage.setItem('redirect_to_state', toState.name);
+                        sessionStorage.setItem('redirect_to_params', angular.toJson(toParams));
+                        
                         // error loading loggedIn user, redirect to login
                         document.location.href = auth.loginUrl;
                     });
