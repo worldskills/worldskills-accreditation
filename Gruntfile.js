@@ -409,6 +409,10 @@ module.exports = function (grunt) {
       config: {
       	src: '<%= yeoman.app %>/scripts/config.js.' + grunt.option('server'),
     	dest: '<%= yeoman.app %>/scripts/config.js'
+      },
+      select2png: {
+    	  src: '<%= yeoman.app %>/../bower_components/select2/select2.png',
+    	  dest: '<%= yeoman.dist %>/styles/select2.png'
       }
     },
 
@@ -478,6 +482,7 @@ module.exports = function (grunt) {
     'ngAnnotate',
     //'ngmin',
     'copy:dist',
+    'copy:select2png',
     'cdnify',
     'cssmin',
     'uglify',
