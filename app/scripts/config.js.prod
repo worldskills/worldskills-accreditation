@@ -5,7 +5,7 @@
     var authBaseUrl = 'https://api.worldskills.org';
     var orgBaseUrl = 'https://api.worldskills.org';
     var loginApp = 'https://auth.worldskills.org';
-    var peopleApp = 'http://people.worldskills.org';
+    var peopleApp = 'https://people.worldskills.org';
     
     var wsApp = angular.module('accreditationApp'); 
     wsApp.constant('REST_BASE_URL', restBaseUrl);
