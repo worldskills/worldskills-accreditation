@@ -22,7 +22,8 @@ angular
     'pascalprecht.translate',
     'restangular',
     'ui.select2',
-    'worldskills.utils'
+    'worldskills.utils',
+    'youtube-embed'
   ])
     .config(['$controllerProvider', '$routeProvider', '$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', 'RestangularProvider', 'REST_BASE_URL', 'API_ORG',
              function ($controllerProvider, $routeProvider, $translateProvider, $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, REST_BASE_URL, API_ORG) {

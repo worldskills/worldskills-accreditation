@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('MainCtrl', function ($scope, $rootScope, $state, $translate, Language, auth, user, API_AUTH_CODE, alert, Restangular, $http, OrgRestangular) {
+.controller('MainCtrl', function ($scope, $rootScope, $state, $translate, Language, auth, user, 
+		API_AUTH_CODE, alert, Restangular, $http, OrgRestangular, 
+		$modal) {
     $scope.selectedLanguage = Language.selectedLanguage;
     
     $scope.auth = auth;
@@ -12,6 +14,27 @@ angular.module('accreditationApp')
     $rootScope.currentPage = 1;
     $rootScope.currentPeoplePage = 1;
     $rootScope.filterTags = [];
+    
+    $rootScope.badgerVidId = 'XT8hE7_8BCY';
+    
+    $rootScope.showBadger = function() {
+	    $rootScope.badgerModal = $modal.open({
+			  scope: $scope,
+			  template: '<div style="padding: 5px;"><youtube-video video-id="badgerVidId"></youtube-video></div>',
+			  size: 'lg'
+		  });
+	    $scope.$on('youtube.player.ready', function ($event, player) {
+	        // play it again
+	        player.playVideo();
+	      });
+    };
+    
+    $rootScope.closeBadger = function() {
+    	if ($scope.badgerModal)
+		  {
+			  $scope.badgerModal.close();
+		  }
+    }
     
     $scope.logout = function (e) {
         auth.logout();

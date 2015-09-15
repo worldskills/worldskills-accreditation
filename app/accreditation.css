@@ -18,3 +18,7 @@
 }
 
 .personImage img{ max-width: 100%; min-height: 100px; }
+
+.modal-content {
+    width:655px;
+}

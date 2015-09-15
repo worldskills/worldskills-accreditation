@@ -106,7 +106,7 @@
 
     </footer>
     </div>
-    <!-- <konami/> -->
+    <konami/>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -118,6 +118,14 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
+    <script type="text/ng-template" id="badgerContent.html">
+	<div style="padding: 5px;min-width:700px">
+        <youtube-video video-id="badgerVidId"></youtube-video>
+		<div>
+            <button class="btn btn-primary" type="button" ng-click="closeBadger()">Close</button>
+        </div>
+	</div>
+	</script>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -152,6 +160,7 @@
     <script src="bower_components/select2/select2.js"></script>
     <script src="bower_components/angular-ui-select2/src/select2.js"></script>
     <script src="bower_components/angular-worldskills-utils/src/angular-worldskills-utils.js"></script>
+    <script src="bower_components/angular-youtube-mb/src/angular-youtube-embed.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -163,6 +172,7 @@
         <script src="scripts/controllers/translate.js"></script>
         <script src="scripts/directives/spinner.js"></script>
         <script src="scripts/directives/alerts.js"></script>
+        <script src="scripts/directives/konami.js"></script>
         <script src="scripts/services/user.js"></script>
         <script src="scripts/services/alert.js"></script>
         <script src="scripts/directives/select2_tags.js"></script>
@@ -174,5 +184,7 @@
         <script src="scripts/controllers/people.js"></script>
         <script src="scripts/controllers/person.js"></script>
         <!-- endbuild -->
+        
+        <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
