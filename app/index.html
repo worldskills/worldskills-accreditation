@@ -13,6 +13,8 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/select2/select2.css" />
+    <link rel="stylesheet" href="bower_components/angular-worldskills-utils/src/spinner.css" />
+    <link rel="stylesheet" href="bower_components/angular-worldskills-utils/src/angular-worldskills-utils.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -21,6 +23,7 @@
     <link href="accreditation.css" rel="stylesheet">
   </head>
   <body ng-app="accreditationApp" ng-controller='MainCtrl'>
+  	<ws-puppet p="auth.user.puppeteer"></ws-puppet>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
