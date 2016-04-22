@@ -2,7 +2,7 @@
     'use strict';
 
     var restBaseUrl = 'http://localhost:9991';
-    var authBaseUrl = 'http://localhost:8088';
+    var authBaseUrl = 'http://localhost:8080';
     var orgBaseUrl = 'https://api.worldskills.org';
     var loginApp = 'http://worldskillsdevauth.com';
     var peopleApp = 'http://people.worldskills.org';

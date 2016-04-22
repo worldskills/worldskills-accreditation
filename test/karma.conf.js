@@ -25,7 +25,7 @@ module.exports = function(config) {
       'bower_components/es5-shim/es5-shim.js',
       'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
-      'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/worldskills-bootstrap/dist/js/bootstrap.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-aria/angular-aria.js',
       'bower_components/angular-cookies/angular-cookies.js',
@@ -46,6 +46,7 @@ module.exports = function(config) {
       'bower_components/select2/select2.js',
       'bower_components/angular-ui-select2/src/select2.js',
       'bower_components/angular-worldskills-utils/src/angular-worldskills-utils.js',
+      'bower_components/angular-youtube-mb/src/angular-youtube-embed.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
