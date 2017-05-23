@@ -63,43 +63,24 @@ module.exports = function (grunt) {
     connect: {
       options: {
         port: 9001,
+        base: 'app',
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729
       },
       livereload: {
         options: {
-          open: true,
-          middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect().use(
-                '/app/styles',
-                connect.static('./app/styles')
-              ),
-              connect.static(appConfig.app)
-            ];
-          }
+          open: true
         }
       },
       test: {
         options: {
           port: 9001,
-          middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect.static('test'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect.static(appConfig.app)
-            ];
-          }
+          base: [
+            '.tmp',
+            'test',
+            '<%= yeoman.app %>'
+          ]
         }
       },
       dist: {
@@ -341,8 +322,7 @@ module.exports = function (grunt) {
             'template/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*',
-            '*.css',
-            '../bower_components/**/*'
+            '*.css'
           ]
         }, {
           expand: true,
@@ -351,7 +331,7 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
-          cwd: 'bower_components/bootstrap/dist',
+          cwd: '<%= yeoman.app %>/bower_components/bootstrap/dist',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
         }]
@@ -367,7 +347,7 @@ module.exports = function (grunt) {
     	dest: '<%= yeoman.app %>/scripts/config.js'
       },
       select2png: {
-    	  src: '<%= yeoman.app %>/../bower_components/select2/select2.png',
+    	  src: '<%= yeoman.app %>/bower_components/select2/select2.png',
     	  dest: '<%= yeoman.dist %>/styles/select2.png'
       }
     },
@@ -430,7 +410,6 @@ module.exports = function (grunt) {
     //'ngmin',
     'copy:dist',
     'copy:select2png',
-    'cdnify',
     'cssmin',
     'uglify',
     'filerev',
