@@ -40,10 +40,10 @@
 				</tfoot>
 			</table>
 
-			<pagination total-items="events.total_count" page="current_page"
+			<uib-pagination total-items="events.total_count" ng-model="current_page"
 				items-per-page='items_per_page' class="pagination-small"
 				boundary-links="true" rotate="false" max-size="5"
-				on-select-page="changePage(page)"></pagination>
+				on-select-page="changePage(page)"></uib-pagination>
 		</div>
 	</div>
 	<div class="col-md-3 sidebar" role="navigation">

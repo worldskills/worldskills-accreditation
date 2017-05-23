@@ -3,7 +3,7 @@
 angular.module('accreditationApp')
 .controller('MainCtrl', function ($scope, $rootScope, $state, $translate, Language, auth, user, 
 		API_AUTH_CODE, alert, Restangular, $http, OrgRestangular, 
-		$modal) {
+		$uibModal) {
     $scope.selectedLanguage = Language.selectedLanguage;
     
     $scope.auth = auth;
@@ -18,7 +18,7 @@ angular.module('accreditationApp')
     $rootScope.badgerVidId = 'XT8hE7_8BCY';
     
     $rootScope.showBadger = function() {
-	    $rootScope.badgerModal = $modal.open({
+	    $rootScope.badgerModal = $uibModal.open({
 			  scope: $scope,
 			  template: '<div style="padding: 5px;"><youtube-video video-id="badgerVidId"></youtube-video></div>',
 			  size: 'lg'

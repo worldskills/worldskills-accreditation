@@ -10,10 +10,10 @@
 <div class="row">
 	<div class="col-md-9 ">
 		<div class="table-responsive">
-			<pagination total-items="people.total_count" ng-model="current_page"
+			<uib-pagination total-items="people.total_count" ng-model="current_page"
 				items-per-page='items_per_page' class="pagination-sm pull-right"
 				boundary-links="true" max-size="5" rotate="false"
-				ng-change="changePage()"></pagination>
+				ng-change="changePage()"></uib-pagination>
 			<ws-spinner ng-show='loading' class='bigSpinner col-sm-12'></ws-spinner>
 			<table ng-show='!loading' class="table table-striped resource_list">
 				<colgroup>
@@ -49,10 +49,10 @@
 				</tfoot>
 			</table>
 
-			<pagination total-items="people.total_count" ng-model="current_page"
+			<uib-pagination total-items="people.total_count" ng-model="current_page"
 				items-per-page='items_per_page' class="pagination-sm pull-right"
 				boundary-links="true" max-size="5" rotate="false"
-				ng-change="changePage(page)"></pagination>
+				ng-change="changePage(page)"></uib-pagination>
 		</div>
 	</div>
 	<div class="col-md-3 sidebar" role="navigation">
