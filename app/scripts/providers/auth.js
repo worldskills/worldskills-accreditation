@@ -110,7 +110,6 @@
             if (auth.loggedIn) {
                 $http.defaults.headers.common.Authorization = 'Bearer ' + auth.accessToken;
                 Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + auth.accessToken})
-                console.log('token: ' + auth.accessToken);
             }
 
             var user = $http({method: 'GET', url: API_AUTH + '/users/loggedIn'})
