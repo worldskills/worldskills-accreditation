@@ -3,4 +3,5 @@
 /.sass-cache/
 /.tmp/
 /dist/
-/bower_components/
+/app/bower_components/
+/app/scripts/config.js
