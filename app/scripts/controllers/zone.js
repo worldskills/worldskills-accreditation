@@ -28,12 +28,12 @@
                 if ($scope.zone.id) {
                     $scope.zone.$update({eventId: $stateParams.eventId}, function () {
                         alert.success('The zone has been saved successfully.');
-                        $state.go('zone_list', {eventId: $stateParams.eventId});
+                        $state.go('event.zone_list', {eventId: $stateParams.eventId});
                     });
                 } else {
                     $scope.zone.$save({eventId: $stateParams.eventId}, function () {
                         alert.success('The zone has been added successfully.');
-                        $state.go('zone_list', {eventId: $stateParams.eventId});
+                        $state.go('event.zone_list', {eventId: $stateParams.eventId});
                     });
                 }
             }
@@ -44,7 +44,7 @@
                 $scope.deleteLoading = true;
                 $scope.zone.$delete({eventId: $stateParams.eventId}, function () {
                     alert.success('The zone has been deleted successfully.');
-                    $state.go('zone_list', {eventId: $stateParams.eventId});
+                    $state.go('event.zone_list', {eventId: $stateParams.eventId});
                 });
             }
         };
