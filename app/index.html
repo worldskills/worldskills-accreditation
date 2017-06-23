@@ -58,39 +58,16 @@
       <div ui-view></div>
     </div>
     <div class='container'>
-    <footer>
-          <div class="row">
-            	 <div class="col-xs-6 col-sm-4 col-md-2">
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-2"></div>
-               
-                <div class="clearfix visible-xs"></div>
-                <div class="col-xs-6 col-sm-4 col-md-2"></div>
-                <div class="clearfix visible-sm"></div>
-                <div class="col-xs-6 col-sm-4 col-md-2"></div>
-                <div class="clearfix visible-xs"></div>
-                <div class="col-xs-6 col-sm-4 col-md-2"></div>
-               	<div class="col-xs-6 col-sm-4 col-md-2">
-                    <h5 translate>MENU_OTHER_SYSTEMS</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="http://www.worldskills.org/registrations" target="_blank" translate>SYSTEM_REGO</a></li>
-                        <li><a href="https://people.worldskills.org/" target="_blank" translate>SYSTEM_PEOPLE</a></li>
-                        <li><a href="https://www.worldskills.org/events" target="_blank" translate>SYSTEM_EVENTS</a></li>
-                        <li><a href="https://authadmin.worldskills.org/" target="_blank" translate>SYSTEM_AUTH</a></li>
-                        <li><a href="http://glossary.worldskills.org/" target="_blank" translate>SYSTEM_GLOSSARY</a></li>
-                    </ul>
-                </div>
-            </div>
 
+        <footer>
             <hr />
 
             <div class="row">
                 <div class="col-md-12">
-                    <p>&copy; 2013 WorldSkills</p>
+                    <p>&copy; {{date | date:'yyyy'}} WorldSkills</p>
                 </div>
             </div>
-
-    </footer>
+        </footer>
     </div>
     <konami/>
 
