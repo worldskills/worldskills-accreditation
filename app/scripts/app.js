@@ -21,7 +21,6 @@ angular
     'ui.bootstrap',
     'pascalprecht.translate',
     'restangular',
-    'ui.select2',
     'worldskills.utils',
     'youtube-embed'
   ])

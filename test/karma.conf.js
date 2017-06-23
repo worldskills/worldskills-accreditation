@@ -43,8 +43,6 @@ module.exports = function(config) {
       'app/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
       'app/bower_components/lodash/lodash.js',
       'app/bower_components/restangular/dist/restangular.js',
-      'app/bower_components/select2/select2.js',
-      'app/bower_components/angular-ui-select2/src/select2.js',
       'app/bower_components/angular-worldskills-utils/src/angular-worldskills-utils.js',
       'app/bower_components/angular-youtube-mb/src/angular-youtube-embed.js',
       'app/bower_components/angular-mocks/angular-mocks.js',

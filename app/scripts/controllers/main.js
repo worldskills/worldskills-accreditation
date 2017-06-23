@@ -8,7 +8,9 @@ angular.module('accreditationApp')
     
     $scope.auth = auth;
     $scope.user = user;
-    
+
+    $scope.date = new Date();
+
     $scope.API_AUTH_CODE = API_AUTH_CODE;
     
     $rootScope.currentPage = 1;

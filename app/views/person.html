@@ -24,7 +24,8 @@
 					<div class="form-group">
 						<label for="dt" class="col-md-2 control-label" translate>DelegateType</label>
 						<div class="col-md-6">
-							<select ui-select2 ng-model="person.accreditation.delegate_type.id" class="filterSelect" name="dt" id="dt">
+							<select ng-model="person.accreditation.delegate_type.id" class="form-control" name="dt" id="dt">
+								<option></option>
 								<option ng-repeat="dt in delegate_types" value="{{dt.id}}">{{dt.name}}</option>
 							</select>
 						</div>
@@ -63,7 +64,8 @@
 					<div class="form-group">
 						<label for="name" class="col-md-2 control-label" translate>Country</label>
 						<div class="col-md-6">
-							<select ui-select2 ng-model="person.accreditation.country.id" class="filterSelect" name="country" id="country">
+							<select ng-model="person.accreditation.country.id" class="form-control" name="country" id="country">
+								<option></option>
 								<option ng-repeat="country in countries" value="{{country.id}}">{{country.code}}
 									- {{country.name.text}}</option>
 							</select>

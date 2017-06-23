@@ -63,7 +63,8 @@
                         </div>
                         <div class="form-group">
                             <label for="dt" translate>DelegateType</label>
-                        	<select multiple ui-select2 ng-model="filter.delegateTypes" class="filterSelect" name="dt" id="dt">
+                        	<select ng-model="filter.delegateTypes" class="form-control" name="dt" id="dt">
+								<option></option>
 							    <option ng-repeat="dt in delegate_types" value="{{dt.id}}">{{dt.name}}</option>
 							</select>
 						</div>
@@ -73,25 +74,18 @@
                         </div>
                         <div class="form-group">
                             <label for="country" translate>Country</label>
-                        	<select ui-select2 ng-model="filter.country" class="filterSelect" name="country" id="country">
+                        	<select ng-model="filter.country" class="form-control" name="country" id="country">
+								<option></option>
 							    <option ng-repeat="country in countries" value="{{country.code}}">{{country.code}} - {{country.name.text}}</option>
 							</select>
 						</div>
 						<div class="form-group">
                             <label for="skill" translate>Skill</label>
-                        	<select ui-select2 ng-model="filter.skill" class="filterSelect" name="skill" id="skill">
+                        	<select ng-model="filter.skill" class="form-control" name="skill" id="skill">
+								<option></option>
 							    <option ng-repeat="skill in skills" value="{{skill.id}}">{{skill.skill_number}} {{skill.name.text}}</option>
 							</select>
 						</div>
-                        <div class="form-group">
-                            <label for="sort" translate>Sort</label>
-                            <select ng-model="filter.sort" class="form-control input-sm" id="sort">
-		        				<option value="fn" translate>FirstName</option>
-		        				<option value="fn_desc" translate>FirstNameDesc</option>
-		        				<option value="ln" translate>LastName</option>
-		        				<option value="ln_desc" translate>LastNameDesc</option>
-		        			</select>
-                        </div>
                         <a ng-click="filterResults()" class="btn btn-primary pull-right" ng-disabled="loading || deleting"><span translate>SetFilter</span><spinner ng-show="loading" class="ng-hide"></spinner></a>
                     </form>
                 </div>
