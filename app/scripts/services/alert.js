@@ -30,5 +30,8 @@
             });
             this.messages = messages;
         };
+        this.confirm = function (message) {
+            return confirm(message);
+        };
     });
 })();

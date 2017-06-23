@@ -109,6 +109,22 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('zone_list', {
+        url: '/events/{eventId}/zones',
+        templateUrl: 'views/zone_list.html',
+        controller: 'ZoneListCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
+    .state('zone', {
+        url: '/events/{eventId}/zones/{id}',
+        templateUrl: 'views/zone.html',
+        controller: 'ZoneCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
    ;
 
   }])

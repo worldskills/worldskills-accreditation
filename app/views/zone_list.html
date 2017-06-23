@@ -1,0 +1,46 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="event_list">Events</a></li>
+    <li><a ui-sref="people({event_id: event.id})">{{ event.name.text }}</a></li>
+    <li class="active">Zones</li>
+</ol>
+
+<div class="row">
+<div class="col-lg-8 col-lg-offset-2">
+
+<alerts></alerts>
+
+<p class="pull-right">
+    <a ui-sref="zone({eventId: event.id})" class="btn btn-success">Add Zone</a>
+</p>
+
+<h1>Zones</h1>
+
+<table ng-show='!loading' class="table table-striped resource_list">
+    <colgroup>
+        <col width="10%" />
+        <col width="90%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th class="text-center">Code</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="zone in zones.zones">
+            <td style="background-color: {{zone.color}}" class="text-center">{{zone.code}}</td>
+            <td><a ui-sref="zone({eventId: event.id, id: zone.id})">{{zone.name}}</a></td>
+        </tr>
+        <tr ng-show="zones.zones.length == 0">
+            <td colspan="2">No zones found</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2"></td>
+        </tr>
+    </tfoot>
+</table>
+
+</div>
+</div>
