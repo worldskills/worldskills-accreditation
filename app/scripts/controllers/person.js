@@ -5,7 +5,7 @@ angular.module('accreditationApp')
 	
 	$scope.loading = true;
 	
-	$scope.eventId = $stateParams.event_id;
+	$scope.eventId = $stateParams.eventId;
 	$scope.personId = $stateParams.person_id;
 	$scope.peopleApp = PEOPLE_APP;
 	

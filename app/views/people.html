@@ -1,25 +1,14 @@
-<ol class="breadcrumb">
-	<li><a ui-sref="event_list" translate>EventListHeading</a></li>
-    <li class="active">{{event.name.text}}</li>
-</ol>
-
-<h1><span translate>PeopleListHeading</span> {{event.name.text}}</h1>
-
 <alerts></alerts>
 
 <div class="row">
 	<div class="col-md-9 ">
 		<div class="table-responsive">
-			<uib-pagination total-items="people.total_count" ng-model="current_page"
-				items-per-page='items_per_page' class="pagination-sm pull-right"
-				boundary-links="true" max-size="5" rotate="false"
-				ng-change="changePage()"></uib-pagination>
-			<ws-spinner ng-show='loading' class='bigSpinner col-sm-12'></ws-spinner>
+			<ws-spinner ng-show="loading" class="bigSpinner"></ws-spinner>
 			<table ng-show='!loading' class="table table-striped resource_list">
 				<colgroup>
-					<col width="30%" />
-					<col width="20%" />
 					<col width="25%" />
+					<col width="20%" />
+					<col width="30%" />
 					<col width="25%" />
 				</colgroup>
 				<thead>
@@ -32,7 +21,7 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="person in people.people">
-						<td><a ui-sref="person({event_id: event.id, person_id: person.id})" >{{person.first_name}} {{person.last_name}}</a></td>
+						<td><a ui-sref="person({eventId: event.id, person_id: person.id})" >{{person.first_name}} {{person.last_name}}</a></td>
 						<td><div ng-repeat="pos in person.positions">{{pos}}</div></td>
 						<td><div ng-repeat="skill in person.skills">{{skill.skill_number}} {{skill.name.text}}</div></td>
 						<td>{{person.country.name.text}}</td>
@@ -50,7 +39,7 @@
 			</table>
 
 			<uib-pagination total-items="people.total_count" ng-model="current_page"
-				items-per-page='items_per_page' class="pagination-sm pull-right"
+				items-per-page="items_per_page"
 				boundary-links="true" max-size="5" rotate="false"
 				ng-change="changePage(page)"></uib-pagination>
 		</div>

@@ -4,9 +4,7 @@ angular.module('accreditationApp')
 .controller('PeopleListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular) {
 	
 	$scope.loading = true;
-	
-	$scope.eventId = $stateParams.event_id;
-	
+
 	$scope.current_page = $rootScope.currentPeoplePage;
 	$scope.items_per_page = 10;
 	
@@ -28,14 +26,13 @@ angular.module('accreditationApp')
 		$scope.loading = true;
 
 		$rootScope.currentPeoplePage = $scope.current_page;
-		Restangular.one('accreditation/events', $scope.eventId).one('people').get({fn: $scope.filter.firstName, 
+		Restangular.one('accreditation/events', $stateParams.eventId).one('people').get({fn: $scope.filter.firstName, 
 			ln: $scope.filter.lastName, pos_name: $scope.filter.position, country: $scope.filter.country,
 			skill: $scope.filter.skill, del_types: $scope.filter.delegateTypes, sort: $scope.filter.sort, 
 			limit: $scope.items_per_page, offset: $scope.items_per_page * ($scope.current_page-1), 
 		}).then( function(result) 
 		{
 			$scope.people = result;
-			$scope.loading = false;
 			$scope.loading = false;
 		}, $rootScope.errorHandler);
 	};
@@ -49,17 +46,11 @@ angular.module('accreditationApp')
 	// function for retrieving list of skills
 	$scope.getSkills = function()
 	{
-		Restangular.one('accreditation/events', $scope.eventId).one('skills').get().then( function(result) 
+		Restangular.one('accreditation/events', $stateParams.eventId).one('skills').get().then( function(result) 
 				{
 			$scope.skills = result.skills;
 				}, $rootScope.errorHandler);
 	};
-	
-	// load the event info
-	Restangular.one('accreditation/events', $scope.eventId).get().then(function(result) 
-		{
-			$scope.event = result;
-		}, $rootScope.errorHandler);
 
 	$scope.getSkills();
 	$scope.changePage();

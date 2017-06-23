@@ -2,12 +2,15 @@
     <li class="active" translate>EventListHeading</li>
 </ol>
 
-<h1 translate>EventListHeading</h1>
-
-<alerts></alerts>
-
 <div class="row">
-	<div class="col-md-9 ">
+    <div class="col-lg-8 col-lg-offset-2">
+
+        <h1 translate>EventListHeading</h1>
+
+        <hr/>
+
+        <alerts></alerts>
+
 		<div class="table-responsive">
 			<table class="table table-striped resource_list">
 				<colgroup>
@@ -24,9 +27,9 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="event in events.events">
-						<td><a ui-sref="people({event_id: event.id})" >{{event.name.text}}</a></td>
-						<td>{{event.start_date | date:'yyyy-MM-dd'}}</td>
-						<td>{{event.end_date | date:'yyyy-MM-dd'}}</td>
+						<td><a ui-sref="event.people({eventId: event.id})" >{{event.name.text}}</a></td>
+						<td>{{event.start_date | date:'dd.MM.yyyy'}}</td>
+						<td>{{event.end_date | date:'dd.MM.yyyy'}}</td>
 					</tr>
 					<tr ng-show="events.total_count == 0">
 						<td colspan="8"><span translate>NoResources</span></td>
@@ -45,51 +48,5 @@
 				boundary-links="true" rotate="false" max-size="5"
 				on-select-page="changePage(page)"></uib-pagination>
 		</div>
-	</div>
-	<div class="col-md-3 sidebar" role="navigation">
-		<!-- <form name="form" novalidate>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a class="pull-right" href="" ng-click="clear()">Clear</a>
-                    <h3 class="panel-title" translate>Filter</h3>
-                </div>
-                <div class="panel-body">
-                    <form role="form">
-                    	<div class="form-group">
-                            <label for="name" translate>Name</label>
-                            <input ng-model="filterName" class="form-control input-sm" id="name"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="tags" translate>Tags</label>
-                            <input ui-select2="tagOptions" name="tags" id="tags" wsi-tags="existingTags" ng-model="filterTags" class="resourceTypeSelect" />
-                        </div>
-                        <div class="form-group">
-							<label for="resType" translate>ResourceType</label>
-							<select multiple ui-select2 ng-model="filterResourceType" id="resType" class="resourceTypeSelect" >
-							    <option ng-repeat="type in resourceTypes" value="{{type.id}}">{{type.name}}</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="wse" translate>WSEntity</label>
-							<select ui-select2 ng-model="filterWSEntity" class="wsEntitySelect">
-							    <option ng-repeat="entity in wsEntities" value="{{entity.id}}">{{entity.name.text}} {{entity.public_download ? "(public)" : ""}}</option>
-							</select>
-						</div>
-                        <div class="form-group">
-                            <label for="sort" translate>Sort</label>
-                            <select ng-model="filterSort" class="form-control input-sm" id="sort">
-		        				<option value="name" translate>Name</option>
-		        				<option value="name_desc" translate>NameDesc</option>
-		        				<option value="v_date" translate>VersionDate</option>
-		        				<option value="v_date_desc" translate>VersionDateDesc</option>
-		        				<option value="v_mod_date" translate>ModifiedDate</option>
-		        				<option value="v_mod_date_desc" translate>ModifiedDateDesc</option>
-		        			</select>
-                        </div>
-                        <a ng-click="filterResults()" class="btn btn-primary pull-right" ng-disabled="loading || deleting"><span translate>SetFilter</span><spinner ng-show="loading" class="ng-hide"></spinner></a>
-                    </form>
-                </div>
-            </div>
-        </form> -->
 	</div>
 </div>

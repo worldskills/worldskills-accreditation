@@ -93,8 +93,14 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('people', {
-    	url: '/events/{event_id}/people',
+    .state('event', {
+        url: '/events/{eventId}',
+        templateUrl: 'views/event.html',
+        controller: 'EventCtrl',
+        abstract: true
+    })
+    .state('event.people', {
+    	url: '/people',
     	templateUrl: 'views/people.html',
     	controller: 'PeopleListCtrl',
     	data: {
@@ -102,15 +108,15 @@ angular
         }
     })
     .state('person', {
-    	url: '/events/{event_id}/people/{person_id}',
+    	url: '/events/{eventId}/people/{person_id}',
     	templateUrl: 'views/person.html',
     	controller: 'PersonCtrl',
     	data: {
             requireLoggedIn: true
         }
     })
-    .state('zone_list', {
-        url: '/events/{eventId}/zones',
+    .state('event.zone_list', {
+        url: '/zones',
         templateUrl: 'views/zone_list.html',
         controller: 'ZoneListCtrl',
         data: {

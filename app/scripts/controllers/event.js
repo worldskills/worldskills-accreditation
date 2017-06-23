@@ -30,4 +30,9 @@ angular.module('accreditationApp')
 	  
 	  $scope.changePage($scope.current_page);
   });
- 
+
+angular.module('accreditationApp').controller('EventCtrl', function ($scope, $state, $stateParams, Event) {
+
+    $scope.event = Event.get({id: $stateParams.eventId});
+
+});

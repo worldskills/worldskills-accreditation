@@ -1,19 +1,5 @@
-<ol class="breadcrumb">
-    <li><a ui-sref="event_list">Events</a></li>
-    <li><a ui-sref="people({event_id: event.id})">{{ event.name.text }}</a></li>
-    <li class="active">Zones</li>
-</ol>
-
 <div class="row">
 <div class="col-lg-8 col-lg-offset-2">
-
-<alerts></alerts>
-
-<p class="pull-right">
-    <a ui-sref="zone({eventId: event.id})" class="btn btn-success">Add Zone</a>
-</p>
-
-<h1>Zones</h1>
 
 <table ng-show='!loading' class="table table-striped resource_list">
     <colgroup>
@@ -41,6 +27,10 @@
         </tr>
     </tfoot>
 </table>
+
+<p>
+    <a ui-sref="zone({eventId: event.id})" class="btn btn-success">Add Zone</a>
+</p>
 
 </div>
 </div>

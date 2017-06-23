@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="event_list">Events</a></li>
+    <li class="active">{{ event.name.text }}</li>
+</ol>
+
+<h1>{{ event.name.text }}</h1>
+
+<ul class="nav nav-tabs">
+    <li ui-sref-active="{active: 'event.people'}"><a ui-sref="event.people">People</a></li>
+    <li ui-sref-active="{active: 'event.zone_list'}"><a ui-sref="event.zone_list">Zones</a></li>
+</ul>
+
+<div id="content" ui-view>
+</div>

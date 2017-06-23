@@ -1,9 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('accreditationApp').controller('ZoneListCtrl', function ($scope, $stateParams, Event, Zone) {
-
-        $scope.event = Event.get({id: $stateParams.eventId});
+    angular.module('accreditationApp').controller('ZoneListCtrl', function ($scope, $stateParams, Zone) {
 
         $scope.zones = Zone.query({eventId: $stateParams.eventId});
 

@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
 	<li><a ui-sref="event_list" translate>EventListHeading</a></li>
-	<li><a ui-sref="people({event_id: event.id})">{{event.name.text}}</a></li>
+	<li><a ui-sref="event.people({eventId: event.id})">{{event.name.text}}</a></li>
     <li class="active">{{person.person.first_name}} {{person.person.last_name}}</li>
 </ol>
 

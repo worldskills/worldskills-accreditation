@@ -11,6 +11,10 @@ li.active a {
   display: none !important;
 }
 
+.nav.nav-tabs {
+    margin: 20px 0 30px 0;
+}
+
 .app-show-hide {
   padding:10px;
   border:1px solid black;
