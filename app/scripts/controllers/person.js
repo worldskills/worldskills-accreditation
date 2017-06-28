@@ -41,9 +41,12 @@ angular.module('accreditationApp')
 		var data = {
 				"position": $scope.person.accreditation.position,
 				"organization_name": $scope.person.accreditation.organization_name,
-				"hide_country": $scope.person.accreditation.hide_country,
-				"delegate_type_id": $scope.person.accreditation.delegate_type.id
+				"hide_country": $scope.person.accreditation.hide_country
 		};
+		if ($scope.person.accreditation.delegate_type)
+		{
+			data.delegate_type_id = $scope.person.accreditation.delegate_type.id;
+		}
 		if ($scope.person.accreditation.country)
 		{
 			data.country_id = $scope.person.accreditation.country.id;

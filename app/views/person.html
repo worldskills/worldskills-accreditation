@@ -1,153 +1,170 @@
 <ol class="breadcrumb">
-	<li><a ui-sref="event_list" translate>EventListHeading</a></li>
-	<li><a ui-sref="event.people({eventId: event.id})">{{event.name.text}}</a></li>
+    <li><a ui-sref="event_list" translate>EventListHeading</a></li>
+    <li><a ui-sref="event.people({eventId: event.id})">{{event.name.text}}</a></li>
     <li class="active">{{person.person.first_name}} {{person.person.last_name}}</li>
 </ol>
 
-<h1>{{person.person.first_name}} {{person.person.last_name}}</h1>
-
 <alerts></alerts>
 
-<div class='row'>
-	<div class="col-sm-3 col-md-2 ">       
-			<div class='personImage'>
-				<img ng-src="{{person.person.images[0].thumbnail}}" alt="User Image" />
-			</div>
-	</div>
-	<ws-spinner ng-show='loading' class='bigSpinner col-sm-9 col-md-10'></ws-spinner>
-	<div ng-hide='loading' class="col-sm-9 col-md-10">
-		<div class='panel panel-default'>
-			<div class='panel-heading' translate>AccSpecHeading</div>
-			<div class='panel-body'>
-				<form class="form-horizontal" name="form.accData" novalidate
-					focus-error>
-					<div class="form-group">
-						<label for="dt" class="col-md-2 control-label" translate>DelegateType</label>
-						<div class="col-md-6">
-							<select ng-model="person.accreditation.delegate_type.id" class="form-control" name="dt" id="dt">
-								<option></option>
-								<option ng-repeat="dt in delegate_types" value="{{dt.id}}">{{dt.name}}</option>
-							</select>
-						</div>
-						<div class="col-md-4">
-							<!-- error message here? -->
-							<!-- <span class="help-block"
-									ng-show="form.basic.country.$dirty && form.basic.country.$error.required">Please
-									select a country!</span> -->
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="name" class="col-md-2 control-label" translate>Position</label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" id="position"
-								ng-maxlength="255" name="position"
-								ng-model="person.accreditation.position" />
-						</div>
-						<div class="col-md-4">
-							<!-- error message here? -->
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="name" class="col-md-2 control-label" translate>Organization</label>
-						<div class="col-md-6">
-							<input type="text" class="form-control" id="org"
-								ng-maxlength="255" name="org"
-								ng-model="person.accreditation.organization_name" />
-						</div>
-						<div class="col-md-4">
-							<!-- error message here? -->
-						</div>
-					</div>
+<div class="row">
+    <div class="col-md-4">
 
-					<div class="form-group">
-						<label for="name" class="col-md-2 control-label" translate>Country</label>
-						<div class="col-md-6">
-							<select ng-model="person.accreditation.country.id" class="form-control" name="country" id="country">
-								<option></option>
-								<option ng-repeat="country in countries" value="{{country.id}}">{{country.code}}
-									- {{country.name.text}}</option>
-							</select>
-						</div>
-						<div class="col-md-4">
-							<!-- error message here? -->
-							<!-- <span class="help-block"
-									ng-show="form.basic.country.$dirty && form.basic.country.$error.required">Please
-									select a country!</span> -->
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="name" class="col-md-2 control-label" translate>HideCountry</label>
-						<div class="col-md-6">
-							<input type="checkbox" class="form-control" id="hideCountry" name="hideCountry"
-								ng-model="person.accreditation.hide_country" />
-						</div>
-						<div class="col-md-4">
-							<!-- error message here? -->
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<div class="col-md-12 text-center">
-							<input type="button" class="btn btn-success" value="Save" ng-click="save()"/>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-		
-		<div class='panel panel-default'>
-			<div class='panel-heading' translate>PeopleDataHeading</div>
-			<div class='panel-body'>
-				<form class="form-horizontal">
-					<div class="form-group">
-						<label for="name" class="col-md-2 control-label" translate>Email</label>
-						<div class="col-md-6">
-							{{person.person.email_address}}
-						</div>
-						<div class="col-md-4">
-							<!-- error message here? -->
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="name" class="col-md-2 control-label" translate>Country</label>
-						<div class="col-md-6">
-							{{person.person.country.code}} - {{person.person.country.name.text}}
-						</div>
-						<div class="col-md-4">
-							<!-- error message here? -->
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="name" class="col-md-2 control-label" translate>Positions</label>
-						<div class="col-md-10">
-							<div ng-repeat="pos in person.person.positions">
-								{{pos.position.name.text}} <span ng-show="pos.skill">- {{pos.skill.skill_number}} {{pos.skill.name.text}}</span>
-							</div>
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="name" class="col-md-2 control-label" translate>Pacman</label>
-						<div class="col-md-6">
-							{{person.person.pacman_api_key}}
-						</div>
-						<div class="col-md-4">
-							<!-- error message here? -->
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<div class="col-md-12 text-center">
-							<a href="{{peopleApp}}/#/people/person/{{person.person.id}}" class="btn btn-primary" target="people_tab" translate>ViewInPeople</a>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <h1 class="align-top"><small>Data from</small><br/>People</h1>
+
+                <hr/>
+
+                <form novalidate focus-error>
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <p class="form-control-static">{{person.person.first_name}} {{person.person.last_name}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Country</label>
+                        <p class="form-control-static">{{person.person.country.code}} - {{person.person.country.name.text}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Delegate Type</label>
+                        <p class="form-control-static">Expert</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Positions</label>
+                        <p class="form-control-static">
+                            <span ng-repeat="pos in person.person.positions">
+                                {{pos.position.name.text}} <span ng-show="pos.skill">- {{pos.skill.skill_number}} {{pos.skill.name.text}}</span>
+                                <br/>
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image</label>
+                        <p class="form-control-static">
+                            <img ng-src="{{person.person.images[0].thumbnail}}_small" class="img-responsive" alt="User Image" />
+                        </p>
+                    </div>
+
+                    <p><a href="{{peopleApp}}/#/people/person/{{person.person.id}}" target="people_tab"><span class="glyphicon glyphicon-link"></span> View in People</a></p>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <h1 class="align-top"><small>Override</small><br/>Accreditation</h1>
+    
+                <hr/>
+
+                <form name="form.accData" novalidate focus-error>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" disabled />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" translate>Country</label>
+                        <select ng-options="country.name.text for country in countries track by country.id" ng-model="person.accreditation.country" class="form-control" name="country" id="country">
+                            <option></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dt" translate>DelegateType</label>
+                        <select ng-options="dt.name for dt in delegate_types track by dt.id" ng-model="person.accreditation.delegate_type" class="form-control" name="dt" id="dt">
+                            <option></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" translate>Positions</label>
+                        <textarea class="form-control" rows="3" name="position" ng-model="person.accreditation.position"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" translate>Organization</label>
+                        <input type="text" class="form-control" id="org" ng-maxlength="255" name="org" ng-model="person.accreditation.organization_name" />
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="hideCountry" name="hideCountry" ng-model="person.accreditation.hide_country" />
+                            Hide country
+                        </label>
+                    </div>
+
+                    <div class="form-group text-right">
+                        <input type="button" class="btn btn-success" value="Save" ng-click="save()"/>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-4">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <h1 class="align-top"><small>Preview</small><br/>Badge</h1>
+
+                <hr/>
+
+                <form novalidate focus-error>
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <p class="form-control-static">{{person.person.first_name}} {{person.person.last_name}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Country</label>
+                        <p class="form-control-static" ng-show="!person.accreditation.delegate_type">{{person.person.country.code}} - {{person.person.country.name.text}}</p>
+                        <p class="form-control-static" ng-show="person.accreditation.delegate_type">{{person.accreditation.country.code}} - {{person.accreditation.country.name.text}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Delegate Type</label>
+                        <p class="form-control-static" ng-show="!person.accreditation.delegate_type">Expert</p>
+                        <p class="form-control-static" ng-show="person.accreditation.delegate_type">{{person.accreditation.delegate_type.name}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Positions</label>
+                        <p class="form-control-static" ng-show="!person.accreditation.position">
+                            <span ng-repeat="pos in person.person.positions">
+                                {{pos.position.name.text}} <span ng-show="pos.skill">- {{pos.skill.skill_number}} {{pos.skill.name.text}}</span>
+                                <br/>
+                            </span>
+                        </p>
+                        <p class="form-control-static" ng-show="person.accreditation.position">
+                            {{person.accreditation.position}}
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image</label>
+                        <p class="form-control-static">
+                            <img ng-src="{{person.person.images[0].thumbnail}}_small" class="img-responsive" alt="User Image" />
+                        </p>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
 </div>
