@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, PEOPLE_APP) {
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, DelegateType, PEOPLE_APP) {
 	
 	$scope.loading = true;
 	
@@ -14,7 +14,9 @@ angular.module('accreditationApp')
 		{
 			$scope.event = result;
 		}, $rootScope.errorHandler);
-	
+
+	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
+
 	$scope.getPerson = function()
 	{
 		$scope.loading = true;

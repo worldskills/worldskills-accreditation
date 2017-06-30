@@ -130,6 +130,22 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('event.delegate_type_list', {
+        url: '/delegate_types',
+        templateUrl: 'views/delegate_type_list.html',
+        controller: 'DelegateTypeListCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
+    .state('delegate_type', {
+        url: '/events/{eventId}/delegate_types/{id}',
+        templateUrl: 'views/delegate_type.html',
+        controller: 'DelegateTypeCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
    ;
 
   }])

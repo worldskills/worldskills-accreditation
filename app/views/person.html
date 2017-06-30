@@ -44,6 +44,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Zones</label>
+                        <p class="form-control-static">
+                            <span ng-repeat="authorization in person.accreditation.delegate_type.authorizations">
+                                {{authorization.zone.code}} {{authorization.zone.name}} ({{authorization.type}})
+                                <br/>
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="form-group">
                         <label>Image</label>
                         <p class="form-control-static">
                             <img ng-src="{{person.person.images[0].thumbnail}}_small" class="img-responsive" alt="User Image" />
@@ -82,7 +92,7 @@
 
                     <div class="form-group">
                         <label for="dt" translate>DelegateType</label>
-                        <select ng-options="dt.name for dt in delegate_types track by dt.id" ng-model="person.accreditation.delegate_type" class="form-control" name="dt" id="dt">
+                        <select ng-options="dt.name for dt in delegateTypes.delegate_types track by dt.id" ng-model="person.accreditation.delegate_type" class="form-control" name="dt" id="dt">
                             <option></option>
                         </select>
                     </div>
@@ -151,6 +161,16 @@
                         </p>
                         <p class="form-control-static" ng-show="person.accreditation.position">
                             {{person.accreditation.position}}
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Zones</label>
+                        <p class="form-control-static">
+                            <span ng-repeat="authorization in person.accreditation.delegate_type.authorizations">
+                                {{authorization.zone.code}} {{authorization.zone.name}} ({{authorization.type}})
+                                <br/>
+                            </span>
                         </p>
                     </div>
 

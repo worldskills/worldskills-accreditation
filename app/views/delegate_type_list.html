@@ -1,0 +1,38 @@
+<div class="row">
+<div class="col-lg-8 col-lg-offset-2">
+
+<alerts></alerts>
+
+<table class="table table-striped">
+    <colgroup>
+        <col width="20%" />
+        <col width="80%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="delegateType in delegateTypes.delegate_types">
+            <td><a ui-sref="delegate_type({eventId: event.id, id: delegateType.id})">{{delegateType.code}}</a></td>
+            <td><a ui-sref="delegate_type({eventId: event.id, id: delegateType.id})">{{delegateType.name}}</a></td>
+        </tr>
+        <tr ng-show="delegateTypes.delegate_types.length == 0">
+            <td colspan="2">No Delegate Types found</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2"></td>
+        </tr>
+    </tfoot>
+</table>
+
+<p>
+    <a ui-sref="delegate_type({eventId: event.id})" class="btn btn-success">Add Delegate Type</a>
+</p>
+
+</div>
+</div>

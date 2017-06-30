@@ -1,0 +1,87 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="event_list">Events</a></li>
+    <li><a ui-sref="event.people({eventId: event.id})">{{ event.name.text }}</a></li>
+    <li><a ui-sref="event.delegate_type_list({eventId: event.id})">Delegate Types</a></li>
+    <li class="active">{{ delegateTypeId ? delegateTypeName : "New Delegate Type" }}</li>
+</ol>
+
+<alerts></alerts>
+
+<p class="pull-right">
+    <button ng-show="delegateTypeId" ng-click="delete()" class="btn btn-danger">Delete<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+</p>
+
+<h1>{{ delegateTypeId ? delegateTypeName : "New Delegate Type" }}</h1>
+
+<hr/>
+
+<form class="form-horizontal" name="form" novalidate ng-submit="save()">
+    <div class="form-group" ng-class="{'has-error': submitted && form.code.$invalid}">
+        <label for="code" class="col-sm-3 control-label">Code <span class="required">*</span></label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" name="code" required ng-model="delegateType.code">
+        </div>
+        <div class="col-sm-7">
+            <span class="help-block" ng-show="submitted" ng-messages="form.code.$error">
+                <span ng-message="required">Please enter a code!</span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
+        <label for="name" class="col-sm-3 control-label">Name <span class="required">*</span></label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" name="name" required ng-model="delegateType.name">
+        </div>
+        <div class="col-sm-4">
+            <span class="help-block" ng-show="submitted" ng-messages="form.name.$error">
+                <span ng-message="required">Please enter a name!</span>
+            </span>
+        </div>
+    </div>
+
+    <br/>
+
+    <table class="table table-striped">
+        <colgroup>
+            <col width="25%" />
+            <col width="75%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Zone</th>
+                <th>Authorization</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="zone in zones.zones">
+                <td>{{zone.code}} {{zone.name}}</a></td>
+                <td>
+                    <label class="radio-inline">
+                        <input type="radio" ng-model="zone.authorization" value=""> None
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" ng-model="zone.authorization" value="full"> Full
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" ng-model="zone.authorization" value="skill"> Skill
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" ng-model="zone.authorization" value="conditional"> Conditional
+                    </label>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-success" id="saveEntry">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+            <a ui-sref="event.delegate_type_list({eventId: event.id})" class="btn btn-default">Cancel</a>
+        </div>
+    </div>
+</form>
