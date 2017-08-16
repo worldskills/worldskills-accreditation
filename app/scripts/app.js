@@ -106,8 +106,16 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('person_create', {
+    	url: '/events/{eventId}/person/create',
+    	templateUrl: 'views/person.html',
+    	controller: 'PersonCreateCtrl',
+    	data: {
+            requireLoggedIn: true
+        }
+    })
     .state('person', {
-    	url: '/events/{eventId}/people/{person_id}',
+    	url: '/events/{eventId}/people/{accreditationId}',
     	templateUrl: 'views/person.html',
     	controller: 'PersonCtrl',
     	data: {

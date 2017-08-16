@@ -20,14 +20,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="person in people.people">
-						<td><a ui-sref="person({eventId: event.id, person_id: person.id})" >{{person.first_name}} {{person.last_name}}</a></td>
-						<td><div ng-repeat="pos in person.positions">{{pos}}</div></td>
-						<td><div ng-repeat="skill in person.skills">{{skill.skill_number}} {{skill.name.text}}</div></td>
-						<td>{{person.country.name.text}}</td>
+					<tr ng-repeat="accreditation in accreditations.people">
+						<td><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})" >{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
+						<td><div ng-repeat="pos in accreditation.positions">{{pos}}</div></td>
+						<td><div ng-repeat="skill in accreditation.skills">{{skill.skill_number}} {{skill.name.text}}</div></td>
+						<td>{{accreditation.country.name.text}}</td>
 					</tr>
-					<tr ng-show="people.total_count == 0">
-						<td colspan="8"><span translate>NoPeople</span></td>
+					<tr ng-show="accreditations.total_count == 0">
+						<td colspan="8">No people found</td>
 					</tr>
 
 				</tbody>
@@ -38,10 +38,10 @@
 				</tfoot>
 			</table>
 
-			<uib-pagination total-items="people.total_count" ng-model="current_page"
+			<uib-pagination total-items="accreditations.total_count || (current_page - 1) * items_per_page" ng-model="current_page"
 				items-per-page="items_per_page"
 				boundary-links="true" max-size="5" rotate="false"
-				ng-change="changePage(page)"></uib-pagination>
+				ng-change="changePage()"></uib-pagination>
 		</div>
 	</div>
 	<div class="col-md-3 sidebar" role="navigation">
@@ -90,6 +90,11 @@
                     </form>
                 </div>
             </div>
+
+			<p>
+			    <a ui-sref="person_create({eventId: event.id})" class="btn btn-success">Add Person</a>
+			</p>
+
         </form>
 	</div>
 </div>

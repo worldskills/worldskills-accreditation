@@ -1,12 +1,47 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, DelegateType, PEOPLE_APP) {
+.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, PEOPLE_APP) {
 	
 	$scope.loading = true;
 	
 	$scope.eventId = $stateParams.eventId;
-	$scope.personId = $stateParams.person_id;
+	$scope.peopleApp = PEOPLE_APP;
+	
+	$scope.accreditation = new Accreditation();
+
+	// load the event info
+	Restangular.one('accreditation/events', $scope.eventId).get().then(function(result) 
+		{
+			$scope.event = result;
+		}, $rootScope.errorHandler);
+
+	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
+
+	// handler for a successful save
+	var successHandler = function()
+	{
+		$scope.loading = false;
+		$translate('PersonSaveMsg').then(function(msg)
+		{
+			alert.success(msg);
+			$state.go('event.people', {eventId: $scope.eventId});
+		});
+	};
+	
+	$scope.save = function()
+	{
+		$scope.accreditation.$save({eventId: $scope.eventId}, successHandler, $rootScope.errorHandler);
+	};
+});
+
+angular.module('accreditationApp')
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, PEOPLE_APP) {
+	
+	$scope.loading = true;
+	
+	$scope.eventId = $stateParams.eventId;
+	$scope.accreditationId = $stateParams.accreditationId;
 	$scope.peopleApp = PEOPLE_APP;
 	
 	// load the event info
@@ -20,13 +55,11 @@ angular.module('accreditationApp')
 	$scope.getPerson = function()
 	{
 		$scope.loading = true;
-		Restangular.one('accreditation/events', $scope.eventId).one('people', $scope.personId).one('full').get().then( function(result) 
-		{
-			$scope.person = result;
+		$scope.accreditation = Accreditation.get({eventId: $scope.eventId, id: $scope.accreditationId}, function(accreditation) {
 			$scope.loading = false;
 		}, $rootScope.errorHandler);
 	};
-	
+
 	// handler for a successful save
 	var successHandler = function()
 	{
@@ -34,28 +67,15 @@ angular.module('accreditationApp')
 		$translate('PersonSaveMsg').then(function(msg)
 		{
 			alert.success(msg);
-			$state.go('people', {event_id: $scope.eventId});
+			$state.go('event.people', {eventId: $scope.eventId});
 		});
 	};
 	
 	$scope.save = function()
 	{
-		var data = {
-				"position": $scope.person.accreditation.position,
-				"organization_name": $scope.person.accreditation.organization_name,
-				"hide_country": $scope.person.accreditation.hide_country
-		};
-		if ($scope.person.accreditation.delegate_type)
-		{
-			data.delegate_type_id = $scope.person.accreditation.delegate_type.id;
-		}
-		if ($scope.person.accreditation.country)
-		{
-			data.country_id = $scope.person.accreditation.country.id;
-		}
-		Restangular.one('accreditation/events', $scope.eventId).one('people', $scope.personId).one('accreditation')
-			.customPUT(data).then(successHandler, $rootScope.errorHandler);
+		$scope.accreditation.$update({eventId: $scope.eventId}, successHandler, $rootScope.errorHandler);
 	};
-	
+
 	$scope.getPerson();
 });
+'use strict';
