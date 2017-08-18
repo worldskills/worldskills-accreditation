@@ -159,8 +159,8 @@
 
                     <div class="form-group">
                         <label>Delegate Type</label>
-                        <p class="form-control-static" ng-show="accreditation.position_delegate_type">{{accreditation.position_delegate_type.delegate_type.name}}</p>
-                        <p class="form-control-static" ng-show="!accreditation.position_delegate_type">{{accreditation.delegate_type.name}}</p>
+                        <p class="form-control-static" ng-show="!accreditation.delegate_type">{{accreditation.position_delegate_type.delegate_type.name}}</p>
+                        <p class="form-control-static" ng-show="accreditation.delegate_type">{{accreditation.delegate_type.name}}</p>
                     </div>
 
                     <div class="form-group">
@@ -195,13 +195,13 @@
 
                     <div class="form-group">
                         <label>Zones</label>
-                        <p class="form-control-static" ng-show="accreditation.position_delegate_type">
+                        <p class="form-control-static" ng-show="!accreditation.delegate_type">
                             <span ng-repeat="authorization in accreditation.position_delegate_type.delegate_type.authorizations">
                                 {{authorization.zone.code}} {{authorization.zone.name}} ({{authorization.type}})
                                 <br/>
                             </span>
                         </p>
-                        <p class="form-control-static" ng-show="!accreditation.position_delegate_type">
+                        <p class="form-control-static" ng-show="accreditation.delegate_type">
                             <span ng-repeat="authorization in accreditation.delegate_type.authorizations">
                                 {{authorization.zone.code}} {{authorization.zone.name}} ({{authorization.type}})
                                 <br/>
