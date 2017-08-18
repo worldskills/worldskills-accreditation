@@ -36,7 +36,7 @@ angular.module('accreditationApp')
 });
 
 angular.module('accreditationApp')
-.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, PEOPLE_APP) {
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, Member, Skill, PEOPLE_APP) {
 	
 	$scope.loading = true;
 	
@@ -51,6 +51,8 @@ angular.module('accreditationApp')
 		}, $rootScope.errorHandler);
 
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
+	$scope.members = Member.query({limit: 100});
+	$scope.skills = Skill.query({eventId: $stateParams.eventId});
 
 	$scope.getPerson = function()
 	{

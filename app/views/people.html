@@ -15,25 +15,25 @@
 					<tr>
 						<th><span translate>Name</span></th>
 						<th><span translate>Position</span></th>
-						<th><span translate>Skills</span></th>
-						<th><span translate>Country</span></th>
+						<th><span translate>Skill</span></th>
+						<th><span translate>Member</span></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="accreditation in accreditations.people">
 						<td><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})" >{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
-						<td><div ng-repeat="pos in accreditation.positions">{{pos}}</div></td>
-						<td><div ng-repeat="skill in accreditation.skills">{{skill.skill_number}} {{skill.name.text}}</div></td>
-						<td>{{accreditation.country.name.text}}</td>
+						<td>{{accreditation.position}}</td>
+						<td>{{accreditation.skill.skill_number}} {{accreditation.skill.name.text}}</td>
+						<td>{{accreditation.member.name.text}}</td>
 					</tr>
 					<tr ng-show="accreditations.total_count == 0">
-						<td colspan="8">No people found</td>
+						<td colspan="4">No people found</td>
 					</tr>
 
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="8"></td>
+						<td colspan="4"></td>
 					</tr>
 				</tfoot>
 			</table>

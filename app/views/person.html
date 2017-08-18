@@ -25,21 +25,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Country</label>
-                        <p class="form-control-static">{{accreditation.person.country.code}} - {{accreditation.person.country.name.text}}</p>
-                    </div>
-
-                    <div class="form-group">
                         <label>Delegate Type</label>
                         <p class="form-control-static">Expert</p>
                     </div>
 
                     <div class="form-group">
                         <label>Positions</label>
-                        <p class="form-control-static">
-                            <span ng-repeat="pos in accreditation.person.positions">
-                                {{pos.position.name.text}} <span ng-show="pos.skill">- {{pos.skill.skill_number}} {{pos.skill.name.text}}</span>
-                                <br/>
+                        <p class="form-control-static" ng-repeat="pos in accreditation.person.positions">
+                            <span>
+                                {{pos.position.name.text}}
+                                <span ng-show="pos.skill"><br/>{{pos.skill.skill_number}} {{pos.skill.name.text}}</span>
+                                <span ng-show="pos.member"><br/>{{pos.member.code}} {{pos.member.name.text}}</span>
                             </span>
                         </p>
                     </div>
@@ -105,20 +101,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name" translate>Country</label>
-                        <select ng-options="country.name.text for country in countries track by country.id" ng-model="accreditation.country" class="form-control" name="country" id="country">
-                            <option></option>
-                        </select>
-                    </div>
-
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="hideCountry" name="hideCountry" ng-model="accreditation.hide_country" />
-                            Hide country
-                        </label>
-                    </div>
-
-                    <div class="form-group">
                         <label for="dt" translate>DelegateType</label>
                         <select ng-options="dt.name for dt in delegateTypes.delegate_types track by dt.id" ng-model="accreditation.delegate_type" class="form-control" name="dt" id="dt">
                             <option></option>
@@ -126,8 +108,22 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name" translate>Positions</label>
-                        <textarea class="form-control" rows="3" name="position" ng-model="accreditation.position"></textarea>
+                        <label for="name" translate>Position</label>
+                        <input type="text" class="form-control" id="position" ng-maxlength="255" name="position" ng-model="accreditation.position" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" translate>Skill</label>
+                        <select ng-options="skill.name.text for skill in skills.skills track by skill.id" ng-model="accreditation.skill" class="form-control" name="skill" id="skill">
+                            <option></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" translate>Member</label>
+                        <select ng-options="member.name.text for member in members.members track by member.id" ng-model="accreditation.member" class="form-control" name="member" id="member">
+                            <option></option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -161,12 +157,6 @@
                         <p class="form-control-static" ng-show="!accreditation.person">{{accreditation.first_name}} {{accreditation.last_name}}</p>
                     </div>
 
-                    <div class="form-group" ng-show="!accreditation.hide_country">
-                        <label>Country</label>
-                        <p class="form-control-static" ng-show="!accreditation.country">{{accreditation.person.country.code}} - {{accreditation.person.country.name.text}}</p>
-                        <p class="form-control-static" ng-show="accreditation.country">{{accreditation.country.code}} - {{accreditation.country.name.text}}</p>
-                    </div>
-
                     <div class="form-group">
                         <label>Delegate Type</label>
                         <p class="form-control-static" ng-show="accreditation.position_delegate_type">{{accreditation.position_delegate_type.delegate_type.name}}</p>
@@ -174,15 +164,32 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Positions</label>
+                        <label>Position</label>
                         <p class="form-control-static" ng-show="!accreditation.position">
-                            <span ng-repeat="pos in accreditation.person.positions">
-                                {{pos.position.name.text}} <span ng-show="pos.skill">- {{pos.skill.skill_number}} {{pos.skill.name.text}}</span>
-                                <br/>
-                            </span>
+                            {{accreditation.person_position.position.name.text}}
                         </p>
                         <p class="form-control-static" ng-show="accreditation.position">
                             {{accreditation.position}}
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Skill</label>
+                        <p class="form-control-static" ng-show="!accreditation.skill">
+                            {{accreditation.person_position.skill.name.text}}
+                        </p>
+                        <p class="form-control-static" ng-show="accreditation.skill">
+                            {{accreditation.skill.name.text}}
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Member</label>
+                        <p class="form-control-static" ng-show="!accreditation.member">
+                            {{accreditation.person_position.member.name.text}}
+                        </p>
+                        <p class="form-control-static" ng-show="accreditation.member">
+                            {{accreditation.member.name.text}}
                         </p>
                     </div>
 
