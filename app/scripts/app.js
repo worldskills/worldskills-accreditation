@@ -154,6 +154,14 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('event.positions', {
+        url: '/positions',
+        templateUrl: 'views/positions.html',
+        controller: 'PositionsCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
    ;
 
   }])
