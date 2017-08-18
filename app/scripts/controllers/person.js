@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, PEOPLE_APP) {
+.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, Member, Skill, PEOPLE_APP) {
 	
 	$scope.loading = true;
 	
@@ -17,6 +17,8 @@ angular.module('accreditationApp')
 		}, $rootScope.errorHandler);
 
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
+	$scope.members = Member.query({limit: 100});
+	$scope.skills = Skill.query({eventId: $stateParams.eventId});
 
 	// handler for a successful save
 	var successHandler = function()
