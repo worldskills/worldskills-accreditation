@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, Member, Skill, PEOPLE_APP) {
+.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP) {
 	
 	$scope.loading = true;
 	
@@ -19,6 +19,7 @@ angular.module('accreditationApp')
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 	$scope.members = Member.query({limit: 100});
 	$scope.skills = Skill.query({eventId: $stateParams.eventId});
+	$scope.zones = Zone.query({eventId: $stateParams.eventId});
 
 	// handler for a successful save
 	var successHandler = function()
@@ -33,12 +34,18 @@ angular.module('accreditationApp')
 	
 	$scope.save = function()
 	{
+		$scope.accreditation.zones = [];
+		angular.forEach($scope.zones.zones, function (zone) {
+			if (zone.checked) {
+				$scope.accreditation.zones.push(zone);
+			}
+		});
 		$scope.accreditation.$save({eventId: $scope.eventId}, successHandler, $rootScope.errorHandler);
 	};
 });
 
 angular.module('accreditationApp')
-.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, Member, Skill, PEOPLE_APP) {
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP) {
 	
 	$scope.loading = true;
 	
@@ -55,12 +62,22 @@ angular.module('accreditationApp')
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 	$scope.members = Member.query({limit: 100});
 	$scope.skills = Skill.query({eventId: $stateParams.eventId});
+	$scope.zones = Zone.query({eventId: $stateParams.eventId});
 
 	$scope.getPerson = function()
 	{
 		$scope.loading = true;
 		$scope.accreditation = Accreditation.get({eventId: $scope.eventId, id: $scope.accreditationId}, function(accreditation) {
 			$scope.loading = false;
+			$scope.zones.$promise.then(function () {
+				angular.forEach($scope.zones.zones, function (zone) {
+					angular.forEach($scope.accreditation.zones, function (accreditationZone) {
+						if (accreditationZone.id === zone.id) {
+							zone.checked = true;
+						}
+					});
+				});
+			});
 		}, $rootScope.errorHandler);
 	};
 
@@ -77,6 +94,12 @@ angular.module('accreditationApp')
 	
 	$scope.save = function()
 	{
+		$scope.accreditation.zones = [];
+		angular.forEach($scope.zones.zones, function (zone) {
+			if (zone.checked) {
+				$scope.accreditation.zones.push(zone);
+			}
+		});
 		$scope.accreditation.$update({eventId: $scope.eventId}, successHandler, $rootScope.errorHandler);
 	};
 
