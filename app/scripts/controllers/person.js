@@ -76,6 +76,19 @@ angular.module('accreditationApp')
 							zone.checked = true;
 						}
 					});
+					if ($scope.accreditation.delegate_type) {
+						angular.forEach($scope.accreditation.delegate_type.zones, function (delegateTypeZone) {
+							if (delegateTypeZone.id === zone.id) {
+								zone.existing = true;
+							}
+						});
+					} else if ($scope.accreditation.position_delegate_type.delegate_type) {
+						angular.forEach($scope.accreditation.position_delegate_type.delegate_type.zones, function (positionDelegateTypeZone) {
+							if (positionDelegateTypeZone.id === zone.id) {
+								zone.existing = true;
+							}
+						});
+					}
 				});
 			});
 		}, $rootScope.errorHandler);

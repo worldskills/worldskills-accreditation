@@ -20,10 +20,9 @@
                 $scope.delegateTypeName = $scope.delegateType.name;
                 $scope.zones.$promise.then(function () {
                     angular.forEach($scope.zones.zones, function (zone) {
-                        zone.authorization = '';
-                        angular.forEach($scope.delegateType.authorizations, function (authorization) {
-                            if (authorization.zone.id === zone.id) {
-                                zone.authorization = authorization.type;
+                        angular.forEach($scope.delegateType.zones, function (delegateTypeZone) {
+                            if (delegateTypeZone.id === zone.id) {
+                                zone.checked = true;
                             }
                         });
                     });
@@ -37,13 +36,11 @@
             $scope.submitted = true;
             if ($scope.form.$valid) {
                 $scope.loading = true;
-                $scope.delegateType.authorizations = [];
+
+                $scope.delegateType.zones = [];
                 angular.forEach($scope.zones.zones, function (zone) {
-                    if (zone.authorization) {
-                        $scope.delegateType.authorizations.push({
-                            zone: zone,
-                            type: zone.authorization
-                        });
+                    if (zone.checked) {
+                        $scope.delegateType.zones.push(zone);
                     }
                 });
                 if ($scope.delegateType.id) {

@@ -38,8 +38,8 @@
                     <div class="form-group">
                         <label>Zones</label>
                         <p class="form-control-static">
-                            <span ng-repeat="authorization in person.accreditation.delegate_type.authorizations">
-                                {{authorization.zone.code}} {{authorization.zone.name}} ({{authorization.type}})
+                            <span ng-repeat="zone in person.accreditation.delegate_type.zones">
+                                {{zone.code}} {{zone.name}}
                                 <br/>
                             </span>
                         </p>
@@ -103,32 +103,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name" translate>Position</label>
-                        <input type="text" class="form-control" id="position" ng-maxlength="255" name="position" ng-model="accreditation.position" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name" translate>Skill</label>
-                        <select ng-options="skill.name.text for skill in skills.skills track by skill.id" ng-model="accreditation.skill" class="form-control" name="skill" id="skill">
-                            <option></option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name" translate>Member</label>
-                        <select ng-options="member.name.text for member in members.members track by member.id" ng-model="accreditation.member" class="form-control" name="member" id="member">
-                            <option></option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name" translate>Organization</label>
-                        <input type="text" class="form-control" id="org" ng-maxlength="255" name="org" ng-model="accreditation.organization_name" />
-                    </div>
-
-                    <div class="form-group">
                         <label for="name" translate>Additional Zones</label>
-                        <div class="checkbox" ng-repeat="zone in zones.zones">
+                        <div class="checkbox" ng-repeat="zone in zones.zones" ng-show="!zone.existing">
+                            <label>
+                                <input type="checkbox" ng-model="zone.checked" value="true">
+                                {{ zone.code }} {{ zone.name }}
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" translate>Remove Zones</label>
+                        <div class="checkbox" ng-repeat="zone in zones.zones" ng-show="zone.existing">
                             <label>
                                 <input type="checkbox" ng-model="zone.checked" value="true">
                                 {{ zone.code }} {{ zone.name }}
@@ -169,46 +155,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Position</label>
-                        <p class="form-control-static" ng-show="!accreditation.position">
-                            {{accreditation.person_position.position.name.text}}
-                        </p>
-                        <p class="form-control-static" ng-show="accreditation.position">
-                            {{accreditation.position}}
-                        </p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Skill</label>
-                        <p class="form-control-static" ng-show="!accreditation.skill">
-                            {{accreditation.person_position.skill.name.text}}
-                        </p>
-                        <p class="form-control-static" ng-show="accreditation.skill">
-                            {{accreditation.skill.name.text}}
-                        </p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Member</label>
-                        <p class="form-control-static" ng-show="!accreditation.member">
-                            {{accreditation.person_position.member.name.text}}
-                        </p>
-                        <p class="form-control-static" ng-show="accreditation.member">
-                            {{accreditation.member.name.text}}
-                        </p>
-                    </div>
-
-                    <div class="form-group">
                         <label>Zones</label>
                         <p class="form-control-static" ng-show="!accreditation.delegate_type">
-                            <span ng-repeat="authorization in accreditation.position_delegate_type.delegate_type.authorizations">
-                                {{authorization.zone.code}} {{authorization.zone.name}} ({{authorization.type}})
+                            <span ng-repeat="zone in accreditation.position_delegate_type.delegate_type.zones">
+                                {{zone.code}} {{zone.name}}
                                 <br/>
                             </span>
                         </p>
                         <p class="form-control-static" ng-show="accreditation.delegate_type">
-                            <span ng-repeat="authorization in accreditation.delegate_type.authorizations">
-                                {{authorization.zone.code}} {{authorization.zone.name}} ({{authorization.type}})
+                            <span ng-repeat="zone in accreditation.delegate_type.zones">
+                                {{zone.code}} {{zone.name}}
                                 <br/>
                             </span>
                         </p>
@@ -218,11 +174,6 @@
                                 <br/>
                             </span>
                         </p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Organization</label>
-                        <p class="form-control-static" ng-show="accreditation.organization_name">{{accreditation.organization_name}}</p>
                     </div>
 
                     <div class="form-group">
