@@ -103,6 +103,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="lines" translate>Lines</label>
+                        <textarea name="lines" class="form-control" rows="3" ng-model="accreditation.lines"></textarea>
+                    </div>
+
+                    <div class="form-group">
                         <label for="name" translate>Additional Zones</label>
                         <div class="checkbox" ng-repeat="zone in zones.zones" ng-show="!zone.existing">
                             <label>
@@ -152,6 +157,12 @@
                         <label>Delegate Type</label>
                         <p class="form-control-static" ng-show="!accreditation.delegate_type">{{accreditation.position_delegate_type.delegate_type.name}}</p>
                         <p class="form-control-static" ng-show="accreditation.delegate_type">{{accreditation.delegate_type.name}}</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Lines</label>
+                        <p class="form-control-static" ng-show="!accreditation.lines" style="white-space: pre-line;">{{accreditation.lines}}</p>
+                        <p class="form-control-static" ng-show="accreditation.lines" style="white-space: pre-line;">{{accreditation.lines}}</p>
                     </div>
 
                     <div class="form-group">
