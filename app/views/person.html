@@ -161,7 +161,52 @@
 
                     <div class="form-group">
                         <label>Lines</label>
-                        <p class="form-control-static" ng-show="!accreditation.lines" style="white-space: pre-line;">{{accreditation.lines}}</p>
+                        <p class="form-control-static" ng-show="!accreditation.lines">
+                            <span ng-show="!accreditation.delegate_type">
+                                <span ng-switch on="accreditation.position_delegate_type.delegate_type.line1">
+                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line1}}</span>
+                                </span>
+                                <br/>
+                                <span ng-switch on="accreditation.position_delegate_type.delegate_type.line2">
+                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line2}}</span>
+                                </span>
+                                <br/>
+                                <span ng-switch on="accreditation.position_delegate_type.delegate_type.line3">
+                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line3}}</span>
+                                </span>
+                            </span>
+                            <span ng-show="accreditation.delegate_type">
+                                <span ng-switch on="accreditation.delegate_type.line1">
+                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line1}}</span>
+                                </span>
+                                <br/>
+                                <span ng-switch on="accreditation.delegate_type.line2">
+                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line2}}</span>
+                                </span>
+                                <br/>
+                                <span ng-switch on="accreditation.delegate_type.line3">
+                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line3}}</span>
+                                </span>
+                            </span>
+                        </p>
                         <p class="form-control-static" ng-show="accreditation.lines" style="white-space: pre-line;">{{accreditation.lines}}</p>
                     </div>
 
