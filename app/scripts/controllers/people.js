@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PeopleListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular, Accreditation, Event) {
+.controller('PeopleListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular, Accreditation, Event, DelegateType) {
 	
 	$scope.loading = true;
 
@@ -20,6 +20,8 @@ angular.module('accreditationApp')
 		
 		$scope.changePage();	
 	};
+
+	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 
 	$scope.changePage = function() 
 	{
