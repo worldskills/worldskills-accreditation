@@ -79,12 +79,14 @@ angular.module('accreditationApp')
 					if ($scope.accreditation.delegate_type) {
 						angular.forEach($scope.accreditation.delegate_type.zones, function (delegateTypeZone) {
 							if (delegateTypeZone.id === zone.id) {
+								delegateTypeZone.zone = zone;
 								zone.existing = true;
 							}
 						});
 					} else if ($scope.accreditation.position_delegate_type.delegate_type) {
 						angular.forEach($scope.accreditation.position_delegate_type.delegate_type.zones, function (positionDelegateTypeZone) {
 							if (positionDelegateTypeZone.id === zone.id) {
+								positionDelegateTypeZone.zone = zone;
 								zone.existing = true;
 							}
 						});

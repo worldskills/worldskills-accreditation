@@ -7,6 +7,12 @@
 
 <alerts></alerts>
 
+<form name="form.accData" novalidate focus-error>
+
+<p class="text-right">
+    <input type="button" class="btn btn-success" value="Save" ng-click="save()"/>
+</p>
+
 <div class="row">
     <div class="col-md-4">
 
@@ -17,44 +23,45 @@
 
                 <hr/>
 
-                <form novalidate focus-error>
+                <div class="form-group">
+                    <label>Name</label>
+                    <p class="form-control-static">{{accreditation.person.first_name}} {{accreditation.person.last_name}}</p>
+                </div>
 
-                    <div class="form-group">
-                        <label>Name</label>
-                        <p class="form-control-static">{{accreditation.person.first_name}} {{accreditation.person.last_name}}</p>
-                    </div>
+                <div class="form-group">
+                    <label>Delegate Type</label>
+                    <p class="form-control-static">{{accreditation.position_delegate_type.delegate_type.name}}</p>
+                </div>
 
-                    <div class="form-group">
-                        <label>Positions</label>
-                        <p class="form-control-static" ng-repeat="pos in accreditation.person.positions">
-                            <span>
-                                {{pos.position.name.text}}
-                                <span ng-show="pos.skill"><br/>{{pos.skill.skill_number}} {{pos.skill.name.text}}</span>
-                                <span ng-show="pos.member"><br/>{{pos.member.code}} {{pos.member.name.text}}</span>
-                            </span>
-                        </p>
-                    </div>
+                <div class="form-group">
+                    <label>Positions</label>
+                    <p class="form-control-static" ng-repeat="pos in accreditation.person.positions">
+                        <span>
+                            {{pos.position.name.text}}
+                            <span ng-show="pos.skill"><br/>{{pos.skill.skill_number}} {{pos.skill.name.text}}</span>
+                            <span ng-show="pos.member"><br/>{{pos.member.code}} {{pos.member.name.text}}</span>
+                        </span>
+                    </p>
+                </div>
 
-                    <div class="form-group">
-                        <label>Zones</label>
-                        <p class="form-control-static">
-                            <span ng-repeat="zone in person.accreditation.delegate_type.zones">
-                                {{zone.code}} {{zone.name}}
-                                <br/>
-                            </span>
-                        </p>
-                    </div>
+                <div class="form-group">
+                    <label>Zones</label>
+                    <p class="form-control-static">
+                        <span ng-repeat="zone in person.accreditation.delegate_type.zones">
+                            {{zone.code}} {{zone.name}}
+                            <br/>
+                        </span>
+                    </p>
+                </div>
 
-                    <div class="form-group">
-                        <label>Image</label>
-                        <p class="form-control-static">
-                            <img ng-src="{{accreditation.person.images[0].thumbnail}}_small" class="img-responsive" alt="User Image" />
-                        </p>
-                    </div>
+                <div class="form-group">
+                    <label>Image</label>
+                    <p class="form-control-static">
+                        <img ng-src="{{accreditation.person.images[0].thumbnail}}_small" class="img-responsive" alt="User Image" />
+                    </p>
+                </div>
 
-                    <p><a href="{{peopleApp}}/#/people/person/{{accreditation.person.id}}" target="people_tab"><span class="glyphicon glyphicon-link"></span> View in People</a></p>
-
-                </form>
+                <p><a href="{{peopleApp}}/#/people/person/{{accreditation.person.id}}" target="people_tab"><span class="glyphicon glyphicon-link"></span> View in People</a></p>
 
             </div>
         </div>
@@ -83,54 +90,53 @@
     
                 <hr/>
 
-                <form name="form.accData" novalidate focus-error>
-
-                    <div class="form-group" ng-show="!accreditation.person">
+                <div class="row">
+                    <div class="form-group col-sm-6">
                         <label for="first_name" translate>First Name</label>
-                        <input type="text" class="form-control" ng-maxlength="255" name="first_name" ng-model="accreditation.first_name" />
+                        <input type="text" class="form-control" ng-maxlength="255" id="first_name" name="first_name" ng-model="accreditation.first_name" ng-disabled="accreditation.person" />
                     </div>
-
-                    <div class="form-group" ng-show="!accreditation.person">
+                    <div class="form-group col-sm-6">
                         <label for="last_name" translate>Last Name</label>
-                        <input type="text" class="form-control" ng-maxlength="255" name="last_name" ng-model="accreditation.last_name" />
+                        <input type="text" class="form-control" ng-maxlength="255" id="last_name" name="last_name" ng-model="accreditation.last_name" ng-disabled="accreditation.person" />
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="dt" translate>DelegateType</label>
-                        <select ng-options="dt.name for dt in delegateTypes.delegate_types track by dt.id" ng-model="accreditation.delegate_type" class="form-control" name="dt" id="dt">
-                            <option></option>
-                        </select>
-                    </div>
+                <div class="form-group" ng-show="!accreditation.person">
+                    <label for="last_name" translate>Last Name</label>
+                    <input type="text" class="form-control" ng-maxlength="255" name="last_name" ng-model="accreditation.last_name" />
+                </div>
 
-                    <div class="form-group">
-                        <label for="lines" translate>Lines</label>
-                        <textarea name="lines" class="form-control" rows="3" ng-model="accreditation.lines"></textarea>
-                    </div>
+                <div class="form-group">
+                    <label for="dt" translate>DelegateType</label>
+                    <select ng-options="dt.name for dt in delegateTypes.delegate_types track by dt.id" ng-model="accreditation.delegate_type" class="form-control" name="dt" id="dt">
+                        <option></option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label for="name" translate>Additional Zones</label>
-                        <div class="checkbox" ng-repeat="zone in zones.zones" ng-show="!zone.existing">
-                            <label>
-                                <input type="checkbox" ng-model="zone.checked" value="true">
-                                {{ zone.code }} {{ zone.name }}
-                            </label>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="lines" translate>Lines</label>
+                    <textarea name="lines" class="form-control" rows="3" ng-model="accreditation.lines"></textarea>
+                </div>
 
-                    <div class="form-group">
-                        <label for="name" translate>Remove Zones</label>
-                        <div class="checkbox" ng-repeat="zone in zones.zones" ng-show="zone.existing">
-                            <label>
-                                <input type="checkbox" ng-model="zone.checked" value="true">
-                                {{ zone.code }} {{ zone.name }}
-                            </label>
-                        </div>
+                <div class="form-group">
+                    <label for="name" translate>Additional Zones</label>
+                    <div class="checkbox" ng-repeat="zone in zones.zones" ng-show="!zone.existing">
+                        <label>
+                            <input type="checkbox" ng-model="zone.checked" value="true">
+                            {{ zone.code }} {{ zone.name }}
+                        </label>
                     </div>
+                </div>
 
-                    <div class="form-group text-right">
-                        <input type="button" class="btn btn-success" value="Save" ng-click="save()"/>
+                <div class="form-group">
+                    <label for="name" translate>Remove Zones</label>
+                    <div class="checkbox" ng-repeat="zone in zones.zones" ng-show="zone.existing">
+                        <label>
+                            <input type="checkbox" ng-model="zone.checked" value="true">
+                            {{ zone.code }} {{ zone.name }}
+                        </label>
                     </div>
-                </form>
+                </div>
 
             </div>
         </div>
@@ -145,104 +151,101 @@
 
                 <hr/>
 
-                <form novalidate focus-error>
+                <div class="form-group">
+                    <label>Name</label>
+                    <p class="form-control-static" ng-show="accreditation.person">{{accreditation.person.first_name}} {{accreditation.person.last_name}}</p>
+                    <p class="form-control-static" ng-show="!accreditation.person">{{accreditation.first_name}} {{accreditation.last_name}}</p>
+                </div>
 
-                    <div class="form-group">
-                        <label>Name</label>
-                        <p class="form-control-static" ng-show="accreditation.person">{{accreditation.person.first_name}} {{accreditation.person.last_name}}</p>
-                        <p class="form-control-static" ng-show="!accreditation.person">{{accreditation.first_name}} {{accreditation.last_name}}</p>
-                    </div>
+                <div class="form-group">
+                    <label>Delegate Type</label>
+                    <p class="form-control-static" ng-show="!accreditation.delegate_type">{{accreditation.position_delegate_type.delegate_type.name}}</p>
+                    <p class="form-control-static" ng-show="accreditation.delegate_type">{{accreditation.delegate_type.name}}</p>
+                </div>
 
-                    <div class="form-group">
-                        <label>Delegate Type</label>
-                        <p class="form-control-static" ng-show="!accreditation.delegate_type">{{accreditation.position_delegate_type.delegate_type.name}}</p>
-                        <p class="form-control-static" ng-show="accreditation.delegate_type">{{accreditation.delegate_type.name}}</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Lines</label>
-                        <p class="form-control-static" ng-show="!accreditation.lines">
-                            <span ng-show="!accreditation.delegate_type">
-                                <span ng-switch on="accreditation.position_delegate_type.delegate_type.line1">
-                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
-                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
-                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
-                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line1}}</span>
-                                </span>
-                                <br/>
-                                <span ng-switch on="accreditation.position_delegate_type.delegate_type.line2">
-                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
-                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
-                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
-                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line2}}</span>
-                                </span>
-                                <br/>
-                                <span ng-switch on="accreditation.position_delegate_type.delegate_type.line3">
-                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
-                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
-                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
-                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line3}}</span>
-                                </span>
+                <div class="form-group">
+                    <label>Lines</label>
+                    <p class="form-control-static" ng-show="!accreditation.lines">
+                        <span ng-show="!accreditation.delegate_type">
+                            <span ng-switch on="accreditation.position_delegate_type.delegate_type.line1">
+                                <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line1}}</span>
                             </span>
-                            <span ng-show="accreditation.delegate_type">
-                                <span ng-switch on="accreditation.delegate_type.line1">
-                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
-                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
-                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
-                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line1}}</span>
-                                </span>
-                                <br/>
-                                <span ng-switch on="accreditation.delegate_type.line2">
-                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
-                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
-                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
-                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line2}}</span>
-                                </span>
-                                <br/>
-                                <span ng-switch on="accreditation.delegate_type.line3">
-                                    <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
-                                    <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
-                                    <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
-                                    <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line3}}</span>
-                                </span>
+                            <br/>
+                            <span ng-switch on="accreditation.position_delegate_type.delegate_type.line2">
+                                <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line2}}</span>
                             </span>
-                        </p>
-                        <p class="form-control-static" ng-show="accreditation.lines" style="white-space: pre-line;">{{accreditation.lines}}</p>
-                    </div>
+                            <br/>
+                            <span ng-switch on="accreditation.position_delegate_type.delegate_type.line3">
+                                <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line3}}</span>
+                            </span>
+                        </span>
+                        <span ng-show="accreditation.delegate_type">
+                            <span ng-switch on="accreditation.delegate_type.line1">
+                                <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line1}}</span>
+                            </span>
+                            <br/>
+                            <span ng-switch on="accreditation.delegate_type.line2">
+                                <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line2}}</span>
+                            </span>
+                            <br/>
+                            <span ng-switch on="accreditation.delegate_type.line3">
+                                <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
+                                <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                                <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                                <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line3}}</span>
+                            </span>
+                        </span>
+                    </p>
+                    <p class="form-control-static" ng-show="accreditation.lines" style="white-space: pre-line;">{{accreditation.lines}}</p>
+                </div>
 
-                    <div class="form-group">
-                        <label>Zones</label>
-                        <p class="form-control-static" ng-show="!accreditation.delegate_type">
-                            <span ng-repeat="zone in accreditation.position_delegate_type.delegate_type.zones">
-                                {{zone.code}} {{zone.name}}
-                                <br/>
-                            </span>
-                        </p>
-                        <p class="form-control-static" ng-show="accreditation.delegate_type">
-                            <span ng-repeat="zone in accreditation.delegate_type.zones">
-                                {{zone.code}} {{zone.name}}
-                                <br/>
-                            </span>
-                        </p>
-                        <p class="form-control-static">
-                            <span ng-repeat="zone in zones.zones" ng-show="zone.checked">
-                                {{zone.code}} {{zone.name}}
-                                <br/>
-                            </span>
-                        </p>
-                    </div>
+                <div class="form-group">
+                    <label>Zones</label>
+                    <p class="form-control-static" ng-show="!accreditation.delegate_type">
+                        <span ng-repeat="zone in accreditation.position_delegate_type.delegate_type.zones" ng-show="!zone.zone.checked">
+                            {{zone.name}} <span class="text-muted">{{zone.code}}</span>
+                            <br/>
+                        </span>
+                    </p>
+                    <p class="form-control-static" ng-show="accreditation.delegate_type">
+                        <span ng-repeat="zone in accreditation.delegate_type.zones" ng-show="!zone.zone.checked">
+                            {{zone.name}} <span class="text-muted">{{zone.code}}</span>
+                            <br/>
+                        </span>
+                    </p>
+                    <p class="form-control-static">
+                        <span ng-repeat="zone in zones.zones" ng-show="zone.checked && !zone.existing">
+                            {{zone.name}} <span class="text-muted">{{zone.code}}</span>
+                            <br/>
+                        </span>
+                    </p>
+                </div>
 
-                    <div class="form-group">
-                        <label>Image</label>
-                        <p class="form-control-static">
-                            <img ng-src="{{accreditation.person.images[0].thumbnail}}_small" class="img-responsive" alt="User Image" />
-                        </p>
-                    </div>
-
-                </form>
+                <div class="form-group">
+                    <label>Image</label>
+                    <p class="form-control-static">
+                        <img ng-src="{{accreditation.person.images[0].thumbnail}}_small" class="img-responsive" alt="User Image" />
+                    </p>
+                </div>
 
             </div>
         </div>
-
     </div>
 </div>
+
+</form>
