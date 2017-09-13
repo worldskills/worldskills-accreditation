@@ -14,7 +14,7 @@
 				<thead>
 					<tr>
 						<th><span translate>Name</span></th>
-						<th><span translate>Position</span></th>
+						<th><span translate>Delegate Type</span></th>
 						<th><span translate>Skill</span></th>
 						<th><span translate>Member</span></th>
 					</tr>
@@ -22,7 +22,7 @@
 				<tbody>
 					<tr ng-repeat="accreditation in accreditations.people">
 						<td><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})" >{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
-						<td>{{accreditation.position}}</td>
+						<td>{{accreditation.delegate_type.name}}</td>
 						<td>{{accreditation.skill.skill_number}} {{accreditation.skill.name.text}}</td>
 						<td>{{accreditation.member.name.text}}</td>
 					</tr>
