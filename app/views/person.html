@@ -34,13 +34,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Positions</label>
-                    <p class="form-control-static" ng-repeat="pos in accreditation.person.positions" ng-show="!pos.invalid">
-                        <span>
-                            {{pos.position.name.text}}
-                            <span ng-show="pos.skill"><br/>{{pos.skill.skill_number}} {{pos.skill.name.text}}</span>
-                            <span ng-show="pos.member"><br/>{{pos.member.code}} {{pos.member.name.text}}</span>
-                        </span>
+                    <label>Position</label>
+                    <p class="form-control-static">
+                        {{accreditation.person_position.position.name.text}}
+                        <span ng-show="accreditation.person_position.skill"><br/>{{accreditation.person_position.skill.skill_number}} {{accreditation.person_position.skill.name.text}}</span>
+                        <span ng-show="accreditation.person_position.sector"><br/>{{accreditation.person_position.sector.name.text}}</span>
+                        <span ng-show="accreditation.person_position.member"><br/>{{accreditation.person_position.member.code}} {{pos.name.text}}</span>
                     </p>
                 </div>
 
