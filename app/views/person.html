@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="event_list">EventListHeading</a></li>
+    <li><a ui-sref="event_list">Events</a></li>
     <li><a ui-sref="event.people({eventId: event.id})">{{event.name.text}}</a></li>
     <li class="active" ng-show="accreditation.person">{{accreditation.person.first_name}} {{accreditation.person.last_name}}</li>
     <li class="active" ng-show="!accreditation.person">{{accreditation.first_name}} {{accreditation.last_name}}</li>
@@ -102,19 +102,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="dt">DelegateType</label>
+                    <label for="dt">Delegate Type</label>
                     <select ng-options="dt.name for dt in delegateTypes.delegate_types track by dt.id" ng-model="accreditation.delegate_type" class="form-control" name="dt" id="dt" ng-change="changeDelegateType()">
                         <option></option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="organizationName">Organization</label>
-                    <input type="text" class="form-control" ng-maxlength="255" id="organizationName" name="organizationName" ng-model="accreditation.organization_name" />
-                </div>
-
-                <div class="form-group">
-                    <label for="lines">Lines</label>
+                    <label for="lines">Badge Lines</label>
                     <textarea name="lines" class="form-control" rows="3" ng-model="accreditation.lines"></textarea>
                 </div>
 
@@ -164,7 +159,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Lines</label>
+                    <label>Badge Lines</label>
                     <p class="form-control-static" ng-show="!accreditation.lines">
                         <span ng-show="!accreditation.delegate_type">
                             <span ng-switch on="accreditation.position_delegate_type.delegate_type.line1">

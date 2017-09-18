@@ -31,7 +31,21 @@ angular.module('accreditationApp')
 			$state.go('event.people', {eventId: $scope.eventId});
 		});
 	};
-	
+
+	$scope.changeDelegateType = function () {
+		angular.forEach($scope.zones.zones, function (zone) {
+			zone.existing = false;
+			if ($scope.accreditation.delegate_type) {
+				angular.forEach($scope.accreditation.delegate_type.zones, function (delegateTypeZone) {
+					if (delegateTypeZone.id === zone.id) {
+						delegateTypeZone.zone = zone;
+						zone.existing = true;
+					}
+				});
+			}
+		});
+	};
+
 	$scope.save = function()
 	{
 		$scope.accreditation.zones = [];
