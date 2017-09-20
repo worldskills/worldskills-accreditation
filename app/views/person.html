@@ -78,14 +78,23 @@
     
                 <hr/>
 
-                <div class="row">
-                    <div class="form-group col-sm-6">
-                        <label for="first_name">First Name</label>
-                        <input type="text" class="form-control" ng-maxlength="255" id="first_name" name="first_name" ng-model="accreditation.first_name" ng-disabled="accreditation.person" />
+                <div class="form-group" ng-show="!accreditation.person">
+                    <label for="image">Photo</label>
+                    <input type="file" id="image" name="image" ng-file-select="onFileSelect($files)" />
+                </div>
+
+                <div class="row" ng-show="!accreditation.person">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input type="text" class="form-control" ng-maxlength="255" id="first_name" name="first_name" ng-model="accreditation.first_name" />
+                        </div>
                     </div>
-                    <div class="form-group col-sm-6">
-                        <label for="last_name">Last Name</label>
-                        <input type="text" class="form-control" ng-maxlength="255" id="last_name" name="last_name" ng-model="accreditation.last_name" ng-disabled="accreditation.person" />
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" class="form-control" ng-maxlength="255" id="last_name" name="last_name" ng-model="accreditation.last_name" />
+                        </div>
                     </div>
                 </div>
 
@@ -108,8 +117,8 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Add Zone <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li ng-repeat="zone in zones.zones" ng-show="!zone.checked">
-                                    <a href ng-click="addZone(zone)">
+                                <li ng-repeat="zone in zones.zones">
+                                    <a href ng-click="addAddZone(zone)">
                                         {{ zone.name }}
                                     </a>
                                 </li>
@@ -119,8 +128,8 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Remove Zone <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li ng-repeat="zone in zones.zones" ng-show="!zone.checked">
-                                    <a href ng-click="removeZone(zone)">
+                                <li ng-repeat="zone in zones.zones">
+                                    <a href ng-click="addRemoveZone(zone)">
                                         {{ zone.name }}
                                     </a>
                                 </li>
@@ -130,11 +139,11 @@
 
                     <p class="form-control-static">
                         <span ng-repeat="zone in accreditation.zones_add">
-                            {{ zone.name }}
+                            <span ng-click="removeAddZone(zone)">{{ zone.name }}</span>
                             <br/>
                         </span>
                         <span ng-repeat="zone in accreditation.zones_remove">
-                            <s>{{ zone.name }}</s>
+                            <s ng-click="removeRemoveZone(zone)">{{ zone.name }}</s>
                             <br/>
                         </span>
                     </p>
@@ -154,7 +163,8 @@
                 <hr/>
                 
                 <p>
-                    <img ng-src="{{accreditation.person.images[0].thumbnail}}_small" width="100" alt="User Image" />
+                    <img ng-show="accreditation.person" ng-src="{{accreditation.person.images[0].thumbnail}}_small" width="100" alt="User Image" />
+                    <img ng-show="!accreditation.person && accreditation.image" ng-src="{{accreditation.image.thumbnail}}_small" width="100" alt="User Image" />
                 </p>
 
                 <h3 style="margin-bottom: 0;">

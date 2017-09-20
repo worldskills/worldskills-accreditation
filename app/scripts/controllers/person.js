@@ -1,13 +1,26 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP) {
-	
+.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $upload, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
+
+    var image = $q.when();
+
 	$scope.loading = true;
 	
 	$scope.eventId = $stateParams.eventId;
 	$scope.peopleApp = PEOPLE_APP;
-	
+
+    $scope.onFileSelect = function($files) {
+        var deferred = $q.defer();
+        image = deferred.promise;
+        $scope.upload = $upload.upload({
+            url: WORLDSKILLS_API_IMAGES,
+            file: $files[0],
+        }).success(function(data, status, headers, config) {
+            deferred.resolve(data);
+        });
+    };
+
 	$scope.accreditation = new Accreditation();
 	$scope.accreditation.zones_add = [];
 	$scope.accreditation.zones_remove = [];
@@ -68,30 +81,39 @@ angular.module('accreditationApp')
 	var successHandler = function()
 	{
 		$scope.loading = false;
-		$translate('PersonSaveMsg').then(function(msg)
-		{
-			alert.success(msg);
-			$state.go('event.people', {eventId: $scope.eventId});
-		});
+		alert.success("Accreditation data saved");
+		$state.go('event.people', {eventId: $scope.eventId});
 	};
 
 	$scope.save = function()
 	{
-		$scope.accreditation.zones = [];
-		angular.forEach($scope.zones.zones, function (zone) {
-			if (zone.checked) {
-				$scope.accreditation.zones.push(zone);
-			}
+        image.then(function (image) {
+	        if (typeof image != 'undefined') {
+	            $scope.accreditation.image = {id: image.id, thumbnail_hash: image.thumbnail_hash};
+	        }
+			$scope.accreditation.$save({eventId: $scope.eventId}, successHandler, $rootScope.errorHandler);
 		});
-		$scope.accreditation.$save({eventId: $scope.eventId}, successHandler, $rootScope.errorHandler);
 	};
 });
 
 angular.module('accreditationApp')
-.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP) {
-	
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $upload, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
+
+    var image = $q.when();
+
 	$scope.loading = true;
-	
+
+    $scope.onFileSelect = function($files) {
+        var deferred = $q.defer();
+        image = deferred.promise;
+        $scope.upload = $upload.upload({
+            url: WORLDSKILLS_API_IMAGES,
+            file: $files[0],
+        }).success(function(data, status, headers, config) {
+            deferred.resolve(data);
+        });
+    };
+
 	$scope.eventId = $stateParams.eventId;
 	$scope.accreditationId = $stateParams.accreditationId;
 	$scope.peopleApp = PEOPLE_APP;
@@ -155,37 +177,45 @@ angular.module('accreditationApp')
 			});
 		});
 	};
-
-	$scope.addZone = function (zone) {
+	
+	$scope.addAddZone = function (zone) {
 		$scope.accreditation.zones_add.push(zone);
 		$scope.updateZones();
 	};
 
-	$scope.removeZone = function (zone) {
+    $scope.removeAddZone = function (zone) {
+        var index = $scope.accreditation.zones_add.indexOf(zone);
+        $scope.accreditation.zones_add.splice(index, 1);
+        $scope.updateZones();
+    };
+
+	$scope.addRemoveZone = function (zone) {
 		$scope.accreditation.zones_remove.push(zone);
 		$scope.updateZones();
 	};
+
+    $scope.removeRemoveZone = function (zone) {
+        var index = $scope.accreditation.zones_remove.indexOf(zone);
+        $scope.accreditation.zones_remove.splice(index, 1);
+        $scope.updateZones();
+    };
 
 	// handler for a successful save
 	var successHandler = function()
 	{
 		$scope.loading = false;
-		$translate('PersonSaveMsg').then(function(msg)
-		{
-			alert.success(msg);
-			$state.go('event.people', {eventId: $scope.eventId});
-		});
+		alert.success("Accreditation data saved");
+		$state.go('event.people', {eventId: $scope.eventId});
 	};
 	
 	$scope.save = function()
 	{
-		$scope.accreditation.zones = [];
-		angular.forEach($scope.zones.zones, function (zone) {
-			if (zone.checked) {
-				$scope.accreditation.zones.push(zone);
-			}
+        image.then(function (image) {
+	        if (typeof image != 'undefined') {
+	            $scope.accreditation.image = {id: image.id, thumbnail_hash: image.thumbnail_hash};
+	        }
+			$scope.accreditation.$update({eventId: $scope.eventId}, successHandler, $rootScope.errorHandler);
 		});
-		$scope.accreditation.$update({eventId: $scope.eventId}, successHandler, $rootScope.errorHandler);
 	};
 
 	$scope.getPerson();
