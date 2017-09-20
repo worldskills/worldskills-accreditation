@@ -9,6 +9,8 @@ angular.module('accreditationApp')
 	$scope.peopleApp = PEOPLE_APP;
 	
 	$scope.accreditation = new Accreditation();
+	$scope.accreditation.zones_add = [];
+	$scope.accreditation.zones_remove = [];
 
 	// load the event info
 	Restangular.one('accreditation/events', $scope.eventId).get().then(function(result) 
@@ -19,7 +21,48 @@ angular.module('accreditationApp')
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 	$scope.members = Member.query({limit: 100});
 	$scope.skills = Skill.query({eventId: $stateParams.eventId});
-	$scope.zones = Zone.query({eventId: $stateParams.eventId});
+
+	$scope.accreditationZones = {};
+	$scope.zones = Zone.query({eventId: $stateParams.eventId}, function () {
+		angular.forEach($scope.zones.zones, function (zone) {
+			zone.access = false;
+			$scope.accreditationZones[zone.code] = zone;
+		});
+	});
+
+	$scope.updateZones = function () {
+		angular.forEach($scope.zones.zones, function (zone) {
+			zone.access = false;
+			if ($scope.accreditation.delegate_type) {
+				angular.forEach($scope.accreditation.delegate_type.zones, function (delegateTypeZone) {
+					if (delegateTypeZone.id === zone.id) {
+						delegateTypeZone.zone = zone;
+						zone.access = true;
+					}
+				});
+			}
+			angular.forEach($scope.accreditation.zones_add, function (accreditationZone) {
+				if (accreditationZone.id === zone.id) {
+					zone.access = true;
+				}
+			});
+			angular.forEach($scope.accreditation.zones_remove, function (accreditationZone) {
+				if (accreditationZone.id === zone.id) {
+					zone.access = false;
+				}
+			});
+		});
+	};
+
+	$scope.addZone = function (zone) {
+		$scope.accreditation.zones_add.push(zone);
+		$scope.updateZones();
+	};
+
+	$scope.removeZone = function (zone) {
+		$scope.accreditation.zones_remove.push(zone);
+		$scope.updateZones();
+	};
 
 	// handler for a successful save
 	var successHandler = function()
@@ -29,20 +72,6 @@ angular.module('accreditationApp')
 		{
 			alert.success(msg);
 			$state.go('event.people', {eventId: $scope.eventId});
-		});
-	};
-
-	$scope.changeDelegateType = function () {
-		angular.forEach($scope.zones.zones, function (zone) {
-			zone.existing = false;
-			if ($scope.accreditation.delegate_type) {
-				angular.forEach($scope.accreditation.delegate_type.zones, function (delegateTypeZone) {
-					if (delegateTypeZone.id === zone.id) {
-						delegateTypeZone.zone = zone;
-						zone.existing = true;
-					}
-				});
-			}
 		});
 	};
 
@@ -76,7 +105,14 @@ angular.module('accreditationApp')
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 	$scope.members = Member.query({limit: 100});
 	$scope.skills = Skill.query({eventId: $stateParams.eventId});
-	$scope.zones = Zone.query({eventId: $stateParams.eventId});
+
+	$scope.accreditationZones = {};
+	$scope.zones = Zone.query({eventId: $stateParams.eventId}, function () {
+		angular.forEach($scope.zones.zones, function (zone) {
+			zone.access = false;
+			$scope.accreditationZones[zone.code] = zone;
+		});
+	});
 
 	$scope.getPerson = function()
 	{
@@ -84,37 +120,50 @@ angular.module('accreditationApp')
 		$scope.accreditation = Accreditation.get({eventId: $scope.eventId, id: $scope.accreditationId}, function(accreditation) {
 			$scope.loading = false;
 			$scope.zones.$promise.then(function () {
-				angular.forEach($scope.zones.zones, function (zone) {
-					angular.forEach($scope.accreditation.zones, function (accreditationZone) {
-						if (accreditationZone.id === zone.id) {
-							zone.checked = true;
-						}
-					});
-				});
-				$scope.changeDelegateType();
+				$scope.updateZones();
 			});
 		}, $rootScope.errorHandler);
 	};
-	
-	$scope.changeDelegateType = function () {
+
+	$scope.updateZones = function () {
 		angular.forEach($scope.zones.zones, function (zone) {
-			zone.existing = false;
+			zone.access = false;
 			if ($scope.accreditation.delegate_type) {
 				angular.forEach($scope.accreditation.delegate_type.zones, function (delegateTypeZone) {
 					if (delegateTypeZone.id === zone.id) {
 						delegateTypeZone.zone = zone;
-						zone.existing = true;
+						zone.access = true;
 					}
 				});
 			} else if ($scope.accreditation.position_delegate_type.delegate_type) {
 				angular.forEach($scope.accreditation.position_delegate_type.delegate_type.zones, function (positionDelegateTypeZone) {
 					if (positionDelegateTypeZone.id === zone.id) {
 						positionDelegateTypeZone.zone = zone;
-						zone.existing = true;
+						zone.access = true;
 					}
 				});
 			}
+			angular.forEach($scope.accreditation.zones_add, function (accreditationZone) {
+				if (accreditationZone.id === zone.id) {
+					zone.access = true;
+				}
+			});
+			angular.forEach($scope.accreditation.zones_remove, function (accreditationZone) {
+				if (accreditationZone.id === zone.id) {
+					zone.access = false;
+				}
+			});
 		});
+	};
+
+	$scope.addZone = function (zone) {
+		$scope.accreditation.zones_add.push(zone);
+		$scope.updateZones();
+	};
+
+	$scope.removeZone = function (zone) {
+		$scope.accreditation.zones_remove.push(zone);
+		$scope.updateZones();
 	};
 
 	// handler for a successful save

@@ -38,12 +38,9 @@
             </span>
         </div>
     </div>
-    <div class="form-group">
-        <label for="color" class="col-sm-3 control-label">Color</label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" name="label" ng-model="delegateType.color">
-        </div>
-    </div>
+
+    <hr/>
+
     <div class="form-group">
         <label for="label" class="col-sm-3 control-label">Badge Label</label>
         <div class="col-sm-5">
@@ -51,24 +48,39 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="color" class="col-sm-3 control-label">Color</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" name="label" ng-model="delegateType.color">
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
         <label for="line1" class="col-sm-3 control-label">Badge Lines</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" name="line1" ng-model="delegateType.line1">
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" name="line1" ng-model="delegateType.line1">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" name="line2" ng-model="delegateType.line2">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" name="line3" ng-model="delegateType.line3">
+                </div>
+            </div>
         </div>
         <div class="col-sm-4">
-            <span class="help-block">SKILL, POSITION and MEMBER will be replaced</span>
+            <span class="help-block">Available keywords: SKILL, SECTOR, POSITION, MEMBER, ORGANIZATION</span>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-5">
-            <input type="text" class="form-control" name="line2" ng-model="delegateType.line2">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-5">
-            <input type="text" class="form-control" name="line3" ng-model="delegateType.line3">
-        </div>
-    </div>
+
+    <hr/>
 
     <div class="form-group">
         <label for="name" class="col-sm-3 control-label">Zones</label>
