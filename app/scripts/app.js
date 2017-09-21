@@ -21,7 +21,7 @@ angular
     'ui.bootstrap',
     'pascalprecht.translate',
     'restangular',
-    'angularFileUpload',
+    'ngFileUpload',
     'worldskills.utils',
     'youtube-embed'
   ])

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $upload, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
+.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, Upload, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
 
     var image = $q.when();
 
@@ -13,11 +13,11 @@ angular.module('accreditationApp')
     $scope.onFileSelect = function($files) {
         var deferred = $q.defer();
         image = deferred.promise;
-        $scope.upload = $upload.upload({
+        Upload.upload({
             url: WORLDSKILLS_API_IMAGES,
             file: $files[0],
-        }).success(function(data, status, headers, config) {
-            deferred.resolve(data);
+        }).then(function(response) {
+            deferred.resolve(response.data);
         });
     };
 
@@ -97,7 +97,7 @@ angular.module('accreditationApp')
 });
 
 angular.module('accreditationApp')
-.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $upload, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, Upload, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
 
     var image = $q.when();
 
@@ -106,11 +106,11 @@ angular.module('accreditationApp')
     $scope.onFileSelect = function($files) {
         var deferred = $q.defer();
         image = deferred.promise;
-        $scope.upload = $upload.upload({
+        Upload.upload({
             url: WORLDSKILLS_API_IMAGES,
             file: $files[0],
-        }).success(function(data, status, headers, config) {
-            deferred.resolve(data);
+        }).then(function(response) {
+            deferred.resolve(response.data);
         });
     };
 
