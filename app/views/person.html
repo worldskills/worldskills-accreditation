@@ -270,7 +270,7 @@
                     <a class="btn btn-default disabled" ng-style="{'visibility': accreditationZones['D'].access ? 'visible' : 'hidden'}">D</a>
                     <a class="btn btn-default disabled" ng-style="{'visibility': accreditationZones['S'].access ? 'visible' : 'hidden'}">S</a>
                     <a class="btn btn-default disabled" ng-style="{'visibility': accreditationZones['FP'].access ? 'visible' : 'hidden'}">F</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': accreditationZones['CD1'].access || accreditationZones['CD2'].access ? 'visible' : 'hidden'}">C</a>
+                    <a class="btn btn-default disabled" ng-style="{'visibility': accreditationZones['CD1'].access || accreditationZones['CD2'].access ? 'visible' : 'hidden'}"><span ng-show="accreditationZones['CD1'].access">C1</span><span ng-show="accreditationZones['CD2'].access">C2</span></a>
                     <a class="btn btn-default disabled" ng-style="{'visibility': accreditationZones['AGE'].access ? 'visible' : 'hidden'}">21+</a>
                 </p>
 
