@@ -10,6 +10,10 @@
 <form name="form.accData" novalidate focus-error>
 
 <p class="text-right">
+    <button ng-show="accreditation.id" class="btn btn-warning" ng-click="sync()">
+        <span ng-show="!synced">Sync</span>
+        <span ng-show="synced">Synced</span>
+    </button>
     <input type="button" class="btn btn-success" value="Save Accreditation" ng-click="save()"/>
 </p>
 
@@ -152,6 +156,22 @@
             </div>
         </div>
 
+        <div class="panel panel-default" ng-show="eas">
+            <div class="panel-body">
+
+                <h1 class="align-top">Passport information</h1>
+    
+                <hr/>
+
+                <p>
+                    {{eas.status}}<br/>
+                    {{eas.error_description}}
+                </p>
+
+                <p><a href="" target="_blank"><span class="glyphicon glyphicon-link"></span> Update passport information</a>
+
+            </div>
+        </div>
     </div>
     <div class="col-md-4">
 

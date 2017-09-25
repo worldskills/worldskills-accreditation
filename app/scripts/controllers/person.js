@@ -218,6 +218,13 @@ angular.module('accreditationApp')
 		});
 	};
 
+    $scope.sync = function() {
+        $scope.accreditation.$sync({eventId: $scope.eventId}, function (response) { 
+            $scope.synced = true;
+            $scope.eas = response.data;
+        }, $rootScope.errorHandler);
+    };
+
 	$scope.getPerson();
 });
 'use strict';
