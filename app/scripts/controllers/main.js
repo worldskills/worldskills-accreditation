@@ -50,10 +50,7 @@ angular.module('accreditationApp')
     $rootScope.errorHandler = function(response)
     {
     	$scope.loading = false;
-    	$translate('Error').then(function(errLabel)
-    	{
-    		alert.error(errLabel + ' ' + response.data.code + ': ' + response.data.user_msg);
-    	});
+    	alert.error('Error: ' + ' ' + response.data.code + ': ' + response.data.user_msg);
     	document.body.scrollTop = document.documentElement.scrollTop = 0;
     };
 
