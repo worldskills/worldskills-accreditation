@@ -197,8 +197,9 @@
                         <span ng-switch on="accreditation.position_delegate_type.delegate_type.line1">
                             <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
                             <span ng-switch-when="SECTOR">{{accreditation.person_position.sector.name.text}}</span>
-                            <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                            <span ng-switch-when="POSITION"><span ng-show="accreditation.position">{{accreditation.position}}</span><span ng-show="!accreditation.position">{{accreditation.person_position.position.name.text}}</span></span>
                             <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                            <span ng-switch-when="COUNTRY">{{accreditation.person.country.name.text}}</span>
                             <span ng-switch-when="ORGANIZATION">{{accreditation.organization_name}}</span>
                             <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line1}}</span>
                         </span>
@@ -206,8 +207,9 @@
                         <span ng-switch on="accreditation.position_delegate_type.delegate_type.line2">
                             <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
                             <span ng-switch-when="SECTOR">{{accreditation.person_position.sector.name.text}}</span>
-                            <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                            <span ng-switch-when="POSITION"><span ng-show="accreditation.position">{{accreditation.position}}</span><span ng-show="!accreditation.position">{{accreditation.person_position.position.name.text}}</span></span>
                             <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                            <span ng-switch-when="COUNTRY">{{accreditation.person.country.name.text}}</span>
                             <span ng-switch-when="ORGANIZATION">{{accreditation.organization_name}}</span>
                             <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line2}}</span>
                         </span>
@@ -215,8 +217,9 @@
                         <span ng-switch on="accreditation.position_delegate_type.delegate_type.line3">
                             <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
                             <span ng-switch-when="SECTOR">{{accreditation.person_position.sector.name.text}}</span>
-                            <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                            <span ng-switch-when="POSITION"><span ng-show="accreditation.position">{{accreditation.position}}</span><span ng-show="!accreditation.position">{{accreditation.person_position.position.name.text}}</span></span>
                             <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                            <span ng-switch-when="COUNTRY">{{accreditation.person.country.name.text}}</span>
                             <span ng-switch-when="ORGANIZATION">{{accreditation.organization_name}}</span>
                             <span ng-switch-default>{{accreditation.position_delegate_type.delegate_type.line3}}</span>
                         </span>
@@ -225,8 +228,9 @@
                         <span ng-switch on="accreditation.delegate_type.line1">
                             <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
                             <span ng-switch-when="SECTOR">{{accreditation.person_position.sector.name.text}}</span>
-                            <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                            <span ng-switch-when="POSITION"><span ng-show="accreditation.position">{{accreditation.position}}</span><span ng-show="!accreditation.position">{{accreditation.person_position.position.name.text}}</span></span>
                             <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                            <span ng-switch-when="COUNTRY">{{accreditation.person.country.name.text}}</span>
                             <span ng-switch-when="ORGANIZATION">{{accreditation.organization_name}}</span>
                             <span ng-switch-default>{{accreditation.delegate_type.line1}}</span>
                         </span>
@@ -234,8 +238,9 @@
                         <span ng-switch on="accreditation.delegate_type.line2">
                             <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
                             <span ng-switch-when="SECTOR">{{accreditation.person_position.sector.name.text}}</span>
-                            <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                            <span ng-switch-when="POSITION"><span ng-show="accreditation.position">{{accreditation.position}}</span><span ng-show="!accreditation.position">{{accreditation.person_position.position.name.text}}</span></span>
                             <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                            <span ng-switch-when="COUNTRY">{{accreditation.person.country.name.text}}</span>
                             <span ng-switch-when="ORGANIZATION">{{accreditation.organization_name}}</span>
                             <span ng-switch-default>{{accreditation.delegate_type.line2}}</span>
                         </span>
@@ -243,8 +248,9 @@
                         <span ng-switch on="accreditation.delegate_type.line3">
                             <span ng-switch-when="SKILL">{{accreditation.person_position.skill.name.text}}</span>
                             <span ng-switch-when="SECTOR">{{accreditation.person_position.sector.name.text}}</span>
-                            <span ng-switch-when="POSITION">{{accreditation.person_position.position.name.text}}</span>
+                            <span ng-switch-when="POSITION"><span ng-show="accreditation.position">{{accreditation.position}}</span><span ng-show="!accreditation.position">{{accreditation.person_position.position.name.text}}</span></span>
                             <span ng-switch-when="MEMBER">{{accreditation.person_position.member.name.text}}</span>
+                            <span ng-switch-when="COUNTRY">{{accreditation.person.country.name.text}}</span>
                             <span ng-switch-when="ORGANIZATION">{{accreditation.organization_name}}</span>
                             <span ng-switch-default>{{accreditation.delegate_type.line3}}</span>
                         </span>
