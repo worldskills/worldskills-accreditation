@@ -1,0 +1,49 @@
+
+<alerts></alerts>
+
+<div class="alert alert-danger" ng-show="error">
+    <strong>{{error.user_msg}}</strong> {{error.dev_msg}}
+</div>
+
+<p class="text-right">
+    <button class="btn btn-success" ngf-select="onFileSelect($files)">Import</button>
+</p>
+
+<ws-spinner ng-show="loading" class="bigSpinner"></ws-spinner>
+
+<table ng-show="!loading" class="table table-striped">
+    <colgroup>
+        <col width="20%" />
+        <col width="20%" />
+        <col width="20%" />
+        <col width="20%" />
+        <col width="20%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th><span translate>Name</span></th>
+            <th><span translate>Delegate Type</span></th>
+            <th><span translate>Country</span></th>
+            <th><span translate>Company</span></th>
+            <th><span translate>Job Title</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="accreditation in accreditations.people">
+            <td><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})">{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
+            <td>{{accreditation.delegate_type.name}}</td>
+            <td>{{accreditation.country.name.text}}</td>
+            <td>{{accreditation.organization}}</td>
+            <td>{{accreditation.position}}</td>
+        </tr>
+        <tr ng-show="!accreditations || accreditations.total_count == 0">
+            <td colspan="5">No people found</td>
+        </tr>
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5"></td>
+        </tr>
+    </tfoot>
+</table>

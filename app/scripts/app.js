@@ -163,6 +163,14 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('event.import', {
+        url: '/import',
+        templateUrl: 'views/import.html',
+        controller: 'ImportCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
    ;
 
   }])
