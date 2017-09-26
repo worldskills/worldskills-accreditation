@@ -221,7 +221,7 @@ angular.module('accreditationApp')
     $scope.sync = function() {
         Accreditation.sync({eventId: $scope.eventId, id: $scope.accreditation.id}, {}, function (response) { 
             $scope.synced = true;
-            $scope.eas = response.data;
+            $scope.eas = response;
         }, $rootScope.errorHandler);
     };
 

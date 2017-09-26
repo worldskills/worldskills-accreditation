@@ -152,23 +152,16 @@
                         </span>
                     </p>
                 </div>
-
             </div>
-        </div>
 
-        <div class="panel panel-default" ng-show="eas">
-            <div class="panel-body">
-
-                <h1 class="align-top">Passport information</h1>
-    
-                <hr/>
+            <div class="panel-footer" ng-show="eas">
 
                 <p>
-                    {{eas.status}}<br/>
+                    Passport information: {{eas.status}}<br/>
                     {{eas.error_description}}
                 </p>
 
-                <p><a href="" target="_blank"><span class="glyphicon glyphicon-link"></span> Update passport information</a>
+                <p><a href="{{eas.redirect}}" target="_blank"><span class="glyphicon glyphicon-link"></span> Update passport information</a>
 
             </div>
         </div>
