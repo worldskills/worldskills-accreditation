@@ -85,6 +85,10 @@ angular.module('accreditationApp')
 		$state.go('event.people', {eventId: $scope.eventId});
 	};
 
+    $scope.changed = function ()
+    {
+    };
+
 	$scope.save = function()
 	{
         image.then(function (image) {
@@ -111,6 +115,7 @@ angular.module('accreditationApp')
             file: $files[0],
         }).then(function(response) {
             deferred.resolve(response.data);
+            $scope.save();
         });
     };
 
@@ -141,75 +146,63 @@ angular.module('accreditationApp')
 		$scope.loading = true;
 		$scope.accreditation = Accreditation.get({eventId: $scope.eventId, id: $scope.accreditationId}, function(accreditation) {
 			$scope.loading = false;
-			$scope.zones.$promise.then(function () {
-				$scope.updateZones();
-			});
 		}, $rootScope.errorHandler);
 	};
 
-	$scope.updateZones = function () {
-		angular.forEach($scope.zones.zones, function (zone) {
-			zone.access = false;
-			if ($scope.accreditation.delegate_type) {
-				angular.forEach($scope.accreditation.delegate_type.zones, function (delegateTypeZone) {
-					if (delegateTypeZone.id === zone.id) {
-						delegateTypeZone.zone = zone;
-						zone.access = true;
-					}
-				});
-			} else if ($scope.accreditation.position_delegate_type.delegate_type) {
-				angular.forEach($scope.accreditation.position_delegate_type.delegate_type.zones, function (positionDelegateTypeZone) {
-					if (positionDelegateTypeZone.id === zone.id) {
-						positionDelegateTypeZone.zone = zone;
-						zone.access = true;
-					}
-				});
-			}
-			angular.forEach($scope.accreditation.zones_add, function (accreditationZone) {
-				if (accreditationZone.id === zone.id) {
-					zone.access = true;
-				}
-			});
-			angular.forEach($scope.accreditation.zones_remove, function (accreditationZone) {
-				if (accreditationZone.id === zone.id) {
-					zone.access = false;
-				}
-			});
-		});
-	};
-	
+    $scope.hasNotZone = function (zone) {
+        return !$scope.hasZone(zone);
+    }
+
+    $scope.hasZone = function (zone) {
+        var hasZone = false;
+        if ($scope.accreditation.summary) {
+            angular.forEach($scope.accreditation.summary.zones, function (accreditationZone) {
+                if (accreditationZone.code === zone.code) {
+                    hasZone = true;
+                }
+            });
+        }
+        return hasZone;
+    };
+
 	$scope.addAddZone = function (zone) {
 		$scope.accreditation.zones_add.push(zone);
-		$scope.updateZones();
+		$scope.save();
 	};
 
     $scope.removeAddZone = function (zone) {
         var index = $scope.accreditation.zones_add.indexOf(zone);
         $scope.accreditation.zones_add.splice(index, 1);
-        $scope.updateZones();
+        $scope.save();
     };
 
 	$scope.addRemoveZone = function (zone) {
 		$scope.accreditation.zones_remove.push(zone);
-		$scope.updateZones();
+		$scope.save();
 	};
 
     $scope.removeRemoveZone = function (zone) {
         var index = $scope.accreditation.zones_remove.indexOf(zone);
         $scope.accreditation.zones_remove.splice(index, 1);
-        $scope.updateZones();
+        $scope.save();
     };
 
-	// handler for a successful save
-	var successHandler = function()
-	{
-		$scope.loading = false;
-		alert.success("Accreditation data saved");
-		$state.go('event.people', {eventId: $scope.eventId});
-	};
-	
+    // handler for a successful save
+    var successHandler = function()
+    {
+        $scope.saved = true;
+        $scope.saving = false;
+    };
+
+    $scope.changed = function ()
+    {
+        $scope.save();
+    };
+
 	$scope.save = function()
 	{
+        $scope.saved = false;
+        $scope.saving = true;
         image.then(function (image) {
 	        if (typeof image != 'undefined') {
 	            $scope.accreditation.image = {id: image.id, thumbnail_hash: image.thumbnail_hash};
@@ -219,8 +212,9 @@ angular.module('accreditationApp')
 	};
 
     $scope.sync = function() {
+        $scope.syncing = true;
         Accreditation.sync({eventId: $scope.eventId, id: $scope.accreditation.id}, {}, function (response) { 
-            $scope.synced = true;
+            $scope.syncing = false;
             $scope.eas = response;
         }, $rootScope.errorHandler);
     };
