@@ -7,7 +7,7 @@
 
     });
 
-    angular.module('accreditationApp').controller('DelegateTypeCtrl', function ($scope, $state, $stateParams, alert, Event, Zone, DelegateType) {
+    angular.module('accreditationApp').controller('DelegateTypeCtrl', function ($scope, $state, $stateParams, $http, alert, Downloader, Event, Zone, DelegateType, REST_BASE_URL) {
 
         $scope.event = Event.get({id: $stateParams.eventId});
 
@@ -65,6 +65,17 @@
                     $state.go('event.delegate_type_list', {eventId: $stateParams.eventId});
                 });
             }
+        };
+
+        $scope.export = function () {
+
+            $http({url: REST_BASE_URL + '/accreditation/events/' + $stateParams.eventId + '/delegate_types/' + $scope.delegateTypeId + '/eas/export', method: 'PUT', responseType: 'blob'}).success(function(data, status, headers) {
+               var filename = 'accreditation.xlsx';
+               Downloader.handleDownload(data, status, headers, filename);
+            })
+            .error(function(data, status) {
+                window.alert("Could not export!");
+            });
         };
     });
 
