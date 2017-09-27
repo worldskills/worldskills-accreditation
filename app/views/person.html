@@ -9,13 +9,17 @@
 
 <form name="form.accData" novalidate focus-error>
 
-<p class="text-right text-muted">
+<p class="pull-right text-muted">
     <span ng-show="accreditation.id && !saving && !saved">Changes are saved automatically</span>
     <span ng-show="accreditation.id && saving">Saving...</span>
     <span ng-show="accreditation.id && !saving && saved">Saved</span>
     &nbsp;
     <button ng-show="accreditation.id" class="btn btn-warning" ng-click="sync()">Sync to EAS<ws-text-spinner ng-show="syncing" class="ng-hide"></ws-text-spinner></button>
     <input ng-show="!accreditation.id" type="button" class="btn btn-success" value="Save Accreditation" ng-click="save()"/>
+</p>
+
+<p>
+    <a ui-sref="event.people({eventId: event.id})" class="btn btn-default">Back</a>
 </p>
 
 <div class="row">

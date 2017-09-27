@@ -101,20 +101,18 @@ angular.module('accreditationApp')
 });
 
 angular.module('accreditationApp')
-.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, Upload, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $timeout, Upload, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
 
-    var image = $q.when();
+    var image;
 
 	$scope.loading = true;
 
     $scope.onFileSelect = function($files) {
-        var deferred = $q.defer();
-        image = deferred.promise;
         Upload.upload({
             url: WORLDSKILLS_API_IMAGES,
             file: $files[0],
         }).then(function(response) {
-            deferred.resolve(response.data);
+            image = response.data;
             $scope.save();
         });
     };
@@ -187,29 +185,28 @@ angular.module('accreditationApp')
         $scope.save();
     };
 
-    // handler for a successful save
-    var successHandler = function()
-    {
-        $scope.saved = true;
-        $scope.saving = false;
-    };
-
+    var accreditationTimeout;
     $scope.changed = function ()
     {
-        $scope.save();
+        if (accreditationTimeout) {
+            $timeout.cancel(accreditationTimeout);
+        }
+        accreditationTimeout = $timeout($scope.save, 500);
     };
 
-	$scope.save = function()
-	{
+    $scope.save = function()
+    {
         $scope.saved = false;
         $scope.saving = true;
-        image.then(function (image) {
-	        if (typeof image != 'undefined') {
-	            $scope.accreditation.image = {id: image.id, thumbnail_hash: image.thumbnail_hash};
-	        }
-			$scope.accreditation.$update({eventId: $scope.eventId}, successHandler, $rootScope.errorHandler);
-		});
-	};
+        if (typeof image != 'undefined') {
+            $scope.accreditation.image = {id: image.id, thumbnail_hash: image.thumbnail_hash};
+        }
+        Accreditation.update({eventId: $scope.eventId}, $scope.accreditation, function (response) {
+            $scope.accreditation.summary = response.summary;
+            $scope.saved = true;
+            $scope.saving = false;
+        }, $rootScope.errorHandler);
+    };
 
     $scope.sync = function() {
         $scope.syncing = true;
