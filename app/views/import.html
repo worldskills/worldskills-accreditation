@@ -5,45 +5,62 @@
     <strong>{{error.user_msg}}</strong> {{error.dev_msg}}
 </div>
 
-<p class="text-right">
-    <button class="btn btn-success" ngf-select="onFileSelect($files)">Import</button>
+<p class="pull-right">
+    <button class="btn btn-success" ng-click="import()" ng-disabled="!accreditations.data">Import<ws-text-spinner ng-show="importing" class="ng-hide"></ws-text-spinner></button>
 </p>
 
-<ws-spinner ng-show="loading" class="bigSpinner"></ws-spinner>
+<p>
+    <button class="btn btn-primary" ngf-select="onFileSelect($files)">Load file</button>
+</p>
 
-<table ng-show="!loading" class="table table-striped">
+<table class="table table-striped" style="table-layout: fixed;">
     <colgroup>
-        <col width="20%" />
-        <col width="20%" />
-        <col width="20%" />
-        <col width="20%" />
-        <col width="20%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
     </colgroup>
     <thead>
         <tr>
-            <th><span translate>Name</span></th>
-            <th><span translate>Delegate Type</span></th>
-            <th><span translate>Country</span></th>
-            <th><span translate>Company</span></th>
-            <th><span translate>Job Title</span></th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Country</th>
+            <th>Email</th>
+            <th>Position</th>
+            <th>Entity</th>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="accreditation in accreditations.people">
-            <td><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})" target="_blank">{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
-            <td>{{accreditation.delegate_type.name}}</td>
-            <td>{{accreditation.country.name.text}}</td>
-            <td>{{accreditation.organization}}</td>
-            <td>{{accreditation.position}}</td>
+        <tr ng-repeat="accreditation in accreditations.data">
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['First Name']}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Last Name']}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Country']}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Email']}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Position']}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Entity']}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Job Title']}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Company']}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                <a ng-show="accreditation.accreditation" ui-sref="person({eventId: event.id, accreditationId: accreditation.accreditation.id})" target="_blank">{{accreditation.status}}</a>
+                <span ng-show="!accreditation.accreditation">{{accreditation.status}}</span>
+            </td>
         </tr>
-        <tr ng-show="!accreditations || accreditations.total_count == 0">
-            <td colspan="5">No people found</td>
+        <tr ng-show="!accreditations.data">
+            <td colspan="9">No people found</td>
         </tr>
 
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="5"></td>
+            <td colspan="9"></td>
         </tr>
     </tfoot>
 </table>

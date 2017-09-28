@@ -224,7 +224,7 @@
                 </p>
                 <div ng-class="{collapse: !showAllZones}">
                     <p>
-                        <span ng-repeat="zone in zones.zones" ng-show="zone.access">
+                        <span ng-repeat="zone in zones.zones | filter:hasZone">
                             {{zone.name}}
                             <br/>
                         </span>
