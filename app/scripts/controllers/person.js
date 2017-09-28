@@ -214,7 +214,12 @@ angular.module('accreditationApp')
             $scope.syncing = false;
             $scope.eas = response;
             $scope.eas.redirect += "&return_url=" + encodeURIComponent(window.location.href);
-        }, $rootScope.errorHandler);
+        }, function (response) {
+            $scope.syncing = false;
+            $scope.eas = {};
+            $scope.eas.status = 'Error';
+            $scope.eas.error_description = response.data.dev_msg;
+        });
     };
 
 	$scope.getPerson();
