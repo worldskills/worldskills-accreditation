@@ -51,7 +51,7 @@
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.country.name.text}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.eas.status}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.eas.error_description}}</td>
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="{{accreditation.eas.redirect}}">{{accreditation.eas.redirect}}</a></td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="{{accreditation.eas.redirect}}" target="_blank">{{accreditation.eas.redirect}}</a></td>
         </tr>
         <tr ng-show="!accreditations.people || accreditations.total_count == 0">
             <td colspan="8">No people found</td>
