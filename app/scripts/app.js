@@ -171,6 +171,14 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('event.export', {
+        url: '/export',
+        templateUrl: 'views/export.html',
+        controller: 'ExportCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
    ;
 
   }])

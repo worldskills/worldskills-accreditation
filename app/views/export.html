@@ -1,0 +1,66 @@
+
+<alerts></alerts>
+
+<div class="alert alert-danger" ng-show="error">
+    <strong>{{error.user_msg}}</strong> {{error.dev_msg}}
+</div>
+
+<p class="pull-right">
+    <button class="btn btn-warning" ng-click="sync()">Sync to EAS<ws-text-spinner ng-show="syncing" class="ng-hide"></ws-text-spinner></button>
+</p>
+
+<p class="form-inline">
+    <select ng-model="delegateType" class="form-control">
+        <option></option>
+        <option ng-repeat="dt in delegateTypes.delegate_types" value="{{dt.id}}">{{dt.name}}</option>
+    </select>
+    &nbsp;
+    <button class="btn btn-primary" ng-click="load()">Load<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+    <span ng-show="accreditations.people" class="text-muted">&nbsp;Loaded {{accreditations.people.length}} people</span>
+</p>
+
+<table class="table table-striped" style="table-layout: fixed;">
+    <colgroup>
+        <col width="12%" />
+        <col width="12%" />
+        <col width="12%" />
+        <col width="12%" />
+        <col width="12%" />
+        <col width="12%" />
+        <col width="12%" />
+        <col width="12%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Company</th>
+            <th>Country</th>
+            <th>Status</th>
+            <th>Details</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="accreditation in accreditations.people">
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.first_name}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.last_name}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.email_address}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.organization}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.country.name.text}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.eas.status}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.eas.error_description}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.eas.redirect}}</td>
+        </tr>
+        <tr ng-show="!accreditations.people || accreditations.total_count == 0">
+            <td colspan="8">No people found</td>
+        </tr>
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="8"></td>
+        </tr>
+    </tfoot>
+</table>

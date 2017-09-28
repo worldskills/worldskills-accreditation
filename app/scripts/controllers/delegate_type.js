@@ -67,16 +67,6 @@
             }
         };
 
-        $scope.export = function () {
-
-            $http({url: REST_BASE_URL + '/accreditation/events/' + $stateParams.eventId + '/delegate_types/' + $scope.delegateTypeId + '/eas/export', method: 'PUT', responseType: 'blob'}).success(function(data, status, headers) {
-               var filename = 'accreditation.xlsx';
-               Downloader.handleDownload(data, status, headers, filename);
-            })
-            .error(function(data, status) {
-                window.alert("Could not export!");
-            });
-        };
     });
 
 })();
