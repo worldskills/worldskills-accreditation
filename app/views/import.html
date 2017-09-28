@@ -30,7 +30,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="accreditation in accreditations.people">
-            <td><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})">{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
+            <td><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})" target="_blank">{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
             <td>{{accreditation.delegate_type.name}}</td>
             <td>{{accreditation.country.name.text}}</td>
             <td>{{accreditation.organization}}</td>

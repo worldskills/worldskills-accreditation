@@ -44,14 +44,14 @@
     </thead>
     <tbody>
         <tr ng-repeat="accreditation in accreditations.people">
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.first_name}}</td>
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.last_name}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})" target="_blank">{{accreditation.first_name}}</a></td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})" target="_blank">{{accreditation.last_name}}</a></td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.email_address}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.organization}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.country.name.text}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.eas.status}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.eas.error_description}}</td>
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.eas.redirect}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="{{accreditation.eas.redirect}}">{{accreditation.eas.redirect}}</a></td>
         </tr>
         <tr ng-show="!accreditations.people || accreditations.total_count == 0">
             <td colspan="8">No people found</td>
