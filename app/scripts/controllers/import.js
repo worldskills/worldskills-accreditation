@@ -53,7 +53,7 @@ angular.module('accreditationApp').controller('ImportCtrl', function ($scope, $r
 
         $scope.importing = true;
 
-        var delay = 3000;
+        var delay = 5000;
 
         angular.forEach($scope.accreditations.data, function (accreditation, i) {
             $timeout(function () {
