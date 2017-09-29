@@ -24,6 +24,7 @@
         <col width="10%" />
         <col width="10%" />
         <col width="10%" />
+        <col width="10%" />
     </colgroup>
     <thead>
         <tr>
@@ -35,6 +36,7 @@
             <th>Entity</th>
             <th>Job Title</th>
             <th>Company</th>
+            <th>Delegate Type</th>
             <th>Status</th>
         </tr>
     </thead>
@@ -48,19 +50,20 @@
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Entity']}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Job Title']}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Company']}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Delegate Type']}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                 <a ng-show="accreditation.accreditation" ui-sref="person({eventId: event.id, accreditationId: accreditation.accreditation.id})" target="_blank">{{accreditation.status}}</a>
                 <span ng-show="!accreditation.accreditation">{{accreditation.status}}</span>
             </td>
         </tr>
         <tr ng-show="!accreditations.data">
-            <td colspan="9">No people found</td>
+            <td colspan="10">No people found</td>
         </tr>
 
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="9"></td>
+            <td colspan="10"></td>
         </tr>
     </tfoot>
 </table>
