@@ -21,14 +21,16 @@
 
 <table class="table table-striped" style="table-layout: fixed;">
     <colgroup>
-        <col width="12%" />
-        <col width="12%" />
-        <col width="12%" />
-        <col width="12%" />
-        <col width="12%" />
-        <col width="12%" />
-        <col width="12%" />
-        <col width="12%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
     </colgroup>
     <thead>
         <tr>
@@ -37,6 +39,8 @@
             <th>Email</th>
             <th>Company</th>
             <th>Country</th>
+            <th>Conf. D1</th>
+            <th>Conf. D2</th>
             <th>Status</th>
             <th>Details</th>
             <th>Link</th>
@@ -49,18 +53,20 @@
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.email_address}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.organization}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.country.name.text}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{hasZone(accreditation, 'CD1') ? 'Yes' : ''}}</td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{hasZone(accreditation, 'CD2') ? 'Yes' : ''}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.eas.status}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.eas.error_description}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="{{accreditation.eas.redirect}}" target="_blank">{{accreditation.eas.redirect}}</a></td>
         </tr>
         <tr ng-show="!accreditations.people || accreditations.total_count == 0">
-            <td colspan="8">No people found</td>
+            <td colspan="10">No people found</td>
         </tr>
 
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="8"></td>
+            <td colspan="10"></td>
         </tr>
     </tfoot>
 </table>

@@ -6,6 +6,16 @@ angular.module('accreditationApp').controller('ExportCtrl', function ($scope, $r
 
     $scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 
+    $scope.hasZone = function (accreditation, zone) {
+        var hasZone = false;
+        angular.forEach(accreditation.zones, function (accreditationZone) {
+            if (accreditationZone.code === zone) {
+                hasZone = true;
+            }
+        });
+        return hasZone;
+    };
+    
     $scope.load = function() 
     {
         $scope.loading = true;
