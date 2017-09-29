@@ -300,7 +300,7 @@ module.exports = function (grunt) {
         },
         options: {
             module: 'accreditationApp',
-            usemin: 'scripts/app.js',
+            usemin: 'scripts/scripts.js',
         }
     },
 
