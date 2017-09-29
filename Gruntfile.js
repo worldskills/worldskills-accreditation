@@ -292,6 +292,18 @@ module.exports = function (grunt) {
       }
     },
 
+    ngtemplates: {
+        dist: {
+            cwd: '<%= yeoman.app %>',
+            src: 'views/*.html',
+            dest: '.tmp/template.js'
+        },
+        options: {
+            module: 'accreditationApp',
+            usemin: 'scripts/app.js',
+        }
+    },
+
     // ng-annotate tries to make the code safe for minification automatically
     // by using the Angular long form for dependency injection.
     ngAnnotate: {
@@ -401,6 +413,8 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'htmlmin',
+    'ngtemplates',
     'concat',
     'ngAnnotate',
     //'ngmin',
@@ -408,8 +422,7 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'filerev',
-    'usemin',
-    'htmlmin'
+    'usemin'
   ]);
 
   grunt.registerTask('default', [
