@@ -213,7 +213,6 @@ angular.module('accreditationApp')
         Accreditation.sync({eventId: $scope.eventId, id: $scope.accreditation.id}, {}, function (response) { 
             $scope.syncing = false;
             $scope.eas = response;
-            $scope.eas.redirect += "&return_url=" + encodeURIComponent(window.location.href);
         }, function (response) {
             $scope.syncing = false;
             $scope.eas = {};
