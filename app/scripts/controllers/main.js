@@ -18,7 +18,13 @@ angular.module('accreditationApp')
     $rootScope.filterTags = [];
     
     $rootScope.badgerVidId = 'XT8hE7_8BCY';
-    
+
+    auth.hasUserRole(API_AUTH_CODE, 'Admin').then(function (hasUserRole) {
+        if (hasUserRole) {
+            $scope.userIsAdmin = true;
+        }
+    });
+
     $rootScope.showBadger = function() {
 	    $rootScope.badgerModal = $uibModal.open({
 			  scope: $scope,
