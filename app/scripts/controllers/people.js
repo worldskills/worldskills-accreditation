@@ -29,8 +29,8 @@ angular.module('accreditationApp')
 
 		$rootScope.currentPeoplePage = $scope.current_page;
 
-		Accreditation.query({eventId: $stateParams.eventId, fn: $scope.filter.firstName, 
-			ln: $scope.filter.lastName, pos_name: $scope.filter.position, country: $scope.filter.country,
+		Accreditation.query({eventId: $stateParams.eventId, name: $scope.filter.name, 
+			pos_name: $scope.filter.position, country: $scope.filter.country,
 			skill: $scope.filter.skill, del_types: $scope.filter.delegateTypes, sort: $scope.filter.sort, 
 			limit: $scope.items_per_page, offset: $scope.items_per_page * ($scope.current_page-1) 
 		}, function(result) {
