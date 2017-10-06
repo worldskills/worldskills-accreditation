@@ -43,46 +43,52 @@ angular.module('accreditationApp')
 		});
 	});
 
-	$scope.updateZones = function () {
-		angular.forEach($scope.zones.zones, function (zone) {
-			zone.access = false;
-			if ($scope.accreditation.delegate_type) {
-				angular.forEach($scope.accreditation.delegate_type.zones, function (delegateTypeZone) {
-					if (delegateTypeZone.id === zone.id) {
-						delegateTypeZone.zone = zone;
-						zone.access = true;
-					}
-				});
-			}
-			angular.forEach($scope.accreditation.zones_add, function (accreditationZone) {
-				if (accreditationZone.id === zone.id) {
-					zone.access = true;
-				}
-			});
-			angular.forEach($scope.accreditation.zones_remove, function (accreditationZone) {
-				if (accreditationZone.id === zone.id) {
-					zone.access = false;
-				}
-			});
-		});
+    $scope.hasNotZone = function (zone) {
+        return !$scope.hasZone(zone);
+    }
+
+    $scope.hasZone = function (zone) {
+        var hasZone = false;
+        angular.forEach($scope.zones_add, function (accreditationZone) {
+            if (accreditationZone.code === zone.code) {
+                hasZone = true;
+            }
+        });
+        return hasZone;
+    };
+
+	$scope.addAddZone = function (zone) {
+		$scope.accreditation.zones_add.push(zone);
 	};
+
+    $scope.removeAddZone = function (zone) {
+        var index = $scope.accreditation.zones_add.indexOf(zone);
+        $scope.accreditation.zones_add.splice(index, 1);
+    };
+
+	$scope.addRemoveZone = function (zone) {
+		$scope.accreditation.zones_remove.push(zone);
+	};
+
+    $scope.removeRemoveZone = function (zone) {
+        var index = $scope.accreditation.zones_remove.indexOf(zone);
+        $scope.accreditation.zones_remove.splice(index, 1);
+    };
 
 	$scope.addZone = function (zone) {
 		$scope.accreditation.zones_add.push(zone);
-		$scope.updateZones();
 	};
 
 	$scope.removeZone = function (zone) {
 		$scope.accreditation.zones_remove.push(zone);
-		$scope.updateZones();
 	};
 
 	// handler for a successful save
-	var successHandler = function()
+	var successHandler = function(accreditation)
 	{
 		$scope.loading = false;
 		alert.success("Accreditation data saved");
-		$state.go('event.people', {eventId: $scope.eventId});
+		$state.go('person', {eventId: $scope.eventId, accreditationId: accreditation.id});
 	};
 
     $scope.changed = function ()
