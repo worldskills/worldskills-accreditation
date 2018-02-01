@@ -13,9 +13,8 @@ angular.module('accreditationApp')
 	  $scope.changePage = function(page) 
 	  {
 		  $rootScope.loading = true;
-		   
-		  $scope.current_page = page;
-		  Restangular.one('accreditation/events').get({limit: $scope.items_per_page, offset: $scope.items_per_page * (page-1), 
+
+		  Restangular.one('accreditation/events').get({limit: $scope.items_per_page, offset: $scope.items_per_page * ($scope.current_page-1), 
 			  }).then( function(result) 
 			  {
 				  $scope.events = result;
