@@ -214,19 +214,6 @@ angular.module('accreditationApp')
         }, $rootScope.errorHandler);
     };
 
-    $scope.sync = function() {
-        $scope.syncing = true;
-        Accreditation.sync({eventId: $scope.eventId, id: $scope.accreditation.id}, {}, function (response) { 
-            $scope.syncing = false;
-            $scope.eas = response;
-        }, function (response) {
-            $scope.syncing = false;
-            $scope.eas = {};
-            $scope.eas.status = 'Error';
-            $scope.eas.error_description = response.data.dev_msg;
-        });
-    };
-
 	$scope.getPerson();
 });
 'use strict';

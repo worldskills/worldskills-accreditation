@@ -14,7 +14,6 @@
     <span ng-show="accreditation.id && saving">Saving...</span>
     <span ng-show="accreditation.id && !saving && saved">Saved</span>
     &nbsp;
-    <button ng-show="accreditation.id" class="btn btn-warning" ng-click="sync()">Sync to EAS<ws-text-spinner ng-show="syncing" class="ng-hide"></ws-text-spinner></button>
     <input ng-show="!accreditation.id" type="button" class="btn btn-success" value="Save Accreditation" ng-click="save()"/>
 </p>
 
@@ -155,18 +154,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="panel-footer" ng-show="eas">
-
-                <p>
-                    <strong>EAS: {{eas.status}}</strong>
-                    <br/>
-                    {{eas.error_description}}
-                </p>
-
-                <p ng-show="eas.redirect"><a href="{{eas.redirect}}" target="_blank"><span class="glyphicon glyphicon-link"></span> Update passport information</a>
-
             </div>
         </div>
     </div>
