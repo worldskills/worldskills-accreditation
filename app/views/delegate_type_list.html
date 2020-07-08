@@ -17,7 +17,7 @@
     <tbody>
         <tr ng-repeat="delegateType in delegateTypes.delegate_types">
             <td style="background-color: {{delegateType.color}}; color: {{delegateType.text_color;}}" class="text-center">{{delegateType.code}}</td>
-            <td><a ui-sref="delegate_type({eventId: event.id, id: delegateType.id})">{{delegateType.name}}</a></td>
+            <td><a ui-sref="main.delegate_type({eventId: event.id, id: delegateType.id})">{{delegateType.name}}</a></td>
         </tr>
         <tr ng-show="delegateTypes.delegate_types.length == 0">
             <td colspan="2">No Delegate Types found</td>
@@ -31,7 +31,7 @@
 </table>
 
 <p>
-    <a ui-sref="delegate_type({eventId: event.id})" class="btn btn-success">Add Delegate Type</a>
+    <a ui-sref="main.delegate_type({eventId: event.id})" class="btn btn-success">Add Delegate Type</a>
 </p>
 
 </div>

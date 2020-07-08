@@ -46,7 +46,7 @@ angular
             }
             $state.go(redirectToState, redirectToParams);
         } else {
-            $state.go('event_list');
+            $state.go('main.event_list');
         }
     });
 
@@ -77,15 +77,12 @@ angular
 
   $stateProvider
 
-    .state('index', {
-      url: '/',
-      templateUrl: 'views/event_list.html',
-      controller: 'EventListCtrl',
-      data: {
-          requireLoggedIn: true
-      }
+    .state('main', {
+      abstract: true,
+      templateUrl: 'views/main.html',
+      controller: 'MainCtrl'
     })
-    .state('event_list', {
+    .state('main.event_list', {
     	url: '/events',
     	templateUrl: 'views/event_list.html',
     	controller: 'EventListCtrl',
@@ -93,13 +90,13 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('event', {
+    .state('main.event', {
         url: '/events/{eventId}',
         templateUrl: 'views/event.html',
         controller: 'EventCtrl',
         abstract: true
     })
-    .state('event.people', {
+    .state('main.event.people', {
     	url: '/people',
     	templateUrl: 'views/people.html',
     	controller: 'PeopleListCtrl',
@@ -107,7 +104,7 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('person_create', {
+    .state('main.person_create', {
     	url: '/events/{eventId}/person/create',
     	templateUrl: 'views/person.html',
     	controller: 'PersonCreateCtrl',
@@ -115,7 +112,7 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('person', {
+    .state('main.person', {
     	url: '/events/{eventId}/people/{accreditationId}',
     	templateUrl: 'views/person.html',
     	controller: 'PersonCtrl',
@@ -123,7 +120,15 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('event.zone_list', {
+    .state('print', {
+    	url: '/events/{eventId}/people/{accreditationId}/print',
+    	templateUrl: 'views/print.html',
+    	controller: 'PrintCtrl',
+    	data: {
+            requireLoggedIn: true
+        }
+    })
+    .state('main.event.zone_list', {
         url: '/zones',
         templateUrl: 'views/zone_list.html',
         controller: 'ZoneListCtrl',
@@ -131,7 +136,7 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('zone', {
+    .state('main.zone', {
         url: '/events/{eventId}/zones/{id}',
         templateUrl: 'views/zone.html',
         controller: 'ZoneCtrl',
@@ -139,7 +144,7 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('event.delegate_type_list', {
+    .state('main.event.delegate_type_list', {
         url: '/delegate_types',
         templateUrl: 'views/delegate_type_list.html',
         controller: 'DelegateTypeListCtrl',
@@ -147,7 +152,7 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('delegate_type', {
+    .state('main.delegate_type', {
         url: '/events/{eventId}/delegate_types/{id}',
         templateUrl: 'views/delegate_type.html',
         controller: 'DelegateTypeCtrl',
@@ -155,7 +160,7 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('event.positions', {
+    .state('main.event.positions', {
         url: '/positions',
         templateUrl: 'views/positions.html',
         controller: 'PositionsCtrl',
@@ -163,7 +168,7 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('event.import', {
+    .state('main.event.import', {
         url: '/import',
         templateUrl: 'views/import.html',
         controller: 'ImportCtrl',
@@ -171,7 +176,7 @@ angular
             requireLoggedIn: true
         }
     })
-    .state('event.export', {
+    .state('main.event.export', {
         url: '/export',
         templateUrl: 'views/export.html',
         controller: 'ExportCtrl',

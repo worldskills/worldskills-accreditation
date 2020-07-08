@@ -52,7 +52,7 @@
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Company']}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation['Delegate Type']}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                <a ng-show="accreditation.accreditation" ui-sref="person({eventId: event.id, accreditationId: accreditation.accreditation.id})" target="_blank">{{accreditation.status}}</a>
+                <a ng-show="accreditation.accreditation" ui-sref="main.person({eventId: event.id, accreditationId: accreditation.accreditation.id})" target="_blank">{{accreditation.status}}</a>
                 <span ng-show="!accreditation.accreditation">{{accreditation.status}}</span>
             </td>
         </tr>

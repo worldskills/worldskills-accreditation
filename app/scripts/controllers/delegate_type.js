@@ -46,12 +46,12 @@
                 if ($scope.delegateType.id) {
                     $scope.delegateType.$update({eventId: $stateParams.eventId}, function () {
                         alert.success('The Delegate Type has been saved successfully.');
-                        $state.go('event.delegate_type_list', {eventId: $stateParams.eventId});
+                        $state.go('main.event.delegate_type_list', {eventId: $stateParams.eventId});
                     });
                 } else {
                     $scope.delegateType.$save({eventId: $stateParams.eventId}, function () {
                         alert.success('The Delegate Type has been added successfully.');
-                        $state.go('event.delegate_type_list', {eventId: $stateParams.eventId});
+                        $state.go('main.event.delegate_type_list', {eventId: $stateParams.eventId});
                     });
                 }
             }
@@ -62,7 +62,7 @@
                 $scope.deleteLoading = true;
                 $scope.delegateType.$delete({eventId: $stateParams.eventId}, function () {
                     alert.success('The Delegate Type has been deleted successfully.');
-                    $state.go('event.delegate_type_list', {eventId: $stateParams.eventId});
+                    $state.go('main.event.delegate_type_list', {eventId: $stateParams.eventId});
                 });
             }
         };

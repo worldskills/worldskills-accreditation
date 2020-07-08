@@ -21,7 +21,7 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="accreditation in accreditations.people">
-						<td><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})" >{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
+						<td><a ui-sref="main.person({eventId: event.id, accreditationId: accreditation.id})" >{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
 						<td>{{accreditation.delegate_type.name}}</td>
 						<td>{{accreditation.skill.skill_number}} {{accreditation.skill.name.text}}</td>
 						<td>{{accreditation.member.name.text}}</td>
@@ -88,7 +88,7 @@
             </div>
 
 			<p>
-			    <a ui-sref="person_create({eventId: event.id})" class="btn btn-success">Add Person</a>
+			    <a ui-sref="main.person_create({eventId: event.id})" class="btn btn-success">Add Person</a>
 			</p>
 
         </form>

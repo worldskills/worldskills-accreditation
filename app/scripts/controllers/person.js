@@ -88,7 +88,7 @@ angular.module('accreditationApp')
 	{
 		$scope.loading = false;
 		alert.success("Accreditation data saved");
-		$state.go('person', {eventId: $scope.eventId, accreditationId: accreditation.id});
+		$state.go('main.person', {eventId: $scope.eventId, accreditationId: accreditation.id});
 	};
 
     $scope.changed = function ()
@@ -216,4 +216,3 @@ angular.module('accreditationApp')
 
 	$scope.getPerson();
 });
-'use strict';

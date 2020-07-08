@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="event_list">Events</a></li>
-    <li><a ui-sref="event.people({eventId: event.id})">{{event.name.text}}</a></li>
+    <li><a ui-sref="main.event_list">Events</a></li>
+    <li><a ui-sref="main.event.people({eventId: event.id})">{{event.name.text}}</a></li>
     <li class="active" ng-show="accreditation.person">{{accreditation.person.first_name}} {{accreditation.person.last_name}}</li>
     <li class="active" ng-show="!accreditation.person">{{accreditation.first_name}} {{accreditation.last_name}}</li>
 </ol>
@@ -18,7 +18,7 @@
 </p>
 
 <p>
-    <a ui-sref="event.people({eventId: event.id})" class="btn btn-default">Back</a>
+    <a ui-sref="main.event.people({eventId: event.id})" class="btn btn-default">Back</a>
 </p>
 
 <div class="row">
@@ -161,6 +161,10 @@
 
         <div class="panel panel-default" ng-show="accreditation.id">
             <div class="panel-body">
+
+                <p class="pull-right">
+                  <a ng-show="accreditation.id" ui-sref="print({eventId: event.id, accreditationId: accreditation.id})" class="btn btn-warning" target="_blank">Print</a>
+                </p>
 
                 <h1 class="align-top"><small>Preview</small><br/>Badge</h1>
 

@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="event_list">Events</a></li>
-    <li><a ui-sref="event.people({eventId: event.id})">{{ event.name.text }}</a></li>
-    <li><a ui-sref="event.zone_list({eventId: event.id})">Zones</a></li>
+    <li><a ui-sref="main.event_list">Events</a></li>
+    <li><a ui-sref="main.event.people({eventId: event.id})">{{ event.name.text }}</a></li>
+    <li><a ui-sref="main.event.zone_list({eventId: event.id})">Zones</a></li>
     <li class="active">{{ zoneId ? zoneName : "New Zone" }}</li>
 </ol>
 
@@ -66,7 +66,7 @@
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
             <button type="submit" class="btn btn-success" id="saveEntry">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
-            <a ui-sref="event.zone_list({eventId: event.id})" class="btn btn-default">Cancel</a>
+            <a ui-sref="main.event.zone_list({eventId: event.id})" class="btn btn-default">Cancel</a>
         </div>
     </div>
 </form>

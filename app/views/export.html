@@ -38,8 +38,8 @@
     </thead>
     <tbody>
         <tr ng-repeat="accreditation in accreditations.people">
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})" target="_blank">{{accreditation.first_name}}</a></td>
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a ui-sref="person({eventId: event.id, accreditationId: accreditation.id})" target="_blank">{{accreditation.last_name}}</a></td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a ui-sref="main.person({eventId: event.id, accreditationId: accreditation.id})" target="_blank">{{accreditation.first_name}}</a></td>
+            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a ui-sref="main.person({eventId: event.id, accreditationId: accreditation.id})" target="_blank">{{accreditation.last_name}}</a></td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.email_address}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.organization}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.country.name.text}}</td>
