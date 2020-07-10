@@ -1,51 +1,51 @@
 <alerts></alerts>
 
 <div class="row">
-	<div class="col-md-9 ">
-		<div class="table-responsive">
-			<ws-spinner ng-show="loading" class="bigSpinner"></ws-spinner>
-			<table ng-show='!loading' class="table table-striped">
-				<colgroup>
-					<col width="25%" />
-					<col width="20%" />
-					<col width="30%" />
-					<col width="25%" />
-				</colgroup>
-				<thead>
-					<tr>
-						<th><span translate>Name</span></th>
-						<th><span translate>Delegate Type</span></th>
-						<th><span translate>Skill</span></th>
-						<th><span translate>Member</span></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="accreditation in accreditations.people">
-						<td><a ui-sref="main.person({eventId: event.id, accreditationId: accreditation.id})" >{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
-						<td>{{accreditation.delegate_type.name}}</td>
-						<td>{{accreditation.skill.skill_number}} {{accreditation.skill.name.text}}</td>
-						<td>{{accreditation.member.name.text}}</td>
-					</tr>
-					<tr ng-show="accreditations.total_count == 0">
-						<td colspan="4">No people found</td>
-					</tr>
+    <div class="col-md-9 ">
+        <div class="table-responsive">
+            <ws-spinner ng-show="loading" class="bigSpinner"></ws-spinner>
+            <table ng-show='!loading' class="table table-striped">
+                <colgroup>
+                    <col width="25%" />
+                    <col width="20%" />
+                    <col width="30%" />
+                    <col width="25%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th><span translate>Name</span></th>
+                        <th><span translate>Delegate Type</span></th>
+                        <th><span translate>Skill</span></th>
+                        <th><span translate>Member</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="accreditation in accreditations.people">
+                        <td><a ui-sref="main.person({eventId: event.id, accreditationId: accreditation.id})" >{{accreditation.first_name}} {{accreditation.last_name}}</a></td>
+                        <td>{{accreditation.delegate_type.name}}</td>
+                        <td>{{accreditation.skill.skill_number}} {{accreditation.skill.name.text}}</td>
+                        <td>{{accreditation.member.name.text}}</td>
+                    </tr>
+                    <tr ng-show="accreditations.total_count == 0">
+                        <td colspan="4">No people found</td>
+                    </tr>
 
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="4"></td>
-					</tr>
-				</tfoot>
-			</table>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4"></td>
+                    </tr>
+                </tfoot>
+            </table>
 
-			<uib-pagination total-items="accreditations.total_count || (current_page - 1) * items_per_page" ng-model="current_page"
-				items-per-page="items_per_page"
-				boundary-links="true" max-size="5" rotate="false"
-				ng-change="changePage()"></uib-pagination>
-		</div>
-	</div>
-	<div class="col-md-3 sidebar" role="navigation">
-		<form name="form" novalidate ng-controller="PeopleFilterController" ng-disabled="loading">
+            <uib-pagination total-items="accreditations.total_count || (current_page - 1) * items_per_page" ng-model="current_page"
+                items-per-page="items_per_page"
+                boundary-links="true" max-size="5" rotate="false"
+                ng-change="changePage()"></uib-pagination>
+        </div>
+    </div>
+    <div class="col-md-3 sidebar" role="navigation">
+        <form name="form" novalidate ng-controller="PeopleFilterController" ng-disabled="loading">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a class="pull-right" href="" ng-click="clear()" translate>Clear</a>
@@ -53,44 +53,44 @@
                 </div>
                 <div class="panel-body">
                     <form role="form" >
-                    	<div class="form-group">
+                        <div class="form-group">
                             <label for="name">Name</label>
                             <input ng-model="filter.name" class="form-control input-sm" id="name"/>
                         </div>
                         <div class="form-group">
                             <label for="dt" translate>DelegateType</label>
-                        	<select ng-model="filter.delegateTypes" class="form-control" name="dt" id="dt">
-								<option></option>
-							    <option ng-repeat="dt in delegateTypes.delegate_types" value="{{dt.id}}">{{dt.name}}</option>
-							</select>
-						</div>
+                            <select ng-model="filter.delegateTypes" class="form-control" name="dt" id="dt">
+                                <option></option>
+                                <option ng-repeat="dt in delegateTypes.delegate_types" value="{{dt.id}}">{{dt.name}}</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="position" translate>Position</label>
                             <input ng-model="filter.position" class="form-control input-sm" id="position"/>
                         </div>
                         <div class="form-group">
                             <label for="country" translate>Country</label>
-                        	<select ng-model="filter.country" class="form-control" name="country" id="country">
-								<option></option>
-							    <option ng-repeat="country in countries" value="{{country.code}}">{{country.code}} - {{country.name.text}}</option>
-							</select>
-						</div>
-						<div class="form-group">
+                            <select ng-model="filter.country" class="form-control" name="country" id="country">
+                                <option></option>
+                                <option ng-repeat="country in countries" value="{{country.code}}">{{country.code}} - {{country.name.text}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="skill" translate>Skill</label>
-                        	<select ng-model="filter.skill" class="form-control" name="skill" id="skill">
-								<option></option>
-							    <option ng-repeat="skill in skills" value="{{skill.id}}">{{skill.skill_number}} {{skill.name.text}}</option>
-							</select>
-						</div>
+                            <select ng-model="filter.skill" class="form-control" name="skill" id="skill">
+                                <option></option>
+                                <option ng-repeat="skill in skills" value="{{skill.id}}">{{skill.skill_number}} {{skill.name.text}}</option>
+                            </select>
+                        </div>
                         <a ng-click="filterResults()" class="btn btn-primary pull-right" ng-disabled="loading || deleting"><span translate>SetFilter</span><spinner ng-show="loading" class="ng-hide"></spinner></a>
                     </form>
                 </div>
             </div>
 
-			<p>
-			    <a ui-sref="main.person_create({eventId: event.id})" class="btn btn-success">Add Person</a>
-			</p>
+            <p>
+                <a ui-sref="main.person_create({eventId: event.id})" class="btn btn-success">Add Person</a>
+            </p>
 
         </form>
-	</div>
+    </div>
 </div>
