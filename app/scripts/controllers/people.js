@@ -7,7 +7,10 @@ angular.module('accreditationApp')
 
 	$scope.current_page = $rootScope.currentPeoplePage;
 	$scope.items_per_page = 10;
-	
+
+	$scope.filter = {};
+	$scope.filter.eventId = $stateParams.eventId;
+
 	$scope.clear = function() {
 		$scope.current_page = 1;
 		$scope.filter.firstName = '';

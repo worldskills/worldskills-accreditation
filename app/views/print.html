@@ -10,7 +10,13 @@ body {
 }
 </style>
 
-<div class="container-fluid" style="margin-top: 1em;">
+<div ng-if="loading">
+  <p style="padding: 3em 2em;">Loading, please wait<spinner ng-show="loading" class="ng-hide"></spinner></p>
+</div>
+
+<div ng-if="!loading" ng-repeat="accreditation in accreditations">
+
+<div class="container-fluid" style="margin-top: 1em; page-break-after: always;">
 
 <div class="row">
 
@@ -66,14 +72,14 @@ body {
 <div class="col-xs-5">
 
 <p>
-    <img ng-show="accreditation.summary.image" ng-src="{{accreditation.summary.image.thumbnail}}_small" class="img-fluid" width="150" alt="User Image" />
+    <img ng-show="accreditation.image" ng-src="{{accreditation.image.thumbnail}}_small" class="img-fluid" width="150" alt="User Image" />
 </p>
 
 </div>
 <div class="col-xs-7 text-center">
 
 <div>
-  <img src="{{apiBaseUrl}}/accreditation/qrcode/{{accreditation.id}}-{{accreditation.random_hash}}" class="img-fluid" width="120" style="margin: 20px 0;">
+  <img ng-src="{{accreditation.qr_code}}" class="img-fluid" width="120" style="margin: 20px 0;">
   <div class="text-center">{{accreditation.id}}-{{accreditation.random_hash}}</div>
 </div>
 
@@ -81,21 +87,21 @@ body {
 </div>
 
 <h3 style="-webkit-print-color-adjust: exact; margin-top: 0; margin-bottom: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #003764 !important; font-family: 'Inria Serif', serif;">
-    {{accreditation.summary.first_name}} {{accreditation.summary.last_name}}
+    {{accreditation.first_name}} {{accreditation.last_name}}
 </h3>
 
-<div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.summary.lines[0]}}</div>
-<div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.summary.lines[1]}}</div>
-<div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.summary.lines[2]}}</div>
+<div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[0]}}</div>
+<div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[1]}}</div>
+<div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[2]}}</div>
 
 <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0.8em 0;">
-  <span ng-repeat="zone in accreditation.summary.zones">
+  <span ng-repeat="zone in accreditation.zones">
     <span style="-webkit-print-color-adjust: exact; display: inline-block; padding: 6px 12px; background-color: {{zone.color}} !important;">{{ zone.code }}</span>
   </span>
 </div>
 
-<div style="-webkit-print-color-adjust: exact; background-color: {{accreditation.summary.delegate_type.color}} !important; padding: 18px 12px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700;">
-    <span style="font-size: 16px; color: {{accreditation.summary.delegate_type.text_color;}} !important;">{{accreditation.summary.delegate_type.name}}</span>
+<div style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; padding: 18px 12px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700;">
+    <span style="font-size: 16px; color: {{accreditation.delegate_type.text_color;}} !important;">{{accreditation.delegate_type.name}}</span>
 </div>
 
 </div>
@@ -104,7 +110,7 @@ body {
 
 <h5 style="font-size: 10px; font-weight: 400;">All zones</h5>
 <p>
-    <span ng-repeat="zone in accreditation.summary.zones">
+    <span ng-repeat="zone in accreditation.zones">
         {{zone.code}} - {{zone.name}}
         <br/>
     </span>
@@ -116,4 +122,6 @@ body {
 </div>
 
 </div>
+</div>
+
 </div>

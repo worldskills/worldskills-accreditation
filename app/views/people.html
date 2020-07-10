@@ -84,7 +84,10 @@
                                 <option ng-repeat="skill in skills" value="{{skill.id}}">{{skill.skill_number}} {{skill.name.text}}</option>
                             </select>
                         </div>
-                        <a ng-click="filterResults()" class="btn btn-primary pull-right" ng-disabled="loading || deleting"><span translate>SetFilter</span><spinner ng-show="loading" class="ng-hide"></spinner></a>
+                        <div class="btn-toolbar pull-right">
+                          <a ui-sref="print(filter)" class="btn btn-warning" target="_blank">Print</a>
+                          <a ng-click="filterResults()" class="btn btn-primary" ng-disabled="loading || deleting"><span translate>SetFilter</span><spinner ng-show="loading" class="ng-hide"></spinner></a>
+                        </div>
                     </form>
                 </div>
             </div>
