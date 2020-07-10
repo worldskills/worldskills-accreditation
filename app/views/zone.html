@@ -44,7 +44,7 @@
     <div class="form-group" ng-class="{'has-error': submitted && form.color.$invalid}">
         <label for="color" class="col-sm-3 control-label">Color <span class="required">*</span></label>
         <div class="col-sm-2">
-            <input type="text" class="form-control" name="color" required ng-model="zone.color">
+            <input type="text" class="form-control" name="color" required ng-model="zone.color" placeholder="#FF0000">
         </div>
         <div class="col-sm-7">
             <span class="help-block" ng-show="submitted" ng-messages="form.color.$error">
