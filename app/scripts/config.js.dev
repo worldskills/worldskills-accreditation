@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    var restBaseUrl = 'https://api.worldskillsdev';
-    var authBaseUrl = 'https://api.worldskillsdev';
-    var orgBaseUrl = 'https://api.worldskillsdev';
-    var loginApp = 'https://auth.worldskillsdev';
-    var peopleApp = 'https://people.worldskillsdev';
+    var restBaseUrl = 'https://api.worldskills.dev';
+    var authBaseUrl = 'https://api.worldskills.dev';
+    var orgBaseUrl = 'https://api.worldskills.dev';
+    var loginApp = 'https://auth.worldskills.dev';
+    var peopleApp = 'https://people.worldskills.dev';
     
     var wsApp = angular.module('accreditationApp'); 
     wsApp.constant('REST_BASE_URL', restBaseUrl);
