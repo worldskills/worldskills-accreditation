@@ -168,6 +168,22 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('main.event.package_option_list', {
+        url: '/package_options',
+        templateUrl: 'views/package_option_list.html',
+        controller: 'PackageOptionListCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
+    .state('main.event.package_option', {
+        url: '/package_options/{id}',
+        templateUrl: 'views/package_option.html',
+        controller: 'PackageOptionCtrl',
+        data: {
+            requireLoggedIn: true
+        }
+    })
     .state('main.event.import', {
         url: '/import',
         templateUrl: 'views/import.html',
