@@ -196,33 +196,15 @@
                     {{accreditation.summary.first_name}} {{accreditation.summary.last_name}}
                 </h3>
 
-                <p>
-                    {{accreditation.summary.lines[0]}}<br/>
-                    {{accreditation.summary.lines[1]}}<br/>
-                    {{accreditation.summary.lines[2]}}
-                </p>
+                <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.summary.lines[0]}}</div>
+                <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.summary.lines[1]}}</div>
+                <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.summary.lines[2]}}</div>
 
-                <hr/>
-
-                <p>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: '1'}) ? 'visible' : 'hidden'}">1</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: '2'}) ? 'visible' : 'hidden'}">2</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: '3'}) ? 'visible' : 'hidden'}">3</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: '4'}) ? 'visible' : 'hidden'}">4</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: '5'}) ? 'visible' : 'hidden'}">5</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: '6'}) ? 'visible' : 'hidden'}">6</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: '7'}) ? 'visible' : 'hidden'}">7</a>
-                </p>
-
-                <p>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: 'T'}) ? 'visible' : 'hidden'}">T</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: 'L'}) ? 'visible' : 'hidden'}">L</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: 'D'}) ? 'visible' : 'hidden'}">D</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: 'S'}) ? 'visible' : 'hidden'}">S</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: 'FP'}) ? 'visible' : 'hidden'}">F</a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: 'CD1'}) || hasZone({code: 'CD2'}) ? 'visible' : 'hidden'}"><span ng-show="hasZone({code: 'CD1'})">C1</span><span ng-show="hasZone({code: 'CD2'})">C2</span></a>
-                    <a class="btn btn-default disabled" ng-style="{'visibility': hasZone({code: 'AGE'}) ? 'visible' : 'hidden'}">21+</a>
-                </p>
+                <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0.8em 0;">
+                  <span ng-repeat="zone in accreditation.summary.zones">
+                    <span style="display: inline-block; padding: 6px 12px; background-color: {{zone.color}} !important;">{{ zone.code }}</span>
+                  </span>
+                </div>
 
                 <p>
                     <br/><a href ng-click="showAllZones = !showAllZones">All zones <span class="caret"></span></a>
@@ -230,7 +212,7 @@
                 <div ng-class="{collapse: !showAllZones}">
                     <p>
                         <span ng-repeat="zone in zones.zones | filter:hasZone">
-                            {{zone.name}}
+                            {{zone.code}} - {{zone.name}}
                             <br/>
                         </span>
                     </p>
