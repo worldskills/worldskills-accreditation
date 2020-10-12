@@ -13,13 +13,9 @@
                 method: 'GET',
                 url: REST_BASE_URL + '/accreditation/package_options/:id/zones',
             },
-            addZone: {
+            updateZones: {
                 method: 'PUT',
-                url: REST_BASE_URL + '/accreditation/package_options/:id/zones/:zoneId',
-            },
-            removeZone: {
-                method: 'DELETE',
-                url: REST_BASE_URL + '/accreditation/package_options/:id/zones/:zoneId',
+                url: REST_BASE_URL + '/accreditation/package_options/:id/zones',
             }
         });
 

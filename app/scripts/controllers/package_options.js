@@ -28,15 +28,8 @@
         $scope.save = function() {
             $scope.loading = true;
 
-            var promises = [];
-            angular.forEach($scope.zones.zones, function (zone) {
-                if (zone.checked) {
-                    promises.push(PackageOption.addZone({id: $stateParams.id, zoneId: zone.id}, {}));
-                } else {
-                    promises.push(PackageOption.removeZone({id: $stateParams.id, zoneId: zone.id}, {}));
-                }
-            });
-            $q.all(promises).then(function () {
+            var zones = $scope.zones.zones.filter(function (zone) { return zone.checked });
+            PackageOption.updateZones({id: $stateParams.id}, {zones: zones}, function () {
                 alert.success('The Package Option has been saved successfully.');
                 $state.go('main.event.package_option_list');
             });
