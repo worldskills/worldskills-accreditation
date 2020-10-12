@@ -3,9 +3,11 @@
 angular.module('accreditationApp')
 .controller('MainCtrl', function ($scope, $rootScope, $state, $translate, Language, auth, user, 
 		API_AUTH_CODE, alert, Restangular, $http, OrgRestangular, 
-		$uibModal) {
+		$uibModal, ENVIRONMENT_WARNING) {
     $scope.selectedLanguage = Language.selectedLanguage;
-    
+
+    $scope.environmentWarning = ENVIRONMENT_WARNING;
+
     $scope.auth = auth;
     $scope.user = user;
 

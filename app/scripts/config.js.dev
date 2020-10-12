@@ -21,5 +21,6 @@
     wsApp.constant('PEOPLE_APP', peopleApp);
     wsApp.constant('LOAD_CHILD_ENTITY_ROLES', true);
     wsApp.constant('FILTER_AUTH_ROLES', [2100]); // Accreditation
+    wsApp.constant('ENVIRONMENT_WARNING', 'This is the local development environment. Happy coding!');
 
 })();
