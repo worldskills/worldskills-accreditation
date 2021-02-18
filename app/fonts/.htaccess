@@ -6,7 +6,6 @@ AddType application/font-woff2 .woff2
 RewriteEngine on
 RewriteCond %{HTTP_REFERER} !^http(s)?://accreditation.worldskills.org [NC]
 RewriteCond %{HTTP_REFERER} !^http(s)?://accreditation.worldskills.show [NC]
-RewriteCond %{HTTP_REFERER} !^http(s)?://accreditation.worldskills.dev [NC]
 RewriteCond %{HTTP_REFERER} !^http(s)?://localhost:8000 [NC]
 RewriteCond %{HTTP_REFERER} !^http(s)?://localhost [NC]
 RewriteRule \.(eot|ttf|woff|woff2)$ - [NC,F,L]
