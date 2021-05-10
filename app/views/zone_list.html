@@ -16,7 +16,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="zone in zones.zones">
-            <td style="background-color: {{zone.color}}" class="text-center">{{zone.code}}</td>
+            <td style="background-color: {{zone.color}}; color: {{zone.text_color}};" class="text-center">{{zone.code}}</td>
             <td><a ui-sref="main.zone({eventId: event.id, id: zone.id})">{{zone.name}}</a></td>
         </tr>
         <tr ng-show="zones.zones.length == 0">

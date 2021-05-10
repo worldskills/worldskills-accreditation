@@ -19,6 +19,8 @@
             });
         } else {
             $scope.zone = new Zone();
+            $scope.zone.color = '#003764';
+            $scope.zone.sort = 1;
         }
 
         $scope.save = function() {
