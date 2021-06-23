@@ -10,8 +10,8 @@
     </colgroup>
     <thead>
         <tr>
-            <th>Code</th>
-            <th>Name</th>
+            <th translate>code</th>
+            <th translate>name</th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +20,7 @@
             <td><a ui-sref="main.delegate_type({eventId: event.id, id: delegateType.id})">{{delegateType.name}}</a></td>
         </tr>
         <tr ng-show="delegateTypes.delegate_types.length == 0">
-            <td colspan="2">No Delegate Types found</td>
+            <td colspan="2" translate>error_no_delegate_types</td>
         </tr>
     </tbody>
     <tfoot>
@@ -31,7 +31,7 @@
 </table>
 
 <p>
-    <a ui-sref="main.delegate_type({eventId: event.id})" class="btn btn-success">Add Delegate Type</a>
+    <a ui-sref="main.delegate_type({eventId: event.id})" class="btn btn-success" translate>add_delegate_type</a>
 </p>
 
 </div>

@@ -3,6 +3,7 @@
     "country": "Land",
     "delegate_type": "Delegierterentyp",
     "end_date": "Enddatum",
+    "error_no_delegate_types": "Keine Delegierterentypen gefunden",
     "error_no_events": "Keine Events gefunden",
     "error_no_people": "Keine Personen gefunden",
     "filter": "Filter",

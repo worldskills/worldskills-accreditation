@@ -1,45 +1,45 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="main.event_list">Events</a></li>
+    <li><a ui-sref="main.event_list" translate>events</a></li>
     <li><a ui-sref="main.event.people({eventId: event.id})">{{ event.name.text }}</a></li>
-    <li><a ui-sref="main.event.delegate_type_list({eventId: event.id})">Delegate Types</a></li>
-    <li class="active">{{ delegateTypeId ? delegateTypeName : "New Delegate Type" }}</li>
+    <li><a ui-sref="main.event.delegate_type_list({eventId: event.id})" translate>delegate_types</a></li>
+    <li class="active">{{ delegateTypeId ? delegateTypeName : ("new_delegate_type" | translate) }}</li>
 </ol>
 
 <alerts></alerts>
 
 <p class="pull-right">
-    <button ng-show="delegateTypeId" ng-click="delete()" class="btn btn-danger">Delete<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+    <button ng-show="delegateTypeId" ng-click="delete()" class="btn btn-danger"><span translate>delete</span><ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
-<h1>{{ delegateTypeId ? delegateTypeName : "New Delegate Type" }}</h1>
+<h1>{{ delegateTypeId ? delegateTypeName : ("new_delegate_type" | translate) }}</h1>
 
 <hr/>
 
 <form class="form-horizontal" name="form" novalidate ng-submit="save()">
     <div class="form-group" ng-class="{'has-error': submitted && form.code.$invalid}">
-        <label for="code" class="col-sm-3 control-label">Code <span class="required">*</span></label>
+        <label for="code" class="col-sm-3 control-label"><span translate>code</span> <span class="required">*</span></label>
         <div class="col-sm-2">
             <input type="text" class="form-control" name="code" required ng-model="delegateType.code">
         </div>
         <div class="col-sm-7">
             <span class="help-block" ng-show="submitted" ng-messages="form.code.$error">
-                <span ng-message="required">Please enter a code!</span>
+                <span ng-message="required" translate>error_missing_code</span>
             </span>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': submitted && form.name.$invalid}">
-        <label for="name" class="col-sm-3 control-label">Name <span class="required">*</span></label>
+        <label for="name" class="col-sm-3 control-label"><span translate>name</span> <span class="required">*</span></label>
         <div class="col-sm-5">
             <input type="text" class="form-control" name="name" required ng-model="delegateType.name">
         </div>
         <div class="col-sm-4">
             <span class="help-block" ng-show="submitted" ng-messages="form.name.$error">
-                <span ng-message="required">Please enter a name!</span>
+                <span ng-message="required" translate>error_missing_name</span>
             </span>
         </div>
     </div>
     <div class="form-group">
-        <label for="color" class="col-sm-3 control-label">Color</label>
+        <label for="color" class="col-sm-3 control-label" translate>color</label>
         <div class="col-sm-5">
             <input type="text" class="form-control" name="label" ng-model="delegateType.color" placeholder="#000000">
         </div>
@@ -48,7 +48,7 @@
     <hr/>
 
     <div class="row">
-        <label for="line1" class="col-sm-3 control-label">Badge Lines</label>
+        <label for="line1" class="col-sm-3 control-label" translate>badge_lines</label>
         <div class="col-sm-5">
             <div class="form-group">
                 <div class="col-sm-12">
@@ -67,14 +67,14 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <span class="help-block">Available keywords: SKILL, SECTOR, POSITION, MEMBER, ORGANIZATION</span>
+            <span class="help-block" translate>accreditation_available_keywords</span>
         </div>
     </div>
 
     <hr/>
 
     <div class="form-group">
-        <label for="name" class="col-sm-3 control-label">Zones</label>
+        <label for="name" class="col-sm-3 control-label" translate>zones</label>
         <div class="col-sm-9">
             <div class="checkbox" ng-repeat="zone in zones.zones">
                 <label>
@@ -89,8 +89,8 @@
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-success" id="saveEntry">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
-            <a ui-sref="main.event.delegate_type_list({eventId: event.id})" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-success" id="saveEntry"><span translate>save</span><ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+            <a ui-sref="main.event.delegate_type_list({eventId: event.id})" class="btn btn-default" translate>cancel</a>
         </div>
     </div>
 </form>
