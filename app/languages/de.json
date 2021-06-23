@@ -1,1 +1,16 @@
-{}
+{
+    "clear": "Zurücksetzen",
+    "country": "Land",
+    "delegate_type": "Delegierterentyp",
+    "end_date": "Enddatum",
+    "error_no_events": "Keine Events gefunden",
+    "filter": "Filter",
+    "login": "Login",
+    "logout": "Logout",
+    "member": "Mitglied",
+    "name": "Name",
+    "position": "Position",
+    "set_filter": "Filtern",
+    "skill": "Beruf",
+    "start_date": "Startdatum"
+}
