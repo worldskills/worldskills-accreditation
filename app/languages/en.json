@@ -3,6 +3,7 @@
     "start_date": "Start Date",
     "end_date": "End Date",
     "error_no_events": "No Events found",
+    "error_no_people": "No people found",
     "login": "Login",
     "logout": "Logout",
     "delegate_type": "Delegate Type",
