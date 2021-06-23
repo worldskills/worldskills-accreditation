@@ -176,6 +176,14 @@ module.exports = function (grunt) {
       },
     },
 
+    i18nextract: {
+      default_options: {
+        src: [ 'app/scripts/**/*.js', 'app/views/**/*.html' ],
+        lang: ['en'],
+        dest: 'app/languages'
+      }
+    },
+
     // Renames files for browser caching purposes
     filerev: {
       dist: {
@@ -430,7 +438,7 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
-  
+
   grunt.registerTask('config', [
     'copy:config'
   ]);
