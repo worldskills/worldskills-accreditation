@@ -4,6 +4,7 @@
     "delegate_type": "Delegierterentyp",
     "end_date": "Enddatum",
     "error_no_events": "Keine Events gefunden",
+    "error_no_people": "Keine Personen gefunden",
     "filter": "Filter",
     "login": "Login",
     "logout": "Logout",
