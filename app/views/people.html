@@ -13,10 +13,10 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th><span translate>Name</span></th>
-                        <th><span translate>Delegate Type</span></th>
-                        <th><span translate>Skill</span></th>
-                        <th><span translate>Member</span></th>
+                        <th><span translate>name</span></th>
+                        <th><span translate>delegate_type</span></th>
+                        <th><span translate>skill</span></th>
+                        <th><span translate>member</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,35 +50,35 @@
         <form name="form" novalidate ng-controller="PeopleFilterController" ng-disabled="loading">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a class="pull-right" href="" ng-click="clear()" translate>Clear</a>
-                    <h3 class="panel-title" translate>Filter</h3>
+                    <a class="pull-right" href="" ng-click="clear()" translate>clear</a>
+                    <h3 class="panel-title" translate>filter</h3>
                 </div>
                 <div class="panel-body">
                     <form role="form" >
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name" translate>name</label>
                             <input ng-model="filter.name" class="form-control input-sm" id="name"/>
                         </div>
                         <div class="form-group">
-                            <label for="dt" translate>DelegateType</label>
+                            <label for="dt" translate>delegate_type</label>
                             <select ng-model="filter.delegateTypes" class="form-control" name="dt" id="dt">
                                 <option value=""></option>
                                 <option ng-repeat="dt in delegateTypes.delegate_types" value="{{dt.id}}">{{dt.name}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="position" translate>Position</label>
+                            <label for="position" translate>position</label>
                             <input ng-model="filter.position" class="form-control input-sm" id="position"/>
                         </div>
                         <div class="form-group">
-                            <label for="country" translate>Country</label>
+                            <label for="country" translate>country</label>
                             <select ng-model="filter.country" class="form-control" name="country" id="country">
                                 <option></option>
                                 <option ng-repeat="country in countries" value="{{country.code}}">{{country.code}} - {{country.name.text}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="skill" translate>Skill</label>
+                            <label for="skill" translate>skill</label>
                             <select ng-model="filter.skill" class="form-control" name="skill" id="skill">
                                 <option></option>
                                 <option ng-repeat="skill in skills" value="{{skill.id}}">{{skill.skill_number}} {{skill.name.text}}</option>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="btn-toolbar pull-right">
                           <a ui-sref="print(filter)" class="btn btn-warning" target="_blank">Print</a>
-                          <a ng-click="filterResults()" class="btn btn-primary" ng-disabled="loading || deleting"><span translate>SetFilter</span><spinner ng-show="loading" class="ng-hide"></spinner></a>
+                          <a ng-click="filterResults()" class="btn btn-primary" ng-disabled="loading || deleting"><span translate>set_filter</span><spinner ng-show="loading" class="ng-hide"></spinner></a>
                         </div>
                     </form>
                 </div>

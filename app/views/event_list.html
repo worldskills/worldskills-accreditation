@@ -20,9 +20,9 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th><span translate>Name</span></th>
-						<th><span translate>StartDate</span></th>
-						<th><span translate>EndDate</span></th>
+						<th><span translate>name</span></th>
+						<th><span translate>start_date</span></th>
+						<th><span translate>end_date</span></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,7 +32,7 @@
 						<td>{{event.end_date | date:'dd.MM.yyyy'}}</td>
 					</tr>
 					<tr ng-show="events.total_count == 0">
-						<td colspan="8"><span translate>NoResources</span></td>
+						<td colspan="8"><span translate>error_no_events</span></td>
 					</tr>
 
 				</tbody>

@@ -1,43 +1,16 @@
 {
-	"APP_NAME":"Accreditation",
-	
-	"MENU_OTHER_SYSTEMS": "Other Systems",
-	"SYSTEM_REGO": "Registrations",
-	"SYSTEM_EVENTS": "Events",
-	"SYSTEM_AUTH": "Auth Admin",
-	"SYSTEM_GLOSSARY": "Glossary",
-	"SYSTEM_PEOPLE": "People",
-	"SYSTEM_RESOURCES": "Resource Manager",
-	
-	"EventListHeading":"Events",
-	"Name": "Name",
-	"StartDate": "Start Date",
-	"EndDate": "End Date",
-	
-	"PeopleListHeading": "Accredited People for",
-	"Position": "Position",
-	"Skills": "Skills",
-	"Country": "Country",
-	"NoPeople": "No people found matching your search criteria",
-	"Filter": "Filter",
-	"Clear": "Clear",
-	"FirstName": "First Name",
-	"LastName": "Last Name",
-	"FirstNameDesc": "First Name descending",
-	"LastNameDesc": "Last Name descending",
-	"SetFilter": "Set Filter",
-	
-	"AccSpecHeading": "Accreditation-Specific Information",
-	"Organization": "Organization",
-	"HideCountry": "Hide Country",
-	"PeopleDataHeading": "Data from People Service",
-	"Positions": "Positions",
-	"Pacman": "Pacman ID",
-	"Save": "Save",
-	"PersonSaveMsg": "Accreditation data saved",
-	"ViewInPeople": "View in People",
-	"DelegateType": "Delegate Type",
-	"Email": "Email Address"
-	
-
+    "name": "Name",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "error_no_events": "No Events found",
+    "login": "Login",
+    "logout": "Logout",
+    "delegate_type": "Delegate Type",
+    "skill": "Skill",
+    "member": "Member",
+    "clear": "Clear",
+    "filter": "Filter",
+    "position": "Position",
+    "country": "Country",
+    "set_filter": "Set Filter"
 }
