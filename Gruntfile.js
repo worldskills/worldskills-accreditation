@@ -180,6 +180,7 @@ module.exports = function (grunt) {
       default_options: {
         src: [ 'app/scripts/**/*.js', 'app/views/**/*.html' ],
         lang: ['en'],
+        stringifyOptions: true,
         dest: 'app/languages'
       }
     },

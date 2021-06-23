@@ -1,17 +1,17 @@
 {
-    "name": "Name",
-    "start_date": "Start Date",
+    "clear": "Clear",
+    "country": "Country",
+    "delegate_type": "Delegate Type",
     "end_date": "End Date",
     "error_no_events": "No Events found",
     "error_no_people": "No people found",
+    "filter": "Filter",
     "login": "Login",
     "logout": "Logout",
-    "delegate_type": "Delegate Type",
-    "skill": "Skill",
     "member": "Member",
-    "clear": "Clear",
-    "filter": "Filter",
+    "name": "Name",
     "position": "Position",
-    "country": "Country",
-    "set_filter": "Set Filter"
+    "set_filter": "Set Filter",
+    "skill": "Skill",
+    "start_date": "Start Date"
 }
