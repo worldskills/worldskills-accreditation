@@ -11,7 +11,7 @@ body {
 </style>
 
 <div ng-if="loading">
-  <p style="padding: 3em 2em;">Loading, please wait<spinner ng-show="loading" class="ng-hide"></spinner></p>
+  <p style="padding: 3em 2em;"><span translate>loading_please_wait</span><spinner ng-show="loading" class="ng-hide"></spinner></p>
 </div>
 
 <div ng-if="!loading" ng-repeat="accreditation in accreditations">
@@ -108,7 +108,7 @@ body {
 
 <div class="col-xs-6" style="font-size: 10px;">
 
-<h5 style="font-size: 10px; font-weight: 400;">Access to zones</h5>
+<h5 style="font-size: 10px; font-weight: 400;" translate>access_to_zones</h5>
 <p>
     <span ng-repeat="zone in accreditation.zones">
         {{zone.code}} - {{zone.name}}
@@ -118,11 +118,9 @@ body {
 
 <hr>
 
-<p>
-This accreditation badge is personal and non-transferable. It is property of the Competition Organizer and can be withdrawn at any time at the Competition Organizer's sole discretion.
-</p>
+<p translate>accreditation_badge_disclaimer_info</p>
 
-<p>Generated on: {{date | date:'dd.MM.yyyy HH:mm'}}</p>
+<p><span translate>generated_on</span>: {{date | date:'dd.MM.yyyy HH:mm'}}</p>
 </div>
 
 </div>

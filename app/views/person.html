@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="main.event_list">Events</a></li>
+    <li><a ui-sref="main.event_list" translate>events</a></li>
     <li><a ui-sref="main.event.people({eventId: event.id})">{{event.name.text}}</a></li>
     <li class="active">{{accreditation.person.first_name}} {{accreditation.person.last_name}}</li>
 </ol>
@@ -9,15 +9,15 @@
 <form name="form.accData" novalidate focus-error>
 
 <p class="pull-right text-muted">
-    <span ng-show="accreditation.id && !saving && !saved">Changes are saved automatically</span>
-    <span ng-show="accreditation.id && saving">Saving...</span>
-    <span ng-show="accreditation.id && !saving && saved">Saved</span>
+    <span ng-show="accreditation.id && !saving && !saved" translate>changes_saved_automatically</span>
+    <span ng-show="accreditation.id && saving" translate>saving_indicator</span>
+    <span ng-show="accreditation.id && !saving && saved" translate>saved</span>
     &nbsp;
-    <input ng-show="!accreditation.id" type="button" class="btn btn-success" value="Save Accreditation" ng-click="save()"/>
+    <input ng-show="!accreditation.id" type="button" class="btn btn-success" value="{{ 'save_accreditation' | translate }}" ng-click="save()"/>
 </p>
 
 <p>
-    <a ui-sref="main.event.people({eventId: event.id})" class="btn btn-default">Back</a>
+    <a ui-sref="main.event.people({eventId: event.id})" class="btn btn-default" translate>back</a>
 </p>
 
 <div class="row">
@@ -26,23 +26,23 @@
         <div class="panel panel-default">
             <div class="panel-body">
 
-                <h1 class="align-top"><small>Existing</small><br/>Information</h1>
+                <h1 class="align-top"><small translate>existing</small><br/><span translate>information</span></h1>
 
                 <hr/>
 
                 <div class="form-group" ng-show="accreditation.person.images[0]">
                     <p class="form-control-static">
-                        <img ng-src="{{accreditation.person.images[0].thumbnail}}_accreditation" width="100" alt="User Image" />
+                        <img ng-src="{{accreditation.person.images[0].thumbnail}}_accreditation" width="100" alt="{{ 'user_image' | translate }}" />
                     </p>
                 </div>
 
                 <div class="form-group">
-                    <label>Name</label>
+                    <label translate>name</label>
                     <p class="form-control-static">{{accreditation.person.first_name}} {{accreditation.person.last_name}}</p>
                 </div>
 
                 <div class="form-group">
-                    <label>Position</label>
+                    <label translate>position</label>
                     <p class="form-control-static">
                         {{accreditation.person_position.position.name.text}}
                         <span ng-show="accreditation.person_position.skill"><br/>{{accreditation.person_position.skill.skill_number}} {{accreditation.person_position.skill.name.text}}</span>
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Delegate Type</label>
+                    <label translate>delegate_type</label>
                     <div class="form-control-static">
                         <div>{{accreditation.position_delegate_type.delegate_type.name}}:</div>
                         <div ng-repeat="zone in accreditation.position_delegate_type.delegate_type.zones">
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Package Options</label>
+                    <label translate>package_options</label>
                     <div class="form-control-static">
                         <div ng-repeat="packageOptionZone in accreditation.package_option_zones">
                             <span>{{ packageOptionZone.package_option.name.text }}: {{ packageOptionZone.zone.name }}</span>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                <p><a href="{{peopleApp}}/#/people/person/{{accreditation.person.id}}" target="people_tab"><span class="glyphicon glyphicon-link"></span> View in People</a></p>
+                <p><a href="{{peopleApp}}/#/people/person/{{accreditation.person.id}}" target="people_tab"><span class="glyphicon glyphicon-link"></span> <span translate>view_in_people</span></a></p>
 
             </div>
         </div>
@@ -81,28 +81,28 @@
         <div class="panel panel-default">
             <div class="panel-body">
 
-                <h1 class="align-top"><small>Manual</small><br/>Override</h1>
+                <h1 class="align-top"><small translate>manual</small><br/><span translate>override</span></h1>
     
                 <hr/>
 
                 <div class="form-group">
-                    <label for="dt">Delegate Type</label>
+                    <label for="dt" translate>delegate_type</label>
                     <select ng-options="dt.name for dt in delegateTypes.delegate_types track by dt.id" ng-model="accreditation.delegate_type" class="form-control" name="dt" id="dt" ng-change="changed()">
                         <option></option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="lines">Badge Lines</label>
+                    <label for="lines" translate>badge_lines</label>
                     <textarea name="lines" class="form-control" rows="3" ng-model="accreditation.lines" ng-change="changed()"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Additional Zones</label>
+                    <label translate>additional_zones</label>
 
                     <div class="form-control-static">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Add Zone <span class="caret"></span></button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span translate>add_zone</span> <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li ng-repeat="zone in zones.zones | filter:hasNotZone">
                                     <a href ng-click="addAddZone(zone)">
@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Remove Zone <span class="caret"></span></button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span translate>remove_zone</span> <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li ng-repeat="zone in zones.zones | filter:hasZone">
                                     <a href ng-click="addRemoveZone(zone)">
@@ -145,7 +145,7 @@
                   <a ng-show="accreditation.id" ui-sref="print({eventId: event.id, accreditationId: accreditation.id})" class="btn btn-warning" target="_blank" translate>print</a>
                 </p>
 
-                <h1 class="align-top"><small>Preview</small><br/>Badge</h1>
+                <h1 class="align-top"><small translate>preview</small><br/><span translate>badge</span></h1>
 
                 <hr/>
                 
@@ -154,7 +154,7 @@
                 </div>
                 <div ng-show="!saving">
                 <p>
-                    <img ng-show="accreditation.summary.image" ng-src="{{accreditation.summary.image.thumbnail}}_accreditation" width="100" alt="User Image" />
+                    <img ng-show="accreditation.summary.image" ng-src="{{accreditation.summary.image.thumbnail}}_accreditation" width="100" alt="{{ 'user_image' | translate }}" />
                 </p>
 
                 <h3 style="margin-bottom: 0;">
@@ -172,7 +172,7 @@
                 </div>
 
                 <p>
-                    <a href ng-click="showAllZones = !showAllZones">All zones <span class="caret"></span></a>
+                    <a href ng-click="showAllZones = !showAllZones"><span translate>all_zones</span> <span class="caret"></span></a>
                 </p>
                 <div ng-class="{collapse: !showAllZones}">
                     <p>

@@ -10,8 +10,8 @@
     </colgroup>
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Type</th>
+            <th translate>name</th>
+            <th translate>type</th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +20,7 @@
             <td style="text-transform: capitalize;">{{option.type | lowercase}}</td>
         </tr>
         <tr ng-show="options.options.length == 0">
-            <td colspan="2">No Package Options found</td>
+            <td colspan="2" translate>error_no_package_options</td>
         </tr>
     </tbody>
     <tfoot>

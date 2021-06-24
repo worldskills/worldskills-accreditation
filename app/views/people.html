@@ -43,7 +43,7 @@
                 boundary-links="true" max-size="5" rotate="false"
                 ng-change="changePage()"></uib-pagination>
 
-            <p class="text-muted">Total {{accreditations.total_count}} People found.</p>
+            <p class="text-muted">{{ 'total_people_found_msg' | translate: {total: accreditations.total_count} }}</p>
         </div>
     </div>
     <div class="col-md-3 sidebar" role="navigation">
@@ -91,10 +91,6 @@
                     </form>
                 </div>
             </div>
-
-            <!-- <p>
-                <a ui-sref="main.person_create({eventId: event.id})" class="btn btn-success">Add Person</a>
-            </p> -->
 
         </form>
     </div>

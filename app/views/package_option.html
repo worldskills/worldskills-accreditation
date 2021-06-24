@@ -2,7 +2,7 @@
 <div class="col-lg-8 col-lg-offset-2">
 
 <p class="pull-right">
-    <button ng-show="zoneId" ng-click="delete()" class="btn btn-danger">Delete<ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
+    <button ng-show="zoneId" ng-click="delete()" class="btn btn-danger"><span translate>delete</span><ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
 <h1>{{ option.name.text }}</h1>
@@ -12,7 +12,7 @@
 <form class="form-horizontal" name="form" novalidate ng-submit="save()">
 
     <div class="form-group">
-        <label for="name" class="col-sm-3 control-label">Zones</label>
+        <label for="name" class="col-sm-3 control-label" translate>zones</label>
         <div class="col-sm-9">
             <div class="checkbox" ng-repeat="zone in zones.zones">
                 <label>
@@ -25,8 +25,8 @@
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-success" id="saveEntry">Save<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
-            <a ui-sref="main.event.package_option_list({eventId: event.id})" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-success" id="saveEntry"><span translate>save</span><ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+            <a ui-sref="main.event.package_option_list({eventId: event.id})" class="btn btn-default" translate>cancel</a>
         </div>
     </div>
 </form>

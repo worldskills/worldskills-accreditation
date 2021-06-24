@@ -1,16 +1,16 @@
 <ol class="breadcrumb">
-    <li><a ui-sref="main.event_list">Events</a></li>
+    <li><a ui-sref="main.event_list" translate>events</a></li>
     <li class="active">{{ event.name.text }}</li>
 </ol>
 
 <h1>{{ event.name.text }}</h1>
 
 <ul class="nav nav-tabs">
-    <li ui-sref-active="{active: 'main.event.people'}"><a ui-sref="main.event.people">People</a></li>
-    <li ui-sref-active="{active: 'main.event.delegate_type_list'}" ng-show="userIsAdmin"><a ui-sref="main.event.delegate_type_list">Delegate Types</a></li>
-    <li ui-sref-active="{active: 'main.event.positions'}" ng-show="userIsAdmin"><a ui-sref="main.event.positions">Positions</a></li>
-    <li ui-sref-active="{active: 'main.event.package_option_list'}" ng-show="userIsAdmin"><a ui-sref="main.event.package_option_list">Package Options</a></li>
-    <li ui-sref-active="{active: 'main.event.zone_list'}" ng-show="userIsAdmin"><a ui-sref="main.event.zone_list">Zones</a></li>
+    <li ui-sref-active="{active: 'main.event.people'}"><a ui-sref="main.event.people" translate>people</a></li>
+    <li ui-sref-active="{active: 'main.event.delegate_type_list'}" ng-show="userIsAdmin"><a ui-sref="main.event.delegate_type_list" translate>delegate_types</a></li>
+    <li ui-sref-active="{active: 'main.event.positions'}" ng-show="userIsAdmin"><a ui-sref="main.event.positions" translate>positions</a></li>
+    <li ui-sref-active="{active: 'main.event.package_option_list'}" ng-show="userIsAdmin"><a ui-sref="main.event.package_option_list" translate>package_options</a></li>
+    <li ui-sref-active="{active: 'main.event.zone_list'}" ng-show="userIsAdmin"><a ui-sref="main.event.zone_list" translate>zones</a></li>
 </ul>
 
 <div id="content" ui-view>

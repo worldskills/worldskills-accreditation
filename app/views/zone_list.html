@@ -10,8 +10,8 @@
     </colgroup>
     <thead>
         <tr>
-            <th class="text-center">Code</th>
-            <th>Name</th>
+            <th class="text-center" translate>code</th>
+            <th translate>name</th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +20,7 @@
             <td><a ui-sref="main.zone({eventId: event.id, id: zone.id})">{{zone.name}}</a></td>
         </tr>
         <tr ng-show="zones.zones.length == 0">
-            <td colspan="2">No zones found</td>
+            <td colspan="2" translate>error_no_zones</td>
         </tr>
     </tbody>
     <tfoot>
@@ -31,7 +31,7 @@
 </table>
 
 <p>
-    <a ui-sref="main.zone({eventId: event.id})" class="btn btn-success">Add Zone</a>
+    <a ui-sref="main.zone({eventId: event.id})" class="btn btn-success" translate>add_zone</a>
 </p>
 
 </div>

@@ -11,7 +11,7 @@
         <option ng-repeat="dt in delegateTypes.delegate_types" value="{{dt.id}}">{{dt.name}}</option>
     </select>
     &nbsp;
-    <button class="btn btn-primary" ng-click="load()">Load<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+    <button class="btn btn-primary" ng-click="load()"><span translate>load</span><ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
     <span ng-show="accreditations.people" class="text-muted">&nbsp;Loaded {{accreditations.people.length}} people</span>
 </p>
 
@@ -22,18 +22,14 @@
         <col width="10%" />
         <col width="10%" />
         <col width="10%" />
-        <col width="10%" />
-        <col width="10%" />
     </colgroup>
     <thead>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Company</th>
-            <th>Country</th>
-            <th>Conf. D1</th>
-            <th>Conf. D2</th>
+            <th translate>first_name</th>
+            <th translate>last_name</th>
+            <th translate>email</th>
+            <th translate>company</th>
+            <th translate>country</th>
         </tr>
     </thead>
     <tbody>
@@ -43,17 +39,15 @@
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.email_address}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.organization}}</td>
             <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.country.name.text}}</td>
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{hasZone(accreditation, 'CD1') ? 'Yes' : ''}}</td>
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{hasZone(accreditation, 'CD2') ? 'Yes' : ''}}</td>
         </tr>
         <tr ng-show="!accreditations.people || accreditations.total_count == 0">
-            <td colspan="7">No people found</td>
+            <td colspan="5" translate>error_no_people</td>
         </tr>
 
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="7"></td>
+            <td colspan="5"></td>
         </tr>
     </tfoot>
 </table>
