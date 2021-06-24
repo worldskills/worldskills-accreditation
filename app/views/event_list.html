@@ -46,7 +46,8 @@
 			<uib-pagination total-items="events.total_count" ng-model="current_page"
 				items-per-page='items_per_page' class="pagination-small"
 				boundary-links="true" rotate="false" max-size="5"
-				ng-change="changePage()"></uib-pagination>
+				ng-change="changePage()"
+        first-text="{{'first' | translate}}" last-text="{{'last' | translate}}" next-text="{{'next' | translate}}" previous-text="{{'previous' | translate}}"></uib-pagination>
 		</div>
 	</div>
 </div>

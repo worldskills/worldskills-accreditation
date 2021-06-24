@@ -41,7 +41,8 @@
             <uib-pagination total-items="accreditations.total_count || (current_page - 1) * items_per_page" ng-model="current_page"
                 items-per-page="items_per_page"
                 boundary-links="true" max-size="5" rotate="false"
-                ng-change="changePage()"></uib-pagination>
+                ng-change="changePage()"
+                first-text="{{'first' | translate}}" last-text="{{'last' | translate}}" next-text="{{'next' | translate}}" previous-text="{{'previous' | translate}}"></uib-pagination>
 
             <p class="text-muted">{{ 'total_people_found_msg' | translate: {total: accreditations.total_count} }}</p>
         </div>
