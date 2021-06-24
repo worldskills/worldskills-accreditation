@@ -2,7 +2,7 @@
     <li><a ui-sref="main.event_list" translate>events</a></li>
     <li><a ui-sref="main.event.people({eventId: event.id})">{{ event.name.text }}</a></li>
     <li><a ui-sref="main.event.delegate_type_list({eventId: event.id})" translate>delegate_types</a></li>
-    <li class="active">{{ delegateTypeId ? delegateTypeName : ("new_delegate_type" | translate) }}</li>
+    <li class="active">{{ delegateTypeId ? delegateTypeName : ('new_delegate_type' | translate) }}</li>
 </ol>
 
 <alerts></alerts>
@@ -11,7 +11,7 @@
     <button ng-show="delegateTypeId" ng-click="delete()" class="btn btn-danger"><span translate>delete</span><ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
-<h1>{{ delegateTypeId ? delegateTypeName : ("new_delegate_type" | translate) }}</h1>
+<h1>{{ delegateTypeId ? delegateTypeName : ('new_delegate_type' | translate) }}</h1>
 
 <hr/>
 

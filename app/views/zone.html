@@ -2,7 +2,7 @@
     <li><a ui-sref="main.event_list" translate>events</a></li>
     <li><a ui-sref="main.event.people({eventId: event.id})">{{ event.name.text }}</a></li>
     <li><a ui-sref="main.event.zone_list({eventId: event.id})" translate>zones</a></li>
-    <li class="active">{{ zoneId ? zoneName : ("new_zone" | translate) }}</li>
+    <li class="active">{{ zoneId ? zoneName : ('new_zone' | translate) }}</li>
 </ol>
 
 <alerts></alerts>
@@ -14,7 +14,7 @@
     <button ng-show="zoneId" ng-click="delete()" class="btn btn-danger"><span translate>delete</span><ws-text-spinner ng-show="deleteLoading" class="ng-hide"></ws-text-spinner></button>
 </p>
 
-<h1>{{ zoneId ? zoneName : ("new_zone" | translate) }}</h1>
+<h1>{{ zoneId ? zoneName : ('new_zone' | translate) }}</h1>
 
 <hr/>
 

@@ -181,6 +181,7 @@ module.exports = function (grunt) {
         src: [ 'app/scripts/**/*.js', 'app/views/**/*.html' ],
         lang: ['en'],
         stringifyOptions: true,
+        safeMode: true,
         dest: 'app/languages'
       }
     },
