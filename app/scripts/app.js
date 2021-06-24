@@ -212,7 +212,7 @@ angular
   .run(['$rootScope', '$state', '$stateParams', '$window', 'Restangular', 'auth', 'user', 'API_AUTH_CODE',
         function($rootScope, $state, $stateParams, $window, Restangular, auth, user, API_AUTH_CODE){
 	
-	  $rootScope.available_languages = {"en":"English"};
+	  $rootScope.available_languages = {'en': 'English', 'de': 'Deutsch', 'fr': 'Français', 'it': 'Italiano'};
 	
 	  if (!auth.loggedIn )//|| (!user.hasPermission(API_AUTH_CODE, 'Admin') && !user.hasPermission(API_AUTH_CODE, 'CreateResource')))
 	  {
