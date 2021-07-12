@@ -43,9 +43,15 @@
                 $scope.zoneName = $scope.zone.name;
             });
         } else {
+            var maxSort = 1;
+            Zone.query({eventId: $stateParams.eventId}, function (zones) {
+              zones.zones.forEach(function (zone) {
+                  maxSort = Math.max(maxSort, zone.sort);
+              });
+              $scope.zone.sort = maxSort + 1;
+            });
             $scope.zone = new Zone();
             $scope.zone.color = '#003764';
-            $scope.zone.sort = 1;
         }
 
         $scope.save = function() {
