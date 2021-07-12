@@ -5,6 +5,31 @@
 
         $scope.zones = Zone.query({eventId: $stateParams.eventId});
 
+        $scope.moveUp = function (sort, zone) {
+            var index = $scope.zones.zones.indexOf(zone);
+            var newZone = $scope.zones.zones[index];
+            var oldZone = $scope.zones.zones[index - 1];
+            $scope.zones.zones[index - 1] = newZone;
+            $scope.zones.zones[index] = oldZone;
+            $scope.save();
+        };
+
+        $scope.moveDown = function (sort, zone) {
+            var index = $scope.zones.zones.indexOf(zone);
+            var newZone = $scope.zones.zones[index];
+            var oldZone = $scope.zones.zones[index + 1];
+            $scope.zones.zones[index + 1] = newZone;
+            $scope.zones.zones[index] = oldZone;
+            $scope.save();
+        };
+
+        $scope.save = function () {
+            angular.forEach($scope.zones.zones, function (zone, index) {
+                zone.sort = index + 1;
+            });
+            Zone.updateSort({eventId: $stateParams.eventId}, $scope.zones);
+        };
+
     });
 
     angular.module('accreditationApp').controller('ZoneCtrl', function ($scope, $state, $stateParams, alert, Event, Zone) {

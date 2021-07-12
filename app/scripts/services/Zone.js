@@ -11,7 +11,11 @@
             },
             update: {
                 method: 'PUT'
-            }
+            },
+            updateSort: {
+                method: 'PUT',
+                url: REST_BASE_URL + '/accreditation/events/:eventId/zones/sort',
+            },
         });
 
     });
