@@ -11,6 +11,15 @@ angular.module('accreditationApp')
     $scope.eventId = $stateParams.eventId;
     $scope.accreditations = [];
 
+    var templates = {
+      //'316': 'wsc2017.html',
+    };
+
+    $scope.template = 'views/badges/default.html';
+    if (typeof templates[$scope.eventId] !== 'undefined') {
+      $scope.template = 'views/badges/' + templates[$scope.eventId];
+    }
+
     // load the event info
     Restangular.one('accreditation/events', $scope.eventId).get().then(function(result) 
         {
