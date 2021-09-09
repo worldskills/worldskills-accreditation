@@ -22,8 +22,7 @@ angular
     'pascalprecht.translate',
     'restangular',
     'ngFileUpload',
-    'worldskills.utils',
-    'youtube-embed'
+    'worldskills.utils'
   ])
     .config(['$controllerProvider', '$routeProvider', '$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', 'RestangularProvider', 'REST_BASE_URL', 'API_ORG',
              function ($controllerProvider, $routeProvider, $translateProvider, $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, REST_BASE_URL, API_ORG) {

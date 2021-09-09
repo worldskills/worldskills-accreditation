@@ -18,33 +18,12 @@ angular.module('accreditationApp')
     $rootScope.currentPage = 1;
     $rootScope.currentPeoplePage = 1;
     $rootScope.filterTags = [];
-    
-    $rootScope.badgerVidId = 'XT8hE7_8BCY';
 
     auth.hasUserRole(API_AUTH_CODE, 'Admin').then(function (hasUserRole) {
         if (hasUserRole) {
             $scope.userIsAdmin = true;
         }
     });
-
-    $rootScope.showBadger = function() {
-	    $rootScope.badgerModal = $uibModal.open({
-			  scope: $scope,
-			  template: '<div style="padding: 5px;"><youtube-video video-id="badgerVidId"></youtube-video></div>',
-			  size: 'lg'
-		  });
-	    $scope.$on('youtube.player.ready', function ($event, player) {
-	        // play it again
-	        player.playVideo();
-	      });
-    };
-    
-    $rootScope.closeBadger = function() {
-    	if ($scope.badgerModal)
-		  {
-			  $scope.badgerModal.close();
-		  }
-    }
     
     $scope.logout = function (e) {
         auth.logout();
