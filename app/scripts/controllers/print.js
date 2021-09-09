@@ -12,7 +12,7 @@ angular.module('accreditationApp')
     $scope.accreditations = [];
 
     var templates = {
-      //'316': 'wsc2017.html',
+      '587': 'ch-2022.html',
     };
 
     $scope.template = 'views/badges/default.html';
