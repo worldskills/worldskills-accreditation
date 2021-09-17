@@ -85,6 +85,14 @@
                                 <option ng-repeat="skill in skills" value="{{skill.id}}">{{skill.skill_number}} {{skill.name.text}}</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="skill" translate>printed</label>
+                            <select ng-model="filter.printed" class="form-control" name="printed" id="printed">
+                                <option></option>
+                                <option value="true" translate>yes</option>
+                                <option value="false" translate>no</option>
+                            </select>
+                        </div>
                         <div class="btn-toolbar pull-right">
                           <a ui-sref="print(filter)" class="btn btn-warning" target="_blank" translate>print</a>
                           <a ng-click="filterResults()" class="btn btn-primary" ng-disabled="loading || deleting"><span translate>set_filter</span><spinner ng-show="loading" class="ng-hide"></spinner></a>

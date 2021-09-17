@@ -12,6 +12,10 @@
             update: {
                 method: 'PUT'
             },
+            printed: {
+                method: 'PUT',
+                url: REST_BASE_URL + '/accreditation/events/:eventId/accreditations/:id/printed',
+            },
             import: {
                 method: 'POST',
                 url: REST_BASE_URL + '/accreditation/events/:eventId/accreditations/import',

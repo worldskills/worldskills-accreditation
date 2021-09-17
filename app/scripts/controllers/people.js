@@ -19,6 +19,7 @@ angular.module('accreditationApp')
 		$scope.filter.position = '';
 		$scope.filter.country = '';
 		$scope.filter.skill = undefined;
+		$scope.filter.printed = undefined;
 		$scope.filter.sort = '';
 		
 		$scope.changePage();	
@@ -32,11 +33,16 @@ angular.module('accreditationApp')
 
 		$rootScope.currentPeoplePage = $scope.current_page;
 
-		Accreditation.query({eventId: $stateParams.eventId, name: $scope.filter.name, 
+		var query = {eventId: $stateParams.eventId, name: $scope.filter.name, 
 			pos_name: $scope.filter.position, country: $scope.filter.country,
-			skill: $scope.filter.skill, del_types: $scope.filter.delegateTypes, sort: $scope.filter.sort, 
+			skill: $scope.filter.skill, del_types: $scope.filter.delegateTypes,
+			sort: $scope.filter.sort, 
 			limit: $scope.items_per_page, offset: $scope.items_per_page * ($scope.current_page-1) 
-		}, function(result) {
+		};
+		if ($scope.filter.printed !== undefined) {
+			query['printed'] = $scope.filter.printed;
+		}
+		Accreditation.query(query, function(result) {
 			$scope.loading = false;
 			$scope.accreditations = result;
 		}, $rootScope.errorHandler);
