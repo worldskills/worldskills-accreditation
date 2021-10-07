@@ -4,7 +4,6 @@ angular.module('accreditationApp')
 .controller('PrintCtrl', function ($scope, $rootScope, $state, $stateParams, Restangular, Accreditation, REST_BASE_URL) {
 
     $scope.loading = true;
-    $scope.printed = false;
     $scope.apiBaseUrl = REST_BASE_URL;
 
     $scope.date = new Date();
@@ -33,9 +32,6 @@ angular.module('accreditationApp')
         Accreditation.get({eventId: $scope.eventId, id: $stateParams.accreditationId}, function(accreditation) {
             $scope.loading = false;
             $scope.accreditations = [accreditation.summary];
-            setTimeout(function () {
-              window.print();
-            }, 300);
         }, $rootScope.errorHandler);
 
     } else {
@@ -51,21 +47,20 @@ angular.module('accreditationApp')
         Accreditation.query(query, function(result) {
             $scope.loading = false;
             $scope.accreditations = result.people;
-            setTimeout(function () {
-              window.print();
-            }, 300);
         }, $rootScope.errorHandler);
 
     }
 
-    $scope.markPrinted = function () {
+    window.matchMedia('print').addListener(function (mediaQueryListEvent) {
+        if (mediaQueryListEvent.matches) {
+            angular.forEach($scope.accreditations, function (accreditation) {
+                Accreditation.printed({eventId: $stateParams.eventId}, accreditation);
+            });
+        }
+    });
 
-        $scope.printed = true;
-
-        angular.forEach($scope.accreditations, function (accreditation) {
-            Accreditation.printed({eventId: $stateParams.eventId}, accreditation);
-        });
-
+    $scope.print = function () {
+        window.print();
     };
 
 });

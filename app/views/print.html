@@ -20,7 +20,7 @@
 </div>
 
 <div ng-if="!loading">
-  <div class="ws-button-overlay" style="background-color: rgba(0, 0, 0, 0.6); position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center;">
-    <button class="btn btn-default btn-lg" ng-class="{'btn-success': printed}" ng-click="markPrinted()" ng-disabled="printed">Mark as printed</button>
+  <div class="ws-button-overlay" style="position: fixed; top: 24px; right: 12px;">
+    <button class="btn btn-default btn-lg" ng-click="print()" translate>print</button>
   </div>
 </div>
