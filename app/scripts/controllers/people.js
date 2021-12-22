@@ -27,7 +27,13 @@ angular.module('accreditationApp')
 
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 
-	$scope.members = Member.query({member_of: 1, limit: 999});
+	$scope.event.$promise.then(function () {
+		var member = 1;
+		if ($scope.event.member_id) {
+			member = $scope.event.member_id;
+		}
+		$scope.members = Member.query({member_of: member, limit: 999});
+	});
 
 	$scope.changePage = function() 
 	{
