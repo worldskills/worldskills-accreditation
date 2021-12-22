@@ -72,10 +72,10 @@
                             <input ng-model="filter.position" class="form-control input-sm" id="position"/>
                         </div>
                         <div class="form-group">
-                            <label for="country" translate>country</label>
-                            <select ng-model="filter.country" class="form-control" name="country" id="country">
+                            <label for="member" translate>member</label>
+                            <select ng-model="filter.member" class="form-control" name="member" id="member">
                                 <option></option>
-                                <option ng-repeat="country in countries" value="{{country.code}}">{{country.code}} - {{country.name.text}}</option>
+                                <option ng-repeat="member in members.members" value="{{member.id}}">{{member.name.text}}</option>
                             </select>
                         </div>
                         <div class="form-group">

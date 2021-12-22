@@ -37,7 +37,7 @@ angular.module('accreditationApp')
     } else {
       
         var query = {eventId: $stateParams.eventId, name: $stateParams.name, 
-            pos_name: $stateParams.position, country: $stateParams.country,
+            pos_name: $stateParams.position, member: $stateParams.member,
             skill: $stateParams.skill, del_types: $stateParams.delegateTypes, 
             limit: $scope.limit
         };

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PeopleListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular, Accreditation, Event, DelegateType) {
+.controller('PeopleListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular, Accreditation, Event, DelegateType, Member) {
 	
 	$scope.loading = true;
 
@@ -17,7 +17,7 @@ angular.module('accreditationApp')
 		$scope.filter.lastName = '';
 		$scope.filter.delegateTypes = [];
 		$scope.filter.position = '';
-		$scope.filter.country = '';
+		$scope.filter.member = '';
 		$scope.filter.skill = undefined;
 		$scope.filter.printed = undefined;
 		$scope.filter.sort = '';
@@ -27,6 +27,8 @@ angular.module('accreditationApp')
 
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 
+	$scope.members = Member.query({member_of: 1, limit: 999});
+
 	$scope.changePage = function() 
 	{
 		$scope.loading = true;
@@ -34,7 +36,7 @@ angular.module('accreditationApp')
 		$rootScope.currentPeoplePage = $scope.current_page;
 
 		var query = {eventId: $stateParams.eventId, name: $scope.filter.name, 
-			pos_name: $scope.filter.position, country: $scope.filter.country,
+			pos_name: $scope.filter.position, member: $scope.filter.member,
 			skill: $scope.filter.skill, del_types: $scope.filter.delegateTypes,
 			sort: $scope.filter.sort, 
 			limit: $scope.items_per_page, offset: $scope.items_per_page * ($scope.current_page-1) 

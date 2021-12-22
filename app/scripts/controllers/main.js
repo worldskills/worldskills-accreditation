@@ -41,21 +41,11 @@ angular.module('accreditationApp')
     	document.body.scrollTop = document.documentElement.scrollTop = 0;
     };
 
-    $rootScope.getCountries = function()
-    {
-    	OrgRestangular.one('countries').get().then( function(result)
-    	{
-    		$rootScope.countries = result.country_list;
-    	}, $rootScope.errorHandler);
-    };
-	  
-    $rootScope.getCountries();
-    
     $rootScope.filter = {
 			firstName: '',
 			lastName: '',
 			position: '',
-			country: '',
+			member: '',
 			skill: undefined,
 			sort: ''
 	};
