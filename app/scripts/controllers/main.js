@@ -45,7 +45,7 @@ angular.module('accreditationApp')
 			firstName: '',
 			lastName: '',
 			position: '',
-			member: '',
+			member: undefined,
 			skill: undefined,
 			sort: ''
 	};

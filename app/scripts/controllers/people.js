@@ -17,7 +17,7 @@ angular.module('accreditationApp')
 		$scope.filter.lastName = '';
 		$scope.filter.delegateTypes = [];
 		$scope.filter.position = '';
-		$scope.filter.member = '';
+		$scope.filter.member = undefined;
 		$scope.filter.skill = undefined;
 		$scope.filter.printed = undefined;
 		$scope.filter.sort = '';
