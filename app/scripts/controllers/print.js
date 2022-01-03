@@ -44,6 +44,9 @@ angular.module('accreditationApp')
         if ($stateParams.printed !== undefined) {
             query['printed'] = $stateParams.printed;
         }
+        if ($scope.filter.photo !== undefined) {
+            query['photo'] = $scope.filter.photo;
+        }
         Accreditation.query(query, function(result) {
             $scope.loading = false;
             $scope.accreditations = result.people;
