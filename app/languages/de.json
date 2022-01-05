@@ -51,6 +51,7 @@
     "new_delegate_type": "Neuer Delegiertentyp",
     "new_zone": "Neue Zone",
     "next": "Nächste",
+    "no": "Nein",
     "override": "Überschrieben",
     "package_options": "Package-Optionen",
     "people": "Personen",
@@ -73,5 +74,6 @@
     "type": "Typ",
     "user_image": "Benutzerbild",
     "view_in_people": "In Personen anzeigen",
+    "yes": "Ja",
     "zones": "Zonen"
 }
