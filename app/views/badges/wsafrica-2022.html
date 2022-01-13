@@ -50,7 +50,7 @@ body {
     <div style="flex: 1;">
       
       <div style="display: flex; flex-wrap: wrap;">
-        <div ng-repeat="zone in zones.zones" style="margin-bottom: 1mm; margin-right: 1mm; display: flex; align-items: center; justify-content: center; -webkit-print-color-adjust: exact; width: 10mm; height: 10mm; background-color: {{zone.color}} !important;">
+        <div ng-repeat="zone in zones.zones" style="{{hasZone(accreditation, zone) ? 'visibility: visible;' : 'visibility: hidden;'}} margin-bottom: 1mm; margin-right: 1mm; display: flex; align-items: center; justify-content: center; -webkit-print-color-adjust: exact; width: 10mm; height: 10mm; background-color: {{zone.color}} !important;">
           <div style="color: {{zone.text_color}} !important; font-weight: bold; font-size: 20px;">{{ zone.code }}</div>
         </div>
       </div>
