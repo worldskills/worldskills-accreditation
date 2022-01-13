@@ -13,6 +13,7 @@ angular.module('accreditationApp')
 
     var templates = {
       '587': 'ch-2022.html',
+      '584': 'wsafrica-2022.html',
     };
 
     $scope.template = 'views/badges/default.html';
@@ -25,7 +26,7 @@ angular.module('accreditationApp')
         {
             $scope.event = result;
         }, $rootScope.errorHandler);
-
+    
     $scope.zones = Zone.query({eventId: $stateParams.eventId});
 
     if ($stateParams.accreditationId) {
