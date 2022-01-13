@@ -29,6 +29,16 @@ angular.module('accreditationApp')
     
     $scope.zones = Zone.query({eventId: $stateParams.eventId});
 
+    $scope.hasZone = function (accreditation, zone) {
+        var hasZone = false;
+        angular.forEach(accreditation.zones, function (accreditationZone) {
+            if (accreditationZone.id === zone.id) {
+                hasZone = true;
+            }
+        });
+        return hasZone;
+    };
+
     if ($stateParams.accreditationId) {
 
         $scope.loading = true;
