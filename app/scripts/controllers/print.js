@@ -57,8 +57,8 @@ angular.module('accreditationApp')
         if ($stateParams.printed !== undefined) {
             query['printed'] = $stateParams.printed;
         }
-        if ($scope.filter.photo !== undefined) {
-            query['photo'] = $scope.filter.photo;
+        if ($stateParams.photo !== undefined) {
+            query['photo'] = $stateParams.photo;
         }
         Accreditation.query(query, function(result) {
             $scope.loading = false;
