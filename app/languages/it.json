@@ -1,3 +1,12 @@
 {
-  "login": "Login"
+    "cancel": "Interrompi",
+    "clear": "Cancella",
+    "country": "Paese",
+    "error_no_people": "Persona non trovata",
+    "language": "Lingua",
+    "login": "Login",
+    "no": "No",
+    "people": "Persone",
+    "save": "Salva",
+    "yes": "Sì"
 }
