@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PrintCtrl', function ($scope, $rootScope, $state, $stateParams, Restangular, Accreditation, REST_BASE_URL) {
+.controller('PrintCtrl', function ($scope, $rootScope, $state, $stateParams, Restangular, Accreditation, Zone, REST_BASE_URL) {
 
     $scope.loading = true;
     $scope.apiBaseUrl = REST_BASE_URL;
@@ -25,6 +25,8 @@ angular.module('accreditationApp')
         {
             $scope.event = result;
         }, $rootScope.errorHandler);
+
+    $scope.zones = Zone.query({eventId: $stateParams.eventId});
 
     if ($stateParams.accreditationId) {
 
