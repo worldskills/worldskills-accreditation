@@ -1,3 +1,9 @@
 {
-  "login": "Login"
+    "clear": "Supprimer",
+    "country": "Pays",
+    "error_no_people": "Personne non trouvée",
+    "login": "Login",
+    "people": "Personnes",
+    "save": "Enregistrer",
+    "yes": "Oui"
 }
