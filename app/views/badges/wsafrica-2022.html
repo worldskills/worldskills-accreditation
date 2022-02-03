@@ -48,10 +48,16 @@ body {
     </div>
 
     <div style="flex: 1;">
-      
+
       <div style="display: flex; flex-wrap: wrap;">
-        <div ng-repeat="zone in zones.zones" style="{{hasZone(accreditation, zone) ? 'visibility: visible;' : 'visibility: hidden;'}} margin-bottom: 1mm; margin-right: 1mm; display: flex; align-items: center; justify-content: center; -webkit-print-color-adjust: exact; width: 10mm; height: 10mm; background-color: {{zone.color}} !important;">
+        <div ng-repeat="zone in zones.zones | filter:{color: '#AB372A'}" style="{{hasZone(accreditation, zone) ? 'visibility: visible;' : 'visibility: hidden;'}} margin-bottom: 1mm; margin-right: 1mm; display: flex; align-items: center; justify-content: center; -webkit-print-color-adjust: exact; width: 10mm; height: 10mm; background-color: {{zone.color}} !important;">
           <div style="color: {{zone.text_color}} !important; font-weight: bold; font-size: 20px;">{{ zone.code }}</div>
+        </div>
+      </div>
+
+      <div style="display: flex;">
+        <div ng-repeat="zone in accreditation.zones | filter:{color: '#015aaa'}" style="margin-bottom: 1mm; margin-right: 1mm; display: flex; align-items: center; justify-content: center; -webkit-print-color-adjust: exact; width: 21mm; height: 7mm; background-color: {{zone.color}} !important;">
+          <div style="color: {{zone.text_color}} !important; font-size: 14px;">{{ zone.name }}</div>
         </div>
       </div>
 
@@ -85,7 +91,7 @@ body {
     <h5 style="font-size: 10px;" translate>access_to_zones</h5>
 
     <p>
-      <span ng-repeat="zone in accreditation.zones">
+      <span ng-repeat="zone in accreditation.zones | filter:{color: '#AB372A'}">
         {{zone.code}} - {{zone.name}}
         <br/>
       </span>
