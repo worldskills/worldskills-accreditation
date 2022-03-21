@@ -42,12 +42,23 @@ angular.module('accreditationApp')
 
 		$rootScope.currentPeoplePage = $scope.current_page;
 
-		var query = {eventId: $stateParams.eventId, name: $scope.filter.name, 
-			pos_name: $scope.filter.position, member: $scope.filter.member,
-			skill: $scope.filter.skill, del_types: $scope.filter.delegateTypes,
-			sort: $scope.filter.sort, 
-			limit: $scope.items_per_page, offset: $scope.items_per_page * ($scope.current_page-1) 
+		var query = {
+			eventId: $stateParams.eventId,
+			name: $scope.filter.name,
+			pos_name: $scope.filter.position,
+			sort: $scope.filter.sort,
+			limit: $scope.items_per_page,
+			offset: $scope.items_per_page * ($scope.current_page-1)
 		};
+		if ($scope.filter.member) {
+			query['member'] = $scope.filter.member;
+		}
+		if ($scope.filter.delegateTypes) {
+			query['del_types'] = $scope.filter.delegateTypes;
+		}
+		if ($scope.filter.skill) {
+			query['skill'] = $scope.filter.skill;
+		}
 		if ($scope.filter.printed !== undefined) {
 			query['printed'] = $scope.filter.printed;
 		}
