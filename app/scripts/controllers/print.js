@@ -54,6 +54,9 @@ angular.module('accreditationApp')
             skill: $stateParams.skill, del_types: $stateParams.delegateTypes, 
             limit: $scope.limit
         };
+        if ($stateParams.group) {
+            query['group'] = $stateParams.group;
+        }
         if ($stateParams.printed !== undefined) {
             query['printed'] = $stateParams.printed;
         }

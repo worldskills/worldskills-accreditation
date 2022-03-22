@@ -120,7 +120,7 @@ angular
         }
     })
     .state('print', {
-    	url: '/events/{eventId}/print/?accreditationId&name&position&member&skill&printed&photo&delegateTypes',
+    	url: '/events/{eventId}/print/?accreditationId&name&position&member&skill&printed&photo&delegateTypes&group',
     	templateUrl: 'views/print.html',
     	controller: 'PrintCtrl',
     	data: {
