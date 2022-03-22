@@ -19,6 +19,7 @@ angular.module('accreditationApp')
 		$scope.filter.position = '';
 		$scope.filter.member = undefined;
 		$scope.filter.skill = undefined;
+		$scope.filter.group = '';
 		$scope.filter.printed = undefined;
 		$scope.filter.photo = undefined;
 		$scope.filter.sort = '';
@@ -58,6 +59,9 @@ angular.module('accreditationApp')
 		}
 		if ($scope.filter.skill) {
 			query['skill'] = $scope.filter.skill;
+		}
+		if ($scope.filter.group) {
+			query['group'] = $scope.filter.group;
 		}
 		if ($scope.filter.printed !== undefined) {
 			query['printed'] = $scope.filter.printed;
