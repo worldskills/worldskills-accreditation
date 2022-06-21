@@ -69,7 +69,7 @@ body {
     </div>
 
   <div class="ws-card">
-    <div style="text-align: right; padding-right: 0.6cm; padding-left: 0.3cm;">
+    <div style="text-align: right; padding-right: 0.6cm; padding-left: 0.3cm; max-height: 5.35cm; overflow: hidden;">
 
       <div style="height: 3.6cm;">
           <img ng-show="accreditation.image" ng-src="{{accreditation.image.thumbnail}}_accreditation" style="height: 3.6cm;" alt="" />
@@ -80,8 +80,9 @@ body {
       </div>
 
       <div style="font-size: 0.35cm; line-height: 1.2; font-weight: 500;">
-        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[0]}}</div>
-        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[1]}}</div>
+        <div>{{accreditation.lines[0]}}</div>
+        <div>{{accreditation.lines[1]}}</div>
+        <div>{{accreditation.lines[2]}}</div>
       </div>
 
     </div>
