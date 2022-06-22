@@ -16,9 +16,11 @@ angular.module('accreditationApp')
       '584': 'wsafrica-2022.html',
     };
 
-    $scope.template = 'views/badges/default.html';
+    var time = new Date().getTime();
+
+    $scope.template = 'views/badges/default.html?v=' + time;
     if (typeof templates[$scope.eventId] !== 'undefined') {
-      $scope.template = 'views/badges/' + templates[$scope.eventId];
+      $scope.template = 'views/badges/' + templates[$scope.eventId] + '?v=' + time;
     }
 
     // load the event info
