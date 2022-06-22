@@ -1,12 +1,12 @@
 <style>
 @page {
   margin: 0;
-  size: 8.6cm 5.4cm landscape;
+  size: 8.6cm 5.5cm landscape;
 }
 
 .ws-card {
   width: 8.6cm;
-  height: 5.35cm;
+  height: 5.5cm;
 }
 
 @media screen {
@@ -20,8 +20,8 @@
 
   .ws-badge {
     width: 8.6cm;
-    height: 12.4cm;
-    padding-top: 0.9cm;
+    height: 12.2cm;
+    padding-top: 0.4cm;
     margin: 100px auto;
     background-color: #fff;
   }
@@ -69,10 +69,10 @@ body {
     </div>
 
   <div class="ws-card">
-    <div style="text-align: right; padding-right: 0.6cm; padding-left: 0.3cm; max-height: 5.35cm; overflow: hidden;">
+    <div style="text-align: right; padding-right: 0.6cm; padding-left: 0.3cm; height: 5.35cm; overflow: hidden;">
 
-      <div style="height: 3.6cm;">
-          <img ng-show="accreditation.image" ng-src="{{accreditation.image.thumbnail}}_accreditation" style="height: 3.6cm;" alt="" />
+      <div style="padding-top: 0.4cm; height: 3.6cm;">
+          <img ng-show="accreditation.image" ng-src="{{accreditation.image.thumbnail}}_accreditation" style="height: 3.2cm;" alt="" />
       </div>
 
       <div style="font-size: 0.5cm; line-height: 1.4; padding-top: 0.2cm; padding-left: 0.6cm; font-weight: 900; font-family: 'Frutiger LT Pro', Arial, sans-serif;">
@@ -94,7 +94,7 @@ body {
       {{accreditation.delegate_type.code}}
     </div>
 
-    <div style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; height: 2.8cm; padding: 0.4cm; font-size: 0.9cm; line-height: 0.9cm; font-weight: 900; font-family: 'Frutiger LT Pro', Arial, sans-serif; background-image: url('/images/ch-2022/pattern.png') !important; background-size: cover !important; background-repeat: no-repeat !important; background-blend-mode: overlay;">
+    <div style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; height: 2.9cm; padding: 0.4cm; font-size: 0.9cm; line-height: 0.9cm; font-weight: 900; font-family: 'Frutiger LT Pro', Arial, sans-serif; background-image: url('/images/ch-2022/pattern.png') !important; background-size: cover !important; background-repeat: no-repeat !important; background-blend-mode: overlay;">
       <span ng-repeat="zone in zones.zones" style="{{(hasZone(accreditation, zone) || (zone.code == '3' && accreditation.custom_field_data['99'] == '96')) ? 'display: inline;' : 'display: none;'}}">
         <span style="-webkit-print-color-adjust: exact; display: inline-block; width: 1.3cm; text-align: center; padding: 0; margin: 0 0.4cm 0.3cm 0; background-color: #fff !important; color: #000 !important;">{{ zone.code }}</span>
       </span>
