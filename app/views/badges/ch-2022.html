@@ -108,7 +108,7 @@ body {
 
     <div style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; height: 3.2cm; padding: 0.4cm 0.6cm; font-size: 0.9cm; line-height: 0.9cm; font-weight: 800; font-family: 'Frutiger LT Pro', Arial, sans-serif; background-image: url('/images/ch-2022/pattern.png') !important; background-size: cover !important; background-repeat: no-repeat !important; background-blend-mode: overlay;">
       <span ng-repeat="zone in zones.zones" style="{{(hasZone(accreditation, zone) || (zone.code == '3' && accreditation.custom_field_data['99'] == '96')) ? 'display: inline;' : 'display: none;'}}">
-        <span style="-webkit-print-color-adjust: exact; display: inline-block; width: 1.3cm; text-align: center; padding: 0; margin: 0 0.4cm 0.3cm 0; background-color: #fff !important; color: #000 !important;">{{ zone.code }}</span>
+        <span style="-webkit-print-color-adjust: exact; display: inline-block; width: 1.35cm; text-align: center; padding: 0; margin: 0 0.3cm 0.3cm 0; background-color: #fff !important; color: #000 !important;">{{ zone.code }}</span>
       </span>
     </div>
 
