@@ -39,7 +39,7 @@ body {
 <div class="ws-badge" style="page-break-after: always;">
 
     <div style="display:flex;">
-        <div>
+        <div style="flex: 1;">
 
             <div style="padding: 4mm 6mm; height: 120mm; -webkit-print-color-adjust: exact !important; background-image: url('/images/wsi-2022/background-blue.png') !important; background-size: contain !important; background-repeat: no-repeat !important; background-position: bottom !important;">
                 <div style="display:flex; height: 60mm;">
@@ -71,16 +71,16 @@ body {
             </div>
             
         </div>
-        <div>
+        <div style="flex: 1;">
 
             <div style="padding: 4mm 6mm; font-size: 3mm;">
                 <div style="display:flex;">
-                    <div style="flex: 1 1;"><strong style="font-weight: 400;">Code</strong></div>
-                    <div style="flex: 6 6;"><strong style="font-weight: 400;">Name</strong></div>
+                    <div style="flex: 1;"><strong style="font-weight: 400;">Code</strong></div>
+                    <div style="flex: 5;"><strong style="font-weight: 400;">Name</strong></div>
                 </div>
                 <div style="display:flex;" ng-repeat="zone in accreditation.zones">
-                    <div style="flex: 1 1;">{{zone.code}}</div>
-                    <div style="flex: 6 6;">{{zone.name}}</div>
+                    <div style="flex: 1;">{{zone.code}}</div>
+                    <div style="flex: 5;">{{zone.name}}</div>
                 </div>
                 
                 <hr>
