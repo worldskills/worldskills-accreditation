@@ -41,10 +41,10 @@ body {
     <div style="display:flex;">
         <div style="flex: 1;">
 
-            <div style="padding: 4mm 6mm; height: 120mm; -webkit-print-color-adjust: exact !important; background-image: url('/images/wsi-2022/background-blue.png') !important; background-size: contain !important; background-repeat: no-repeat !important; background-position: bottom !important;">
-                <div style="display:flex; height: 60mm;">
+            <div style="padding: 4mm 6mm; height: 128mm; -webkit-print-color-adjust: exact !important; background-image: url('/images/wsi-2022/background-blue.png') !important; background-size: contain !important; background-repeat: no-repeat !important; background-position: bottom !important;">
+                <div style="display: flex; justify-content: space-between; height: 60mm;">
                     <div>
-                        <img ng-show="accreditation.image" ng-src="{{accreditation.image.thumbnail}}_accreditation" class="img-responsive" width="150" alt="">
+                        <img ng-show="accreditation.image" ng-src="{{accreditation.image.thumbnail}}_accreditation" alt="" style="height: 50mm;">
                     </div>
                     <div>
                         <img src="/images/wsi-2022/WSC2022SE_Logo_Samsung_horizontal_Colour_RGB.png" style="width: 50mm">
@@ -55,13 +55,15 @@ body {
                     {{accreditation.first_name}} {{accreditation.last_name}}
                 </h2>
                 
-                <div class="ws-badge-line ws-overflow">{{accreditation.lines[0]}}</div>
-                <div class="ws-badge-line ws-overflow">{{accreditation.lines[1]}}</div>
-                <div class="ws-badge-line ws-overflow">{{accreditation.lines[2]}}</div>
+                <div style="height: 20mm;">
+                    <div class="ws-badge-line ws-overflow">{{accreditation.lines[0]}}</div>
+                    <div class="ws-badge-line ws-overflow">{{accreditation.lines[1]}}</div>
+                    <div class="ws-badge-line ws-overflow">{{accreditation.lines[2]}}</div>
+                </div>
                 
-                <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0.8em 0;">
+                <div style="margin: 4mm 0;">
                 <span ng-repeat="zone in accreditation.zones">
-                    <span style="-webkit-print-color-adjust: exact; display: inline-block; padding: 6px 12px; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important;">{{ zone.code }}</span>
+                    <span style="-webkit-print-color-adjust: exact; display: inline-block; padding: 1mm 2mm; margin: 0 2mm 2mm 0; font-size: 4mm; font-weight: 700; border: 0.4mm solid #003764; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important;">{{ zone.code }}</span>
                 </span>
                 </div>
             </div>
