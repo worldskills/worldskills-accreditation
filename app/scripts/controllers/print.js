@@ -63,6 +63,9 @@ angular.module('accreditationApp')
         if ($stateParams.printed !== undefined) {
             query['printed'] = $stateParams.printed;
         }
+        if ($stateParams.zone !== undefined) {
+            query['zone'] = $stateParams.zone;
+        }
         if ($stateParams.photo !== undefined) {
             query['photo'] = $stateParams.photo;
         }
