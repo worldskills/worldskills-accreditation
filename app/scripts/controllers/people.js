@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PeopleListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular, Accreditation, Event, DelegateType, Member) {
+.controller('PeopleListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular, Accreditation, Event, DelegateType, Zone, Member) {
 	
 	$scope.loading = true;
 
@@ -21,6 +21,7 @@ angular.module('accreditationApp')
 		$scope.filter.skill = undefined;
 		$scope.filter.group = '';
 		$scope.filter.printed = undefined;
+		$scope.filter.zone = undefined;
 		$scope.filter.photo = undefined;
 		$scope.filter.sort = '';
 		
@@ -28,6 +29,8 @@ angular.module('accreditationApp')
 	};
 
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
+
+	$scope.zones = Zone.query({eventId: $stateParams.eventId});
 
 	$scope.event.$promise.then(function () {
 		var member = 1;
@@ -62,6 +65,9 @@ angular.module('accreditationApp')
 		}
 		if ($scope.filter.group) {
 			query['group'] = $scope.filter.group;
+		}
+		if ($scope.filter.zone !== undefined) {
+			query['zone'] = $scope.filter.zone;
 		}
 		if ($scope.filter.printed !== undefined) {
 			query['printed'] = $scope.filter.printed;
