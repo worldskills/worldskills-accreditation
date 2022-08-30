@@ -35,11 +35,9 @@ angular.module('accreditationApp')
 	$scope.members = Member.query({limit: 100});
 	$scope.skills = Skill.query({eventId: $stateParams.eventId});
 
-	$scope.accreditationZones = {};
 	$scope.zones = Zone.query({eventId: $stateParams.eventId}, function () {
 		angular.forEach($scope.zones.zones, function (zone) {
 			zone.access = false;
-			$scope.accreditationZones[zone.code] = zone;
 		});
 	});
 
@@ -50,7 +48,7 @@ angular.module('accreditationApp')
     $scope.hasZone = function (zone) {
         var hasZone = false;
         angular.forEach($scope.zones_add, function (accreditationZone) {
-            if (accreditationZone.code === zone.code) {
+            if (accreditationZone.id === zone.id) {
                 hasZone = true;
             }
         });
@@ -137,11 +135,9 @@ angular.module('accreditationApp')
 	$scope.members = Member.query({limit: 100});
 	$scope.skills = Skill.query({eventId: $stateParams.eventId});
 
-	$scope.accreditationZones = {};
 	$scope.zones = Zone.query({eventId: $stateParams.eventId}, function () {
 		angular.forEach($scope.zones.zones, function (zone) {
 			zone.access = false;
-			$scope.accreditationZones[zone.code] = zone;
 		});
 	});
 
@@ -161,7 +157,7 @@ angular.module('accreditationApp')
         var hasZone = false;
         if ($scope.accreditation.summary) {
             angular.forEach($scope.accreditation.summary.zones, function (accreditationZone) {
-                if (accreditationZone.code === zone.code) {
+                if (accreditationZone.id === zone.id) {
                     hasZone = true;
                 }
             });
