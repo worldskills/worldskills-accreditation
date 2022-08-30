@@ -56,7 +56,7 @@
                     <div class="form-control-static">
                         <div>{{accreditation.position_delegate_type.delegate_type.name}}:</div>
                         <div ng-repeat="zone in accreditation.position_delegate_type.delegate_type.zones">
-                            <span>{{ zone.name }}</span>
+                            <span>{{ zone.code }} - {{ zone.name }}</span>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <label translate>package_options</label>
                     <div class="form-control-static">
                         <div ng-repeat="packageOptionZone in accreditation.package_option_zones">
-                            <span>{{ packageOptionZone.package_option.name.text }}: {{ packageOptionZone.zone.name }}</span>
+                            <span>{{ packageOptionZone.package_option.name.text }}: {{ packageOptionZone.zone.code }} - {{ packageOptionZone.zone.name }}</span>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                             <ul class="dropdown-menu">
                                 <li ng-repeat="zone in zones.zones | filter:hasNotZone">
                                     <a href ng-click="addAddZone(zone)">
-                                        {{ zone.name }}
+                                        {{ zone.code }} - {{ zone.name }}
                                     </a>
                                 </li>
                             </ul>
@@ -117,7 +117,7 @@
                             <ul class="dropdown-menu">
                                 <li ng-repeat="zone in zones.zones | filter:hasZone">
                                     <a href ng-click="addRemoveZone(zone)">
-                                        {{ zone.name }}
+                                        {{ zone.code }} - {{ zone.name }}
                                     </a>
                                 </li>
                             </ul>
@@ -126,10 +126,10 @@
 
                     <div>
                         <div ng-repeat="zone in accreditation.zones_add">
-                            <span ng-click="removeAddZone(zone)">{{ zone.name }}</span>
+                            <span ng-click="removeAddZone(zone)">{{ zone.code }} - {{ zone.name }}</span>
                         </div>
                         <div ng-repeat="zone in accreditation.zones_remove">
-                            <s ng-click="removeRemoveZone(zone)">{{ zone.name }}</s>
+                            <s ng-click="removeRemoveZone(zone)">{{ zone.code }} - {{ zone.name }}</s>
                         </div>
                     </div>
                 </div>
