@@ -91,7 +91,7 @@
                         </div>
                         <div class="form-group">
                             <label for="zone" translate>zone</label>
-                            <select ng-model="filter.zone" class="form-control" name="zone" id="zone">
+                            <select multiple ng-model="filter.zone" class="form-control" name="zone" id="zone">
                                 <option></option>
                                 <option ng-repeat="zone in zones.zones" value="{{zone.id}}">{{zone.code}} - {{zone.name}}</option>
                             </select>
