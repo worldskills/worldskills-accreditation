@@ -71,7 +71,7 @@ angular.module('accreditationApp').controller('ExportCtrl', function ($scope, $r
             XLSX.utils.book_append_sheet(workbook, worksheet, 'accreditations');
     
             var today = new Date().toISOString();
-            XLSX.writeFile(workbook, 'accreditation-' + today.replace(/[-:T]/ig, '').substring(0, 14) + '.xlsx');
+            XLSX.writeFile(workbook, 'WSC2022SE_AT1_accreditations_' + today.replace(/[-:T]/ig, '').substring(0, 14) + '.xlsx');
 
         }, $rootScope.errorHandler);
     };
