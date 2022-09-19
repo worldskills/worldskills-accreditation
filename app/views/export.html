@@ -7,47 +7,10 @@
 
 <p class="form-inline">
     <select ng-model="delegateType" class="form-control">
-        <option></option>
+        <option value="">- ALL -</option>
         <option ng-repeat="dt in delegateTypes.delegate_types" value="{{dt.id}}">{{dt.name}}</option>
     </select>
     &nbsp;
-    <button class="btn btn-primary" ng-click="load()"><span translate>load</span><ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
-    <span ng-show="accreditations.people" class="text-muted">&nbsp;Loaded {{accreditations.people.length}} people</span>
+    <button class="btn btn-primary" ng-click="export()">Export<ws-text-spinner ng-show="loading" class="ng-hide"></ws-text-spinner></button>
+    <span ng-show="accreditations.people" class="text-muted">&nbsp;Exported {{accreditations.people.length}} people</span>
 </p>
-
-<table class="table table-striped" style="table-layout: fixed;">
-    <colgroup>
-        <col width="10%" />
-        <col width="10%" />
-        <col width="10%" />
-        <col width="10%" />
-        <col width="10%" />
-    </colgroup>
-    <thead>
-        <tr>
-            <th translate>first_name</th>
-            <th translate>last_name</th>
-            <th translate>email</th>
-            <th translate>company</th>
-            <th translate>country</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="accreditation in accreditations.people">
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a ui-sref="main.person({eventId: event.id, accreditationId: accreditation.id})" target="_blank">{{accreditation.first_name}}</a></td>
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a ui-sref="main.person({eventId: event.id, accreditationId: accreditation.id})" target="_blank">{{accreditation.last_name}}</a></td>
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.email_address}}</td>
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.organization}}</td>
-            <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{accreditation.country.name.text}}</td>
-        </tr>
-        <tr ng-show="!accreditations.people || accreditations.total_count == 0">
-            <td colspan="5" translate>error_no_people</td>
-        </tr>
-
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="5"></td>
-        </tr>
-    </tfoot>
-</table>
