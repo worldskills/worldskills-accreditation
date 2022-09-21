@@ -33,6 +33,7 @@ angular.module('accreditationApp').controller('ExportCtrl', function ($scope, $r
                     'text_color',
                     'first_name',
                     'last_name',
+                    'email',
                     'zone_1',
                     'zone_2',
                     'zone_at1_green',
@@ -52,6 +53,7 @@ angular.module('accreditationApp').controller('ExportCtrl', function ($scope, $r
                     accreditation.delegate_type.text_color,
                     accreditation.first_name,
                     accreditation.last_name,
+                    '', // email
                     $scope.hasZone(accreditation, 46) ? 'Y' : 'N', // Skills
                     $scope.hasZone(accreditation, 47) ? 'Y' : 'N', // Offices
                     $scope.hasZone(accreditation, 63) ? 'Y' : 'N', // AT1 green
