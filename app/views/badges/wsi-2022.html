@@ -92,6 +92,10 @@ body {
                 <p translate>accreditation_badge_disclaimer_info</p>
                 
                 <p><span translate>generated_on</span>: {{date | date:'dd.MM.yyyy HH:mm'}}</p>
+
+                <div ng-if="hasZone(accreditation, {id: 83}) || hasZone(accreditation, {id: 84})" style="margin-top: 10mm;">
+                    <img ng-src="/tmp/wsc2022se/it1/IT1_QR_{{accreditation.person_id}}.png">
+                </div>
             </div>
 
         </div>
