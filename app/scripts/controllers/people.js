@@ -40,6 +40,23 @@ angular.module('accreditationApp')
 		$scope.members = Member.query({member_of: member, limit: 999});
 	});
 
+    var errored = function (response) {
+    	$scope.loading = false;
+        if (response.status == 401) {
+            // Unauthorized
+            window.alert('Your session has timed out. The page will now refresh and you might need to login again.');
+            // reload page
+            window.location.reload(false)
+        } else {
+            if (response.data.user_msg) {
+                alert.error('Error: ' + ' ' + response.data.code + ': ' + response.data.user_msg);
+            } else {
+                alert.error('An error has occured: ' + JSON.stringify(response.data));
+            }
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+        }
+    };
+
 	$scope.changePage = function() 
 	{
 		$scope.loading = true;
@@ -78,7 +95,7 @@ angular.module('accreditationApp')
 		Accreditation.query(query, function(result) {
 			$scope.loading = false;
 			$scope.accreditations = result;
-		}, $rootScope.errorHandler);
+		}, errored);
 	};
 
 	$scope.filterResults = function()
