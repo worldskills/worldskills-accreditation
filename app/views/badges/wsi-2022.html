@@ -93,8 +93,12 @@ body {
                 
                 <p><span translate>generated_on</span>: {{date | date:'dd.MM.yyyy HH:mm'}}</p>
 
-                <div ng-if="hasZone(accreditation, {id: 83}) || hasZone(accreditation, {id: 84})" style="position: absolute; top: 80mm; left: 50%; margin-left: -20mm; text-align: center;">
+                <div ng-if="hasZone(accreditation, {id: 83}) || hasZone(accreditation, {id: 84})" style="position: absolute; top: 80mm; left: 50%; margin-left: -20mm;">
                     <img ng-src="/tmp/wsc2022se/it1/IT1_QR_{{accreditation.person_id}}.png" style="width: 40mm; outline: 5mm solid #fff;">
+                </div>
+
+                <div ng-if="hasZone(accreditation, {id: 73}) || hasZone(accreditation, {id: 74})" style="position: absolute; top: 130mm; left: 50%; margin-left: -45mm;">
+                    <img ng-src="/images/wsi-2022/GV_WorldSkills_TZDresden.png" style="width: 90mm; outline: 5mm solid #fff;">
                 </div>
             </div>
 
