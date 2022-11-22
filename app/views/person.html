@@ -44,7 +44,8 @@
                 <div class="form-group">
                     <label translate>position</label>
                     <p class="form-control-static">
-                        {{accreditation.person_position.position.name.text}}
+                        {{accreditation.person_position.position.name.text}}<br/>
+                        {{accreditation.person_position.position.wsEntity.name.text}}
                         <span ng-show="accreditation.person_position.skill"><br/>{{accreditation.person_position.skill.skill_number}} {{accreditation.person_position.skill.name.text}}</span>
                         <span ng-show="accreditation.person_position.sector"><br/>{{accreditation.person_position.sector.name.text}}</span>
                         <span ng-show="accreditation.person_position.member"><br/>{{accreditation.person_position.member.code}} {{pos.name.text}}</span>
