@@ -30,8 +30,28 @@ angular.module('accreditationApp')
 	  $scope.changePage($scope.current_page);
   });
 
-angular.module('accreditationApp').controller('EventCtrl', function ($scope, $state, $stateParams, Event) {
+angular.module('accreditationApp').controller('EventCtrl', function ($scope, $state, $stateParams, API_AUTH_CODE, auth, Event) {
 
-    $scope.event = Event.get({id: $stateParams.eventId});
+    $scope.event = Event.get({id: $stateParams.eventId}, function () {
+
+        auth.hasUserRole(API_AUTH_CODE, ['Admin', 'EditDelegateTypes'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditDelegateTypes = true;
+            }
+        });
+
+        auth.hasUserRole(API_AUTH_CODE, ['Admin', 'EditPositions'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditPositions = true;
+            }
+        });
+
+        auth.hasUserRole(API_AUTH_CODE, ['Admin', 'EditZones'], $scope.event.entity_id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditZones = true;
+            }
+        });
+
+	});
 
 });
