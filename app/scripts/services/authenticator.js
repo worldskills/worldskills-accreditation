@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-	.service('authenticator', function(API_AUTH_CODE)
+	.service('authenticator', function(API_ACCREDITATION_CODE)
 	{
 		this.hasPermission = function(user, webServiceCode, permission)
         {
@@ -21,6 +21,6 @@ angular.module('accreditationApp')
 		
 		this.authenticate = function(user)
 		{
-			return this.hasPermission(user, API_AUTH_CODE, 'Admin') || this.hasPermission(user, API_AUTH_CODE, 'Edit');
+			return this.hasPermission(user, API_ACCREDITATION_CODE, 'Admin') || this.hasPermission(user, API_ACCREDITATION_CODE, 'Edit');
 		}
 	});

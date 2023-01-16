@@ -2,7 +2,7 @@
 
 angular.module('accreditationApp')
 .controller('MainCtrl', function ($scope, $rootScope, $state, $translate, Language, auth, user, 
-		API_AUTH_CODE, alert, Restangular, $http, OrgRestangular, 
+    API_ACCREDITATION_CODE, alert, Restangular, $http, OrgRestangular, 
 		$uibModal, ENVIRONMENT_WARNING) {
     $scope.selectedLanguage = Language.selectedLanguage;
 
@@ -13,13 +13,11 @@ angular.module('accreditationApp')
 
     $scope.date = new Date();
 
-    $scope.API_AUTH_CODE = API_AUTH_CODE;
-    
     $rootScope.currentPage = 1;
     $rootScope.currentPeoplePage = 1;
     $rootScope.filterTags = [];
 
-    auth.hasUserRole(API_AUTH_CODE, 'Admin').then(function (hasUserRole) {
+    auth.hasUserRole(API_ACCREDITATION_CODE, 'Admin').then(function (hasUserRole) {
         if (hasUserRole) {
             $scope.userIsAdmin = true;
         }

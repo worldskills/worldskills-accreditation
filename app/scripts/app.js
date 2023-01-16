@@ -24,6 +24,7 @@ angular
     'ngFileUpload',
     'worldskills.utils'
   ])
+    .constant('API_ACCREDITATION_CODE', 2100)
     .config(['$controllerProvider', '$routeProvider', '$translateProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', 'RestangularProvider', 'REST_BASE_URL', 'API_ORG',
              function ($controllerProvider, $routeProvider, $translateProvider, $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, REST_BASE_URL, API_ORG) {
     
@@ -208,12 +209,12 @@ angular
 		  RestangularConfigurer.setBaseUrl(API_ORG);
 	  });
   })
-  .run(['$rootScope', '$state', '$stateParams', '$window', 'Restangular', 'auth', 'user', 'API_AUTH_CODE',
-        function($rootScope, $state, $stateParams, $window, Restangular, auth, user, API_AUTH_CODE){
+  .run(['$rootScope', '$state', '$stateParams', '$window', 'Restangular', 'auth', 'user',
+        function($rootScope, $state, $stateParams, $window, Restangular, auth, user){
 	
 	  $rootScope.available_languages = {'en': 'English', 'de': 'Deutsch', 'fr': 'Français', 'it': 'Italiano'};
 	
-	  if (!auth.loggedIn )//|| (!user.hasPermission(API_AUTH_CODE, 'Admin') && !user.hasPermission(API_AUTH_CODE, 'CreateResource')))
+	  if (!auth.loggedIn )
 	  {
 		  $window.location.href = auth.loginUrl;
 	  }

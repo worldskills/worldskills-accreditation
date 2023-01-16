@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('EventListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular, REST_BASE_URL, user, API_AUTH_CODE) {
+.controller('EventListCtrl', function ($scope, $rootScope, $stateParams, $translate, alert, Restangular, REST_BASE_URL, user) {
 	  
 	  $scope.current_page = $rootScope.currentPage;
 	  $scope.items_per_page = 10;
@@ -30,23 +30,23 @@ angular.module('accreditationApp')
 	  $scope.changePage($scope.current_page);
   });
 
-angular.module('accreditationApp').controller('EventCtrl', function ($scope, $state, $stateParams, API_AUTH_CODE, auth, Event) {
+angular.module('accreditationApp').controller('EventCtrl', function ($scope, $state, $stateParams, API_ACCREDITATION_CODE, auth, Event) {
 
     $scope.event = Event.get({id: $stateParams.eventId}, function () {
 
-        auth.hasUserRole(API_AUTH_CODE, ['Admin', 'EditDelegateTypes'], $scope.event.entity_id).then(function (hasUserRole) {
+        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditDelegateTypes'], $scope.event.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanEditDelegateTypes = true;
             }
         });
 
-        auth.hasUserRole(API_AUTH_CODE, ['Admin', 'EditPositions'], $scope.event.entity_id).then(function (hasUserRole) {
+        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditPositions'], $scope.event.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanEditPositions = true;
             }
         });
 
-        auth.hasUserRole(API_AUTH_CODE, ['Admin', 'EditZones'], $scope.event.entity_id).then(function (hasUserRole) {
+        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditZones'], $scope.event.entity_id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanEditZones = true;
             }
