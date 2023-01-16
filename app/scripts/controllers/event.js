@@ -34,19 +34,19 @@ angular.module('accreditationApp').controller('EventCtrl', function ($scope, $st
 
     $scope.event = Event.get({id: $stateParams.eventId}, function () {
 
-        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditDelegateTypes'], $scope.event.entity_id).then(function (hasUserRole) {
+        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditDelegateTypes'], $scope.event.ws_entity.id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanEditDelegateTypes = true;
             }
         });
 
-        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditPositions'], $scope.event.entity_id).then(function (hasUserRole) {
+        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditPositions'], $scope.event.ws_entity.id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanEditPositions = true;
             }
         });
 
-        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditZones'], $scope.event.entity_id).then(function (hasUserRole) {
+        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditZones'], $scope.event.ws_entity.id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanEditZones = true;
             }
