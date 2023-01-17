@@ -32,7 +32,10 @@
 
                 <div class="form-group" ng-show="accreditation.person.images[0]">
                     <p class="form-control-static">
-                        <img ng-src="{{accreditation.person.images[0].thumbnail}}_accreditation" width="100" alt="{{ 'user_image' | translate }}" title="{{accreditation.person.images[0].type}}" />
+                        <span ng-repeat="image in accreditation.person.images">
+                            <img ng-src="{{image.thumbnail}}_accreditation" width="100" alt="{{ 'user_image' | translate }}" title="{{image.type}}" />
+                            &nbsp;
+                        </span>
                     </p>
                 </div>
 
