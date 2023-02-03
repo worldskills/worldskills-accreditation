@@ -15,6 +15,7 @@ angular.module('accreditationApp')
       '587': 'ch-2022.html',
       '584': 'wsafrica-2022.html',
       '594': 'wsi-2022.html',
+      '602': 'fi-2023.html',
     };
 
     var time = new Date().getTime();

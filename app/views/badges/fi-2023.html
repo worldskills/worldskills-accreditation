@@ -1,0 +1,100 @@
+<style>
+@page
+{
+  margin: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 6mm;
+}
+
+.ws-overflow {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ws-badge {
+  page-break-after: always;
+}
+
+.ws-badge:last-child {
+  page-break-after: auto;
+}
+
+@media screen {
+  body {
+   background-color: #ccc;
+  }
+
+  .ws-badge {
+    width: 210mm;
+    height: 297mm;
+    margin: 10mm auto;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+}
+</style>
+
+<div class="ws-badge">
+
+  <div style="display: flex; height: 148mm;">
+    <div style="flex: 1; display: flex; min-width: 0;">
+
+      <div style="padding: 4mm; flex: 1; display: flex; flex-flow: column;">
+        <div style="padding: 8mm 0 4mm 6mm; overflow: hidden; -webkit-print-color-adjust: exact !important; background-image: url('/images/fi-2023/Kulmat.png') !important; background-size: 80% !important; background-repeat: no-repeat !important; background-position: bottom right !important; flex: 1 1 auto;">
+          <div style="display: flex; justify-content: space-between; height: 44mm;">
+            <div>
+              <img ng-show="accreditation.image" ng-src="{{accreditation.image.thumbnail}}_accreditation" alt="" style="height: 40mm;">
+            </div>
+            <div>
+              <img src="/images/fi-2023/Taitaja_logo_Espoo2023_pysty.png" style="width: 23mm; margin-right: 12mm;">
+            </div>
+          </div>
+
+          <div class="ws-name">
+            {{accreditation.first_name}} {{accreditation.last_name}}
+          </div>
+
+          <div style="max-height: 18mm; overflow: hidden; padding-right: 28mm;">
+            <div class="ws-badge-line">{{accreditation.lines[0]}}</div>
+            <div class="ws-badge-line">{{accreditation.lines[1]}}</div>
+            <div class="ws-badge-line">{{accreditation.lines[2]}}</div>
+          </div>
+
+          <div style="margin-top: 4mm;">
+          <span ng-repeat="zone in accreditation.zones">
+            <span style="-webkit-print-color-adjust: exact; display: inline-block; padding: 0.4mm 0.2mm; min-width: 11mm; text-align: center; margin: 0 1mm 2mm 0; border: 0.4mm solid #000; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important;">{{ zone.code }}</span>
+          </span>
+          </div>
+        </div>
+
+        <div style="-webkit-print-color-adjust: exact !important; background-color: {{accreditation.delegate_type.color}} !important; padding: 2mm 4mm; flex: 0 1 auto; display: flex; align-items: center;">
+          <div class="ws-overflow" style="flex-grow: 1; text-align: center; font-weight: bold; color: {{accreditation.delegate_type.text_color;}} !important; text-transform: uppercase;">{{accreditation.delegate_type.name}}</div>
+        </div>
+      </div>
+
+    </div>
+    <div style="flex: 1;">
+
+      <div style="-webkit-print-color-adjust: exact !important; background-image: url('/images/fi-2023/Puhekupla.png') !important; background-size: contain !important; background-repeat: no-repeat !important; background-position: center !important; text-align: center; margin: 10mm auto; width: 60mm; padding: 26mm 0 30mm; font-size: 4.4mm;">
+        Taitaja2023<br/>
+        <strong>8.–11.5. Espoo</strong><br/>
+        #OlePro
+      </div>
+
+      <div style="margin-top: 22mm; padding: 4mm 6mm; font-size: 4mm; position: relative;">
+        <div style="display:flex;" ng-repeat="zone in accreditation.zones">
+          <div style="flex: 1;">{{zone.code}}</div>
+          <div style="flex: 22;">{{zone.name}}</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
