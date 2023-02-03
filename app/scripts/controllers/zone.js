@@ -43,7 +43,7 @@
                 $scope.zoneName = $scope.zone.name;
             });
         } else {
-            var maxSort = 1;
+            var maxSort = 0;
             Zone.query({eventId: $stateParams.eventId}, function (zones) {
               zones.zones.forEach(function (zone) {
                   maxSort = Math.max(maxSort, zone.sort);
