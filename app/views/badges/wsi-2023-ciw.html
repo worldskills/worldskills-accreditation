@@ -124,19 +124,19 @@
             </div>
           </div>
 
-          <h3
-            style="-webkit-print-color-adjust: exact; margin-top: 0; margin-bottom: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #003764 !important; font-family: 'Inria Serif', serif;">
+          <h3 style="-webkit-print-color-adjust: exact; margin-top: 2mm; margin-bottom: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #003764 !important; font-family: 'Inria Serif', serif; font-size: 8mm;">
             {{accreditation.first_name}} {{accreditation.last_name}}
           </h3>
 
-          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[0]}}</div>
-          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[1]}}</div>
-          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[2]}}</div>
+          <div style="">
+            <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[0]}}</div>
+            <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[1]}}</div>
+            <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[2]}}</div>
+          </div>
         </div>
 
-        <div style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; padding: 18px 12px; margin: 0.8em 0; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700;">
-          <span
-            style="color: {{accreditation.delegate_type.text_color;}} !important;">{{accreditation.delegate_type.name}}</span>
+        <div style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; height: 20mm; margin: 0.8em 0; display: flex; align-items: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+          <div style="flex-grow: 1; text-align: center;  font-weight: 700; color: {{accreditation.delegate_type.text_color;}} !important;">{{accreditation.delegate_type.name}}</span>
         </div>
 
       </div>
