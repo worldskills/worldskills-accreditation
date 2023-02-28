@@ -29,7 +29,8 @@
 <div class="ws-badge">
 
   <div style="display: flex; height: 148mm;">
-      <div style="flex: 1; padding: 5mm; display: flex;">
+    <div style="flex: 1; display: flex;">
+      <div style="flex: 1; display: flex; padding: 5mm;">
         <div style="flex: 1; position: relative;">
 
           <div style="position: absolute; top: 34mm; left: 0;">
@@ -41,27 +42,21 @@
               style="width: 32mm; clip-path: polygon(0% 0%,100% 0%,100% 76%,40% 100%,0% 82%);" />
           </div>
 
-          <div
-            style="width: 13mm; position: absolute; top: 40mm; left: 0; bottom: 30mm; display: flex; justify-content: center; align-items: center;">
+          <div style="width: 13mm; position: absolute; top: 40mm; left: 0; bottom: 30mm; display: flex; justify-content: center; align-items: center;">
             <div style="flex-grow: 1; text-align: center; font-size: 2.4mm; display: flex;">
-              <span
-                style="transform: rotate(-90deg); white-space: nowrap; font-weight: 700; text-transform: uppercase; -webkit-print-color-adjust: exact; color: #fff !important;">{{event.name.text}}</span>
+              <span style="transform: rotate(-90deg); white-space: nowrap; font-weight: 700; text-transform: uppercase; -webkit-print-color-adjust: exact; color: #fff !important;">{{event.name.text}}</span>
             </div>
           </div>
 
-          <div
-            style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; height: 30mm; width: 13mm; position: absolute; left: 0; bottom: 0; display: flex; align-items: center;">
+          <div style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; height: 30mm; width: 13mm; position: absolute; left: 0; bottom: 0; display: flex; justify-content: center; align-items: center;">
             <div style=" flex-grow: 1; text-align: center;">
-
-              <div
-                style="transform: rotate(-90deg); white-space: nowrap; font-weight: 700; -webkit-print-color-adjust: exact; color: {{accreditation.delegate_type.text_color;}} !important;">
-                {{accreditation.delegate_type.code}}</div>
+              <div style="transform: rotate(-90deg); white-space: nowrap; font-weight: 700; -webkit-print-color-adjust: exact; color: {{accreditation.delegate_type.text_color;}} !important;">{{accreditation.delegate_type.code}}</div>
             </div>
           </div>
 
           <div>
 
-            <div style="height: 40mm; text-align: right;">
+            <div style="height: 42mm; text-align: right;">
               <svg height="20mm"" viewBox=" 0 0 1846 687" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/"
                 style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
@@ -112,11 +107,11 @@
             </div>
 
             <div style="text-align: right;">
-              <div style="-webkit-print-color-adjust: exact; padding-left: 16mm; margin-bottom: 0; overflow: hidden; height: 38mm; text-overflow: ellipsis; color: #2E1651 !important; font-weight: 800; font-size: 10mm;">
+              <div style="-webkit-print-color-adjust: exact; padding-left: 16mm; margin-bottom: 0; overflow: hidden; height: 36mm; margin-bottom: 8mm; text-overflow: ellipsis; color: #2E1651 !important; font-weight: 800; font-size: 10mm; line-height: 1.2;">
                 {{accreditation.first_name}} {{accreditation.last_name}}
               </div>
 
-              <div style="font-weight: 800; font-size: 8mm; padding-left: 16mm; line-height: 1.2;">
+              <div style="font-weight: 800; font-size: 8mm; padding-left: 18mm; line-height: 1.2;">
                 <div style="-webkit-print-color-adjust: exact; color: #D51067 !important; font-size: 5.5mm;">
                   {{accreditation.lines[0]}}
                 </div>
@@ -131,28 +126,29 @@
 
         </div>
       </div>
-      <div style="flex: 1; display: flex; font-size: 3mm;">
-        <div style="padding: 5mm; flex: 1; display: flex; flex-flow: column;">
+    </div>
+    <div style="flex: 1; display: flex; font-size: 3mm;">
+      <div style="padding: 5mm; flex: 1; display: flex; flex-flow: column;">
 
-          <div style="flex: 1 1 auto;">
+        <div style="flex: 1 1 auto;">
 
-            <p>
-              {{event.name.text}}
-              <br>
-              {{event.start_date | date:'dd.MM.yyyy'}} - {{event.end_date | date:'dd.MM.yyyy'}}
-            </p>
+          <p>
+            {{event.name.text}}
+            <br>
+            {{event.start_date | date:'dd.MM.yyyy'}} - {{event.end_date | date:'dd.MM.yyyy'}}
+          </p>
 
-          </div>
+        </div>
 
-          <div>
-            <hr>
+        <div>
+          <hr>
 
-            <p translate>accreditation_badge_disclaimer_info</p>
+          <p translate>accreditation_badge_disclaimer_info</p>
 
-            <p><span translate>generated_on</span>: {{date | date:'dd.MM.yyyy HH:mm'}}</p>
-          </div>
+          <p><span translate>generated_on</span>: {{date | date:'dd.MM.yyyy HH:mm'}}</p>
         </div>
       </div>
-
     </div>
+
+  </div>
 </div>
