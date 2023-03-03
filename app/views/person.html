@@ -91,20 +91,20 @@
 
                 <div class="form-group">
                     <label for="dt" translate>delegate_type</label>
-                    <select ng-options="dt.name for dt in delegateTypes.delegate_types track by dt.id" ng-model="accreditation.delegate_type" class="form-control" name="dt" id="dt" ng-change="changed()">
+                    <select ng-options="dt.name for dt in delegateTypes.delegate_types track by dt.id" ng-model="accreditation.delegate_type" class="form-control" name="dt" id="dt" ng-change="changed()" ng-disabled="!userCanEdit">
                         <option></option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="lines" translate>badge_lines</label>
-                    <textarea name="lines" class="form-control" rows="3" ng-model="accreditation.lines" ng-change="changed()"></textarea>
+                    <textarea name="lines" class="form-control" rows="3" ng-model="accreditation.lines" ng-change="changed()" ng-disabled="!userCanEdit"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label translate>additional_zones</label>
 
-                    <div class="form-control-static">
+                    <div class="form-control-static" ng-show="userCanEdit">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span translate>add_zone</span> <span class="caret"></span></button>
                             <ul class="dropdown-menu">

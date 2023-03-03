@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, Upload, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
+.controller('PersonCreateCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, Upload, alert, Event, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
 
     var image = $q.when();
 
@@ -25,12 +25,16 @@ angular.module('accreditationApp')
 	$scope.accreditation.zones_add = [];
 	$scope.accreditation.zones_remove = [];
 
-	// load the event info
-	Restangular.one('accreditation/events', $scope.eventId).get().then(function(result) 
-		{
-			$scope.event = result;
-		}, $rootScope.errorHandler);
+    $scope.event = Event.get({id: $stateParams.eventId}, function () {
 
+        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'Edit'], $scope.event.ws_entity.id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEdit = false;
+            }
+        });
+
+    });
+    
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 	$scope.members = Member.query({limit: 100});
 	$scope.skills = Skill.query({eventId: $stateParams.eventId});
