@@ -109,7 +109,7 @@ angular.module('accreditationApp')
 });
 
 angular.module('accreditationApp')
-.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $timeout, Upload, alert, Restangular, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $timeout, API_ACCREDITATION_CODE, Upload, alert, Event, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
 
     var image;
 
@@ -128,12 +128,16 @@ angular.module('accreditationApp')
 	$scope.eventId = $stateParams.eventId;
 	$scope.accreditationId = $stateParams.accreditationId;
 	$scope.peopleApp = PEOPLE_APP;
-	
-	// load the event info
-	Restangular.one('accreditation/events', $scope.eventId).get().then(function(result) 
-		{
-			$scope.event = result;
-		}, $rootScope.errorHandler);
+
+    $scope.event = Event.get({id: $stateParams.eventId}, function () {
+
+        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'Edit'], $scope.event.ws_entity.id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEdit = false;
+            }
+        });
+
+    });
 
 	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 	$scope.members = Member.query({limit: 100});
