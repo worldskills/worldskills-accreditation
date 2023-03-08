@@ -109,7 +109,7 @@ angular.module('accreditationApp')
 });
 
 angular.module('accreditationApp')
-.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $timeout, API_ACCREDITATION_CODE, Upload, alert, Event, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $timeout, API_ACCREDITATION_CODE, Upload, auth, Event, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
 
     var image;
 
