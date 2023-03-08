@@ -133,7 +133,7 @@ angular.module('accreditationApp')
 
         auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'Edit'], $scope.event.ws_entity.id).then(function (hasUserRole) {
             if (hasUserRole) {
-                $scope.userCanEdit = false;
+                $scope.userCanEdit = true;
             }
         });
 
