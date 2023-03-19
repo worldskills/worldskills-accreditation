@@ -143,9 +143,18 @@
         <div class="panel panel-default" ng-show="accreditation.id">
             <div class="panel-body">
 
-                <p class="pull-right">
-                  <a ng-show="accreditation.id" ui-sref="print({eventId: event.id, accreditationId: accreditation.id})" class="btn btn-warning" target="_blank" translate>print_preview</a>
-                </p>
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <a ng-show="accreditation.id" ui-sref="print({eventId: event.id, accreditationId: accreditation.id})" class="btn btn-warning" target="_blank" translate>print_preview</a>
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a href ng-click="markDistributed()">Mark as distributed</a></li>
+                        </ul>
+                    </div>
+                </div>
 
                 <h1 class="align-top"><small translate>preview</small><br/><span translate>badge</span></h1>
 

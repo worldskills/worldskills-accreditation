@@ -16,6 +16,10 @@
                 method: 'PUT',
                 url: REST_BASE_URL + '/accreditation/events/:eventId/accreditations/:id/printed',
             },
+            distributed: {
+                method: 'PUT',
+                url: REST_BASE_URL + '/accreditation/events/:eventId/accreditations/:id/distributed',
+            },
             import: {
                 method: 'POST',
                 url: REST_BASE_URL + '/accreditation/events/:eventId/accreditations/import',

@@ -87,6 +87,10 @@ angular.module('accreditationApp')
         $scope.save();
     };
 
+    $scope.markDistributed = function () {
+        Accreditation.distributed({eventId: $stateParams.eventId}, $scope.accreditation);
+    };
+
     var accreditationTimeout;
     $scope.changed = function ()
     {
