@@ -6,6 +6,8 @@
 
 <alerts></alerts>
 
+<div class="alert alert-warning" ng-show="accreditation.deleted" translate>accreditation_deleted</div>
+
 <form name="form.accData" novalidate focus-error>
 
 <p class="pull-right text-muted">
@@ -18,7 +20,7 @@
 
 <div class="clearfix"></div>
 
-<div class="row">
+<div class="row" ng-style="{'opacity': accreditation.deleted ? 0.5 : 1}">
     <div class="col-md-4">
 
         <div class="panel panel-default">
