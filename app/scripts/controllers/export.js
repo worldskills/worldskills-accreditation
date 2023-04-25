@@ -6,7 +6,7 @@ angular.module('accreditationApp').controller('ExportCtrl', function ($scope, $r
 
     $scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 
-	$scope.zones = [63, 64];
+	$scope.zones = Zone.query({eventId: $stateParams.eventId});
 
     $scope.hasZone = function (accreditation, zone) {
         var hasZone = false;
@@ -22,7 +22,7 @@ angular.module('accreditationApp').controller('ExportCtrl', function ($scope, $r
     {
         $scope.loading = true;
 
-        $scope.accreditations = Accreditation.query({eventId: $scope.eventId, del_types: $scope.delegateType, zone: $scope.zones, limit: 10000}, function(result) {
+        $scope.accreditations = Accreditation.query({eventId: $scope.eventId, del_types: $scope.delegateType, limit: 10000}, function(result) {
             $scope.loading = false;
 
             var aoa = [
@@ -33,47 +33,46 @@ angular.module('accreditationApp').controller('ExportCtrl', function ($scope, $r
                     'text_color',
                     'first_name',
                     'last_name',
-                    'email',
-                    'zone_1',
-                    'zone_2',
-                    'zone_at1_green',
-                    'zone_at1_red',
                     'line_1',
                     'line_2',
                     'line_3',
                     'image'
                 ]
             ];
+
+            angular.forEach($scope.zones.zones, function (zone) {
+                aoa[0].push('zone_' + zone.code);
+            });
     
             angular.forEach($scope.accreditations.people, function (accreditation) {
-                aoa.push([
+                var data = [
                     accreditation.id,
                     accreditation.delegate_type.name,
                     accreditation.delegate_type.color,
                     accreditation.delegate_type.text_color,
                     accreditation.first_name,
                     accreditation.last_name,
-                    '', // email
-                    $scope.hasZone(accreditation, 46) ? 'Y' : 'N', // Skills
-                    $scope.hasZone(accreditation, 47) ? 'Y' : 'N', // Offices
-                    $scope.hasZone(accreditation, 63) ? 'Y' : 'N', // AT1 green
-                    $scope.hasZone(accreditation, 64) ? 'Y' : 'N', // AT1 red
                     accreditation.lines[0],
                     accreditation.lines[1],
                     accreditation.lines[2],
                     accreditation.image ? accreditation.image.thumbnail + '_accreditation' : ''
-                ])
+                ];
+
+                angular.forEach($scope.zones.zones, function (zone) {
+                    data.push($scope.hasZone(accreditation, zone.id) ? 'Y' : '');
+                });
+
+                aoa.push(data);
             });
     
             var workbook = XLSX.utils.book_new();
     
             var worksheet = XLSX.utils.aoa_to_sheet(aoa);
-            //var worksheet = XLSX.utils.json_to_sheet($scope.accreditations.people);
     
             XLSX.utils.book_append_sheet(workbook, worksheet, 'accreditations');
     
             var today = new Date().toISOString();
-            XLSX.writeFile(workbook, 'WSC2022SE_AT1_accreditations_' + today.replace(/[-:T]/ig, '').substring(0, 14) + '.xlsx');
+            XLSX.writeFile(workbook, 'accreditations_' + today.replace(/[-:T]/ig, '').substring(0, 14) + '.xlsx');
 
         }, $rootScope.errorHandler);
     };
