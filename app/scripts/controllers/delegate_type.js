@@ -7,7 +7,7 @@
 
     });
 
-    angular.module('accreditationApp').controller('DelegateTypeCtrl', function ($scope, $state, $stateParams, $http, alert, Downloader, Event, Zone, DelegateType, REST_BASE_URL) {
+    angular.module('accreditationApp').controller('DelegateTypeCtrl', function ($scope, $state, $stateParams, $http, alert, Event, Zone, DelegateType, REST_BASE_URL) {
 
         $scope.event = Event.get({id: $stateParams.eventId});
 
