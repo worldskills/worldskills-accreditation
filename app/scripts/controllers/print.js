@@ -152,4 +152,56 @@ angular.module('accreditationApp').controller('PrintAdHocCtrl', function ($scope
         $uibModalInstance.close();
     };
 
+    $scope.onFileSelect = function(files) {
+        if (files && files.length) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                /* read workbook */
+                var bstr = e.target.result;
+                var wb = XLSX.read(bstr, {type:'binary'});
+
+                /* grab first sheet */
+                var wsname = wb.SheetNames[0];
+                var ws = wb.Sheets[wsname];
+
+                /* grab first row and generate column headers */
+                var aoa = XLSX.utils.sheet_to_json(ws, {header:1, raw:false});
+                var cols = [];
+                for(var i = 0; i < aoa[0].length; ++i) {
+                    cols[i] = aoa[0][i];
+                }
+
+                /* generate rest of the data */
+                var data = [];
+                for(var r = 1; r < aoa.length; ++r) {
+                    data[r-1] = {};
+                    for (i = 0; i < aoa[r].length; ++i) {
+                        if (aoa[r][i] == null) {
+                            continue;
+                        }
+                        data[r-1][cols[[i]]] = aoa[r][i];
+                    }
+                }
+
+                /* update scope */
+                $scope.$apply(function() {
+                    angular.forEach(data, function (accreditation) {
+                        accreditation.lines = [accreditation.line_1, accreditation.line_2, accreditation.line_3];
+
+                        angular.forEach($scope.delegateTypes.delegate_types, function (delegateType) {
+                            if (typeof accreditation.delegate_type === 'string' && accreditation.delegate_type == delegateType.name) {
+                                accreditation.delegate_type = delegateType;
+                            }
+                        });
+                        $scope.accreditations.push(accreditation);
+                    });
+                });
+            };
+
+            reader.readAsBinaryString(files[0]);
+        }
+    };
 });

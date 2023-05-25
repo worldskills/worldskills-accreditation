@@ -39,6 +39,7 @@
                 </div>
             </div>
         </div>
+        <button type="button" class="btn btn-default pull-right" ngf-select="onFileSelect($files)" translate>import_excel</button>
         <button type="submit" class="btn btn-success" ng-if="!accreditation.edit" ng-click="addPerson()" translate>add_person</button>
         <button type="submit" class="btn btn-success" ng-if="accreditation.edit" ng-click="save()" translate>save</button>
         <hr>
