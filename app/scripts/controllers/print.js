@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PrintCtrl', function ($scope, $rootScope, $state, $stateParams, Restangular, Accreditation, Zone, REST_BASE_URL) {
+.controller('PrintCtrl', function ($scope, $rootScope, $state, $stateParams, $uibModal, Restangular, Accreditation, Zone, DelegateType, REST_BASE_URL) {
 
     $scope.loading = true;
     $scope.apiBaseUrl = REST_BASE_URL;
@@ -33,6 +33,7 @@ angular.module('accreditationApp')
         }, $rootScope.errorHandler);
     
     $scope.zones = Zone.query({eventId: $stateParams.eventId});
+	$scope.delegateTypes = DelegateType.query({eventId: $stateParams.eventId});
 
     $scope.hasZone = function (accreditation, zone) {
         var hasZone = false;
@@ -44,7 +45,25 @@ angular.module('accreditationApp')
         return hasZone;
     };
 
-    if ($stateParams.accreditationId) {
+    $scope.editAccreditations = function () {
+        $scope.adHocModal = $uibModal.open({
+            templateUrl: 'views/print_ad_hoc.html',
+            controller: 'PrintAdHocCtrl',
+            scope: $scope,
+            animation: false,
+            size: 'lg',
+        });
+    };
+
+    if ($stateParams.adHoc) {
+
+        $scope.adHoc = true;
+        $scope.loading = false;
+        $scope.accreditations = [];
+
+        $scope.editAccreditations();
+
+    } else if ($stateParams.accreditationId) {
 
         $scope.loading = true;
         Accreditation.get({eventId: $scope.eventId, id: $stateParams.accreditationId}, function(accreditation) {
@@ -88,6 +107,49 @@ angular.module('accreditationApp')
 
     $scope.print = function () {
         window.print();
+    };
+
+});
+
+angular.module('accreditationApp').controller('PrintAdHocCtrl', function ($scope, $uibModalInstance) {
+
+    $scope.resetPerson = function () {
+        $scope.accreditation = {
+            first_name: '',
+            last_name: '',
+            lines: '',
+            delegateType: '',
+            zones: [],
+            edit: false
+        };
+    };
+    $scope.resetPerson();
+
+    $scope.addPerson = function () {
+        $scope.accreditation.lines = $scope.accreditation.lines.split('\n');
+        $scope.accreditations.push($scope.accreditation);
+        $scope.resetPerson();
+    };
+
+    $scope.save = function () {
+        $scope.accreditation.lines = $scope.accreditation.lines.split('\n');
+        $scope.accreditations[$scope.accreditation.index] = $scope.accreditation;
+        $scope.resetPerson();
+    };
+
+    $scope.edit = function (accreditation, index) {
+        accreditation.edit = true;
+        accreditation.index = index;
+        $scope.accreditation = angular.copy(accreditation);
+        $scope.accreditation.lines = $scope.accreditation.lines.join('\n');
+    };
+
+    $scope.remove = function (index) {
+        $scope.accreditations.splice(index, 1);
+    };
+
+    $scope.preview = function () {
+        $uibModalInstance.close();
     };
 
 });

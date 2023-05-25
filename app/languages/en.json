@@ -1,4 +1,9 @@
 {
+    "ad_hoc_printing": "Ad Hoc Printing",
+    "add_person": "Add Person",
+    "edit": "Edit",
+    "remove": "Remove",
+    "actions": "Actions",
     "access_to_zones": "Access to zones",
     "accreditation_available_keywords": "Available keywords: SKILL, SECTOR, POSITION, MEMBER, ORGANIZATION",
     "accreditation_badge_disclaimer_info": "This accreditation badge is personal and non-transferable. It is property of the Event Organizer and can be withdrawn at any time at the Event Organizer's sole discretion.",
@@ -22,6 +27,7 @@
     "delete": "Delete",
     "email": "Email",
     "end_date": "End Date",
+    "edit_accreditations": "Edit Accreditations",
     "error_missing_code": "Please enter a code!",
     "error_missing_color": "Please enter a color!",
     "error_missing_name": "Please enter a name!",
