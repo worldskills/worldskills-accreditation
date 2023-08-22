@@ -30,7 +30,7 @@ angular.module('accreditationApp')
 	  $scope.changePage($scope.current_page);
   });
 
-angular.module('accreditationApp').controller('EventCtrl', function ($scope, $state, $stateParams, API_ACCREDITATION_CODE, auth, Event) {
+  angular.module('accreditationApp').controller('EventCtrl', function ($scope, $state, $stateParams, $uibModal, API_ACCREDITATION_CODE, auth, Event) {
 
     $scope.event = Event.get({id: $stateParams.eventId}, function () {
 
@@ -53,5 +53,21 @@ angular.module('accreditationApp').controller('EventCtrl', function ($scope, $st
         });
 
 	});
+
+	$scope.showDeviceSetup = function () {
+        $scope.adHocModal = $uibModal.open({
+            templateUrl: 'views/event_device_setup.html',
+            controller: 'EventDeviceSetupCtrl',
+            scope: $scope,
+            animation: false,
+            size: 'md',
+        });
+	};
+
+});
+
+angular.module('accreditationApp').controller('EventDeviceSetupCtrl', function ($scope, $state, $stateParams, EventConfig) {
+
+    $scope.config = EventConfig.get({id: $stateParams.eventId});
 
 });
