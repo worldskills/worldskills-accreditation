@@ -39,11 +39,8 @@
   <div class="row">
     <div class="col-xs-8">
       <div style="font-weight: 400;">
-        <div style="-webkit-print-color-adjust: exact !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff !important;">
+        <div style="-webkit-print-color-adjust: exact !important; overflow: hidden; max-height: 3em; color: #fff !important;">
           {{event.name.text}}
-        </div>
-        <div style="-webkit-print-color-adjust: exact !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #fff !important;">
-          {{event.start_date | date:'dd.MM.yyyy'}} - {{event.end_date | date:'dd.MM.yyyy'}}
         </div>
       </div>
     </div>
