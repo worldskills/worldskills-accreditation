@@ -37,11 +37,10 @@
 
 
 <div class="ws-badge">
-  <div class="container-fluid" style="margin-top: 1em; page-break-after: always;">
+  <div style="display: flex; height: 148mm;">
 
-  <div class="row">
-
-  <div class="col-xs-6">
+  <div style="flex: 1;">
+  <div style="padding: 5mm;">
 
   <div style="-webkit-print-color-adjust: exact !important; background-color: #4A0D66 !important; padding: 1em 0.8em 0.8em 0.8em;">
 
@@ -123,15 +122,26 @@
   </div>
 
   </div>
+  </div>
 
-  <div class="col-xs-6" style="font-size: 10px;">
+  <div style="flex: 1; display: flex; font-size: 10px;">
+  <div style="padding: 5mm; flex: 1; display: flex; flex-flow: column;">
 
+  <div style="flex: 1 1 auto;">
   <h5 style="font-size: 10px; font-weight: 400;" translate>access_to_zones</h5>
   <p>
       <span ng-repeat="zone in accreditation.zones">
           {{zone.code}} - {{zone.name}}
           <br/>
       </span>
+  </p>
+  </div>
+
+  <div>
+  <p>
+    {{event.name.text}}
+    <br>
+    {{event.start_date | date:'dd.MM.yyyy'}} - {{event.end_date | date:'dd.MM.yyyy'}}
   </p>
 
   <hr>
@@ -140,7 +150,8 @@
 
   <p><span translate>generated_on</span>: {{date | date:'dd.MM.yyyy HH:mm'}}</p>
   </div>
-
+    
   </div>
+
   </div>
 </div>
