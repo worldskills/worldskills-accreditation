@@ -37,7 +37,7 @@
 
 
 <div class="ws-badge">
-  <div style="display: flex; height: 148mm;">
+  <div style="display: flex; height: 148mm; overflow: hidden;">
 
   <div style="flex: 1;">
   <div style="padding: 5mm;">
@@ -111,9 +111,9 @@
   <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[1]}}</div>
   <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[2]}}</div>
 
-  <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0.8em 0;">
+  <div style="overflow: hidden; max-height: 76px; margin: 0.8em 0;">
     <span ng-repeat="zone in accreditation.zones">
-      <span style="-webkit-print-color-adjust: exact; display: inline-block; padding: 6px 12px; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important;">{{ zone.code }}</span>
+      <span style="-webkit-print-color-adjust: exact; display: inline-block; padding: 6px 12px; margin-bottom: 6px; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important;">{{ zone.code }}</span>
     </span>
   </div>
 
