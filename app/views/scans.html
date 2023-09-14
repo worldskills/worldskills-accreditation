@@ -1,0 +1,77 @@
+<alerts></alerts>
+
+<div class="row">
+    <div class="col-md-9 ">
+        <div class="table-responsive">
+            <ws-spinner ng-show="loading" class="bigSpinner"></ws-spinner>
+            <table ng-show='!loading' class="table table-striped">
+                <colgroup>
+                    <col width="20%" />
+                    <col width="25%" />
+                    <col width="25%" />
+                    <col width="20%" />
+                    <col width="10%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th><span translate>timestamp</span></th>
+                        <th><span translate>name</span></th>
+                        <th><span translate>delegate_type</span></th>
+                        <th><span translate>zone</span></th>
+                        <th><span translate>allowed</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="scan in scans.scans">
+                        <td>{{scan.timestamp | date:'dd.MM.yyyy HH:mm'}}</td>
+                        <td><a ui-sref="main.person({eventId: event.id, accreditationId: scan.accreditation.id})" >{{scan.accreditation.first_name}} {{scan.accreditation.last_name}}</a></td>
+                        <td>{{scan.accreditation.delegate_type.name}}</td>
+                        <td>{{scan.zone.code}} - {{scan.zone.name}}</td>
+                        <td>{{scan.allowed}}</td>
+                    </tr>
+                    <tr ng-show="scans.scans.length == 0">
+                        <td colspan="5" translate>error_no_people</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-3 sidebar" role="navigation">
+        <form name="form" novalidate ng-disabled="loading">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="pull-right" href="" ng-click="clear()" translate>clear</a>
+                    <h3 class="panel-title" translate>filter</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" >
+                        <div class="form-group">
+                            <label for="delegateType" translate>delegate_type</label>
+                            <select ng-model="filter.delegateType" class="form-control" name="delegateType" id="delegateType">
+                                <option></option>
+                                <option ng-repeat="delegateType in delegateTypes.delegate_types" value="{{delegateType.id}}">{{delegateType.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="zone" translate>zone</label>
+                            <select ng-model="filter.zone" class="form-control" name="zone" id="zone">
+                                <option></option>
+                                <option ng-repeat="zone in zones.zones" value="{{zone.id}}">{{zone.code}} - {{zone.name}}</option>
+                            </select>
+                        </div>
+                        <div class="btn-toolbar pull-right">
+                          <a ng-click="export()" class="btn btn-warning" target="_blank" translate>export</a>
+                          <a ng-click="filterResults()" class="btn btn-primary" ng-disabled="loading || deleting"><span translate>set_filter</span><spinner ng-show="loading" class="ng-hide"></spinner></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

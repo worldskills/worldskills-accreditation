@@ -120,6 +120,14 @@ angular
             requireLoggedIn: true
         }
     })
+    .state('main.event.scans', {
+    	url: '/scans',
+    	templateUrl: 'views/scans.html',
+    	controller: 'ScansCtrl',
+    	data: {
+            requireLoggedIn: true
+        }
+    })
     .state('main.event.zone_list', {
         url: '/zones',
         templateUrl: 'views/zone_list.html',
