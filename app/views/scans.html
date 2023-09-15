@@ -30,7 +30,7 @@
                         <td>{{scan.allowed}}</td>
                     </tr>
                     <tr ng-show="scans.scans.length == 0">
-                        <td colspan="5" translate>error_no_people</td>
+                        <td colspan="5" translate>error_no_scans</td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -55,6 +55,13 @@
                             <select ng-model="filter.delegateType" class="form-control" name="delegateType" id="delegateType">
                                 <option></option>
                                 <option ng-repeat="delegateType in delegateTypes.delegate_types" value="{{delegateType.id}}">{{delegateType.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="member" translate>member</label>
+                            <select ng-model="filter.member" class="form-control" name="member" id="member">
+                                <option></option>
+                                <option ng-repeat="member in members.members" value="{{member.id}}">{{member.name.text}}</option>
                             </select>
                         </div>
                         <div class="form-group">
