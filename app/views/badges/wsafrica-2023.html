@@ -34,11 +34,10 @@
 
     <div style="flex: 1;">
 
-      <div
-        style="width: 98mm; height: 120mmmm; -webkit-print-color-adjust: exact !important;">
+      <div style="width: 98mm; height: 120mmmm; -webkit-print-color-adjust: exact !important; padding: 1em;">
 
         <img src="/images/wsafrica-2023/header.png" style="width: inherit;" />
-        <div style="display: flex; padding-left: 6mm; padding-right: 3mm;">
+        <div style="display: flex;">
 
           <div style="flex: 1; height: 3.8cm;">
             <img ng-show="accreditation.image" ng-src="{{accreditation.image.thumbnail}}_accreditation"
@@ -60,24 +59,23 @@
         </div>
 
         <h3
-          style="-webkit-print-color-adjust: exact; margin-top: 2mm; margin-bottom: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'Inria Serif', serif; font-size: 20px; padding-left: 1em;">
+          style="-webkit-print-color-adjust: exact; margin-top: 2mm; margin-bottom: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'Inria Serif', serif; font-size: 20px;">
           {{accreditation.first_name}} {{accreditation.last_name}}
         </h3>
 
-        <div style="font-size: 0.35cm; line-height: 1.4; height: 13mm; padding-left: 1.5em;">
+        <div style="font-size: 0.35cm; line-height: 1.4; height: 13mm;">
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[0]}}</div>
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[1]}}</div>
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[2]}}</div>
         </div>
 
-        <div
-          style="background-image: url('/images/wsafrica-2023/footer.png') !important; background-repeat: no-repeat !important; background-size: 363px;">
+        <div style="position: relative;">
+          <img src="/images/wsafrica-2023/footer.png" style="width: inherit; padding-right: 1em;" />
           <div
-            style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; padding-top: 21mm; width: 96mm; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: uppercase; font-weight: bold; font-size: 16px; color: #fff !important; padding-right:0.5em;">
+            style="position: absolute; top: 0; left: 0; -webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; padding-top: 21mm; width: 96mm; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: uppercase; font-weight: bold; font-size: 16px; color: #fff !important; padding-right:0.5em;">
             {{accreditation.delegate_type.name}}
           </div>
         </div>
-
 
       </div>
 
@@ -85,7 +83,7 @@
 
     <div style="flex: 1; font-size: 10px;">
 
-      <div style="-webkit-print-color-adjust: exact !important; width:98mm; height:120mm">
+      <div style="-webkit-print-color-adjust: exact !important; width:98mm; height:120mm; padding: 1em;">
 
         <div style="height: 41mm; overflow: hidden;">
           <h5 style="font-size: 10px;" translate>access_to_zones</h5>
@@ -102,7 +100,7 @@
         <p translate>accreditation_badge_disclaimer_info</p>
 
         <p><span translate>generated_on</span>: {{date | date:'dd.MM.yyyy HH:mm'}}</p>
-        <img src="/images/wsafrica-2023/grid.png" style="width: inherit;" />
+        <img src="/images/wsafrica-2023/grid.png" style="width: inherit; padding-right: 1em;" />
 
       </div>
 
