@@ -40,7 +40,7 @@
         <img src="/images/wsafrica-2023/header.png" style="width: inherit;" />
         <div style="display: flex; padding-left: 6mm; padding-right: 3mm;">
 
-          <div style="flex: 1; height: 4cm;">
+          <div style="flex: 1; height: 3.8cm;">
             <img ng-show="accreditation.image" ng-src="{{accreditation.image.thumbnail}}_accreditation"
               style="height: 3.8cm;" alt="" />
           </div>
@@ -64,7 +64,7 @@
           {{accreditation.first_name}} {{accreditation.last_name}}
         </h3>
 
-        <div style="font-size: 0.35cm; line-height: 1.4; height: 10mm; padding-left: 1.5em;">
+        <div style="font-size: 0.35cm; line-height: 1.4; height: 13mm; padding-left: 1.5em;">
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[0]}}</div>
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[1]}}</div>
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[2]}}</div>
@@ -73,7 +73,7 @@
         <div
           style="background-image: url('/images/wsafrica-2023/footer.png') !important; background-repeat: no-repeat !important; background-size: 363px;">
           <div
-            style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; padding-top: 21mm; width: 96mm; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: uppercase; font-weight: bold; font-size: 16px; color: #fff !important;">
+            style="-webkit-print-color-adjust: exact; background-color: {{accreditation.delegate_type.color}} !important; padding-top: 21mm; width: 96mm; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: uppercase; font-weight: bold; font-size: 16px; color: #fff !important; padding-right:0.5em;">
             {{accreditation.delegate_type.name}}
           </div>
         </div>
