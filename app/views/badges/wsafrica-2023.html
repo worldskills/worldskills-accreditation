@@ -35,19 +35,19 @@
     <div style="flex: 1;">
 
       <div
-        style="width: 105mm; height: 148.5mm; -webkit-print-color-adjust: exact !important;">
+        style="width: 105mm; height: 98mmmm; -webkit-print-color-adjust: exact !important;">
 
         <img src="/images/wsafrica-2023/header.png" style="width: inherit;" />
         <div style="display: flex; padding-left: 6mm; padding-right: 3mm;">
 
           <div style="flex: 1; height: 4cm;">
             <img ng-show="accreditation.image" ng-src="{{accreditation.image.thumbnail}}_accreditation"
-              style="height: 4.8cm;" alt="" />
+              style="height: 3.8cm;" alt="" />
           </div>
 
           <div style="flex: 1;">
 
-            <div style="display: flex; flex-wrap: wrap;">
+            <div style="display: flex; flex-wrap: wrap;  width: 4cm;">
               <div ng-repeat="zone in zones.zones | slice:0:16"
                 style="{{hasZone(accreditation, zone) ? 'visibility: visible;' : 'visibility: hidden;'}} margin-bottom: 1mm; margin-right: 1mm; display: flex; align-items: center; justify-content: center; -webkit-print-color-adjust: exact; width: 8mm; height: 8mm; background-color: {{zone.color}} !important;">
                 <div style="color: {{zone.text_color}} !important; font-weight: bold; font-size:18px;">{{ zone.code }}
@@ -60,11 +60,11 @@
         </div>
 
         <h3
-          style="-webkit-print-color-adjust: exact; margin-top: 2mm; margin-bottom: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'Inria Serif', serif; font-size: 20px;">
+          style="-webkit-print-color-adjust: exact; margin-top: 2mm; margin-bottom: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'Inria Serif', serif; font-size: 20px; padding-left: 1em;">
           {{accreditation.first_name}} {{accreditation.last_name}}
         </h3>
 
-        <div style="font-size: 0.35cm; line-height: 1.4; height: 20mm;">
+        <div style="font-size: 0.35cm; line-height: 1.4; height: 10mm; padding-left: 1.5em;">
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[0]}}</div>
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[1]}}</div>
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{accreditation.lines[2]}}</div>
@@ -85,17 +85,16 @@
 
     <div style="flex: 1; font-size: 10px;">
 
-      <div style="-webkit-print-color-adjust: exact !important; width:105mm">
+      <div style="-webkit-print-color-adjust: exact !important; width:105mm; height:98mm">
 
-        <div style="height: 48mm;">
+        <div style="height: 41mm; overflow: hidden;">
           <h5 style="font-size: 10px;" translate>access_to_zones</h5>
 
-          <p>
-            <span ng-repeat="zone in accreditation.zones">
+          <ul style="column-count: 2; column-gap: 10px">
+            <li ng-repeat="zone in accreditation.zones">
               {{zone.code}} - {{zone.name}}
-              <br />
-            </span>
-          </p>
+            </li>
+          </ul>
         </div>
 
         <hr>
