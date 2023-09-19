@@ -54,7 +54,8 @@ angular.module('accreditationApp').controller('ScansCtrl', function ($scope, $ro
 
 		var aoa = [
 			[
-				'timestamp',
+				'date',
+				'time',
 				'first_name',
 				'last_name',
 				'delegate_type',
@@ -68,12 +69,13 @@ angular.module('accreditationApp').controller('ScansCtrl', function ($scope, $ro
 
 		angular.forEach($scope.scans.scans, function (scan) {
 			var data = [
-				$filter('date')(scan.timestamp, 'yyyy-MM-dd HH:mm'),
+				$filter('date')(scan.timestamp, 'dd.MM.yyyy'),
+				$filter('date')(scan.timestamp, 'HH:mm'),
 				scan.accreditation.first_name,
 				scan.accreditation.last_name,
 				scan.accreditation.delegate_type.name,
-				scan.accreditation.member.code,
-				scan.accreditation.member.name.text,
+				scan.accreditation.member?.code,
+				scan.accreditation.member?.name.text,
 				scan.zone.code,
 				scan.zone.name,
 				scan.allowed
