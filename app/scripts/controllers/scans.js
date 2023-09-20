@@ -85,8 +85,8 @@ angular.module('accreditationApp').controller('ScansCtrl', function ($scope, $ro
 				scan.accreditation.first_name,
 				scan.accreditation.last_name,
 				scan.accreditation.delegate_type.name,
-				scan.accreditation.member?.code,
-				scan.accreditation.member?.name.text,
+				scan.accreditation.member ? scan.accreditation.member.code : '',
+				scan.accreditation.member ? scan.accreditation.member.name.text : '',
 				scan.zone.code,
 				scan.zone.name,
 				scan.allowed
