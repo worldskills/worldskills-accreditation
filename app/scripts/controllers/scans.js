@@ -56,6 +56,7 @@ angular.module('accreditationApp').controller('ScansCtrl', function ($scope, $ro
 			[
 				'date',
 				'time',
+				'person_id',
 				'first_name',
 				'last_name',
 				'delegate_type',
@@ -71,6 +72,7 @@ angular.module('accreditationApp').controller('ScansCtrl', function ($scope, $ro
 			var data = [
 				$filter('date')(scan.timestamp, 'dd.MM.yyyy'),
 				$filter('date')(scan.timestamp, 'HH:mm'),
+				scan.accreditation.person_id,
 				scan.accreditation.first_name,
 				scan.accreditation.last_name,
 				scan.accreditation.delegate_type.name,
