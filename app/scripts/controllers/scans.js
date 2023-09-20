@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('accreditationApp').controller('ScansCtrl', function ($scope, $rootScope, $stateParams, $filter, Scan, DelegateType, Zone, Member) {
+angular.module('accreditationApp').controller('ScansCtrl', function ($scope, $rootScope, $stateParams, $filter, alert, Scan, DelegateType, Zone, Member) {
 
 	$scope.loading = true;
 
@@ -42,10 +42,19 @@ angular.module('accreditationApp').controller('ScansCtrl', function ($scope, $ro
 		if ($scope.filter.member) {
 			query['member'] = $scope.filter.member;
 		}
+		if ($scope.filter.from) {
+			query['from'] = $filter('date')($scope.filter.from, 'yyyy-MM-ddTHH:mm:ssZ');
+		}
+		if ($scope.filter.to) {
+			query['to'] = $filter('date')($scope.filter.to, 'yyyy-MM-ddTHH:mm:ssZ');
+		}
 		Scan.query(query, function(result) {
 			$scope.loading = false;
 			$scope.scans = result;
-		}, $rootScope.errorHandler);
+		}, function (response) {
+			$scope.loading = false;
+			alert.error('Error: ' + ' ' + response.data.code + ': ' + response.data.user_msg);
+		});
 	};
 
 	$scope.filterResults();
