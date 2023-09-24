@@ -46,6 +46,7 @@ module.exports = function(config) {
       'app/bower_components/ng-file-upload/ng-file-upload.js',
       'app/bower_components/angular-worldskills-utils/src/angular-worldskills-utils.js',
       'app/bower_components/js-xlsx/dist/xlsx.full.min.js',
+      'app/bower_components/textfit/textfit.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

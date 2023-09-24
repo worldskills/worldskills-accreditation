@@ -57,6 +57,12 @@ angular.module('accreditationApp')
         });
     };
 
+    var adjustText = function () {
+        setTimeout(function () {
+            textFit(document.getElementsByClassName('ws-text-fit'), {multiLine: true});
+        }, 100);
+    };
+
     if ($stateParams.adHoc) {
 
         $scope.adHoc = true;
@@ -71,6 +77,7 @@ angular.module('accreditationApp')
         Accreditation.get({eventId: $scope.eventId, id: $stateParams.accreditationId}, function(accreditation) {
             $scope.loading = false;
             $scope.accreditations = [accreditation.summary];
+            adjustText();
         }, $rootScope.errorHandler);
 
     } else {
@@ -95,6 +102,7 @@ angular.module('accreditationApp')
         Accreditation.query(query, function(result) {
             $scope.loading = false;
             $scope.accreditations = result.people;
+            adjustText();
         }, $rootScope.errorHandler);
 
     }
@@ -110,7 +118,6 @@ angular.module('accreditationApp')
     $scope.print = function () {
         window.print();
     };
-
 });
 
 angular.module('accreditationApp').controller('PrintAdHocCtrl', function ($scope, $uibModalInstance) {

@@ -23,7 +23,8 @@
     "ng-file-upload": "^12.2.13",
     "angular-worldskills-utils": "~0.1.3",
     "lodash": "3.10.1",
-    "js-xlsx": "^0.11.4"
+    "js-xlsx": "^0.11.4",
+    "textfit": "^2.4.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.0"
