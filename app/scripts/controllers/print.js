@@ -198,10 +198,25 @@ angular.module('accreditationApp').controller('PrintAdHocCtrl', function ($scope
                 /* update scope */
                 $scope.$apply(function() {
                     angular.forEach(data, function (accreditation) {
+
                         accreditation.lines = [accreditation.line_1, accreditation.line_2, accreditation.line_3];
+
+                        if (typeof accreditation['First Name'] !== 'undefined') {
+                            accreditation.first_name = accreditation['First Name'];
+                        }
+                        if (typeof accreditation['Last Name'] !== 'undefined') {
+                            accreditation.last_name = accreditation['Last Name'];
+                        }
+
+                        if (typeof accreditation['Badge Lines'] !== 'undefined') {
+                            accreditation.lines = accreditation['Badge Lines'].split('\n');
+                        }
 
                         angular.forEach($scope.delegateTypes.delegate_types, function (delegateType) {
                             if (typeof accreditation.delegate_type === 'string' && accreditation.delegate_type == delegateType.name) {
+                                accreditation.delegate_type = delegateType;
+                            }
+                            if (typeof accreditation['Delegate Type'] !== 'undefined' && accreditation['Delegate Type'] == delegateType.name) {
                                 accreditation.delegate_type = delegateType;
                             }
                         });
