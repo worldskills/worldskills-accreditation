@@ -110,7 +110,7 @@ angular.module('accreditationApp')
     window.matchMedia('print').addListener(function (mediaQueryListEvent) {
         if (mediaQueryListEvent.matches) {
             angular.forEach($scope.accreditations, function (accreditation) {
-                if (typeof accreditation.id !== undefined) {
+                if (typeof accreditation.id !== 'undefined') {
                     Accreditation.printed({eventId: $stateParams.eventId}, accreditation);
                 }
             });
