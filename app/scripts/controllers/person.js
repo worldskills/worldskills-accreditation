@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('accreditationApp')
-.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $timeout, API_ACCREDITATION_CODE, Upload, auth, Event, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
+.controller('PersonCtrl', function ($scope, $rootScope, $state, $stateParams, $translate, $q, $timeout, API_ACCREDITATION_CODE, Upload, alert, auth, Event, Accreditation, DelegateType, Member, Skill, Zone, PEOPLE_APP, WORLDSKILLS_API_IMAGES) {
 
     var image;
 
@@ -89,6 +89,15 @@ angular.module('accreditationApp')
 
     $scope.markDistributed = function () {
         Accreditation.distributed({eventId: $stateParams.eventId}, $scope.accreditation);
+    };
+
+    $scope.invalidateBadge = function () {
+        if (confirm('This will generate a new random code for the QR code. Any existing badge will no longer be valid. Proceed?')) {
+            Accreditation.resetRandomHash({eventId: $stateParams.eventId}, $scope.accreditation, function () {
+                alert.success('New random code for QR code generated, existing badges are now invalid.');
+                $state.go('.', {}, {reload: true});
+            });
+        }
     };
 
     var accreditationTimeout;
