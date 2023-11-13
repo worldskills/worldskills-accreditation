@@ -1,0 +1,52 @@
+<h2>{{'events' | translate | titlecase}}</h2>
+<div class="clearfix border-bottom"></div>
+
+<ng-template [ngIf]="events">
+  <div class="table-responsive-md">
+    <table class="table table-striped">
+      <colgroup>
+        <col style="width: 60%">
+        <col style="width: 20%">
+        <col style="width: 20%">
+      </colgroup>
+      <thead>
+      <tr>
+        <th class="border-top-0">{{'name' | translate}}</th>
+        <th class="border-top-0">{{'start_date' | translate}}</th>
+        <th class="border-top-0">{{'end_date' | translate}}</th>
+      </tr>
+      </thead>
+      <ng-template [ngIf]="!loading" [ngIfElse]="loader">
+        <tbody>
+        <tr *ngFor="let event of events.events">
+          <td><a routerLink="{{event.id}}">{{event.name.text}}</a></td>
+          <td>{{event.start_date | date}}</td>
+          <td>{{event.end_date | date}}</td>
+        </tr>
+        <tr *ngIf="events.events.length === 0">
+          <td colspan="4">{{'No events found.' | translate}}</td>
+        </tr>
+        </tbody>
+      </ng-template>
+      <ng-template #loader>
+        <tbody>
+        <tr>
+          <td colspan="4">
+            <ws-spinner></ws-spinner>
+          </td>
+        </tr>
+        </tbody>
+      </ng-template>
+    </table>
+  </div>
+    <ngb-pagination
+      class="component-pager align-middle"
+      [collectionSize]="events.total_count"
+      [page]="(fetchParams.offset / fetchParams.limit) + 1"
+      [pageSize]="fetchParams.limit"
+      [maxSize]="10"
+      [boundaryLinks]="true"
+      (pageChange)="fetch($event)">
+    </ngb-pagination>
+  <div class="clearfix"></div>
+</ng-template>
