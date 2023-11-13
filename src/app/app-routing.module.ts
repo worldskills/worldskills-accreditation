@@ -5,9 +5,9 @@ import {ErrorComponent} from "./error/error.component";
 import {EventsComponent} from "./events/events.component";
 import {GuardService} from "@worldskills/worldskills-angular-lib";
 import {HomeComponent} from "./home/home.component";
+import {EventComponent} from "./event/event.component";
 
-const env = environment;
-const ACR_ROLES = env.appRoles;
+const ACR_ROLES = environment.appRoles;
 
 function forAppCode(appCode: number, roles: Array<string>) {
   return roles.map(name => ({
@@ -23,14 +23,18 @@ const routes: Routes = [
   },
   {
     path: 'events',
+    canActivate: [GuardService],
+    data: {roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.EDIT_DELEGATE_TYPES, ACR_ROLES.EDIT_POSITIONS, ACR_ROLES.EDIT_ZONES, ACR_ROLES.PRINT])},
     children: [
       {
         path: '',
         pathMatch: 'full',
-        canActivate: [GuardService],
-        data: {roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.EDIT_DELEGATE_TYPES, ACR_ROLES.EDIT_POSITIONS, ACR_ROLES.EDIT_ZONES, ACR_ROLES.PRINT])},
         component: EventsComponent
       },
+      {
+        path: ':eventId',
+        component: EventComponent
+      }
     ]
   },
   {

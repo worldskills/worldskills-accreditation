@@ -12,8 +12,11 @@ import {ErrorInterceptor} from "../interceptors/error-interceptor";
 import {HomeComponent} from "./home/home.component";
 import {ErrorComponent} from "./error/error.component";
 import {NgSelectModule} from "@ng-select/ng-select";
-import { EventsComponent } from './events/events.component';
-import {NgbPagination, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {EventsComponent} from './events/events.component';
+import {NgbModule, NgbPagination} from "@ng-bootstrap/ng-bootstrap";
+import {EventComponent} from './event/event.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatTabsModule} from "@angular/material/tabs";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20231109');
@@ -24,7 +27,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HomeComponent,
     ErrorComponent,
-    EventsComponent
+    EventsComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +46,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgSelectModule,
     NgbPagination,
     NgbModule,
+    BrowserAnimationsModule,
+    MatTabsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
