@@ -11,6 +11,7 @@ import {AppService} from "../services/app/app.service";
 })
 export class AppComponent implements OnInit {
 
+  showBreadcrumb = true;
   currentUser: User;
   menuItems: Array<MenuItem> = [];
   environmentWarning = environment.environmentWarning;
@@ -29,6 +30,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.appService.showBreadcrumbs.subscribe(showBreadcrumb => setTimeout(() => (this.showBreadcrumb = showBreadcrumb)));
+
     this.wsi.authConfigSubject.next({
       loginUrl: environment.worldskillsAuthorizeUrl,
       redirectUri: environment.worldskillsAuthorizeRedirect,

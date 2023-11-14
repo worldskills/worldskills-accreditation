@@ -4,6 +4,10 @@
                 [menuItems]="menuItems" [autoLoginOnLogout]="true"></ws-auth-header>
 
 <div class="container">
+  <ws-breadcrumbs *ngIf="showBreadcrumb" [showHomeItem]="true" [homeItemText]="'Events' | translate"
+                  [homeItemRoute]="'/'">
+  </ws-breadcrumbs>
+  <div *ngIf="!showBreadcrumb" class="mt-5"></div>
   <div class="clearfix"></div>
   <ws-alerts></ws-alerts>
   <router-outlet (activate)="onActivate($event)"></router-outlet>

@@ -1,0 +1,84 @@
+<div class="">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="table-responsive-md">
+        <table class="table table-striped">
+          <colgroup>
+            <col style="width: 20%">
+            <col style="width: 20%">
+            <col style="width: 20%">
+            <col style="width: 20%">
+            <col style="width: 20%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">
+              <a href="#" (click)="$event.preventDefault(); sort('firstname')">
+                {{'first_name' | translate}}&nbsp;
+                <ng-container *ngIf="fetchParams.sort === 'firstname_asc'">&darr;</ng-container>
+                <ng-container *ngIf="fetchParams.sort !== 'firstname_asc'">&uarr;</ng-container>
+              </a>
+            </th>
+            <th class="border-top-0">
+              <a href="#" (click)="$event.preventDefault(); sort('lastname')">
+                {{'last_name' | translate}}&nbsp;
+                <ng-container *ngIf="fetchParams.sort === 'lastname_asc'">&darr;</ng-container>
+                <ng-container *ngIf="fetchParams.sort !== 'lastname_asc'">&uarr;</ng-container>
+              </a>
+            </th>
+            <th class="border-top-0">{{'delegate_type' | translate}}</th>
+            <th class="border-top-0">{{'member' | translate}}</th>
+            <th class="border-top-0">{{'skill' | translate}}</th>
+          </tr>
+          </thead>
+          <ng-template [ngIf]="!loading" [ngIfElse]="loader">
+            <tbody>
+            <tr *ngFor="let person of result.people">
+              <td>
+                <a routerLink="">
+                  <ng-container *ngIf="person.first_name">{{person.first_name}}</ng-container>
+                  <ng-container *ngIf="!person.first_name">{{'empty_hint' | translate}}</ng-container>
+                </a>
+              </td>
+              <td>
+                <a routerLink="">
+                  <ng-container *ngIf="person.last_name">{{person.last_name}}</ng-container>
+                  <ng-container *ngIf="!person.last_name">{{'empty_hint' | translate}}</ng-container>
+                </a>
+              </td>
+              <td>{{person.delegate_type.name}}</td>
+              <td><span *ngIf="person.member">{{person.member.name.text}}</span></td>
+              <td><span *ngIf="person.skill">{{person.skill.name.text}} ({{person.skill.skill_number}})</span></td>
+            </tr>
+            <tr *ngIf="result.total_count === 0">
+              <td colspan="6">{{'no_people_found' | translate}}</td>
+            </tr>
+            </tbody>
+          </ng-template>
+          <ng-template #loader>
+            <tbody>
+            <tr>
+              <td colspan="6">
+                <ws-spinner></ws-spinner>
+              </td>
+            </tr>
+            </tbody>
+          </ng-template>
+        </table>
+      </div>
+      <span class="text-muted">{{'total_results' | translate}}: {{result.total_count}}</span>
+      <ngb-pagination
+        class="component-pager"
+        [collectionSize]="result.total_count"
+        [page]="(fetchParams.offset / fetchParams.limit) + 1"
+        [pageSize]="fetchParams.limit"
+        [maxSize]="10"
+        [boundaryLinks]="true"
+        (pageChange)="fetch($event)">
+      </ngb-pagination>
+    </div>
+    <div class="col-md-3">
+      <app-people-filter></app-people-filter>
+    </div>
+  </div>
+</div>

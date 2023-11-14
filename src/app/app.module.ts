@@ -17,6 +17,10 @@ import {NgbModule, NgbPagination} from "@ng-bootstrap/ng-bootstrap";
 import {EventComponent} from './event/event.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from "@angular/material/tabs";
+import {PeopleComponent} from './people/people.component';
+import {ScansComponent} from './scans/scans.component';
+import {PeopleFilterComponent} from './people-filter/people-filter.component';
+import {FormsModule} from "@angular/forms";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20231109');
@@ -28,27 +32,31 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     ErrorComponent,
     EventsComponent,
-    EventComponent
+    EventComponent,
+    PeopleComponent,
+    ScansComponent,
+    PeopleFilterComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    OAuthModule.forRoot(),
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    WorldskillsAngularLibModule,
-    NgSelectModule,
-    NgbPagination,
-    NgbModule,
-    BrowserAnimationsModule,
-    MatTabsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        OAuthModule.forRoot(),
+        TranslateModule.forRoot({
+            defaultLanguage: 'en',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        WorldskillsAngularLibModule,
+        NgSelectModule,
+        NgbPagination,
+        NgbModule,
+        BrowserAnimationsModule,
+        MatTabsModule,
+        FormsModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: WsHttpInterceptor, multi: true},

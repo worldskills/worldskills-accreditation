@@ -1,10 +1,9 @@
-<h2>{{currentEvent.name.text}}</h2>
+<ng-container *ngIf="currentEvent">
+  <h2>{{currentEvent.name.text}}</h2>
 
-<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
-  <mat-tab label="People">Content 1</mat-tab>
-  <mat-tab label="Scans">Content 2</mat-tab>
-  <mat-tab label="Delegate Types">Content 3</mat-tab>
-  <mat-tab label="Positions">Content 3</mat-tab>
-  <mat-tab label="Package Options">Content 3</mat-tab>
-  <mat-tab label="Zones">Content 3</mat-tab>
-</mat-tab-group>
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms" (selectedTabChange)="navigate($event)">
+    <mat-tab *ngFor="let tab of tabs" [label]="tab.label"></mat-tab>
+  </mat-tab-group>
+  <div class="my-3"></div>
+  <router-outlet></router-outlet>
+</ng-container>

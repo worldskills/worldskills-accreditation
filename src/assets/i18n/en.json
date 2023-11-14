@@ -1,6 +1,19 @@
 {
   "app_name_accreditation": "Accreditation",
   "name": "Name",
+  "delegate_type": "Delegate Type",
+  "end_date": "End Date",
+  "filter": "Filter",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "group_name": "Group name",
+  "has_photo": "Has photo",
+  "member": "Member",
+  "no_people_found": "No people found",
+  "position": "Position",
+  "printed": "Printed",
+  "skill": "Skill",
   "start_date": "Start Date",
-  "end_date": "End Date"
+  "total_results": "Total results",
+  "zone": "Zone"
 }

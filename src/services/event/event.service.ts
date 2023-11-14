@@ -10,7 +10,7 @@ import {Event, EventContainer} from "../../types/event";
 })
 export class EventService extends WsService<any> {
 
-  readonly url = `${environment.worldskillsApi}/accreditation/events`;
+  readonly url = `${environment.worldskillsApiAccreditation}/events`;
 
   constructor(private http: HttpClient) {
     super();

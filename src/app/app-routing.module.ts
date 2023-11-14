@@ -6,6 +6,8 @@ import {EventsComponent} from "./events/events.component";
 import {GuardService} from "@worldskills/worldskills-angular-lib";
 import {HomeComponent} from "./home/home.component";
 import {EventComponent} from "./event/event.component";
+import {PeopleComponent} from "./people/people.component";
+import {ScansComponent} from "./scans/scans.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -24,7 +26,9 @@ const routes: Routes = [
   {
     path: 'events',
     canActivate: [GuardService],
-    data: {roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.EDIT_DELEGATE_TYPES, ACR_ROLES.EDIT_POSITIONS, ACR_ROLES.EDIT_ZONES, ACR_ROLES.PRINT])},
+    data: {
+      roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.EDIT_DELEGATE_TYPES, ACR_ROLES.EDIT_POSITIONS, ACR_ROLES.EDIT_ZONES, ACR_ROLES.PRINT])
+    },
     children: [
       {
         path: '',
@@ -33,7 +37,25 @@ const routes: Routes = [
       },
       {
         path: ':eventId',
-        component: EventComponent
+        component: EventComponent,
+        data: {breadcrumb: 'Event'},
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'people'
+          },
+          {
+            path: 'people',
+            data: {breadcrumb: 'People'},
+            component: PeopleComponent
+          },
+          {
+            path: 'scans',
+            data: {breadcrumb: 'Scan'},
+            component: ScansComponent
+          }
+        ]
       }
     ]
   },
