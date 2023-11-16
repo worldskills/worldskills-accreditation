@@ -36,8 +36,10 @@ export class PeopleComponent extends WsComponent implements OnInit {
   }
 
   private loadPeople() {
+    this.loading = true;
     this.personAcrService.getAccreditations(this.selectedEvent.id, this.fetchParams).subscribe(res => {
       this.result = res;
+      this.loading = false;
     })
   }
 

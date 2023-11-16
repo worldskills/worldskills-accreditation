@@ -33,6 +33,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
     "moment": "^2.29.4",
+    "ngx-skeleton-loader": "^2.4.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
