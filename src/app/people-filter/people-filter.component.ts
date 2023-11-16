@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {WsComponent} from "@worldskills/worldskills-angular-lib";
 import {PersonAccreditationSummaryReqParams} from "../../types/person-accreditation-summary";
 import {DelegateType} from "../../types/delegate-type";
@@ -10,7 +10,8 @@ import {Member} from "../../types/member";
 import {SkillService} from "../../services/skill/skill.service";
 import {Skill} from "../../types/skill";
 import {ZoneService} from "../../services/zone/zone.service";
-import { Zone } from 'src/types/zone';
+import {Zone} from 'src/types/zone';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-people-filter',
@@ -18,6 +19,9 @@ import { Zone } from 'src/types/zone';
   styleUrls: ['./people-filter.component.css']
 })
 export class PeopleFilterComponent extends WsComponent implements OnInit {
+
+  @Output() filter = new EventEmitter<PersonAccreditationSummaryReqParams>();
+  @ViewChild('form') form: NgForm;
 
   fetchParams: PersonAccreditationSummaryReqParams;
   deleteTypes: DelegateType[];
@@ -34,8 +38,7 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
               private delegateTypeService: DelegateTypeService,
               private memberService: MemberService,
               private skillService: SkillService,
-              private zoneService: ZoneService
-              ) {
+              private zoneService: ZoneService) {
     super();
   }
 
@@ -84,4 +87,7 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
     };
   }
 
+  submit(): void {
+    this.filter.emit({...this.fetchParams, ...this.form.value});
+  }
 }

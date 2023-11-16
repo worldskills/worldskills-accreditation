@@ -1,10 +1,7 @@
 <div class="card">
   <h5 class="card-header m-0">{{'filter' | translate}}</h5>
   <div class="card-body">
-    <form class="form-horizontal" novalidate>
-      <!--          (ngSubmit)="submit()" #form="ngForm"-->
-      <!--          (change)="onChange()"-->
-
+    <form class="form-horizontal" (ngSubmit)="submit()" #form="ngForm" novalidate>
       <div class="row mb-2">
         <div class="col-sm-12">
           <label class="small text-muted font-weight-bold my-0 py-0">{{'name' | translate}}</label>
@@ -20,7 +17,7 @@
         <div class="col-sm-12">
           <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
           <ng-select
-            name="delegate_type"
+            name="del_types"
             [ngModel]="fetchParams.del_types"
             [multiple]="true"
             [items]="deleteTypes"
@@ -70,7 +67,7 @@
           <input
             type="text"
             class="form-control"
-            name="group_name"
+            name="group"
             [ngModel]="fetchParams.group">
         </div>
       </div>
@@ -88,11 +85,11 @@
           >
             <ng-template ng-label-tmp let-item="item">
               <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
-              <div class="d-inline-block ml-2">{{item.name}}</div>
+              <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
             </ng-template>
             <ng-template ng-option-tmp let-item="item" let-index="index">
               <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
-              <div class="d-inline-block ml-2">{{item.name}}</div>
+              <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
             </ng-template>
           </ng-select>
         </div>
@@ -103,7 +100,7 @@
           <label class="small text-muted font-weight-bold my-0 py-0">{{'has_photo' | translate}}?</label>
           <ng-select
             [wsSelect]="['value', 'label']"
-            name="has_photo"
+            name="photo"
             [ngModel]="fetchParams.photo"
             [items]="yesNoSelections"
           ></ng-select>

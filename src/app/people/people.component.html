@@ -62,7 +62,7 @@
         </table>
       </div>
 
-      <span class="text-muted">{{'total_results' | translate}}: {{result.total_count}}</span>
+      <span class="text-muted">{{'total_results' | translate}}: {{result.total_count}} {{'people' | translate}}</span>
       <ngb-pagination
         class="component-pager"
         [collectionSize]="result.total_count"
@@ -81,6 +81,6 @@
     </ng-template>
   </div>
   <div class="col-md-3">
-    <app-people-filter></app-people-filter>
+    <app-people-filter (filter)="filter($event)"></app-people-filter>
   </div>
 </div>
