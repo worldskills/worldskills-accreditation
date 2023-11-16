@@ -22,6 +22,7 @@ import {ScansComponent} from './scans/scans.component';
 import {PeopleFilterComponent} from './people-filter/people-filter.component';
 import {FormsModule} from "@angular/forms";
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
+import { DelegateTypesComponent } from './delegate-types/delegate-types.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20231109');
@@ -36,7 +37,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventComponent,
     PeopleComponent,
     ScansComponent,
-    PeopleFilterComponent
+    PeopleFilterComponent,
+    DelegateTypesComponent
   ],
     imports: [
         BrowserModule,

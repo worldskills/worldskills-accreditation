@@ -8,6 +8,7 @@ import {HomeComponent} from "./home/home.component";
 import {EventComponent} from "./event/event.component";
 import {PeopleComponent} from "./people/people.component";
 import {ScansComponent} from "./scans/scans.component";
+import {DelegateTypesComponent} from "./delegate-types/delegate-types.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -54,6 +55,11 @@ const routes: Routes = [
             path: 'scans',
             data: {breadcrumb: 'Scan'},
             component: ScansComponent
+          },
+          {
+            path: 'delegate-types',
+            data: {breadcrumb: 'Delegate Types'},
+            component: DelegateTypesComponent
           }
         ]
       }

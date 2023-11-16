@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive-md">
+      <table class="table table-striped">
+        <colgroup>
+          <col style="width: 10%">
+          <col style="width: 60%">
+          <col style="width: 30%">
+        </colgroup>
+        <thead>
+        <tr>
+          <th class="border-top-0">{{'code' | translate}}</th>
+          <th class="border-top-0">{{'name' | translate}}</th>
+          <th class="border-top-0">{{'zones' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let dt of delegateTypes">
+          <td [style.background-color]="dt.color" [style.color]="dt.text_color">{{dt.code}}</td>
+          <td><a routerLink="">{{dt.name}}</a></td>
+          <td>
+            <ng-container *ngFor="let zone of dt.zones">
+              <div class="badge mr-1 small" [style.background-color]="zone.color"
+                   [ngbTooltip]="zone.name"
+                   [style.color]="zone.text_color">{{zone.code}}</div>
+            </ng-container>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

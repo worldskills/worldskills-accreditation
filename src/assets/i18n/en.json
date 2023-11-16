@@ -1,6 +1,7 @@
 {
   "app_name_accreditation": "Accreditation",
   "name": "Name",
+  "code": "Code",
   "delegate_type": "Delegate Type",
   "empty_hint": "(empty)",
   "end_date": "End Date",
