@@ -5,95 +5,127 @@
       <!--          (ngSubmit)="submit()" #form="ngForm"-->
       <!--          (change)="onChange()"-->
 
-      <div class="form-group row">
+      <div class="row mb-2">
         <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'name' | translate}}</label>
           <input
             type="text"
-            placeholder="{{'name' | translate}}"
             class="form-control"
             name="name"
             [ngModel]="fetchParams.name">
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-2">
         <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
           <ng-select
             name="delegate_type"
             [ngModel]="fetchParams.del_types"
-            placeholder="{{'delegate_type' | translate}}"
-            [multiple]="true"></ng-select>
+            [multiple]="true"
+            [items]="deleteTypes"
+            bindValue="id"
+            bindLabel="name"
+          >
+            <ng-template ng-label-tmp let-item="item">
+              <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+              <div class="d-inline-block ml-2">{{item.name}}</div>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+              <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+              <div class="d-inline-block ml-2">{{item.name}}</div>
+            </ng-template>
+          </ng-select>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-2">
         <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'member' | translate}}</label>
           <ng-select
-            name="position"
-            [ngModel]="fetchParams.pos_id"
-            placeholder="{{'position' | translate}}"
-            [multiple]="true"></ng-select>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <div class="col-sm-12">
-          <ng-select
+            [wsSelect]="['id', 'name.text']"
             name="member"
             [ngModel]="fetchParams.member"
-            placeholder="{{'member' | translate}}"
-            [multiple]="true"></ng-select>
+            [items]="members"
+          ></ng-select>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-2">
         <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'skill' | translate}}</label>
           <ng-select
+            [wsSelect]="['id', 'name.text']"
             name="skill"
             [ngModel]="fetchParams.skill"
-            placeholder="{{'skill' | translate}}"
-            [multiple]="true"></ng-select>
+            [multiple]="true"
+            [items]="skills"
+          ></ng-select>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-2">
         <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'group_name' | translate}}</label>
           <input
             type="text"
-            placeholder="{{'group_name' | translate}}"
             class="form-control"
             name="group_name"
             [ngModel]="fetchParams.group">
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-2">
         <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'zone' | translate}}</label>
           <ng-select
             name="zone"
             [ngModel]="fetchParams.zone"
-            placeholder="{{'zone' | translate}}"
-            [multiple]="true"></ng-select>
+            [multiple]="true"
+            [items]="zones"
+            bindValue="id"
+            bindLabel="name"
+          >
+            <ng-template ng-label-tmp let-item="item">
+              <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+              <div class="d-inline-block ml-2">{{item.name}}</div>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+              <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+              <div class="d-inline-block ml-2">{{item.name}}</div>
+            </ng-template>
+          </ng-select>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-2">
         <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'has_photo' | translate}}?</label>
           <ng-select
+            [wsSelect]="['value', 'label']"
             name="has_photo"
             [ngModel]="fetchParams.photo"
-            placeholder="{{'has_photo' | translate}}?"
-            [multiple]="true"></ng-select>
+            [items]="yesNoSelections"
+          ></ng-select>
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-2">
         <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'printed' | translate}}?</label>
           <ng-select
+            [wsSelect]="['value', 'label']"
             name="printed"
             [ngModel]="fetchParams.printed"
-            placeholder="{{'printed' | translate}}"
-            [multiple]="true"></ng-select>
+            [items]="yesNoSelections"
+          ></ng-select>
+        </div>
+      </div>
+
+      <div class="row mb-2 text-right">
+        <div class="col-sm-12">
+          <button class="btn btn-sm btn-outline-primary">{{'print_preview' | translate}}</button>
+          <button class="btn btn-sm btn-primary ml-2" type="submit">{{'set_filter' | translate}}</button>
         </div>
       </div>
 

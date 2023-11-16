@@ -5,3 +5,7 @@ export interface Skill {
   skill_number: string;
   name: I18nText;
 }
+
+export interface SkillContainer {
+  skills: Skill[];
+}

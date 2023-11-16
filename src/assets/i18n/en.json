@@ -2,6 +2,7 @@
   "app_name_accreditation": "Accreditation",
   "name": "Name",
   "delegate_type": "Delegate Type",
+  "empty_hint": "(empty)",
   "end_date": "End Date",
   "filter": "Filter",
   "first_name": "First Name",
@@ -11,9 +12,12 @@
   "member": "Member",
   "no_people_found": "No people found",
   "position": "Position",
+  "print_preview": "Print preview",
   "printed": "Printed",
+  "set_filter": "Set filter",
   "skill": "Skill",
   "start_date": "Start Date",
   "total_results": "Total results",
-  "zone": "Zone"
+  "zone": "Zone",
+  "zones": "Zones"
 }

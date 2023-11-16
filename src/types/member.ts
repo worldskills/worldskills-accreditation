@@ -5,3 +5,7 @@ export interface Member {
   name: I18nText;
   code: string;
 }
+
+export interface MemberContainer {
+  members: Member[];
+}

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WsComponent} from "@worldskills/worldskills-angular-lib";
+import {GenericUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
 import {AppService} from "../../services/app/app.service";
 import {
@@ -85,5 +85,9 @@ export class PeopleComponent extends WsComponent implements OnInit {
       };
       this.loadPeople();
     }
+  }
+
+  doesResultHasSkill(): boolean {
+    return this.result.people.filter(p => !GenericUtil.isNullOrUndefined(p.skill)).length > 0;
   }
 }

@@ -11,3 +11,7 @@ export interface DelegateType {
   text_color: string;
   zones: Zone[];
 }
+
+export interface DelegateTypeContainer {
+  delegate_types: DelegateType[];
+}

@@ -3,6 +3,7 @@ export const environment = {
   worldskillsAppId: 2100,
   worldskillsApi: 'https://api.worldskills.org',
   worldskillsApiAccreditation: 'https://api.worldskills.org/accreditation',
+  worldskillsApiOrg: 'https://api.worldskills.org/org',
   worldskillsApiPeople: 'https://api.worldskills.org/people',
   worldskillsClientId: 'a95703d1aa96',
   worldskillsAuthorizeUrl: 'https://auth.worldskills.org/oauth/authorize',

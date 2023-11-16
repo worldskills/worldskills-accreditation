@@ -1,15 +1,8 @@
 <div class="">
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-9 people-result">
       <div class="table-responsive-md">
         <table class="table table-striped">
-          <colgroup>
-            <col style="width: 20%">
-            <col style="width: 20%">
-            <col style="width: 20%">
-            <col style="width: 20%">
-            <col style="width: 20%">
-          </colgroup>
           <thead>
           <tr>
             <th class="border-top-0">
@@ -27,8 +20,10 @@
               </a>
             </th>
             <th class="border-top-0">{{'delegate_type' | translate}}</th>
+            <th class="border-top-0">{{'zones' | translate}}</th>
             <th class="border-top-0">{{'member' | translate}}</th>
-            <th class="border-top-0">{{'skill' | translate}}</th>
+            <th class="border-top-0" *ngIf="doesResultHasSkill()">{{'skill' | translate}}</th>
+            <th class="border-top-0">{{'printed' | translate}}?</th>
           </tr>
           </thead>
           <ng-template [ngIf]="!loading" [ngIfElse]="loader">
@@ -46,9 +41,19 @@
                   <ng-container *ngIf="!person.last_name">{{'empty_hint' | translate}}</ng-container>
                 </a>
               </td>
-              <td>{{person.delegate_type.name}}</td>
+              <td>
+                {{person.delegate_type.name}}
+              </td>
+              <td>
+                <ng-container *ngFor="let zone of person.zones">
+                  <div class="badge mr-1 small" [style.background-color]="zone.color"
+                       [ngbTooltip]="zone.name"
+                       [style.color]="zone.text_color">{{zone.code}}</div>
+                </ng-container>
+              </td>
               <td><span *ngIf="person.member">{{person.member.name.text}}</span></td>
-              <td><span *ngIf="person.skill">{{person.skill.name.text}} ({{person.skill.skill_number}})</span></td>
+              <td><span *ngIf="person.skill && doesResultHasSkill()">{{person.skill.name.text}} ({{person.skill.skill_number}})</span></td>
+              <td></td>
             </tr>
             <tr *ngIf="result.total_count === 0">
               <td colspan="6">{{'no_people_found' | translate}}</td>

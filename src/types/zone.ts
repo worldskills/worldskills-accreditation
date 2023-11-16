@@ -6,3 +6,7 @@ export interface Zone {
   text_color: string;
   sort: number;
 }
+
+export interface ZoneContainer {
+  zones: Zone[];
+}

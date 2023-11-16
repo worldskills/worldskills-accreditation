@@ -13,7 +13,9 @@ import {
 })
 export class PersonAccreditationService extends WsService<any> {
 
-  url = `${environment.worldskillsApiAccreditation}/events/{eventId}/accreditations`;
+  readonly url = (eventId: number) => {
+    return `${environment.worldskillsApiAccreditation}/events/${eventId}/accreditations`
+  };
 
   constructor(private http: HttpClient) {
     super();
@@ -22,6 +24,6 @@ export class PersonAccreditationService extends WsService<any> {
   getAccreditations(eventId: number, params: PersonAccreditationSummaryReqParams): Observable<PersonAccreditationSummaryContainer> {
     let httpParams = HttpUtil.objectToParams(ObjectUtil.stripNullOrUndefined(params || {}));
 
-    return this.http.get<PersonAccreditationSummaryContainer>(this.url.replace('{eventId}', eventId.toString()), {params: httpParams}).pipe(share());
+    return this.http.get<PersonAccreditationSummaryContainer>(this.url(eventId), {params: httpParams}).pipe(share());
   }
 }
