@@ -14,6 +14,7 @@ export class DelegateTypesComponent extends WsComponent implements OnInit {
 
   selectedEvent: Event;
   delegateTypes: DelegateType[];
+  loading = false;
 
   constructor(private appService: AppService,
               private delTypeService: DelegateTypeService) {
@@ -26,8 +27,10 @@ export class DelegateTypesComponent extends WsComponent implements OnInit {
         this.selectedEvent = event;
 
         // load delegate types for selected event
+        this.loading = true;
         this.delTypeService.getDelegateTypes(this.selectedEvent.id).subscribe(res => {
           this.delegateTypes = res.delegate_types;
+          this.loading = false;
         });
       })
     )

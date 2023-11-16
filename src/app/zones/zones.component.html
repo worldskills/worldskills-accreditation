@@ -11,26 +11,29 @@
         <tr>
           <th class="border-top-0">{{'code' | translate}}</th>
           <th class="border-top-0">{{'name' | translate}}</th>
-          <th class="border-top-0">{{'zones' | translate}}</th>
+          <th class="border-top-0">{{'sort' | translate}}</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let dt of delegateTypes">
-          <td [style.background-color]="dt.color" [style.color]="dt.text_color">{{dt.code}}</td>
-          <td><a routerLink="">{{dt.name}}</a></td>
+        <tr *ngFor="let zone of zones">
+          <td [style.background-color]="zone.color" [style.color]="zone.text_color">{{zone.code}}</td>
+          <td><a routerLink="">{{zone.name}}</a></td>
           <td>
-            <ng-container *ngFor="let zone of dt.zones">
-              <div class="badge mr-1 small" [style.background-color]="zone.color"
-                   [ngbTooltip]="zone.name"
-                   [style.color]="zone.text_color">{{zone.code}}</div>
-            </ng-container>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveUp(zone)">
+                <i class="fa fa-arrow-up"></i>
+              </button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveDown(zone)">
+                <i class="fa fa-arrow-down"></i>
+              </button>
+            </div>
           </td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
-</div >
+</div>
 
 <ng-template #loadingAnimation>
   <ngx-skeleton-loader
