@@ -21,6 +21,7 @@ export class EventComponent extends WsComponent implements OnInit {
     {label: 'Package Options', path: 'package-options'},
     {label: 'Zones', path: 'zones'},
   ];
+  selectedTabIndex = 0;
 
   constructor(private eventService: EventService,
               private router: Router,
@@ -36,6 +37,14 @@ export class EventComponent extends WsComponent implements OnInit {
         this.appService.selectedEvent.next(this.currentEvent);
       });
     });
+
+    // set selected tab based on current route
+    const urlSegments = this.router.url.split('/');
+    const lastSegment = urlSegments[urlSegments.length - 1];
+    const selectedTabIndex = this.tabs.findIndex(tab => tab.path === lastSegment);
+    if (selectedTabIndex !== -1) {
+      this.selectedTabIndex = selectedTabIndex;
+    }
   }
 
   navigate(selectedTab: any) {
