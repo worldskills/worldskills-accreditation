@@ -28,10 +28,12 @@ export class DelegateTypesComponent extends WsComponent implements OnInit {
 
         // load delegate types for selected event
         this.loading = true;
-        this.delTypeService.getDelegateTypes(this.selectedEvent.id).subscribe(res => {
-          this.delegateTypes = res.delegate_types;
-          this.loading = false;
-        });
+        this.subscribe(
+          this.delTypeService.getDelegateTypes(this.selectedEvent.id).subscribe(res => {
+            this.delegateTypes = res.delegate_types;
+            this.loading = false;
+          })
+        );
       })
     )
   }

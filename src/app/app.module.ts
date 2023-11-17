@@ -24,6 +24,7 @@ import {FormsModule} from "@angular/forms";
 import {NgxSkeletonLoaderModule} from "ngx-skeleton-loader";
 import { DelegateTypesComponent } from './delegate-types/delegate-types.component';
 import { ZonesComponent } from './zones/zones.component';
+import { PositionsComponent } from './positions/positions.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20231109');
@@ -40,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ScansComponent,
     PeopleFilterComponent,
     DelegateTypesComponent,
-    ZonesComponent
+    ZonesComponent,
+    PositionsComponent
   ],
     imports: [
         BrowserModule,

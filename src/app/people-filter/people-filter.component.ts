@@ -24,7 +24,7 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
   @ViewChild('form') form: NgForm;
 
   fetchParams: PersonAccreditationSummaryReqParams;
-  deleteTypes: DelegateType[];
+  delegateTypes: DelegateType[];
   members: Member[];
   skills: Skill[];
   zones: Zone[];
@@ -52,7 +52,7 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
         // load all filter options based on selected event
         this.subscribe(
           this.delegateTypeService.getDelegateTypes(this.selectedEvent.id).subscribe(res => {
-            this.deleteTypes = res.delegate_types;
+            this.delegateTypes = res.delegate_types;
           }),
           this.skillService.getSkills(this.selectedEvent.id).subscribe(res => {
             this.skills = res.skills.sort((a, b) => a.name.text.localeCompare(b.name.text));

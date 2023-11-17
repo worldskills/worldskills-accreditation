@@ -28,10 +28,12 @@ export class ZonesComponent extends WsComponent implements OnInit {
 
         // load zones for selected event
         this.loading = true;
-        this.zoneService.getZones(this.selectedEvent.id).subscribe(res => {
-          this.zones = res.zones;
-          this.loading = false;
-        });
+        this.subscribe(
+          this.zoneService.getZones(this.selectedEvent.id).subscribe(res => {
+            this.zones = res.zones;
+            this.loading = false;
+          })
+        );
       })
     )
   }

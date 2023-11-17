@@ -10,6 +10,7 @@ import {PeopleComponent} from "./people/people.component";
 import {ScansComponent} from "./scans/scans.component";
 import {DelegateTypesComponent} from "./delegate-types/delegate-types.component";
 import {ZonesComponent} from "./zones/zones.component";
+import {PositionsComponent} from "./positions/positions.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -61,6 +62,11 @@ const routes: Routes = [
             path: 'delegate-types',
             data: {breadcrumb: 'Delegate Types'},
             component: DelegateTypesComponent
+          },
+          {
+            path: 'positions',
+            data: {breadcrumb: 'Positions'},
+            component: PositionsComponent
           },
           {
             path: 'zones',
