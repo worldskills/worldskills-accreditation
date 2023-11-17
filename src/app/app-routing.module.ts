@@ -11,6 +11,7 @@ import {ScansComponent} from "./scans/scans.component";
 import {DelegateTypesComponent} from "./delegate-types/delegate-types.component";
 import {ZonesComponent} from "./zones/zones.component";
 import {PositionsComponent} from "./positions/positions.component";
+import {PackageOptionsComponent} from "./package-options/package-options.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -67,6 +68,11 @@ const routes: Routes = [
             path: 'positions',
             data: {breadcrumb: 'Positions'},
             component: PositionsComponent
+          },
+          {
+            path: 'package-options',
+            data: {breadcrumb: 'Package Options'},
+            component: PackageOptionsComponent
           },
           {
             path: 'zones',
