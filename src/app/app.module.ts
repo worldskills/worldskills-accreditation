@@ -28,6 +28,7 @@ import {PositionsComponent} from './positions/positions.component';
 import {PackageOptionsComponent} from './package-options/package-options.component';
 import {DelegateTypesFormComponent} from './delegate-types-form/delegate-types-form.component';
 import {AngularToastifyModule, ToastService} from "angular-toastify";
+import { ZonesFormComponent } from './zones-form/zones-form.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20231109');
@@ -47,7 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ZonesComponent,
     PositionsComponent,
     PackageOptionsComponent,
-    DelegateTypesFormComponent
+    DelegateTypesFormComponent,
+    ZonesFormComponent
   ],
   imports: [
     BrowserModule,

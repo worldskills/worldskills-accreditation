@@ -26,7 +26,7 @@ export class DelegateTypesFormComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
-      this.zoneService.getZones(this.selectedEvent.id).subscribe(res => {
+      this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
         this.zones = res.zones;
       })
     );

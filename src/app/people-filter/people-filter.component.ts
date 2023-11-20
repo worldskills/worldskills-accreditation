@@ -57,7 +57,7 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
           this.skillService.getSkills(this.selectedEvent.id).subscribe(res => {
             this.skills = res.skills.sort((a, b) => a.name.text.localeCompare(b.name.text));
           }),
-          this.zoneService.getZones(this.selectedEvent.id).subscribe(res => {
+          this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
             this.zones = res.zones;
           })
         );
