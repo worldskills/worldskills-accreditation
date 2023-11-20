@@ -1,39 +1,60 @@
-<div class="row" *ngIf="!loading; else loadingAnimation">
-  <div class="col-md-12">
-    <div class="table-responsive-md">
-      <table class="table table-striped">
-        <colgroup>
-          <col style="width: 10%">
-          <col style="width: 60%">
-          <col style="width: 30%">
-        </colgroup>
-        <thead>
-        <tr>
-          <th class="border-top-0">{{'code' | translate}}</th>
-          <th class="border-top-0">{{'name' | translate}}</th>
-          <th class="border-top-0">{{'zones' | translate}}</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let dt of delegateTypes">
-          <td [style.background-color]="dt.color" [style.color]="dt.text_color">{{dt.code}}</td>
-          <td><a routerLink="">{{dt.name}}</a></td>
-          <td>
-            <ng-container *ngFor="let zone of dt.zones">
-              <div class="badge mr-1 small" [style.background-color]="zone.color"
-                   [ngbTooltip]="zone.name"
-                   [style.color]="zone.text_color">{{zone.code}}</div>
-            </ng-container>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+<ng-container *ngIf="!loading; else loadingAnimation">
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button class="btn btn-sm btn-primary"
+              (click)="addNew()">{{'add_new_delegate_type' | translate | titlecase}}</button>
     </div>
   </div>
-</div >
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive-md">
+        <table class="table table-striped">
+          <colgroup>
+            <col style="width: 10%">
+            <col style="width: 60%">
+            <col style="width: 30%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">{{'code' | translate}}</th>
+            <th class="border-top-0">{{'name' | translate}}</th>
+            <th class="border-top-0">{{'zones' | translate}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let dt of delegateTypes">
+            <td [style.background-color]="dt.color" [style.color]="dt.text_color">{{dt.code}}</td>
+            <td><a class="btn btn-link m-0 p-0" (click)="updateDelType(dt)">{{dt.name}}</a></td>
+            <td>
+              <ng-container *ngFor="let zone of dt.zones">
+                <div class="badge mr-1 small" [style.background-color]="zone.color"
+                     [ngbTooltip]="zone.name"
+                     [style.color]="zone.text_color">{{zone.code}}</div>
+              </ng-container>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <span class="text-muted">{{'total_results' | translate}}: {{delegateTypes.length}}</span>
+    </div>
+  </div>
+</ng-container>
 
 <ng-template #loadingAnimation>
   <ngx-skeleton-loader
     count="10"
     [theme]="{ 'border-radius': '0', width: '100%', height: '30px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
 </ng-template>
+
+<ws-modal [open]="manageDelType !== null" (onClose)="manageDelType = null" [options]="{size: 'lg'}">
+  <ng-container header>
+    <h4 *ngIf="manageDelType?.id === 0">{{'add_new_delegate_type' | translate}}</h4>
+    <h4 *ngIf="manageDelType?.id > 0">{{'editing' | translate}}: {{manageDelType.name}}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-delegate-types-form *ngIf="manageDelType !== null"
+                             [delType]="manageDelType" [selectedEvent]="selectedEvent"
+                             (cancelForm)="manageDelType = null" (saveDelType)="save($event)"></app-delegate-types-form>
+  </ng-container>
+</ws-modal>

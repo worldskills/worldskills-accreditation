@@ -38,7 +38,7 @@ export class PositionsComponent extends WsComponent implements OnInit {
             this.positions = res.positions;
             this.loading = false;
           }),
-          this.delTypeService.getDelegateTypes(this.selectedEvent.id).subscribe(res => {
+          this.delTypeService.getList(this.selectedEvent.id).subscribe(res => {
             this.delegateTypes = res.delegate_types;
           })
         );

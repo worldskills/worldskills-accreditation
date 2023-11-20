@@ -3,3 +3,11 @@ ng-select .ng-dropdown-panel {
   width: auto !important;
   max-width: 550px;
 }
+
+ngb-modal-backdrop {
+  z-index: 1050 !important;
+}
+
+.toast {
+  opacity: 100 !important;
+}

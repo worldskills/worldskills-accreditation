@@ -40,8 +40,7 @@ export class EventComponent extends WsComponent implements OnInit {
 
     // set selected tab based on current route
     const urlSegments = this.router.url.split('/');
-    const lastSegment = urlSegments[urlSegments.length - 1];
-    const selectedTabIndex = this.tabs.findIndex(tab => tab.path === lastSegment);
+    const selectedTabIndex = this.tabs.findIndex(tab => tab.path === urlSegments[3]);
     if (selectedTabIndex !== -1) {
       this.selectedTabIndex = selectedTabIndex;
     }

@@ -1,0 +1,92 @@
+<form class="form-horizontal" (ngSubmit)="save()" #form="ngForm" novalidate>
+  <div class="row mb-2">
+    <div class="col-sm-3">
+      <label class="small font-weight-bold my-0 py-0">{{'code' | translate}}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+      <input
+        type="text"
+        class="form-control"
+        name="code"
+        [ngModel]="delType.code">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{'name' | translate}}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        [ngModel]="delType.name">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-3">
+      <label class="small font-weight-bold my-0 py-0">{{'color' | translate}}</label>
+      <input
+        type="color"
+        class="form-control"
+        name="color"
+        [ngModel]="delType.color">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{'badge_lines' | translate | titlecase}}</label>
+      <input
+        type="text"
+        class="form-control"
+        name="line1"
+        [ngModel]="delType.line1">
+      <p class="text-muted small mb-2">Available keywords: SKILL, SECTOR, POSITION, MEMBER, ORGANIZATION</p>
+
+      <input
+        type="text"
+        class="form-control mb-2"
+        name="line2"
+        [ngModel]="delType.line2">
+
+      <input
+        type="text"
+        class="form-control"
+        name="line3"
+        [ngModel]="delType.line3">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{'zones' | translate | titlecase}}</label>
+      <ng-select
+        name="zones"
+        [ngModel]="delType.zones"
+        [multiple]="true"
+        [items]="zones"
+        bindLabel="name"
+        [closeOnSelect]="false"
+      >
+        <ng-template ng-label-tmp let-item="item">
+          <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+          <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+        </ng-template>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="row mb-2 text-right">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-sm btn-primary">{{'save' | translate}}</button>
+      <button type="button" class="btn btn-sm btn-outline-primary ml-2"
+              (click)="cancel()">{{'cancel' | translate}}</button>
+    </div>
+  </div>
+
+</form>

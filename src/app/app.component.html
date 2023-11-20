@@ -2,6 +2,7 @@
 <ws-puppeteer-banner [currentUser]="currentUser"></ws-puppeteer-banner>
 <ws-auth-header [appName]="'app_name_accreditation' | translate"
                 [menuItems]="menuItems" [autoLoginOnLogout]="true"></ws-auth-header>
+<lib-toastify-toast-container [autoClose]="3000"></lib-toastify-toast-container>
 
 <div class="container">
   <ws-breadcrumbs *ngIf="showBreadcrumb" [showHomeItem]="true" [homeItemText]="'Events' | translate"

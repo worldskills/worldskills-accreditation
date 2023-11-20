@@ -3,7 +3,7 @@ import {WsService} from "@worldskills/worldskills-angular-lib";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable, share} from "rxjs";
-import {DelegateTypeContainer} from "../../types/delegate-type";
+import {DelegateType, DelegateTypeContainer} from "../../types/delegate-type";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,19 @@ export class DelegateTypeService extends WsService<any> {
     super();
   }
 
-  getDelegateTypes(eventId: number): Observable<DelegateTypeContainer> {
+  getList(eventId: number): Observable<DelegateTypeContainer> {
     return this.http.get<DelegateTypeContainer>(this.url(eventId)).pipe(share());
+  }
+
+  get(delTypeId: number, eventId: number): Observable<DelegateType> {
+    return this.http.get<DelegateType>(this.url(eventId) + `/${delTypeId}`).pipe(share());
+  }
+
+  create(eventId: number, delegateType: DelegateType): Observable<DelegateType> {
+    return this.http.post<DelegateType>(this.url(eventId), delegateType).pipe(share());
+  }
+
+  update(eventId: number, delegateType: DelegateType): Observable<DelegateType> {
+    return this.http.put<DelegateType>(this.url(eventId) + `/${delegateType.id}`, delegateType).pipe(share());
   }
 }
