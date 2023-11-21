@@ -21,7 +21,7 @@
             </th>
             <th class="border-top-0">{{'delegate_type' | translate}}</th>
             <th class="border-top-0">{{'zones' | translate}}</th>
-            <th class="border-top-0">{{'member' | translate}}</th>
+            <th class="border-top-0" *ngIf="doesResultHasMember()">{{'member' | translate}}</th>
             <th class="border-top-0" *ngIf="doesResultHasSkill()">{{'skill' | translate}}</th>
             <th class="border-top-0">{{'printed' | translate}}?</th>
           </tr>
@@ -50,7 +50,7 @@
                      [style.color]="zone.text_color">{{zone.code}}</div>
               </ng-container>
             </td>
-            <td><span *ngIf="person.member">{{person.member.name.text}}</span></td>
+            <td><span *ngIf="person.member && doesResultHasMember()">{{person.member.name.text}}</span></td>
             <td><span *ngIf="person.skill && doesResultHasSkill()">{{person.skill.name.text}}
               ({{person.skill.skill_number}})</span></td>
             <td></td>

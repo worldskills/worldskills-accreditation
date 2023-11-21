@@ -93,6 +93,10 @@ export class PeopleComponent extends WsComponent implements OnInit {
     return this.result.people.filter(p => !GenericUtil.isNullOrUndefined(p.skill)).length > 0;
   }
 
+  doesResultHasMember(): boolean {
+    return this.result.people.filter(p => !GenericUtil.isNullOrUndefined(p.member)).length > 0;
+  }
+
   filter(params: PersonAccreditationSummaryReqParams) {
     this.fetchParams = {...params};
     this.loadPeople();
