@@ -32,10 +32,12 @@ export class EventComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(({eventId}) => {
-      this.eventService.get(eventId).subscribe(event => {
-        this.currentEvent = event;
-        this.appService.selectedEvent.next(this.currentEvent);
-      });
+      this.subscribe(
+        this.eventService.get(eventId).subscribe(event => {
+          this.currentEvent = event;
+          this.appService.selectedEvent.next(this.currentEvent);
+        })
+      );
     });
 
     // set selected tab based on current route

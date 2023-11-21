@@ -27,32 +27,32 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let person of result.people">
+          <tr *ngFor="let personAcr of result.people">
             <td>
-              <a routerLink="">
-                <ng-container *ngIf="person.first_name">{{person.first_name}}</ng-container>
-                <ng-container *ngIf="!person.first_name">{{'empty_hint' | translate}}</ng-container>
+              <a routerLink="{{personAcr.id}}">
+                <ng-container *ngIf="personAcr.first_name">{{personAcr.first_name}}</ng-container>
+                <ng-container *ngIf="!personAcr.first_name">{{'empty_hint' | translate}}</ng-container>
               </a>
             </td>
             <td>
-              <a routerLink="">
-                <ng-container *ngIf="person.last_name">{{person.last_name}}</ng-container>
-                <ng-container *ngIf="!person.last_name">{{'empty_hint' | translate}}</ng-container>
+              <a routerLink="{{personAcr.id}}">
+                <ng-container *ngIf="personAcr.last_name">{{personAcr.last_name}}</ng-container>
+                <ng-container *ngIf="!personAcr.last_name">{{'empty_hint' | translate}}</ng-container>
               </a>
             </td>
             <td>
-              {{person.delegate_type.name}}
+              {{personAcr.delegate_type.name}}
             </td>
             <td>
-              <ng-container *ngFor="let zone of person.zones">
+              <ng-container *ngFor="let zone of personAcr.zones">
                 <div class="badge mr-1 small" [style.background-color]="zone.color"
                      [ngbTooltip]="zone.name"
                      [style.color]="zone.text_color">{{zone.code}}</div>
               </ng-container>
             </td>
-            <td><span *ngIf="person.member && doesResultHasMember()">{{person.member.name.text}}</span></td>
-            <td><span *ngIf="person.skill && doesResultHasSkill()">{{person.skill.name.text}}
-              ({{person.skill.skill_number}})</span></td>
+            <td><span *ngIf="personAcr.member && doesResultHasMember()">{{personAcr.member.name.text}}</span></td>
+            <td><span *ngIf="personAcr.skill && doesResultHasSkill()">{{personAcr.skill.name.text}}
+              ({{personAcr.skill.skill_number}})</span></td>
             <td></td>
           </tr>
           <tr *ngIf="result.total_count === 0">

@@ -7,6 +7,7 @@ import {
   PersonAccreditationSummaryContainer,
   PersonAccreditationSummaryReqParams
 } from "../../types/person-accreditation-summary";
+import {PersonAccreditation} from "../../types/person-accreditation";
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class PersonAccreditationService extends WsService<any> {
     let httpParams = HttpUtil.objectToParams(ObjectUtil.stripNullOrUndefined(params || {}));
 
     return this.http.get<PersonAccreditationSummaryContainer>(this.url(eventId), {params: httpParams}).pipe(share());
+  }
+
+  getPersonAccreditation(eventId: number, personAccreditationId: number): Observable<PersonAccreditation> {
+    return this.http.get<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}`).pipe(share());
   }
 }
