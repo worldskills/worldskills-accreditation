@@ -21,4 +21,8 @@ export class PositionDelegateTypeService extends WsService<any> {
   getPositions(eventId: number): Observable<PositionDelegateTypeContainer> {
     return this.http.get<PositionDelegateTypeContainer>(this.url(eventId)).pipe(share());
   }
+
+  update(eventId: number, positions: PositionDelegateTypeContainer): Observable<PositionDelegateTypeContainer> {
+    return this.http.put<PositionDelegateTypeContainer>(this.url(eventId), positions).pipe(share());
+  }
 }

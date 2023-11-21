@@ -15,7 +15,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let pos of positions">
+        <tr *ngFor="let pos of positions; index as idx">
           <td>{{pos.position.name.text}}</td>
           <td>
             <ng-select
@@ -24,6 +24,7 @@
               [items]="delegateTypes"
               bindValue="id"
               bindLabel="name"
+              (change)="onDelTypeChange($event, idx)"
             >
               <ng-template ng-label-tmp let-item="item">
                 <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
@@ -37,10 +38,10 @@
           </td>
           <td>
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveUp(pos)">
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveUp(idx, pos)">
                 <i class="fa fa-arrow-up"></i>
               </button>
-              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveDown(pos)">
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveDown(idx, pos)">
                 <i class="fa fa-arrow-down"></i>
               </button>
             </div>
