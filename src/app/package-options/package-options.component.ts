@@ -4,6 +4,8 @@ import {Event} from "../../types/event";
 import {AppService} from "../../services/app/app.service";
 import {PackageOptionService} from "../../services/package-option/package-option.service";
 import {PackageOption} from "../../types/package-option";
+import {Zone} from 'src/types/zone';
+import {ToastService} from "angular-toastify";
 
 @Component({
   selector: 'app-package-options',
@@ -15,9 +17,12 @@ export class PackageOptionsComponent extends WsComponent implements OnInit {
   selectedEvent: Event;
   options: PackageOption[];
   loading = false;
+  managePackageOption: PackageOption = null;
 
   constructor(private appService: AppService,
-              private packageOptionService: PackageOptionService) {
+              private packageOptionService: PackageOptionService,
+              private toastService: ToastService
+              ) {
     super();
   }
 
@@ -38,4 +43,14 @@ export class PackageOptionsComponent extends WsComponent implements OnInit {
     )
   }
 
+  save(value: { option: PackageOption, zones: Zone[] }) {
+    this.packageOptionService.updatePackageOptionZones(value.option.id, {zones: value.zones}).subscribe(res => {
+      this.managePackageOption = null;
+      this.toastService.success('Package Option is saved!');
+    });
+  }
+
+  updatePackageOption(option: PackageOption) {
+    this.managePackageOption = option;
+  }
 }
