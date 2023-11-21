@@ -46,12 +46,29 @@ export class ZonesComponent extends WsComponent implements OnInit {
     );
   }
 
-  moveUp(zone: Zone) {
+  moveUp(idx: number, zone: Zone) {
+    this.zones[idx] = this.zones[idx - 1];
+    this.zones[idx - 1] = zone;
 
+    this.updateZonesSort();
   }
 
-  moveDown(zone: Zone) {
+  moveDown(idx: number, zone: Zone) {
+    this.zones[idx] = this.zones[idx + 1];
+    this.zones[idx + 1] = zone;
 
+    this.updateZonesSort();
+  }
+
+  private updateZonesSort() {
+    for (let i = 0; i < this.zones.length; i++) {
+      this.zones[i].sort = i + 1;
+    }
+
+    this.zoneService.updateSort(this.selectedEvent.id, {zones: this.zones}).subscribe(res => {
+      this.zones = res.zones;
+      this.toastService.success('Zones are sorted!');
+    });
   }
 
   updateZone(zone: Zone): void {
@@ -65,7 +82,7 @@ export class ZonesComponent extends WsComponent implements OnInit {
       name: '',
       color: '',
       text_color: '',
-      sort: 0
+      sort: this.zones?.length > 0 ? (this.zones.sort((a, b) => a.sort - b.sort)[this.zones.length - 1].sort + 1) : 0
     };
   }
 

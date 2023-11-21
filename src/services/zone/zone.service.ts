@@ -29,4 +29,8 @@ export class ZoneService extends WsService<any> {
   update(eventId: number, zone: Zone): Observable<Zone> {
     return this.http.put<Zone>(this.url(eventId) + `/${zone.id}`, zone).pipe(share());
   }
+
+  updateSort(eventId: number, zones: ZoneContainer): Observable<ZoneContainer> {
+    return this.http.put<ZoneContainer>(this.url(eventId) + '/sort', zones).pipe(share());
+  }
 }
