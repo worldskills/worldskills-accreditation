@@ -16,6 +16,7 @@ export interface PersonAccreditationSummary {
   email_address: string;
   date_of_birth: Date;
   position: string;
+  details: string;
   skill: Skill;
   sector: Sector;
   member: Member;

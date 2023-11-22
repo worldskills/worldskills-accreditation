@@ -13,6 +13,7 @@ import {ZonesComponent} from "./zones/zones.component";
 import {PositionsComponent} from "./positions/positions.component";
 import {PackageOptionsComponent} from "./package-options/package-options.component";
 import {PersonComponent} from "./person/person.component";
+import {PrintComponent} from "./print/print.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -88,6 +89,10 @@ const routes: Routes = [
         ]
       }
     ]
+  },
+  {
+    path: 'events/:eventId/print',
+    component: PrintComponent,
   },
   {
     path: 'not-authorized',

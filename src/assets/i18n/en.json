@@ -1,4 +1,5 @@
 {
+  "accreditation_badge_disclaimer_info": "This accreditation badge is personal and non-transferable. It is property of the Event Organizer and can be withdrawn at any time at the Event Organizer's sole discretion.",
   "add_new_delegate_type": "Add new delegate type",
   "add_new_zone": "Add new zone",
   "app_name_accreditation": "Accreditation",
@@ -10,9 +11,11 @@
   "editing": "Editing",
   "empty_hint": "(empty)",
   "end_date": "End Date",
+  "fetching_information": "Fetching information",
   "filter": "Filter",
   "first_name": "First Name",
   "last_name": "Last Name",
+  "generated_on": "Generated on",
   "group_name": "Group name",
   "has_photo": "Has photo",
   "member": "Member",

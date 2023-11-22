@@ -1,0 +1,11 @@
+<ng-container *ngIf="badgeHTMLTemplate?.length > 0 && !!currentEvent; else loading">
+  <ng-container *ngFor="let person of people">
+    <div [innerHTML]="replaceBadgeContent(person)"></div>
+  </ng-container>
+</ng-container>
+
+<ng-template #loading>
+  <div>
+    {{ 'fetching_information' | translate}}...
+  </div>
+</ng-template>
