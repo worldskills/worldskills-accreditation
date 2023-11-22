@@ -14,6 +14,7 @@ import {PositionsComponent} from "./positions/positions.component";
 import {PackageOptionsComponent} from "./package-options/package-options.component";
 import {PersonComponent} from "./person/person.component";
 import {PrintComponent} from "./print/print.component";
+import {BadgeTemplatesComponent} from "./badge-templates/badge-templates.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -50,6 +51,11 @@ const routes: Routes = [
             path: '',
             pathMatch: 'full',
             redirectTo: 'people'
+          },
+          {
+            path: 'badge-templates',
+            data: {breadcrumb: 'Badge Templates'},
+            component: BadgeTemplatesComponent
           },
           {
             path: 'people',

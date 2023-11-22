@@ -14,6 +14,7 @@ export class EventComponent extends WsComponent implements OnInit {
 
   currentEvent: Event;
   tabs = [
+    {label: 'Badge Templates', path: 'badge-templates'},
     {label: 'People', path: 'people'},
     {label: 'Scans', path: 'scans'},
     {label: 'Delegate Types', path: 'delegate-types'},
