@@ -46,6 +46,12 @@ angular.module('accreditationApp')
             }
         });
 
+        auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditPackageOptions'], $scope.event.ws_entity.id).then(function (hasUserRole) {
+            if (hasUserRole) {
+                $scope.userCanEditPositions = true;
+            }
+        });
+
         auth.hasUserRole(API_ACCREDITATION_CODE, ['Admin', 'EditZones'], $scope.event.ws_entity.id).then(function (hasUserRole) {
             if (hasUserRole) {
                 $scope.userCanEditZones = true;
