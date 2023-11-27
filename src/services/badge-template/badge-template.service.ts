@@ -41,7 +41,12 @@ export class BadgeTemplateService extends WsService<any> {
     return this.http.get('assets/badge-templates/wsi-2023-ga/wsi-2023-ga.html', {responseType: 'text'});
   }
 
-  replaceBadgeContent(badgeHTMLTemplate: string, person: PersonAccreditationSummary, currentEvent: Event): SafeHtml {
+  replaceBadgeContent(idx: number,
+                      badgeHTMLTemplate: string,
+                      person: PersonAccreditationSummary,
+                      currentEvent: Event,
+                      twoBadgesPerPage: boolean = false,
+                      totalBadgesToPrint: number = null): SafeHtml {
     let badgeHTML = badgeHTMLTemplate;
 
     badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.PERSON_FIRST_NAME, person.first_name);
@@ -61,6 +66,23 @@ export class BadgeTemplateService extends WsService<any> {
     badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.EVENT_START_DATE, datepipe.transform(currentEvent.start_date, 'dd.MM.yyyy'));
     badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.EVENT_END_DATE, datepipe.transform(currentEvent.end_date, 'dd.MM.yyyy'));
     badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.GENERATED_ON, this.translate.instant('generated_on'));
+
+    if (twoBadgesPerPage) {
+      let twoBadgesPerPageClass = "ws-badge-multiple";
+      if ((idx+1) % 2 === 1) {
+        twoBadgesPerPageClass += " ws-badge-multiple-odd";
+      } else if ((idx+1) % 2 === 0) {
+        twoBadgesPerPageClass += " ws-badge-multiple-even";
+        twoBadgesPerPageClass += " ws-badge-multiple-cut-separator";
+      }
+
+      // Set full page to last badge if total badges to print is odd
+      if (totalBadgesToPrint % 2 === 1 && idx === totalBadgesToPrint - 1) {
+        twoBadgesPerPageClass += " ws-badge-multiple-last";
+      }
+
+      badgeHTML = badgeHTML.replace("ws-badge", twoBadgesPerPageClass);
+    }
 
     return this.sanitizer.bypassSecurityTrustHtml(badgeHTML);
   }

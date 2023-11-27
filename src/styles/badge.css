@@ -18,4 +18,30 @@
     position: relative;
     overflow: hidden;
   }
+
+  .ws-badge-multiple {
+    width: 210mm;
+    height: 148.5mm;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ws-badge-multiple-odd {
+    margin-top: 10mm;
+  }
+
+  .ws-badge-multiple-cut-separator {
+    border-top: 1px dashed rgba(0, 0, 0, 0.32);
+  }
+
+  .ws-badge-multiple-even {
+    margin-bottom: 10mm;
+  }
+
+  .ws-badge-multiple-last {
+    height: 297mm;
+  }
 }

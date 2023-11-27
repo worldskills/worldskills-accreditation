@@ -25,6 +25,6 @@ export class PersonBadgePreviewComponent extends WsComponent implements OnInit {
   }
 
   replaceBadgeContent(person: PersonAccreditationSummary): SafeHtml {
-    return this.badgeTemplateService.replaceBadgeContent(this.badgeHTMLTemplate, person, this.selectedEvent);
+    return this.badgeTemplateService.replaceBadgeContent(0, this.badgeHTMLTemplate, person, this.selectedEvent);
   }
 }

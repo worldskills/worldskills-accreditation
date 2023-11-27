@@ -1,6 +1,6 @@
 <ng-container *ngIf="badgeHTMLTemplate?.length > 0 && !!currentEvent; else loading">
-  <ng-container *ngFor="let person of people">
-    <div [innerHTML]="replaceBadgeContent(person)"></div>
+  <ng-container *ngFor="let person of people; index as idx">
+    <div [innerHTML]="replaceBadgeContent(person, idx)"></div>
   </ng-container>
 </ng-container>
 
