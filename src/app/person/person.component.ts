@@ -6,6 +6,10 @@ import {Event} from "../../types/event";
 import {AppService} from "../../services/app/app.service";
 import {combineLatest} from "rxjs";
 import {PersonAccreditation} from "../../types/person-accreditation";
+import {environment} from "../../environments/environment";
+import {DelegateType} from "../../types/delegate-type";
+import {DelegateTypeService} from "../../services/delegate-type/delegate-type.service";
+import {BadgeTemplateService} from "../../services/badge-template/badge-template.service";
 
 @Component({
   selector: 'app-person',
@@ -14,13 +18,18 @@ import {PersonAccreditation} from "../../types/person-accreditation";
 })
 export class PersonComponent extends WsComponent implements OnInit {
 
+  readonly peopleURL = environment.worldskillsPeople;
   selectedEvent: Event;
   personAcr: PersonAccreditation;
+  delegateTypes: DelegateType[];
+  badgeHTMLTemplate: string;
 
   constructor(private appService: AppService,
               private router: Router,
               private route: ActivatedRoute,
-              private personAccreditationService: PersonAccreditationService
+              private personAccreditationService: PersonAccreditationService,
+              private delegateTypeService: DelegateTypeService,
+              private badgeTemplateService: BadgeTemplateService
   ) {
     super();
   }
@@ -32,6 +41,12 @@ export class PersonComponent extends WsComponent implements OnInit {
         this.subscribe(
           this.personAccreditationService.getPersonAccreditation(this.selectedEvent.id, personAcrId).subscribe(person => {
             this.personAcr = person;
+          }),
+          this.delegateTypeService.getList(this.selectedEvent.id).subscribe(res => {
+            this.delegateTypes = res.delegate_types;
+          }),
+          this.badgeTemplateService.getBadgeHTMLTemplate().subscribe(html => {
+            this.badgeHTMLTemplate = html;
           })
         );
       });

@@ -1,25 +1,5 @@
-@page {
-  margin: 0;
-}
-
-.ws-badge {
-  /*TODO: include font*/
-  font-family: FrutigerLTW04, Frutiger, Arial, sans-serif;
-  font-weight: 300;
-  font-size: 5mm;
-}
-
 @media screen {
   body {
     background-color: #ccc;
-  }
-
-  .ws-badge {
-    width: 210mm;
-    height: 297mm;
-    margin: 10mm auto;
-    background-color: #fff;
-    position: relative;
-    overflow: hidden;
   }
 }

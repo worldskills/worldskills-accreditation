@@ -4,7 +4,7 @@
       <div class="card-header">
         <h5 class="card-title">Existing Information</h5>
       </div>
-      <div class="card-body">
+      <div class="card-body" *ngIf="personAcr">
         <div class="row mb-2">
           <div class="col-md-4" *ngFor="let pi of personAcr.person.images">
             <img src="{{pi.thumbnail}}" [title]="pi.type"
@@ -35,8 +35,8 @@
 
             <ng-container *ngFor="let zone of personAcr.position_delegate_type.delegate_type.zones">
               <span class="badge mr-1 small" [style.background-color]="zone.color"
-                   [ngbTooltip]="zone.name"
-                   [style.color]="zone.text_color">{{zone.code}} - {{zone.name}}</span>
+                    [ngbTooltip]="zone.name"
+                    [style.color]="zone.text_color">{{zone.code}} - {{zone.name}}</span>
               <br>
             </ng-container>
           </p>
@@ -51,27 +51,115 @@
           </p>
         </div>
 
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="card-title">Manual Override</h5>
-      </div>
-      <div class="card-body">
+        <div class="form-group">
+          <a href="{{peopleURL + '/people/' + personAcr.person.id}}" target="_blank"><span
+            class="fa fa-external-link"></span> View in People</a>
+        </div>
 
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="card-title">Preview Badge</h5>
-      </div>
-      <div class="card-body">
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              Manual Override <span class="fa fa-info-circle"
+                                    ngbTooltip="This gives you the ability to override or customise person's badge"></span>
+            </h5>
+          </div>
+          <div class="card-body" *ngIf="personAcr">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
+                <ng-select
+                  name="del_types"
+                  [items]="delegateTypes"
+                  bindValue="id"
+                  bindLabel="name"
+                >
+                  <ng-template ng-label-tmp let-item="item">
+                    <div class="d-inline-block" style="width: 15px; height: 15px; "
+                         [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{item.name}}</div>
+                  </ng-template>
+                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                    <div class="d-inline-block" style="width: 15px; height: 15px; "
+                         [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{item.name}}</div>
+                  </ng-template>
+                </ng-select>
+              </div>
+            </div>
 
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{'badge_lines' | translate}}</label>
+                <textarea class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{'additional_zones' | translate}}</label>
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="dropdown">
+                      <a class="btn btn-sm btn-outline-primary dropdown-toggle" href="#" role="button"
+                         id="addZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Add Zone
+                      </a>
+
+                      <div class="dropdown-menu" aria-labelledby="addZoneDropdownMenu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="dropdown ml-2">
+                      <a class="btn btn-sm btn-outline-primary dropdown-toggle" href="#" role="button"
+                         id="removeZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Remove Zone
+                      </a>
+
+                      <div class="dropdown-menu" aria-labelledby="removeZoneDropdownMenu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Preview Badge</h5>
+          </div>
+          <div class="card-body p-2 m-0" *ngIf="personAcr">
+            <app-person-badge-preview
+              style="zoom: 0.85"
+              [selectedEvent]="selectedEvent"
+              [person]="personAcr.summary"
+              [badgeHTMLTemplate]="badgeHTMLTemplate"></app-person-badge-preview>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
+<div class="row">
+
 </div>

@@ -5,6 +5,7 @@ export const environment = {
   worldskillsApiAccreditation: 'https://api.worldskills.show/accreditation',
   worldskillsApiOrg: 'https://api.worldskills.show/org',
   worldskillsApiPeople: 'https://api.worldskills.show/people',
+  worldskillsPeople: 'https://people.worldskills.show',
   worldskillsClientId: 'a95703d1aa96',
   worldskillsAuthorizeUrl: 'https://auth.worldskills.show/oauth/authorize',
   worldskillsAuthorizeRedirect: 'https://accreditation.worldskills.show/',
