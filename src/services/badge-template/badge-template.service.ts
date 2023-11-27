@@ -46,8 +46,8 @@ export class BadgeTemplateService extends WsService<any> {
 
     badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.PERSON_FIRST_NAME, person.first_name);
     badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.PERSON_LAST_NAME, person.last_name);
-    badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.LINE_1, person.lines[0]);
-    badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.LINE_2, person.lines[1]);
+    badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.LINE_1, person.lines[0] ?? '');
+    badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.LINE_2, person.lines[1] ?? '');
     badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.QR_CODE, person.qr_code);
     badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.PERSON_IMAGE_THUMBNAIL, person.image.thumbnail);
     badgeHTML = badgeHTML.replace(BADGE_REPLACEMENT_KEYS.DELEGATE_TYPE_COLOR, person.delegate_type.color);
