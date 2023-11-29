@@ -7,7 +7,8 @@
       <div class="card-body" *ngIf="personAcr">
         <div class="row mb-2">
           <div class="col-md-4" *ngFor="let pi of personAcr.person.images">
-            <img src="{{pi.thumbnail}}" ngbTooltip="{{pi.type}} photo of {{personAcr.person.first_name}} {{personAcr.person.last_name}}"
+            <img src="{{pi.thumbnail}}"
+                 ngbTooltip="{{pi.type}} photo of {{personAcr.person.first_name}} {{personAcr.person.last_name}}"
                  width="100"
                  height="125"
                  class="object-fit-cover"
@@ -85,8 +86,9 @@
                 <ng-select
                   name="del_types"
                   [items]="delegateTypes"
-                  bindValue="id"
                   bindLabel="name"
+                  [ngModel]="personAcr.delegate_type"
+                  (change)="onDelTypeChange($event)"
                 >
                   <ng-template ng-label-tmp let-item="item">
                     <div class="d-inline-block" style="width: 15px; height: 15px; "
@@ -105,7 +107,8 @@
             <div class="row mb-2">
               <div class="col-sm-12">
                 <label class="small text-muted font-weight-bold my-0 py-0">{{'badge_lines' | translate}}</label>
-                <textarea class="form-control" rows="3" [(ngModel)]="personAcr.lines"></textarea>
+                <textarea class="form-control" rows="3" [ngModel]="personAcr.lines"
+                          (ngModelChange)="onBadgeLinesChange($event)"></textarea>
               </div>
             </div>
 
@@ -122,9 +125,8 @@
                       </a>
 
                       <div class="dropdown-menu" aria-labelledby="addZoneDropdownMenu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" (click)="addZone(zone)"
+                           *ngFor="let zone of getZonesToAdd()">{{zone.name}}</a>
                       </div>
                     </div>
                     <div class="btn-group ml-2">
@@ -134,17 +136,32 @@
                       </a>
 
                       <div class="dropdown-menu" aria-labelledby="removeZoneDropdownMenu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" (click)="removeZone(zone)"
+                           *ngFor="let zone of getZonesToRemove()">{{zone.name}}</a>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <div class="mt-2">
+                  <p class="py-0 my-0 small" *ngFor="let zone of personAcr.zones_add">
+                    <a class="text-black" ngbTooltip="Click to remove zone" [routerLink]="" (click)="removeZone(zone)">
+                      {{zone.code}} - {{zone.name}}
+                    </a>
+                  </p>
+
+                  <p class="py-0 my-0 small" *ngFor="let zone of personAcr.zones_remove">
+                    <a class="text-black" ngbTooltip="Click to add zone back" [routerLink]="" (click)="addZone(zone)">
+                      <s>{{zone.code}} - {{zone.name}}</s>
+                    </a>
+                  </p>
+                </div>
               </div>
             </div>
 
-            <p class="text-muted small text-right">Changes are saved automatically</p>
+            <p class="text-muted small text-right" *ngIf="savingPersonAcr">{{'saving' | translate}}...</p>
+            <p class="text-muted small text-right"
+               *ngIf="!savingPersonAcr">{{'change_automatic_save_msg'| translate}}</p>
           </div>
           <div class="card-body" *ngIf="!personAcr">
             <ngx-skeleton-loader
@@ -164,7 +181,20 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">{{'preview_badge' | translate | titlecase}}</h5>
+            <h5 class="card-title">{{'preview_badge' | translate | titlecase}}
+              <div class="btn-group float-right align-middle">
+                <a class="btn btn-sm btn-primary dropdown-toggle" href="#" role="button"
+                   id="printPreviewDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{'print_preview' | translate}}
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="printPreviewDropdownMenu">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
+            </h5>
           </div>
           <div class="card-body p-2 m-0" *ngIf="personAcr">
             <app-person-badge-preview

@@ -31,4 +31,8 @@ export class PersonAccreditationService extends WsService<any> {
   getPersonAccreditation(eventId: number, personAccreditationId: number): Observable<PersonAccreditation> {
     return this.http.get<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}`).pipe(share());
   }
+
+  updatePersonAccreditation(eventId: number, personAccreditationId: number, personAccreditation: PersonAccreditation): Observable<PersonAccreditation> {
+    return this.http.put<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}`, personAccreditation).pipe(share());
+  }
 }
