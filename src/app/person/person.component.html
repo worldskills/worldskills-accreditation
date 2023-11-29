@@ -1,74 +1,5 @@
 <div class="row">
   <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="card-title">{{'existing_information' | translate | titlecase}}</h5>
-      </div>
-      <div class="card-body" *ngIf="personAcr">
-        <div class="row mb-2">
-          <div class="col-md-4" *ngFor="let pi of personAcr.person.images">
-            <img src="{{pi.thumbnail}}"
-                 ngbTooltip="{{pi.type}} photo of {{personAcr.person.first_name}} {{personAcr.person.last_name}}"
-                 width="100"
-                 height="125"
-                 class="object-fit-cover"
-                 alt="{{pi.type}} photo of {{personAcr.person.first_name}} {{personAcr.person.last_name}}">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="small text-muted font-weight-bold my-0 py-0">{{'name' | translate}}</label>
-          <p>{{personAcr.person.first_name}} {{personAcr.person.last_name}}</p>
-        </div>
-
-        <div class="form-group">
-          <label class="small text-muted font-weight-bold my-0 py-0">{{'position' | translate}}</label>
-          <p>
-            {{personAcr.person_position.position.name.text}} <br>
-            {{personAcr.person_position.position.wsEntity.name.text}}
-          </p>
-        </div>
-
-        <div class="form-group">
-          <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
-          <p>
-            {{personAcr.position_delegate_type.delegate_type.name}} <br>
-
-            <ng-container *ngFor="let zone of personAcr.position_delegate_type.delegate_type.zones">
-              <span class="badge mr-1 small" [style.background-color]="zone.color"
-                    [ngbTooltip]="zone.name"
-                    [style.color]="zone.text_color">{{zone.code}} - {{zone.name}}</span>
-              <br>
-            </ng-container>
-          </p>
-        </div>
-
-        <div class="form-group">
-          <label class="small text-muted font-weight-bold my-0 py-0">{{'package_options' | translate}}</label>
-          <p>
-            <span *ngFor="let poz of personAcr.package_option_zones">
-              {{poz.package_option.name.text}}: {{poz.zone.code}} - {{poz.zone.name}}
-            </span>
-          </p>
-        </div>
-
-        <div class="form-group">
-          <a href="{{peopleURL + '/people/' + personAcr.person.id}}" target="_blank"><span
-            class="fa fa-external-link"></span> View in People</a>
-        </div>
-
-      </div>
-      <div class="card-body" *ngIf="!personAcr">
-        <ngx-skeleton-loader
-          count="1"
-          [theme]="{ 'border-radius': '0', width: '100px', height: '125px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
-        <ngx-skeleton-loader
-          count="5"
-          [theme]="{ 'border-radius': '0', width: '100%', height: '30px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -81,7 +12,7 @@
           </div>
           <div class="card-body" *ngIf="personAcr">
             <div class="row mb-2">
-              <div class="col-sm-6">
+              <div class="col-sm-12">
                 <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
                 <ng-select
                   name="del_types"
@@ -181,35 +112,107 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">{{'preview_badge' | translate | titlecase}}
-              <div class="btn-group float-right align-middle">
-                <a class="btn btn-sm btn-primary dropdown-toggle" href="#" role="button"
-                   id="printPreviewDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{'print_preview' | translate}}
-                </a>
-
-                <div class="dropdown-menu" aria-labelledby="printPreviewDropdownMenu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </div>
-            </h5>
+            <h5 class="card-title">{{'existing_information' | translate | titlecase}}</h5>
           </div>
-          <div class="card-body p-2 m-0" *ngIf="personAcr">
-            <app-person-badge-preview
-              style="zoom: 0.85"
-              [selectedEvent]="selectedEvent"
-              [person]="personAcr.summary"
-              [badgeHTMLTemplate]="badgeHTMLTemplate"></app-person-badge-preview>
+          <div class="card-body" *ngIf="personAcr">
+            <div class="row mb-2">
+              <div class="col-md-4" *ngFor="let pi of personAcr.person.images">
+                <img src="{{pi.thumbnail}}"
+                     ngbTooltip="{{pi.type}} photo of {{personAcr.person.first_name}} {{personAcr.person.last_name}}"
+                     width="100"
+                     height="125"
+                     class="object-fit-cover"
+                     alt="{{pi.type}} photo of {{personAcr.person.first_name}} {{personAcr.person.last_name}}">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'name' | translate}}</label>
+              <p>{{personAcr.person.first_name}} {{personAcr.person.last_name}}</p>
+            </div>
+
+            <div class="form-group">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'position' | translate}}</label>
+              <p>
+                {{personAcr.person_position.position.name.text}} <br>
+                {{personAcr.person_position.position.wsEntity.name.text}}
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
+              <p>
+                {{personAcr.position_delegate_type.delegate_type.name}} <br>
+
+                <ng-container *ngFor="let zone of personAcr.position_delegate_type.delegate_type.zones">
+              <span class="badge mr-1 small" [style.background-color]="zone.color"
+                    [ngbTooltip]="zone.name"
+                    [style.color]="zone.text_color">{{zone.code}} - {{zone.name}}</span>
+                  <br>
+                </ng-container>
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'package_options' | translate}}</label>
+              <p>
+            <span *ngFor="let poz of personAcr.package_option_zones">
+              {{poz.package_option.name.text}}: {{poz.zone.code}} - {{poz.zone.name}}
+            </span>
+              </p>
+            </div>
+
+            <div class="form-group">
+              <a href="{{peopleURL + '/people/' + personAcr.person.id}}" target="_blank"><span
+                class="fa fa-external-link"></span> View in People</a>
+            </div>
+
           </div>
           <div class="card-body" *ngIf="!personAcr">
             <ngx-skeleton-loader
               count="1"
-              [theme]="{ 'border-radius': '0', width: '100%', height: '148.5mm' }"></ngx-skeleton-loader>
+              [theme]="{ 'border-radius': '0', width: '100px', height: '125px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+              count="5"
+              [theme]="{ 'border-radius': '0', width: '100%', height: '30px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
           </div>
         </div>
       </div>
     </div>
+
   </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">{{'preview_badge' | translate | titlecase}}
+          <div class="btn-group float-right align-middle">
+            <a class="btn btn-sm btn-primary dropdown-toggle" href="#" role="button"
+               id="printPreviewDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{'print_preview' | translate}}
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="printPreviewDropdownMenu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </h5>
+      </div>
+      <div class="card-body p-2 m-0" *ngIf="personAcr">
+        <app-person-badge-preview
+          style="zoom: 0.85"
+          [selectedEvent]="selectedEvent"
+          [person]="personAcr.summary"
+          [badgeHTMLTemplate]="badgeHTMLTemplate"></app-person-badge-preview>
+      </div>
+      <div class="card-body" *ngIf="!personAcr">
+        <ngx-skeleton-loader
+          count="1"
+          [theme]="{ 'border-radius': '0', width: '100%', height: '148.5mm' }"></ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+
+
 </div>
