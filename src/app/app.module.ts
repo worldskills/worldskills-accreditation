@@ -34,6 +34,7 @@ import {PersonComponent} from './person/person.component';
 import {PrintComponent} from './print/print.component';
 import {BadgeTemplatesComponent} from './badge-templates/badge-templates.component';
 import {PersonBadgePreviewComponent} from './person-badge-preview/person-badge-preview.component';
+import {ScansFilterComponent} from './scans-filter/scans-filter.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20231109');
@@ -59,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PersonComponent,
     PrintComponent,
     BadgeTemplatesComponent,
-    PersonBadgePreviewComponent
+    PersonBadgePreviewComponent,
+    ScansFilterComponent
   ],
   imports: [
     BrowserModule,
