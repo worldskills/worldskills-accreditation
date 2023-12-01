@@ -55,7 +55,6 @@
             [wsSelect]="['id', 'name.text']"
             name="skill"
             [ngModel]="fetchParams.skill"
-            [multiple]="true"
             [items]="skills"
           ></ng-select>
         </div>
@@ -121,7 +120,7 @@
 
       <div class="row mb-2 text-right">
         <div class="col-sm-12">
-          <button class="btn btn-sm btn-outline-primary">{{'print_preview' | translate}}</button>
+          <button class="btn btn-sm btn-outline-primary" type="button" (click)="printPreview()">{{'print_preview' | translate}}</button>
           <button class="btn btn-sm btn-primary ml-2" type="submit">{{'set_filter' | translate}}</button>
         </div>
       </div>

@@ -7,6 +7,8 @@ import {
   PersonAccreditationSummaryReqParams
 } from "../../types/person-accreditation-summary";
 import {Event} from "../../types/event";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {combineLatest} from "rxjs";
 
 @Component({
   selector: 'app-people',
@@ -21,18 +23,21 @@ export class PeopleComponent extends WsComponent implements OnInit {
   loading = false;
 
   constructor(private appService: AppService,
-              private personAcrService: PersonAccreditationService) {
+              private personAcrService: PersonAccreditationService,
+              private router: Router,
+              private route: ActivatedRoute) {
     super();
   }
 
   ngOnInit(): void {
-    this.resetFilter();
-    this.subscribe(
-      this.appService.selectedEvent.subscribe(event => {
+    this.fetchParams = this.personAcrService.initialiseFetchParams();
+    combineLatest([this.appService.selectedEvent, this.route.queryParams])
+      .subscribe(([event, params]) => {
         this.selectedEvent = event;
+
+        this.personAcrService.loadFilterFromQueryParams(params, this.fetchParams);
         this.loadPeople();
-      })
-    );
+      });
   }
 
   private loadPeople() {
@@ -41,24 +46,6 @@ export class PeopleComponent extends WsComponent implements OnInit {
       this.result = res;
       this.loading = false;
     })
-  }
-
-  resetFilter(): void {
-    this.fetchParams = {
-      name: null,
-      country: null,
-      member: null,
-      pos_id: null,
-      pos_name: null,
-      skill: null,
-      group: null,
-      zone: [],
-      printed: null,
-      photo: null,
-      del_types: [],
-      offset: 0,
-      limit: 10
-    }
   }
 
   sort(field: string) {
@@ -99,6 +86,18 @@ export class PeopleComponent extends WsComponent implements OnInit {
 
   filter(params: PersonAccreditationSummaryReqParams) {
     this.fetchParams = {...params};
-    this.loadPeople();
+    this.updateSearchQueryParams();
+  }
+
+  private updateSearchQueryParams(): void {
+    const queryParams: Params = this.personAcrService.buildQueryParams(this.fetchParams);
+
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParamsHandling: 'merge',
+        queryParams
+      });
   }
 }

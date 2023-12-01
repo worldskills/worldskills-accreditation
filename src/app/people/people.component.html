@@ -81,6 +81,6 @@
     </ng-template>
   </div>
   <div class="col-md-3">
-    <app-people-filter (filter)="filter($event)"></app-people-filter>
+    <app-people-filter (filter)="filter($event)" [fetchParams]="fetchParams"></app-people-filter>
   </div>
 </div>

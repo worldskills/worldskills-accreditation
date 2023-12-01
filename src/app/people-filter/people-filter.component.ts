@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {WsComponent} from "@worldskills/worldskills-angular-lib";
 import {PersonAccreditationSummaryReqParams} from "../../types/person-accreditation-summary";
 import {DelegateType} from "../../types/delegate-type";
@@ -12,6 +12,8 @@ import {Skill} from "../../types/skill";
 import {ZoneService} from "../../services/zone/zone.service";
 import {Zone} from 'src/types/zone';
 import {NgForm} from "@angular/forms";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
 
 @Component({
   selector: 'app-people-filter',
@@ -21,9 +23,9 @@ import {NgForm} from "@angular/forms";
 export class PeopleFilterComponent extends WsComponent implements OnInit {
 
   @Output() filter = new EventEmitter<PersonAccreditationSummaryReqParams>();
+  @Input() fetchParams: PersonAccreditationSummaryReqParams;
   @ViewChild('form') form: NgForm;
 
-  fetchParams: PersonAccreditationSummaryReqParams;
   delegateTypes: DelegateType[];
   members: Member[];
   skills: Skill[];
@@ -38,12 +40,14 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
               private delegateTypeService: DelegateTypeService,
               private memberService: MemberService,
               private skillService: SkillService,
-              private zoneService: ZoneService) {
+              private zoneService: ZoneService,
+              private personAcrService: PersonAccreditationService,
+              private router: Router,
+              private route: ActivatedRoute) {
     super();
   }
 
   ngOnInit(): void {
-    this.resetFilter();
     this.subscribe(
       // load selected event
       this.appService.selectedEvent.subscribe(event => {
@@ -69,25 +73,18 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
     );
   }
 
-  resetFilter(): void {
-    this.fetchParams = {
-      name: null,
-      country: null,
-      member: null,
-      pos_id: null,
-      pos_name: null,
-      skill: null,
-      group: null,
-      zone: [],
-      printed: null,
-      photo: null,
-      del_types: [],
-      offset: 0,
-      limit: 10
-    };
-  }
-
   submit(): void {
     this.filter.emit({...this.fetchParams, ...this.form.value});
+  }
+
+  printPreview() {
+    this.submit();
+    this.fetchParams = {...this.fetchParams, ...this.form.value};
+
+    const queryParams: Params = this.personAcrService.buildQueryParams(this.fetchParams);
+
+    const urlTree = this.router.createUrlTree(['../print'], {relativeTo: this.route, queryParams});
+    const url = this.router.serializeUrl(urlTree);
+    window.open(url, '_blank');
   }
 }
