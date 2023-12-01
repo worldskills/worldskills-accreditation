@@ -17,7 +17,7 @@ import {PersonAccreditationService} from "../../services/person-accreditation/pe
 @Component({
   selector: 'app-print',
   templateUrl: './print.component.html',
-  styleUrls: ['../../styles/badge.css'],
+  styleUrls: ['../../styles/badge.css', './print.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class PrintComponent extends WsComponent implements OnInit {
