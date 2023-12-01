@@ -13,7 +13,7 @@ import {BadgeTemplateService} from "../../services/badge-template/badge-template
 @Component({
   selector: 'app-print',
   templateUrl: './print.component.html',
-  styleUrls: ['./print.component.css', '../../styles/badge.css'],
+  styleUrls: ['../../styles/badge.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class PrintComponent extends WsComponent implements OnInit {
@@ -145,7 +145,7 @@ export class PrintComponent extends WsComponent implements OnInit {
     {
       "id": 22363,
       "person_id": 9273,
-      "first_name": "Hiroshi",
+      "first_name": "Hiroshi 2",
       "last_name": "Akimoto",
       "lines": [
         "Official Delegate",
@@ -267,7 +267,7 @@ export class PrintComponent extends WsComponent implements OnInit {
     {
       "id": 22363,
       "person_id": 9273,
-      "first_name": "Hiroshi",
+      "first_name": "Hiroshi 2",
       "last_name": "Akimoto",
       "lines": [
         "Official Delegate",
@@ -389,7 +389,7 @@ export class PrintComponent extends WsComponent implements OnInit {
     {
       "id": 22363,
       "person_id": 9273,
-      "first_name": "Hiroshi",
+      "first_name": "Hiroshi 2",
       "last_name": "Akimoto",
       "lines": [
         "Official Delegate",
@@ -511,7 +511,7 @@ export class PrintComponent extends WsComponent implements OnInit {
     {
       "id": 22363,
       "person_id": 9273,
-      "first_name": "Hiroshi",
+      "first_name": "Hiroshi 2",
       "last_name": "Akimoto",
       "lines": [
         "Official Delegate",
@@ -669,6 +669,6 @@ export class PrintComponent extends WsComponent implements OnInit {
   }
 
   replaceBadgeContent(person: PersonAccreditationSummary, idx: number): SafeHtml {
-    return this.badgeTemplateService.replaceBadgeContent(idx, this.badgeHTMLTemplate, person, this.currentEvent, true, this.people.length);
+    return this.badgeTemplateService.replaceBadgeContent(idx, this.badgeHTMLTemplate, person, this.currentEvent, false, this.people.length);
   }
 }
