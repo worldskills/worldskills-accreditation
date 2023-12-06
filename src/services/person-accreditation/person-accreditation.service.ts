@@ -182,6 +182,14 @@ export class PersonAccreditationService extends WsService<any> {
         fetchParams.del_types = (delTypes as []).map(dt => +dt);
       }
     }
+
+    if ('offset' in params && !GenericUtil.isNullOrUndefined(params['offset'])) {
+      fetchParams.offset = +params['offset'];
+    }
+
+    if ('limit' in params && !GenericUtil.isNullOrUndefined(params['limit'])) {
+      fetchParams.limit = +params['limit'];
+    }
   }
 
 }

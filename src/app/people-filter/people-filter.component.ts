@@ -82,6 +82,8 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
     this.fetchParams = {...this.fetchParams, ...this.form.value};
 
     const queryParams: Params = this.personAcrService.buildQueryParams(this.fetchParams);
+    queryParams['offset'] = 0;
+    queryParams['limit'] = 9999;
 
     const urlTree = this.router.createUrlTree(['../print'], {relativeTo: this.route, queryParams});
     const url = this.router.serializeUrl(urlTree);
