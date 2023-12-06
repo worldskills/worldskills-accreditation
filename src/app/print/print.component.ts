@@ -8,7 +8,7 @@ import {
 } from "../../types/person-accreditation-summary";
 import {Event} from "../../types/event";
 import {EventService} from "../../services/event/event.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {BadgeTemplateService} from "../../services/badge-template/badge-template.service";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
@@ -27,6 +27,7 @@ export class PrintComponent extends WsComponent implements OnInit {
   fetchParams: PersonAccreditationSummaryReqParams;
   people: PersonAccreditationSummary[] = [];
   loading = false;
+  badgePerPage: number;
 
   constructor(private eventService: EventService,
               private route: ActivatedRoute,
@@ -46,6 +47,9 @@ export class PrintComponent extends WsComponent implements OnInit {
 
     // fetch badge template
     this.fetchExternalHtml();
+
+    // fetch badge settings
+    this.appService.badgePerPage.subscribe(badgePerPage => this.badgePerPage = badgePerPage);
 
     // fetch event
     this.route.params.subscribe(({eventId, personAcrId}) => {
@@ -93,6 +97,6 @@ export class PrintComponent extends WsComponent implements OnInit {
   }
 
   replaceBadgeContent(person: PersonAccreditationSummary, idx: number): SafeHtml {
-    return this.badgeTemplateService.replaceBadgeContent(idx, this.badgeHTMLTemplate, person, this.selectedEvent, false, this.people.length);
+    return this.badgeTemplateService.replaceBadgeContent(idx, this.badgeHTMLTemplate, person, this.selectedEvent, this.badgePerPage === 2, this.people.length);
   }
 }

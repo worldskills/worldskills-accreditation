@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-md-3">
+    <p><b>{{'badge_per_page' | translate | titlecase}}</b></p>
+    <ng-select (change)="changeBadgePerPage($event)" [ngModel]="badgePerPage" [items]="[1,2]"></ng-select>
+  </div>
+</div>
+
+<hr>
+
+<p><b>{{'badge_templates' | translate | titlecase}}</b></p>
+<app-badge-templates></app-badge-templates>

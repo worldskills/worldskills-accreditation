@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Event} from "../../types/event";
-import {ReplaySubject, Subject} from "rxjs";
+import {BehaviorSubject, ReplaySubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,8 @@ export class AppService {
   showWSLayout: Subject<boolean> = new Subject<boolean>();
   selectedEvent = new ReplaySubject<Event>(1);
   initialized: boolean;
+
+  badgePerPage: BehaviorSubject<number> = new BehaviorSubject<number>(2);
 
   constructor() {
   }
