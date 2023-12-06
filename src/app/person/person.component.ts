@@ -12,6 +12,7 @@ import {DelegateTypeService} from "../../services/delegate-type/delegate-type.se
 import {BadgeTemplateService} from "../../services/badge-template/badge-template.service";
 import {ZoneService} from "../../services/zone/zone.service";
 import {Zone} from "../../types/zone";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-person',
@@ -36,7 +37,8 @@ export class PersonComponent extends WsComponent implements OnInit {
               private personAccreditationService: PersonAccreditationService,
               private delegateTypeService: DelegateTypeService,
               private badgeTemplateService: BadgeTemplateService,
-              private zoneService: ZoneService
+              private zoneService: ZoneService,
+              private location: Location
   ) {
     super();
   }
@@ -127,5 +129,15 @@ export class PersonComponent extends WsComponent implements OnInit {
     }
 
     this.updatePersonAccreditation();
+  }
+
+  printPreview(): void {
+    const urlTree = this.router.createUrlTree(['../../print/' + this.personAcr.id], {relativeTo: this.route});
+    const url = this.router.serializeUrl(urlTree);
+    window.open(url, '_blank');
+  }
+
+  backToPeopleList(): void {
+    this.location.back();
   }
 }

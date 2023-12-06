@@ -25,6 +25,10 @@ function forAppCode(appCode: number, roles: Array<string>) {
   }));
 }
 
+function getTitle(title: string): string {
+  return title + ' | WorldSkills Accreditation';
+}
+
 const routes: Routes = [
   {
     path: '',
@@ -98,6 +102,10 @@ const routes: Routes = [
   },
   {
     path: 'events/:eventId/print',
+    component: PrintComponent,
+  },
+  {
+    path: 'events/:eventId/print/:personAcrId',
     component: PrintComponent,
   },
   {

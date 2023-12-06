@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {WsComponent} from "@worldskills/worldskills-angular-lib";
+import {GenericUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {AppService} from "../../services/app/app.service";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {
@@ -48,17 +48,21 @@ export class PrintComponent extends WsComponent implements OnInit {
     this.fetchExternalHtml();
 
     // fetch event
-    this.route.params.subscribe(({eventId}) => {
+    this.route.params.subscribe(({eventId, personAcrId}) => {
       this.subscribe(
         this.eventService.get(eventId).subscribe(event => {
           this.selectedEvent = event;
           this.appService.selectedEvent.next(this.selectedEvent);
 
-          // fetch people from query params
-          this.route.queryParams.subscribe(params => {
-            this.personAcrService.loadFilterFromQueryParams(params, this.fetchParams);
-            this.loadPeople();
-          });
+          if (!GenericUtil.isNullOrUndefined(personAcrId)) {
+            this.loadPerson(personAcrId);
+          } else {
+            // fetch people from query params
+            this.route.queryParams.subscribe(params => {
+              this.personAcrService.loadFilterFromQueryParams(params, this.fetchParams);
+              this.loadPeople();
+            });
+          }
         })
       );
     });
@@ -68,6 +72,14 @@ export class PrintComponent extends WsComponent implements OnInit {
     this.loading = true;
     this.personAcrService.getAccreditations(this.selectedEvent.id, this.fetchParams).subscribe(res => {
       this.people = res.people;
+      this.loading = false;
+    })
+  }
+
+  private loadPerson(personAcrId: number) {
+    this.loading = true;
+    this.personAcrService.getPersonAccreditation(this.selectedEvent.id, personAcrId).subscribe(res => {
+      this.people = [res.summary];
       this.loading = false;
     })
   }
