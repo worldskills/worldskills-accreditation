@@ -30,6 +30,7 @@ export class PeopleComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.appService.showMenuTabs.next(true);
     this.fetchParams = this.personAcrService.initialiseFetchParams();
     combineLatest([this.appService.selectedEvent, this.route.queryParams])
       .subscribe(([event, params]) => {

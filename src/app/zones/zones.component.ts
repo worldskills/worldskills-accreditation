@@ -26,6 +26,7 @@ export class ZonesComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.appService.showMenuTabs.next(true);
     this.subscribe(
       this.appService.selectedEvent.subscribe(event => {
         this.selectedEvent = event;

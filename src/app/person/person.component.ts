@@ -42,6 +42,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.appService.showMenuTabs.next(false);
     combineLatest([this.appService.selectedEvent, this.route.params])
       .subscribe(([event, {personAcrId}]) => {
         this.selectedEvent = event;

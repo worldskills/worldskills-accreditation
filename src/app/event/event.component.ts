@@ -23,6 +23,7 @@ export class EventComponent extends WsComponent implements OnInit {
     {label: 'Badge Templates', path: 'badge-templates'}
   ];
   selectedTabIndex = 0;
+  showMenuTabs = true;
 
   constructor(private eventService: EventService,
               private router: Router,
@@ -32,6 +33,7 @@ export class EventComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.appService.showMenuTabs.subscribe(showMenuTabs => setTimeout(() => (this.showMenuTabs = showMenuTabs)));
     this.route.params.subscribe(({eventId}) => {
       this.subscribe(
         this.eventService.get(eventId).subscribe(event => {
