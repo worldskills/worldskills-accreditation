@@ -1,8 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";
-import {SafeHtml} from "@angular/platform-browser";
 import {WsComponent} from "@worldskills/worldskills-angular-lib";
-import {BadgeTemplateService} from "../../services/badge-template/badge-template.service";
 import {Event} from "../../types/event";
 
 @Component({
@@ -14,17 +12,12 @@ import {Event} from "../../types/event";
 export class PersonBadgePreviewComponent extends WsComponent implements OnInit {
 
   @Input() selectedEvent: Event;
-  @Input() badgeHTMLTemplate: string;
   @Input() person: PersonAccreditationSummary;
 
-  constructor(private badgeTemplateService: BadgeTemplateService) {
+  constructor() {
     super();
   }
 
   ngOnInit() {
-  }
-
-  replaceBadgeContent(person: PersonAccreditationSummary): SafeHtml {
-    return this.badgeTemplateService.replaceBadgeContent(0, this.badgeHTMLTemplate, person, this.selectedEvent);
   }
 }

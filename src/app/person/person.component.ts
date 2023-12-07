@@ -9,7 +9,6 @@ import {PersonAccreditation} from "../../types/person-accreditation";
 import {environment} from "../../environments/environment";
 import {DelegateType} from "../../types/delegate-type";
 import {DelegateTypeService} from "../../services/delegate-type/delegate-type.service";
-import {BadgeTemplateService} from "../../services/badge-template/badge-template.service";
 import {ZoneService} from "../../services/zone/zone.service";
 import {Zone} from "../../types/zone";
 import {Location} from "@angular/common";
@@ -25,7 +24,6 @@ export class PersonComponent extends WsComponent implements OnInit {
   selectedEvent: Event;
   personAcr: PersonAccreditation;
   delegateTypes: DelegateType[];
-  badgeHTMLTemplate: string;
   zones: Zone[];
 
   savingPersonAcr = false;
@@ -36,7 +34,6 @@ export class PersonComponent extends WsComponent implements OnInit {
               private route: ActivatedRoute,
               private personAccreditationService: PersonAccreditationService,
               private delegateTypeService: DelegateTypeService,
-              private badgeTemplateService: BadgeTemplateService,
               private zoneService: ZoneService,
               private location: Location
   ) {
@@ -54,9 +51,6 @@ export class PersonComponent extends WsComponent implements OnInit {
           }),
           this.delegateTypeService.getList(this.selectedEvent.id).subscribe(res => {
             this.delegateTypes = res.delegate_types;
-          }),
-          this.badgeTemplateService.getBadgeHTMLTemplate().subscribe(html => {
-            this.badgeHTMLTemplate = html;
           }),
           this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
             this.zones = res.zones;
