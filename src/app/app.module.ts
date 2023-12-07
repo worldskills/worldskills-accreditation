@@ -40,6 +40,7 @@ import {Wsi2022Component} from './badges/wsi2022/wsi2022.component';
 import {BadgesDeterminerComponent} from './badges-determiner/badges-determiner.component';
 import {Wsi2023CiwComponent} from './badges/wsi2023-ciw/wsi2023-ciw.component';
 import {DefaultComponent} from './badges/default/default.component';
+import {Wsi2023GaComponent} from './badges/wsi2023-ga/wsi2023-ga.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20231109');
@@ -71,7 +72,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     Wsi2022Component,
     BadgesDeterminerComponent,
     Wsi2023CiwComponent,
-    DefaultComponent
+    DefaultComponent,
+    Wsi2023GaComponent
   ],
   imports: [
     BrowserModule,
