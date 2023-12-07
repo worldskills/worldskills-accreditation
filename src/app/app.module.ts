@@ -36,6 +36,10 @@ import {BadgeTemplatesComponent} from './badge-templates/badge-templates.compone
 import {PersonBadgePreviewComponent} from './person-badge-preview/person-badge-preview.component';
 import {ScansFilterComponent} from './scans-filter/scans-filter.component';
 import {SettingsComponent} from './settings/settings.component';
+import {Wsi2022Component} from './badges/wsi2022/wsi2022.component';
+import {BadgesDeterminerComponent} from './badges-determiner/badges-determiner.component';
+import {Wsi2023CiwComponent} from './badges/wsi2023-ciw/wsi2023-ciw.component';
+import {DefaultComponent} from './badges/default/default.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20231109');
@@ -63,7 +67,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     BadgeTemplatesComponent,
     PersonBadgePreviewComponent,
     ScansFilterComponent,
-    SettingsComponent
+    SettingsComponent,
+    Wsi2022Component,
+    BadgesDeterminerComponent,
+    Wsi2023CiwComponent,
+    DefaultComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="currentEvent.id">
+  <badge-wsi2022 *ngSwitchCase="594" [pa]="pa"></badge-wsi2022>
+  <badge-wsi2023-ciw *ngSwitchCase="603" [pa]="pa" [currentEvent]="currentEvent"></badge-wsi2023-ciw>
+  <badge-default *ngSwitchDefault [pa]="pa" [currentEvent]="currentEvent"></badge-default>
+</ng-container>

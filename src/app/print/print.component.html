@@ -1,6 +1,7 @@
 <ng-container *ngIf="!loading; else loadStatusTemplate">
   <ng-container *ngFor="let person of people; index as idx">
-    <div [innerHTML]="replaceBadgeContent(person, idx)"></div>
+<!--    <div [innerHTML]="replaceBadgeContent(person, idx)"></div>-->
+    <app-badges-determiner [pa]="person" [currentEvent]="selectedEvent"></app-badges-determiner>
   </ng-container>
 </ng-container>
 
