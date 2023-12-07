@@ -12,6 +12,7 @@
   "badge_templates": "Badge templates",
   "name": "Name",
   "change_automatic_save_msg": "Changes are saved automatically",
+  "change_event": "Change event",
   "code": "Code",
   "color": "Color",
   "delegate_type": "Delegate Type",

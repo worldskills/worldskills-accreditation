@@ -20,7 +20,6 @@ export class EventComponent extends WsComponent implements OnInit {
     {label: 'Positions', path: 'positions'},
     {label: 'Package Options', path: 'package-options'},
     {label: 'Zones', path: 'zones'},
-    {label: 'Settings', path: 'settings'}
   ];
   selectedTabIndex = 0;
   showMenuTabs = true;
