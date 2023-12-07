@@ -1,4 +1,10 @@
-<div class="ws-badge">
+<div [class.ws-badge]="!twoBadgesPerPage"
+     [class.ws-badge-multiple]="twoBadgesPerPage"
+     [class.ws-badge-multiple-odd]="twoBadgesPerPage && (index + 1) % 2 == 1"
+     [class.ws-badge-multiple-even]="twoBadgesPerPage && (index + 1) % 2 == 0"
+     [class.ws-badge-multiple-cut-separator]="twoBadgesPerPage && (index + 1) % 2 == 0"
+     [class.ws-badge-multiple-last]="twoBadgesPerPage && totalBadgesToPrint % 2 === 1 && index === totalBadgesToPrint - 1"
+>
 
   <div style="display: flex; height: 148mm;">
     <div style="flex: 1; display: flex;">

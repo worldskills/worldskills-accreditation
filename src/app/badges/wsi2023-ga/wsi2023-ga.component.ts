@@ -8,7 +8,13 @@ import {Event} from "../../../types/event";
   styleUrls: ['../../../styles/badge.css']
 })
 export class Wsi2023GaComponent {
+
   @Input() pa: PersonAccreditationSummary;
   @Input() currentEvent: Event
+
+  @Input() twoBadgesPerPage: boolean;
+  @Input() index: number;
+  @Input() totalBadgesToPrint: number;
+
   currentDate = new Date();
 }

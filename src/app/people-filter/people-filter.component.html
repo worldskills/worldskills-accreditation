@@ -25,11 +25,13 @@
             bindLabel="name"
           >
             <ng-template ng-label-tmp let-item="item">
-              <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+              <div class="d-inline-block" style="width: 15px; height: 15px; "
+                   [style.background-color]="item.color"></div>
               <div class="d-inline-block ml-2">{{item.name}}</div>
             </ng-template>
             <ng-template ng-option-tmp let-item="item" let-index="index">
-              <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+              <div class="d-inline-block" style="width: 15px; height: 15px; "
+                   [style.background-color]="item.color"></div>
               <div class="d-inline-block ml-2">{{item.name}}</div>
             </ng-template>
           </ng-select>
@@ -83,11 +85,13 @@
             bindLabel="name"
           >
             <ng-template ng-label-tmp let-item="item">
-              <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+              <div class="d-inline-block" style="width: 15px; height: 15px; "
+                   [style.background-color]="item.color"></div>
               <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
             </ng-template>
             <ng-template ng-option-tmp let-item="item" let-index="index">
-              <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+              <div class="d-inline-block" style="width: 15px; height: 15px; "
+                   [style.background-color]="item.color"></div>
               <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
             </ng-template>
           </ng-select>
@@ -120,7 +124,17 @@
 
       <div class="row mb-2 text-right">
         <div class="col-sm-12">
-          <button class="btn btn-sm btn-outline-primary" type="button" (click)="printPreview()">{{'print_preview' | translate}}</button>
+          <div class="btn-group dropdown">
+            <button type="button" class="btn btn-sm btn-outline-primary" (click)="printPreview(false)">
+              {{'print_preview' | translate | titlecase}}
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" (click)="printPreview(true)">{{'print_preview' | translate | titlecase}}
+                ({{'two_badges_per_page' | translate}})</a>
+            </div>
+          </div>
           <button class="btn btn-sm btn-primary ml-2" type="submit">{{'set_filter' | translate}}</button>
         </div>
       </div>

@@ -77,13 +77,14 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
     this.filter.emit({...this.fetchParams, ...this.form.value});
   }
 
-  printPreview() {
+  printPreview(twoBadgesPerPage: boolean): void {
     this.submit();
     this.fetchParams = {...this.fetchParams, ...this.form.value};
 
     const queryParams: Params = this.personAcrService.buildQueryParams(this.fetchParams);
     queryParams['offset'] = 0;
     queryParams['limit'] = 9999;
+    queryParams['twoBadgesPerPage'] = twoBadgesPerPage;
 
     const urlTree = this.router.createUrlTree(['../print'], {relativeTo: this.route, queryParams});
     const url = this.router.serializeUrl(urlTree);

@@ -1,6 +1,10 @@
 <ng-container *ngIf="!loading; else loadStatusTemplate">
   <ng-container *ngFor="let person of people; index as idx">
-    <app-badges-determiner [pa]="person" [currentEvent]="selectedEvent"></app-badges-determiner>
+    <app-badges-determiner [pa]="person"
+                           [currentEvent]="selectedEvent"
+                           [twoBadgesPerPage]="twoBadgesPerPage"
+                           [index]="idx"
+                           [totalBadgesToPrint]="people.length"></app-badges-determiner>
   </ng-container>
 </ng-container>
 

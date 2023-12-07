@@ -25,7 +25,7 @@ export class PrintComponent extends WsComponent implements OnInit {
   fetchParams: PersonAccreditationSummaryReqParams;
   people: PersonAccreditationSummary[] = [];
   loading = false;
-  badgePerPage: number;
+  twoBadgesPerPage: boolean;
 
   constructor(private eventService: EventService,
               private route: ActivatedRoute,
@@ -42,9 +42,6 @@ export class PrintComponent extends WsComponent implements OnInit {
 
     this.fetchParams = this.personAcrService.initialiseFetchParams();
 
-    // fetch badge settings
-    this.appService.badgePerPage.subscribe(badgePerPage => this.badgePerPage = badgePerPage);
-
     // fetch event
     this.route.params.subscribe(({eventId, personAcrId}) => {
       this.subscribe(
@@ -58,6 +55,9 @@ export class PrintComponent extends WsComponent implements OnInit {
             // fetch people from query params
             this.route.queryParams.subscribe(params => {
               this.personAcrService.loadFilterFromQueryParams(params, this.fetchParams);
+              if ('twoBadgesPerPage' in params && !GenericUtil.isNullOrUndefined(params['twoBadgesPerPage'])) {
+                this.twoBadgesPerPage = params['twoBadgesPerPage'] === 'true';
+              }
               this.loadPeople();
             });
           }

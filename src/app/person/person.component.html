@@ -1,6 +1,7 @@
 <div class="row mb-2">
   <div class="col-md-12">
-    <button class="btn btn-sm btn-link" (click)="backToPeopleList()"><span class="fa fa-arrow-left"></span> {{'people_list' | translate}}</button>
+    <button class="btn btn-sm btn-link" (click)="backToPeopleList()"><span
+      class="fa fa-arrow-left"></span> {{'people_list' | translate}}</button>
   </div>
 </div>
 <div class="row">
@@ -190,11 +191,12 @@
     <div class="card">
       <div class="card-header">
         <h5 class="card-title">{{'preview_badge' | translate | titlecase}}
-          <div class="btn-group dropright float-right">
+          <div class="btn-group dropdown float-right">
             <button type="button" class="btn btn-sm btn-primary" (click)="printPreview()">
               {{'print_preview' | translate | titlecase}}
             </button>
-            <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#">{{'mark_as_distributed' | translate}}</a>
               <a class="dropdown-item" href="#">{{'invalidate_badge' | translate}}</a>
