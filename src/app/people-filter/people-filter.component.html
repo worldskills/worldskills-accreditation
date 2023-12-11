@@ -122,9 +122,10 @@
         </div>
       </div>
 
-      <div class="row mb-2 text-right">
+      <div class="row mb-2">
         <div class="col-sm-12">
-          <div class="btn-group dropdown">
+          <button type="submit" class="btn btn-sm btn-primary ml-2 float-right">{{'set_filter' | translate}}</button>
+          <div class="btn-group dropdown float-right">
             <button type="button" class="btn btn-sm btn-outline-primary"
                     [disabled]="!hasPrintPermission"
                     (click)="printPreview(false)">
@@ -139,7 +140,6 @@
                 ({{'two_badges_per_page' | translate}})</button>
             </div>
           </div>
-          <button class="btn btn-sm btn-primary ml-2" type="submit">{{'set_filter' | translate}}</button>
         </div>
       </div>
 

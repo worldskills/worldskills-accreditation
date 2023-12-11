@@ -18,7 +18,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" (click)="setupScanApp = true">{{'setup_scan_app' | translate}}</a>
-          <a class="dropdown-item" disabled>{{'adhoc_printing' | translate}}</a>
+          <a class="dropdown-item" (click)="adhocPrinting = true">{{'adhoc_printing' | translate}}</a>
         </div>
       </div>
     </div>
@@ -36,11 +36,20 @@
 </ng-container>
 
 
-<ws-modal [open]="setupScanApp" (onClose)="setupScanApp = false" [options]="{size: 'lg'}">
+<ws-modal *ngIf="setupScanApp" [open]="setupScanApp" (onClose)="setupScanApp = false" [options]="{size: 'lg'}">
   <ng-container header>
     <h4>{{'setup_scan_app' | translate}}</h4>
   </ng-container>
   <ng-container body>
     <app-setup-scan-app></app-setup-scan-app>
+  </ng-container>
+</ws-modal>
+
+<ws-modal *ngIf="adhocPrinting" [open]="adhocPrinting" (onClose)="adhocPrinting = false" [options]="{size: 'xl'}">
+  <ng-container header>
+    <h4>{{'adhoc_printing' | translate}}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-adhoc-printing></app-adhoc-printing>
   </ng-container>
 </ws-modal>

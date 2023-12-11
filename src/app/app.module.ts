@@ -43,6 +43,7 @@ import {DefaultComponent} from './badges/default/default.component';
 import {Wsi2023GaComponent} from './badges/wsi2023-ga/wsi2023-ga.component';
 import {Wsi2024CpwComponent} from './badges/wsi2024-cpw/wsi2024-cpw.component';
 import {SetupScanAppComponent} from './setup-scan-app/setup-scan-app.component';
+import {AdhocPrintingComponent} from './adhoc-printing/adhoc-printing.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20231109');
@@ -77,7 +78,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DefaultComponent,
     Wsi2023GaComponent,
     Wsi2024CpwComponent,
-    SetupScanAppComponent
+    SetupScanAppComponent,
+    AdhocPrintingComponent
   ],
   imports: [
     BrowserModule,
