@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {GenericUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {GenericUtil, NgAuthService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
 import {AppService} from "../../services/app/app.service";
 import {
@@ -9,6 +9,7 @@ import {
 import {Event} from "../../types/event";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {combineLatest} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-people',
@@ -22,16 +23,28 @@ export class PeopleComponent extends WsComponent implements OnInit {
   result: PersonAccreditationSummaryContainer;
   loading = false;
 
+  hasPrintPermission = false;
+
   constructor(private appService: AppService,
               private personAcrService: PersonAccreditationService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private authService: NgAuthService) {
     super();
   }
 
   ngOnInit(): void {
     this.appService.showMenuTabs.next(true);
     this.fetchParams = this.personAcrService.initialiseFetchParams();
+
+    // load current user and check permissions
+    this.subscribe(
+      this.authService.currentUser.subscribe(currentUser => {
+        this.hasPrintPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.PRINT);
+      })
+    )
+
+    // load selectedEvent and data depending on it
     combineLatest([this.appService.selectedEvent, this.route.queryParams])
       .subscribe(([event, params]) => {
         this.selectedEvent = event;

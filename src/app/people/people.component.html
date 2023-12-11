@@ -6,18 +6,10 @@
           <thead>
           <tr>
             <th class="border-top-0">
-              <a href="#" (click)="$event.preventDefault(); sort('firstname')">
-                {{'first_name' | translate}}&nbsp;
-                <ng-container *ngIf="fetchParams.sort === 'firstname_asc'">&darr;</ng-container>
-                <ng-container *ngIf="fetchParams.sort !== 'firstname_asc'">&uarr;</ng-container>
-              </a>
+              <a (click)="$event.preventDefault(); sort('firstname')">{{'first_name' | translate}}</a>
             </th>
             <th class="border-top-0">
-              <a href="#" (click)="$event.preventDefault(); sort('lastname')">
-                {{'last_name' | translate}}&nbsp;
-                <ng-container *ngIf="fetchParams.sort === 'lastname_asc'">&darr;</ng-container>
-                <ng-container *ngIf="fetchParams.sort !== 'lastname_asc'">&uarr;</ng-container>
-              </a>
+              <a (click)="$event.preventDefault(); sort('lastname')">{{'last_name' | translate}}</a>
             </th>
             <th class="border-top-0">{{'delegate_type' | translate}}</th>
             <th class="border-top-0">{{'zones' | translate}}</th>
@@ -81,6 +73,8 @@
     </ng-template>
   </div>
   <div class="col-md-3">
-    <app-people-filter (filter)="filter($event)" [fetchParams]="fetchParams"></app-people-filter>
+    <app-people-filter (filter)="filter($event)"
+                       [hasPrintPermission]="hasPrintPermission"
+                       [fetchParams]="fetchParams"></app-people-filter>
   </div>
 </div>

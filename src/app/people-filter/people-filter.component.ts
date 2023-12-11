@@ -24,6 +24,7 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
 
   @Output() filter = new EventEmitter<PersonAccreditationSummaryReqParams>();
   @Input() fetchParams: PersonAccreditationSummaryReqParams;
+  @Input() hasPrintPermission: boolean;
   @ViewChild('form') form: NgForm;
 
   delegateTypes: DelegateType[];

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WsComponent} from "@worldskills/worldskills-angular-lib";
+import {NgAuthService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
 import {Event} from "../../types/event";
@@ -28,6 +28,8 @@ export class PersonComponent extends WsComponent implements OnInit {
 
   savingPersonAcr = false;
   badgeLinesChange: Subject<string> = new Subject<string>();
+  hasEditPermission = false;
+  hasPrintPermission = false;
 
   constructor(private appService: AppService,
               private router: Router,
@@ -35,13 +37,24 @@ export class PersonComponent extends WsComponent implements OnInit {
               private personAccreditationService: PersonAccreditationService,
               private delegateTypeService: DelegateTypeService,
               private zoneService: ZoneService,
-              private location: Location
+              private location: Location,
+              private authService: NgAuthService,
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.appService.showMenuTabs.next(false);
+
+    // load current user and check permissions
+    this.subscribe(
+      this.authService.currentUser.subscribe(currentUser => {
+        this.hasEditPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.EDIT);
+        this.hasPrintPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.PRINT);
+      })
+    )
+
+    // load selectedEvent and data depending on it
     combineLatest([this.appService.selectedEvent, this.route.params])
       .subscribe(([event, {personAcrId}]) => {
         this.selectedEvent = event;

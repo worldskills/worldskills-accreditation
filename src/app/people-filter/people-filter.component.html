@@ -125,14 +125,18 @@
       <div class="row mb-2 text-right">
         <div class="col-sm-12">
           <div class="btn-group dropdown">
-            <button type="button" class="btn btn-sm btn-outline-primary" (click)="printPreview(false)">
+            <button type="button" class="btn btn-sm btn-outline-primary"
+                    [disabled]="!hasPrintPermission"
+                    (click)="printPreview(false)">
               {{'print_preview' | translate | titlecase}}
             </button>
             <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" (click)="printPreview(true)">{{'print_preview' | translate | titlecase}}
-                ({{'two_badges_per_page' | translate}})</a>
+              <button class="dropdown-item"
+                 [disabled]="!hasPrintPermission"
+                 (click)="printPreview(true)">{{'print_preview' | translate | titlecase}}
+                ({{'two_badges_per_page' | translate}})</button>
             </div>
           </div>
           <button class="btn btn-sm btn-primary ml-2" type="submit">{{'set_filter' | translate}}</button>

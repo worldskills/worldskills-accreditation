@@ -17,6 +17,9 @@
             </h5>
           </div>
           <div class="card-body" *ngIf="personAcr">
+
+            <div class="alert alert-warning small" *ngIf="!hasEditPermission">{{'no_permission_to_edit_person_msg' | translate}}</div>
+
             <div class="row mb-2">
               <div class="col-sm-12">
                 <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
@@ -26,6 +29,7 @@
                   bindLabel="name"
                   [ngModel]="personAcr.delegate_type"
                   (change)="onDelTypeChange($event)"
+                  [disabled]="!hasEditPermission"
                 >
                   <ng-template ng-label-tmp let-item="item">
                     <div class="d-inline-block" style="width: 15px; height: 15px; "
@@ -45,6 +49,7 @@
               <div class="col-sm-12">
                 <label class="small text-muted font-weight-bold my-0 py-0">{{'badge_lines' | translate}}</label>
                 <textarea class="form-control" rows="3" [ngModel]="personAcr.lines"
+                          [disabled]="!hasEditPermission"
                           (ngModelChange)="onBadgeLinesChange($event)"></textarea>
               </div>
             </div>
@@ -56,10 +61,11 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="btn-group">
-                      <a class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
+                      <button class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
+                              [disabled]="!hasEditPermission"
                          id="addZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Add Zone
-                      </a>
+                        {{'add_zone' | translate}}
+                      </button>
 
                       <div class="dropdown-menu" aria-labelledby="addZoneDropdownMenu">
                         <a class="dropdown-item" (click)="addZone(zone)"
@@ -67,10 +73,11 @@
                       </div>
                     </div>
                     <div class="btn-group ml-2">
-                      <a class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
+                      <button class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
+                              [disabled]="!hasEditPermission"
                          id="removeZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Remove Zone
-                      </a>
+                        {{'remove_zone' | translate}}
+                      </button>
 
                       <div class="dropdown-menu" aria-labelledby="removeZoneDropdownMenu">
                         <a class="dropdown-item" (click)="removeZone(zone)"
@@ -192,14 +199,14 @@
       <div class="card-header">
         <h5 class="card-title">{{'preview_badge' | translate | titlecase}}
           <div class="btn-group dropdown float-right">
-            <button type="button" class="btn btn-sm btn-primary" (click)="printPreview()">
+            <button type="button" class="btn btn-sm btn-primary" (click)="printPreview()" [disabled]="!hasPrintPermission">
               {{'print_preview' | translate | titlecase}}
             </button>
             <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">{{'mark_as_distributed' | translate}}</a>
-              <a class="dropdown-item" href="#">{{'invalidate_badge' | translate}}</a>
+              <button class="dropdown-item" [disabled]="!hasPrintPermission">{{'mark_as_distributed' | translate}}</button>
+              <button class="dropdown-item" [disabled]="!hasPrintPermission">{{'invalidate_badge' | translate}}</button>
             </div>
           </div>
         </h5>

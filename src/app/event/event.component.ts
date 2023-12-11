@@ -4,6 +4,7 @@ import {EventService} from "../../services/event/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Event} from "../../types/event";
 import {AppService} from "../../services/app/app.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-event',
@@ -12,6 +13,7 @@ import {AppService} from "../../services/app/app.service";
 })
 export class EventComponent extends WsComponent implements OnInit {
 
+  env = environment;
   currentEvent: Event;
   tabs = [
     {label: 'People', path: 'people'},

@@ -45,6 +45,7 @@ export const environment = {
     EDIT_DELEGATE_TYPES: 'EditDelegateTypes',
     EDIT_POSITIONS: 'EditPositions',
     EDIT_ZONES: 'EditZones',
+    EDIT_PACKAGE_OPTIONS: 'EditPackageOptions',
     PRINT: 'Print'
   }
 };

@@ -14,7 +14,6 @@ import {PositionsComponent} from "./positions/positions.component";
 import {PackageOptionsComponent} from "./package-options/package-options.component";
 import {PersonComponent} from "./person/person.component";
 import {PrintComponent} from "./print/print.component";
-import {SettingsComponent} from "./settings/settings.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -57,18 +56,16 @@ const routes: Routes = [
             redirectTo: 'people'
           },
           {
-            path: 'settings',
-            data: {breadcrumb: 'Settings'},
-            component: SettingsComponent
-          },
-          {
             path: 'people',
             data: {breadcrumb: 'People'},
             component: PeopleComponent
           },
           {
             path: 'people/:personAcrId',
-            data: {breadcrumb: 'Person'},
+            data: {
+              breadcrumb: 'Person',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.PRINT])
+            },
             component: PersonComponent
           },
           {
@@ -78,22 +75,34 @@ const routes: Routes = [
           },
           {
             path: 'delegate-types',
-            data: {breadcrumb: 'Delegate Types'},
+            data: {
+              breadcrumb: 'Delegate Types',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_DELEGATE_TYPES])
+            },
             component: DelegateTypesComponent
           },
           {
             path: 'positions',
-            data: {breadcrumb: 'Positions'},
+            data: {
+              breadcrumb: 'Positions',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_POSITIONS])
+            },
             component: PositionsComponent
           },
           {
             path: 'package-options',
-            data: {breadcrumb: 'Package Options'},
+            data: {
+              breadcrumb: 'Package Options',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_PACKAGE_OPTIONS])
+            },
             component: PackageOptionsComponent
           },
           {
             path: 'zones',
-            data: {breadcrumb: 'Zones'},
+            data: {
+              breadcrumb: 'Zones',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_ZONES])
+            },
             component: ZonesComponent
           }
         ]
@@ -102,10 +111,16 @@ const routes: Routes = [
   },
   {
     path: 'events/:eventId/print',
+    data: {
+      roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.PRINT])
+    },
     component: PrintComponent,
   },
   {
     path: 'events/:eventId/print/:personAcrId',
+    data: {
+      roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.PRINT])
+    },
     component: PrintComponent,
   },
   {
