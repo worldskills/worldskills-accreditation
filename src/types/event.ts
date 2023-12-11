@@ -14,3 +14,8 @@ export interface EventContainer {
   events: Event[];
   total_count: number;
 }
+
+export interface EventConfig {
+  event_id: number;
+  qr_code: string;
+}

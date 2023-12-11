@@ -1,12 +1,28 @@
 <ng-container *ngIf="currentEvent">
-  <h2 class="mb-0">
-    {{currentEvent.name.text}}
-    <a class="btn btn-sm btn-link p-0 m-0"
-       routerLink="../"
-       style="font-size: x-small; vertical-align: bottom">{{'change_event' | translate}}</a>
-  </h2>
-  <p class="text-muted small">{{currentEvent.start_date | date:'dd MMM yyy'}}
-    to {{currentEvent.end_date | date:'dd MMM yyy'}}</p>
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-10">
+      <h2 class="mb-0">
+        {{currentEvent.name.text}}
+        <a class="btn btn-sm btn-link p-0 m-0"
+           routerLink="../"
+           style="font-size: x-small; vertical-align: bottom">{{'change_event' | translate}}</a>
+      </h2>
+      <p class="text-muted small">{{currentEvent.start_date | date:'dd MMM yyy'}}
+        to {{currentEvent.end_date | date:'dd MMM yyy'}}</p>
+    </div>
+    <div class="col-md-2 text-right">
+      <div class="dropdown">
+        <button class="btn btn-sm btn-outline-dark dropdown-toggle"
+                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{'tools' | translate}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" (click)="setupScanApp = true">{{'setup_scan_app' | translate}}</a>
+          <a class="dropdown-item" href="#">{{'adhoc_printing' | translate}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <mat-tab-group class="event-tabs" mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms"
@@ -18,3 +34,13 @@
   <div class="my-3"></div>
   <router-outlet></router-outlet>
 </ng-container>
+
+
+<ws-modal [open]="setupScanApp" (onClose)="setupScanApp = false" [options]="{size: 'lg'}">
+  <ng-container header>
+    <h4>{{'setup_scan_app' | translate}}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-setup-scan-app></app-setup-scan-app>
+  </ng-container>
+</ws-modal>

@@ -23,6 +23,7 @@ export class EventComponent extends WsComponent implements OnInit {
   ];
   selectedTabIndex = 0;
   showMenuTabs = true;
+  setupScanApp: boolean;
 
   constructor(private eventService: EventService,
               private router: Router,
