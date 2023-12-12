@@ -27,6 +27,9 @@ export class PrintComponent extends WsComponent implements OnInit {
   loading = false;
   twoBadgesPerPage: boolean;
 
+  adhocPrinting: boolean;
+  showAdhocPrintingForm: boolean;
+
   constructor(private eventService: EventService,
               private route: ActivatedRoute,
               private appService: AppService,
@@ -54,11 +57,16 @@ export class PrintComponent extends WsComponent implements OnInit {
           } else {
             // fetch people from query params
             this.route.queryParams.subscribe(params => {
-              this.personAcrService.loadFilterFromQueryParams(params, this.fetchParams);
-              if ('twoBadgesPerPage' in params && !GenericUtil.isNullOrUndefined(params['twoBadgesPerPage'])) {
-                this.twoBadgesPerPage = params['twoBadgesPerPage'] === 'true';
+              if ('adhocPrinting' in params && !GenericUtil.isNullOrUndefined(params['adhocPrinting'])) {
+                this.adhocPrinting = params['adhocPrinting'] === 'true';
+                this.showAdhocPrintingForm = this.adhocPrinting;
+              } else {
+                this.personAcrService.loadFilterFromQueryParams(params, this.fetchParams);
+                if ('twoBadgesPerPage' in params && !GenericUtil.isNullOrUndefined(params['twoBadgesPerPage'])) {
+                  this.twoBadgesPerPage = params['twoBadgesPerPage'] === 'true';
+                }
+                this.loadPeople();
               }
-              this.loadPeople();
             });
           }
         })
@@ -80,5 +88,17 @@ export class PrintComponent extends WsComponent implements OnInit {
       this.people = [res.summary];
       this.loading = false;
     })
+  }
+
+  openBrowserPrintPreview(): void {
+    window.print();
+  }
+
+  showAdHocForm() {
+    this.showAdhocPrintingForm = true;
+  }
+
+  saveAdHocPeople(people: PersonAccreditationSummary[]): void {
+    this.people = people;
   }
 }

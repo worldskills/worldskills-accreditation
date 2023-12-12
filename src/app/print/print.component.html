@@ -13,3 +13,17 @@
     {{ 'fetching_information' | translate}}...
   </div>
 </ng-template>
+
+<div class="ws-button-overlay position-absolute top-0 end-0 mt-2 mr-2">
+  <button class="btn btn-secondary" *ngIf="adhocPrinting" (click)="showAdHocForm()">{{'edit_accreditation' | translate | titlecase}}</button>
+  <button class="btn btn-primary ml-2" (click)="openBrowserPrintPreview()">{{'print' | translate | titlecase}}</button>
+</div>
+
+<ws-modal *ngIf="showAdhocPrintingForm" [open]="showAdhocPrintingForm" (onClose)="showAdhocPrintingForm = false" [options]="{size: 'xl'}">
+  <ng-container header>
+    <h4>{{'adhoc_printing' | translate}}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-adhoc-printing [people]="people" (save)="saveAdHocPeople($event)"></app-adhoc-printing>
+  </ng-container>
+</ws-modal>

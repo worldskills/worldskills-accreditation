@@ -26,7 +26,6 @@ export class EventComponent extends WsComponent implements OnInit {
   selectedTabIndex = 0;
   showMenuTabs = true;
   setupScanApp: boolean;
-  adhocPrinting: boolean;
 
   constructor(private eventService: EventService,
               private router: Router,
@@ -54,7 +53,14 @@ export class EventComponent extends WsComponent implements OnInit {
     }
   }
 
-  navigate(selectedTab: any) {
+  navigate(selectedTab: any): void {
     this.router.navigate([this.tabs[selectedTab.index].path], {relativeTo: this.route});
+  }
+
+  openAdHocPrinting(): void {
+    const urlTree = this.router.createUrlTree(['print'],
+      {relativeTo: this.route, queryParams: {adhocPrinting: true}});
+    const url = this.router.serializeUrl(urlTree);
+    window.open(url, '_blank');
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DelegateType} from "../../types/delegate-type";
 import {WsComponent} from "@worldskills/worldskills-angular-lib";
 import {AppService} from "../../services/app/app.service";
@@ -7,7 +7,6 @@ import {ZoneService} from "../../services/zone/zone.service";
 import {Zone} from "../../types/zone";
 import {Event} from "../../types/event";
 import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";
-import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-adhoc-printing',
@@ -16,21 +15,21 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class AdhocPrintingComponent extends WsComponent implements OnInit {
 
+  @Output() save: EventEmitter<PersonAccreditationSummary[]> = new EventEmitter<PersonAccreditationSummary[]>();
+  @Input() people: PersonAccreditationSummary[] = [];
   @Input() hasPrintPermission: boolean; // TODO: set this
   selectedEvent: Event;
   delegateTypes: DelegateType[];
   zones: Zone[];
   personEdit: PersonAccreditationSummary;
-  people: PersonAccreditationSummary[] = [];
+
 
   action: 'ADD' | 'EDIT' = 'ADD';
 
 
   constructor(private appService: AppService,
               private zoneService: ZoneService,
-              private delegateTypeService: DelegateTypeService,
-              private router: Router,
-              private route: ActivatedRoute) {
+              private delegateTypeService: DelegateTypeService) {
     super();
   }
 
@@ -81,22 +80,30 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
     }
   }
 
-  addPerson(): void {
+  savePerson(): void {
     if (this.action === 'ADD') {
       this.people.push(this.personEdit);
     } else if (this.action === 'EDIT') {
       this.action = 'ADD';
     }
     this.initializePersonEdit();
+
+    this.savePeople();
   }
 
   removePerson(index: number) {
     this.people.splice(index, 1);
+
+    this.savePeople();
   }
 
   editPerson(pa: PersonAccreditationSummary) {
     this.personEdit = pa;
     this.action = 'EDIT';
+  }
+
+  savePeople(): void {
+    this.save.emit(this.people);
   }
 
   printPreview(twoBadgesPerPage: boolean): void {

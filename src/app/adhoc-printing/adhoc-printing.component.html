@@ -70,7 +70,7 @@
 
     <div class="row mb-3">
       <div class="col-md-12 text-right">
-        <button class="btn btn-sm btn-primary" (click)="addPerson()">
+        <button class="btn btn-sm btn-primary" (click)="savePerson()">
           {{ (action === 'ADD' ? 'add_person' : 'save') | translate }}
         </button>
       </div>
@@ -78,27 +78,6 @@
 
   </div>
   <div class="col-md-8">
-
-    <div class="row mb-2 text-right">
-      <div class="col-sm-12">
-        <div class="btn-group dropdown">
-          <button type="button" class="btn btn-sm btn-outline-primary"
-                  [disabled]="!hasPrintPermission"
-                  (click)="printPreview(false)">
-            {{'print_preview' | translate | titlecase}}
-          </button>
-          <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-          <div class="dropdown-menu">
-            <button class="dropdown-item"
-                    [disabled]="!hasPrintPermission"
-                    (click)="printPreview(true)">{{'print_preview' | translate | titlecase}}
-              ({{'two_badges_per_page' | translate}})</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="table-responsive-md">
       <table class="table table-striped">
         <thead>
