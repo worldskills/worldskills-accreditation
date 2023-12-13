@@ -31,7 +31,6 @@ export class ScansComponent extends WsComponent implements OnInit {
       this.appService.selectedEvent.subscribe(event => {
         this.selectedEvent = event;
         this.resetFilter(this.selectedEvent);
-        this.loadData();
       })
     );
   }

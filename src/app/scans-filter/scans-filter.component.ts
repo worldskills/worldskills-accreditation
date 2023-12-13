@@ -1,5 +1,5 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {WsComponent} from "@worldskills/worldskills-angular-lib";
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Datetime, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {NgForm} from "@angular/forms";
 import {PersonAccreditationScanReqParams} from "../../types/person-accreditation-scan";
 import {DelegateType} from "../../types/delegate-type";
@@ -21,9 +21,13 @@ import {ZoneService} from "../../services/zone/zone.service";
 export class ScansFilterComponent extends WsComponent implements OnInit {
 
   @Output() filter = new EventEmitter<PersonAccreditationScanReqParams>();
+  @Input() loading: boolean;
   @ViewChild('form') form: NgForm;
 
   fetchParams: PersonAccreditationScanReqParams;
+  from: Datetime;
+  to: Datetime;
+
   delegateTypes: DelegateType[];
   members: Member[];
   skills: Skill[];
@@ -45,6 +49,7 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
         this.selectedEvent = event;
 
         this.resetFilter(this.selectedEvent);
+        this.submit();
 
         // load all filter options based on selected event
         this.subscribe(
@@ -76,9 +81,44 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
       member: null,
       accreditation: null
     }
+
+    // set default date filter value
+    const eventStart = new Date(selectedEvent.start_date);
+    const eventEnd = new Date(selectedEvent.end_date);
+    this.from = new Datetime({
+      year: eventStart.getFullYear(),
+      month: eventStart.getMonth() + 1,
+      day: eventStart.getDate(),
+      hour: 0,
+      minute: 0,
+      second: 0,
+      timeZoneOffset: 0
+    });
+    this.to = new Datetime({
+      year: eventEnd.getFullYear(),
+      month: eventEnd.getMonth() + 1,
+      day: eventEnd.getDate(),
+      hour: 23,
+      minute: 59,
+      second: 59,
+      timeZoneOffset: 0
+    });
   }
 
   submit(): void {
-    this.filter.emit({...this.fetchParams, ...this.form.value});
+    this.fetchParams.from = this.fixDateFormat(this.from.toString());
+    this.fetchParams.to = this.fixDateFormat(this.to.toString());
+
+    this.filter.emit({...this.fetchParams, ...this.form?.value});
+  }
+
+  private fixDateFormat(value: string): string {
+    const regex = /\+\d{2}:\d{2}/;
+    const offset = value.match(regex);
+    if (offset) {
+      return value.replace(regex, offset[0].replace(':', ''));
+    } else {
+      return value;
+    }
   }
 }

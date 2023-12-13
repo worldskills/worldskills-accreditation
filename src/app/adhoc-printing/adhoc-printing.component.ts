@@ -81,6 +81,7 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
   }
 
   savePerson(): void {
+    this.personEdit.lines = this.personEdit.lines.toString().split('\n');
     if (this.action === 'ADD') {
       this.people.push(this.personEdit);
     } else if (this.action === 'EDIT') {
@@ -99,6 +100,7 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
 
   editPerson(pa: PersonAccreditationSummary) {
     this.personEdit = pa;
+    this.personEdit.lines = [this.personEdit.lines.join('\n')];
     this.action = 'EDIT';
   }
 

@@ -58,12 +58,31 @@
         </div>
       </div>
 
-<!--      TODO: from and to date selection-->
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'from' | translate}}</label>
+          <ws-datetime-picker name="dateFrom" [(ngModel)]="from"
+                              [seconds]="true"
+                              [readonly]="true"
+                              inputDatetimeFormat="dd MMM yyyy HH:mm:ss"></ws-datetime-picker>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'to' | translate}}</label>
+          <ws-datetime-picker name="dateTo" [(ngModel)]="to"
+                              [seconds]="true"
+                              [readonly]="true"
+                              inputDatetimeFormat="dd MMM yyyy HH:mm:ss"></ws-datetime-picker>
+        </div>
+      </div>
+
 
       <div class="row mb-2 text-right">
         <div class="col-sm-12">
-          <button class="btn btn-sm btn-outline-primary">{{'export' | translate}}</button>
-          <button class="btn btn-sm btn-primary ml-2" type="submit">{{'set_filter' | translate}}</button>
+          <button class="btn btn-sm btn-outline-primary" [disabled]="loading">{{'export' | translate}}</button>
+          <button class="btn btn-sm btn-primary ml-2" type="submit" [disabled]="loading">{{'set_filter' | translate}}</button>
         </div>
       </div>
 

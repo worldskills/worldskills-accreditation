@@ -3,6 +3,14 @@
     <ng-container *ngIf="!loading; else loadingAnimation">
       <div class="table-responsive-md">
         <table class="table table-striped">
+          <colgroup>
+            <col style="width: 20%">
+            <col style="width: 15%">
+            <col style="width: 15%">
+            <col style="width: 20%">
+            <col style="width: 15%">
+            <col style="width: 15%">
+          </colgroup>
           <thead>
           <tr>
             <th class="border-top-0">{{'timestamp' | translate}}</th>
@@ -14,7 +22,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let scan of result.scans">
+          <tr *ngFor="let scan of result?.scans">
             <td>{{scan.timestamp | date:'dd.MM.yyyy HH:mm'}}</td>
             <td>
               <a routerLink="../people/{{scan.accreditation.id}}">
@@ -38,14 +46,14 @@
             </td>
             <td>{{scan.allowed ? 'yes' : 'no'}}</td>
           </tr>
-          <tr *ngIf="result.scans.length === 0">
-            <td colspan="5">{{'no_people_found' | translate}}</td>
+          <tr *ngIf="result?.scans.length === 0">
+            <td colspan="6">{{'no_people_found' | translate}}</td>
           </tr>
           </tbody>
         </table>
       </div>
 
-      <span class="text-muted">{{'total_results' | translate}}: {{result.scans.length}} {{'people' | translate}}</span>
+      <span class="text-muted">{{'total_results' | translate}}: {{result?.scans.length}} {{'people' | translate}}</span>
       <!--      <ngb-pagination-->
       <!--        class="component-pager"-->
       <!--        [collectionSize]="result.total_count"-->
@@ -64,6 +72,6 @@
     </ng-template>
   </div>
   <div class="col-md-3">
-    <app-scans-filter (filter)="filter($event)"></app-scans-filter>
+    <app-scans-filter [loading]="loading" (filter)="filter($event)"></app-scans-filter>
   </div>
 </div>
