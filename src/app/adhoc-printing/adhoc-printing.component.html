@@ -95,7 +95,9 @@
           <tr *ngFor="let pa of people; index as idx">
             <td>{{pa.first_name}}</td>
             <td>{{pa.last_name}}</td>
-            <td>{{pa.lines}}</td>
+            <td>
+              <p class="my-0 py-0" *ngFor="let line of pa.lines">{{line}}</p>
+            </td>
             <td>{{pa.delegate_type.name}}</td>
             <td>
               <ng-container *ngFor="let zone of pa.zones">
