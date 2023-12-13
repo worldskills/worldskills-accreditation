@@ -77,7 +77,6 @@ export class DelegateTypesComponent extends WsComponent implements OnInit {
     if (confirm('Are you sure you want to delete this "' + dt.name + '" Delegate Type?')) {
       this.delTypeService.delete(this.selectedEvent.id, dt.id).subscribe(_ => {
         this.loadData();
-        this.manageDelType = null;
         this.toastService.success('Delegate Type is deleted!');
       });
     }

@@ -11,14 +11,16 @@
         <table class="table table-striped">
           <colgroup>
             <col style="width: 10%">
-            <col style="width: 60%">
+            <col style="width: 55%">
             <col style="width: 30%">
+            <col style="width: 5%">
           </colgroup>
           <thead>
           <tr>
             <th class="border-top-0">{{'code' | translate}}</th>
             <th class="border-top-0">{{'name' | translate}}</th>
             <th class="border-top-0">{{'sort' | translate}}</th>
+            <th class="border-top-0">{{'action' | translate}}</th>
           </tr>
           </thead>
           <tbody>
@@ -36,6 +38,11 @@
                   <i class="fa fa-arrow-down"></i>
                 </button>
               </div>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteZone(zone)">
+                <i class="fa fa-trash"></i>
+              </button>
             </td>
           </tr>
           </tbody>

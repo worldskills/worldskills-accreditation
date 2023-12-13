@@ -94,4 +94,13 @@ export class ZonesComponent extends WsComponent implements OnInit {
       this.toastService.success('Zone is saved!');
     });
   }
+
+  deleteZone(zone: Zone): void {
+    if (confirm('Are you sure you want to delete this "' + zone.name + '" Zone?')) {
+      this.zoneService.delete(this.selectedEvent.id, zone.id).subscribe(res => {
+        this.loadData();
+        this.toastService.success('Zone is deleted!');
+      });
+    }
+  }
 }
