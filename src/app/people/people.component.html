@@ -15,7 +15,6 @@
             <th class="border-top-0">{{'zones' | translate}}</th>
             <th class="border-top-0" *ngIf="doesResultHasMember()">{{'member' | translate}}</th>
             <th class="border-top-0" *ngIf="doesResultHasSkill()">{{'skill' | translate}}</th>
-            <th class="border-top-0">{{'printed' | translate}}?</th>
           </tr>
           </thead>
           <tbody>
@@ -45,7 +44,6 @@
             <td><span *ngIf="personAcr.member && doesResultHasMember()">{{personAcr.member.name.text}}</span></td>
             <td><span *ngIf="personAcr.skill && doesResultHasSkill()">{{personAcr.skill.name.text}}
               ({{personAcr.skill.skill_number}})</span></td>
-            <td></td>
           </tr>
           <tr *ngIf="result.total_count === 0">
             <td colspan="6">{{'no_people_found' | translate}}</td>
