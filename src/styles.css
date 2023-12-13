@@ -1,0 +1,17 @@
+ng-select .ng-dropdown-panel {
+  min-width: 100%;
+  width: auto !important;
+  max-width: 550px;
+}
+
+ngb-modal-backdrop {
+  z-index: 1050 !important;
+}
+
+.toast {
+  opacity: 100 !important;
+}
+
+.event-tabs .mat-mdc-tab-header {
+  border-bottom: 1px solid #e8e8e8;
+}

@@ -1,0 +1,73 @@
+@page {
+  padding: 0;
+  margin: 0;
+  size: a4 !important; /* important to override this https://github.com/worldskills/bootstrap/blob/main/dist/css/bootstrap.css#L10509 */
+}
+
+.ws-badge {
+  /*TODO: include font*/
+  font-family: FrutigerLTW04, Frutiger, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 5mm;
+}
+
+@media print {
+  body {
+    min-width: 100% !important; /* important to override https://github.com/worldskills/bootstrap/blob/main/dist/css/bootstrap.css#L10512*/
+  }
+  .ws-badge {
+    display: flex;
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .ws-badge-multiple {
+    width: 210mm;
+    height: 148.5mm;
+    overflow: hidden;
+  }
+  .ws-badge-multiple-cut-separator {
+    border-top: 1px dashed rgba(0, 0, 0, 0.32);
+  }
+  .ws-badge-multiple-last {
+    height: 297mm;
+  }
+}
+
+@media screen {
+  .ws-badge {
+    width: 210mm;
+    height: 297mm;
+    margin: 10mm auto;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ws-badge-multiple {
+    width: 210mm;
+    height: 148.5mm;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ws-badge-multiple-odd {
+    margin-top: 10mm;
+  }
+
+  .ws-badge-multiple-cut-separator {
+    border-top: 1px dashed rgba(0, 0, 0, 0.32);
+  }
+
+  .ws-badge-multiple-even {
+    margin-bottom: 10mm;
+  }
+
+  .ws-badge-multiple-last {
+    height: 297mm;
+  }
+}

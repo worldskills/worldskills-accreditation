@@ -1,0 +1,60 @@
+<div class="row" *ngIf="!loading; else loadingAnimation">
+  <div class="col-md-12">
+    <div class="table-responsive-md">
+      <table class="table table-striped">
+        <colgroup>
+          <col style="width: 40%">
+          <col style="width: 50%">
+          <col style="width: 10%">
+        </colgroup>
+        <thead>
+        <tr>
+          <th class="border-top-0">{{'position' | translate}}</th>
+          <th class="border-top-0">{{'delegate_type' | translate}}</th>
+          <th class="border-top-0">{{'sort' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let pos of positions; index as idx">
+          <td>{{pos.position.name.text}}</td>
+          <td>
+            <ng-select
+              name="del_types"
+              [ngModel]="pos.delegate_type?.id ?? null"
+              [items]="delegateTypes"
+              bindValue="id"
+              bindLabel="name"
+              (change)="onDelTypeChange($event, idx)"
+            >
+              <ng-template ng-label-tmp let-item="item">
+                <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+                <div class="d-inline-block ml-2">{{item.name}}</div>
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item" let-index="index">
+                <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+                <div class="d-inline-block ml-2">{{item.name}}</div>
+              </ng-template>
+            </ng-select>
+          </td>
+          <td>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveUp(idx, pos)">
+                <i class="fa fa-arrow-up"></i>
+              </button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveDown(idx, pos)">
+                <i class="fa fa-arrow-down"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingAnimation>
+  <ngx-skeleton-loader
+    count="10"
+    [theme]="{ 'border-radius': '0', width: '100%', height: '30px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
+</ng-template>

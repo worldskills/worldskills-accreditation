@@ -1,0 +1,59 @@
+<form class="form-horizontal" (ngSubmit)="save()" #form="ngForm" novalidate>
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{'code' | translate}}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+      <input
+        type="text"
+        class="form-control"
+        name="code"
+        [ngModel]="zone.code">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{'name' | translate}}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        [ngModel]="zone.name">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{'color' | translate}}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span>
+      </label>
+      <input
+        type="color"
+        class="form-control"
+        name="color"
+        [ngModel]="zone.color">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{'sort' | translate}}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+      <input
+        type="number"
+        class="form-control"
+        name="sort"
+        [ngModel]="zone.sort">
+    </div>
+  </div>
+
+  <div class="row mb-2 text-right">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-sm btn-primary">{{'save' | translate}}</button>
+      <button type="button" class="btn btn-sm btn-outline-primary ml-2"
+              (click)="cancel()">{{'cancel' | translate}}</button>
+    </div>
+  </div>
+
+</form>

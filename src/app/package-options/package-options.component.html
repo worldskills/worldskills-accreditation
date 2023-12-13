@@ -1,0 +1,43 @@
+<div class="row" *ngIf="!loading; else loadingAnimation">
+  <div class="col-md-12">
+    <div class="table-responsive-md">
+      <table class="table table-striped">
+        <colgroup>
+          <col style="width: 50%">
+          <col style="width: 50%">
+        </colgroup>
+        <thead>
+        <tr>
+          <th class="border-top-0">{{'name' | translate}}</th>
+          <th class="border-top-0">{{'type' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let option of options">
+          <td><a class="btn btn-link m-0 p-0" (click)="updatePackageOption(option)">{{option.name.text}}</a></td>
+          <td>{{option.type}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingAnimation>
+  <ngx-skeleton-loader
+    count="10"
+    [theme]="{ 'border-radius': '0', width: '100%', height: '30px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
+</ng-template>
+
+<ws-modal [open]="managePackageOption !== null" (onClose)="managePackageOption = null" [options]="{size: 'lg'}">
+  <ng-container header>
+    <h4 *ngIf="managePackageOption?.id > 0">{{'editing' | translate}}: {{managePackageOption.name.text}}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-package-options-form *ngIf="managePackageOption !== null"
+                              [selectedEvent]="selectedEvent"
+                              [packageOption]="managePackageOption"
+                              (cancelForm)="managePackageOption = null" (savePackageOptionZones)="save($event)">
+    </app-package-options-form>
+  </ng-container>
+</ws-modal>

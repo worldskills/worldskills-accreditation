@@ -1,0 +1,64 @@
+<div class="ws-badge">
+
+  <div style="display:flex;">
+    <div style="flex: 1; min-width: 0;">
+
+      <div style="padding: 4mm;">
+        <div style="padding: 4mm 0 4mm 6mm; height: 120mm; overflow: hidden; -webkit-print-color-adjust: exact !important; background-image: url('/assets/badges/wsi2022/background-{{ pa.delegate_type.color.substring(1) || 'blue' }}.png') !important; background-size: contain !important; background-repeat: no-repeat !important; background-position: bottom !important;">
+          <div style="display: flex; justify-content: space-between; height: 44mm;">
+            <div>
+              <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="height: 40mm;">
+            </div>
+            <div>
+              <img src="assets/badges/wsi2022/WSC2022SE_Logo_Samsung_horizontal_Colour_RGB.png" style="width: 50mm">
+            </div>
+          </div>
+
+        <h2 style="-webkit-print-color-adjust: exact; margin-top: 0; margin-bottom: 0; color: #003764 !important;">
+          {{pa.first_name}} {{pa.last_name}}
+        </h2>
+
+        <div style="height: 18mm; overflow: hidden; padding-right: 2mm;">
+          <div class="ws-badge-line">{{pa.lines[0]}}</div>
+          <div class="ws-badge-line">{{pa.lines[1]}}</div>
+          <div class="ws-badge-line">{{pa.lines[2]}}</div>
+        </div>
+
+        <div style="margin-top: 2mm;">
+                    <span *ngFor="let zone of pa.zones">
+                        <span
+                          style="-webkit-print-color-adjust: exact; display: inline-block; padding: 0.4mm 0.2mm; min-width: 13mm; text-align: center; margin: 0 1mm 2mm 0; font-size: 6mm; font-weight: 700; border: 0.4mm solid #003764; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important;">{{ zone.code }}</span>
+                    </span>
+        </div>
+      </div>
+
+      <div
+        style="-webkit-print-color-adjust: exact !important; background-color: {{pa.delegate_type.color}} !important; height: 20mm; display: flex; align-items: center;">
+        <div class="ws-overflow"
+             style="flex-grow: 1; text-align: center; font-size: 6mm; font-weight: 700; color: {{pa.delegate_type.text_color}} !important;">{{pa.delegate_type.name}}</div>
+      </div>
+    </div>
+  </div>
+  <div style="flex: 1;">
+
+    <div style="padding: 4mm 6mm; font-size: 3mm; position: relative;">
+      <div style="display:flex;">
+        <div style="flex: 1;"><strong style="font-weight: 400;">Code</strong></div>
+        <div style="flex: 5;"><strong style="font-weight: 400;">Name</strong></div>
+      </div>
+      <div style="display:flex;" *ngFor="let zone of pa.zones">
+        <div style="flex: 1;">{{zone.code}}</div>
+        <div style="flex: 5;">{{zone.name}}</div>
+      </div>
+
+      <hr>
+
+      <p>{{'accreditation_badge_disclaimer_info' | translate}}</p>
+
+      <p><span>{{'generated_on' | translate}}</span>: {{currentDate | date:'dd.MM.yyyy HH:mm'}}</p>
+    </div>
+
+  </div>
+
+</div>
+</div>

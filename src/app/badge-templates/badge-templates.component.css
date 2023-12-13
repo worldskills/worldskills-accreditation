@@ -1,0 +1,6 @@
+.badge-card-img-top {
+  width: 100%;
+  height: 15vw !important;
+  object-fit: contain;
+  background-color: rgba(89, 89, 89, 0.16);
+}

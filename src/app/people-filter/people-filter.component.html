@@ -1,0 +1,148 @@
+<div class="card">
+  <h5 class="card-header m-0">{{'filter' | translate}}</h5>
+  <div class="card-body">
+    <form class="form-horizontal" (ngSubmit)="submit()" #form="ngForm" novalidate>
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'name' | translate}}</label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            [ngModel]="fetchParams.name">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
+          <ng-select
+            name="del_types"
+            [ngModel]="fetchParams.del_types"
+            [multiple]="true"
+            [items]="delegateTypes"
+            bindValue="id"
+            bindLabel="name"
+          >
+            <ng-template ng-label-tmp let-item="item">
+              <div class="d-inline-block" style="width: 15px; height: 15px; "
+                   [style.background-color]="item.color"></div>
+              <div class="d-inline-block ml-2">{{item.name}}</div>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+              <div class="d-inline-block" style="width: 15px; height: 15px; "
+                   [style.background-color]="item.color"></div>
+              <div class="d-inline-block ml-2">{{item.name}}</div>
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'member' | translate}}</label>
+          <ng-select
+            [wsSelect]="['id', 'name.text']"
+            name="member"
+            [ngModel]="fetchParams.member"
+            [items]="members"
+          ></ng-select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'skill' | translate}}</label>
+          <ng-select
+            [wsSelect]="['id', 'name.text']"
+            name="skill"
+            [ngModel]="fetchParams.skill"
+            [items]="skills"
+          ></ng-select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'group_name' | translate}}</label>
+          <input
+            type="text"
+            class="form-control"
+            name="group"
+            [ngModel]="fetchParams.group">
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'zone' | translate}}</label>
+          <ng-select
+            name="zone"
+            [ngModel]="fetchParams.zone"
+            [multiple]="true"
+            [items]="zones"
+            bindValue="id"
+            bindLabel="name"
+          >
+            <ng-template ng-label-tmp let-item="item">
+              <div class="d-inline-block" style="width: 15px; height: 15px; "
+                   [style.background-color]="item.color"></div>
+              <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+              <div class="d-inline-block" style="width: 15px; height: 15px; "
+                   [style.background-color]="item.color"></div>
+              <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'has_photo' | translate}}?</label>
+          <ng-select
+            [wsSelect]="['value', 'label']"
+            name="photo"
+            [ngModel]="fetchParams.photo"
+            [items]="yesNoSelections"
+          ></ng-select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'printed' | translate}}?</label>
+          <ng-select
+            [wsSelect]="['value', 'label']"
+            name="printed"
+            [ngModel]="fetchParams.printed"
+            [items]="yesNoSelections"
+          ></ng-select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <button type="submit" class="btn btn-sm btn-primary ml-2 float-right">{{'set_filter' | translate}}</button>
+          <div class="btn-group dropdown float-right">
+            <button type="button" class="btn btn-sm btn-outline-primary"
+                    [disabled]="!hasPrintPermission"
+                    (click)="printPreview(false)">
+              {{'print_preview' | translate | titlecase}}
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-split"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu">
+              <button class="dropdown-item"
+                 [disabled]="!hasPrintPermission"
+                 (click)="printPreview(true)">{{'print_preview' | translate | titlecase}}
+                ({{'two_badges_per_page' | translate}})</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

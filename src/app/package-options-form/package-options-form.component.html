@@ -1,0 +1,33 @@
+<form class="form-horizontal" (ngSubmit)="save()" #form="ngForm" novalidate>
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{'zones' | translate | titlecase}}</label>
+      <ng-select
+        name="zones"
+        [ngModel]="packageOptionSelectedZones"
+        [multiple]="true"
+        [items]="zones"
+        bindLabel="name"
+        [closeOnSelect]="false"
+      >
+        <ng-template ng-label-tmp let-item="item">
+          <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+          <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>
+          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+        </ng-template>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="row mb-2 text-right">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-sm btn-primary">{{'save' | translate}}</button>
+      <button type="button" class="btn btn-sm btn-outline-primary ml-2"
+              (click)="cancel()">{{'cancel' | translate}}</button>
+    </div>
+  </div>
+
+</form>
