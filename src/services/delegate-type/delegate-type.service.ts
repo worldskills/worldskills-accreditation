@@ -33,4 +33,8 @@ export class DelegateTypeService extends WsService<any> {
   update(eventId: number, delegateType: DelegateType): Observable<DelegateType> {
     return this.http.put<DelegateType>(this.url(eventId) + `/${delegateType.id}`, delegateType).pipe(share());
   }
+
+  delete(eventId: number, delegateTypeId: number): Observable<any> {
+    return this.http.delete<any>(this.url(eventId) + `/${delegateTypeId}`).pipe(share());
+  }
 }
