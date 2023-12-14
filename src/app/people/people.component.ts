@@ -86,7 +86,7 @@ export class PeopleComponent extends WsComponent implements OnInit {
         limit: this.fetchParams.limit,
         offset: this.fetchParams.limit ? this.fetchParams.limit * (page - 1) : 0,
       };
-      this.loadPeople();
+      this.updateSearchQueryParams();
     }
   }
 
