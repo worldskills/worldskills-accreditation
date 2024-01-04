@@ -27,6 +27,12 @@
       {{pa.lines[2]}}
     </div>
 
+    <div style="position: absolute; left: 6mm; right: 6mm; top: 90mm;">
+      <span *ngFor="let zone of pa.zones">
+          <span style="-webkit-print-color-adjust: exact; display: inline-block; padding: 1mm 2mm; min-width: 14mm; text-align: center; margin: 0 2mm 4mm 0; font-size: 6mm; font-weight: 700; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important;">{{ zone.code }}</span>
+      </span>
+    </div>
+
     <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type.color}} !important; height: 9mm; width: 40mm; position: absolute; left: 3mm; bottom: 3mm; display: flex; justify-content: center; align-items: center;">
       <div style="flex-grow: 1; text-align: center;">
         <div style="white-space: nowrap; font-weight: 700; font-size: 4mm; -webkit-print-color-adjust: exact; color: {{pa.delegate_type.text_color}} !important;">{{pa.delegate_type.code}}</div>
