@@ -62,7 +62,7 @@
                   <div class="col-md-12">
                     <div class="btn-group">
                       <button class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
-                              [disabled]="!hasEditPermission"
+                              [disabled]="!hasEditPermission || getZonesToAdd().length === 0"
                          id="addZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{'add_zone' | translate}}
                       </button>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="btn-group ml-2">
                       <button class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
-                              [disabled]="!hasEditPermission"
+                              [disabled]="!hasEditPermission || getZonesToRemove().length === 0"
                          id="removeZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{'remove_zone' | translate}}
                       </button>
