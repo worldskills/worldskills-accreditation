@@ -1,0 +1,35 @@
+@page {
+  padding: 0;
+  margin: 0;
+  size: 120mm 160mm !important;
+}
+
+.ws-badge {
+  font-family: FrutigerLTW04, Frutiger, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 5mm;
+  width: 120mm;
+  height: 160mm;
+}
+
+@media print {
+  body {
+    min-width: 100% !important; /* important to override https://github.com/worldskills/bootstrap/blob/main/dist/css/bootstrap.css#L10512*/
+  }
+  .ws-badge {
+    display: flex;
+    overflow: hidden;
+  }
+}
+
+@media screen {
+  .ws-badge {
+    margin: 10mm auto;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    background-image: url('../../../assets/badges/wsi2024-cpw/background.png');
+    background-repeat: no-repeat;
+    background-size: 120mm auto;
+  }
+}

@@ -5,7 +5,7 @@ import {Event} from "../../../types/event";
 @Component({
   selector: 'badge-wsi2024-cpw',
   templateUrl: './wsi2024-cpw.component.html',
-  styleUrls: ['../../../styles/badge.css']
+  styleUrls: ['./wsi2024-cpw.component.css']
 })
 export class Wsi2024CpwComponent {
   @Input() pa: PersonAccreditationSummary;
