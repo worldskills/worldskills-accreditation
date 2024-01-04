@@ -166,7 +166,7 @@
               </p>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="personAcr.package_option_zones.length > 0">
               <label class="small text-muted font-weight-bold my-0 py-0">{{'package_options' | translate}}</label>
               <p>
             <span *ngFor="let poz of personAcr.package_option_zones">
