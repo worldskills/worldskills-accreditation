@@ -89,13 +89,13 @@
 
                 <div class="mt-2">
                   <p class="py-0 my-0 small" *ngFor="let zone of personAcr.zones_add">
-                    <a class="text-black" ngbTooltip="Click to remove zone" [routerLink]="" (click)="removeZone(zone)">
+                    <a class="text-black" ngbTooltip="Click to remove zone" routerLink="." (click)="removeZone(zone)">
                       {{zone.code}} - {{zone.name}}
                     </a>
                   </p>
 
                   <p class="py-0 my-0 small" *ngFor="let zone of personAcr.zones_remove">
-                    <a class="text-black" ngbTooltip="Click to add zone back" [routerLink]="" (click)="addZone(zone)">
+                    <a class="text-black" ngbTooltip="Click to add zone back" routerLink="." (click)="addZone(zone)">
                       <s>{{zone.code}} - {{zone.name}}</s>
                     </a>
                   </p>
