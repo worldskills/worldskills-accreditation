@@ -6,16 +6,16 @@
       <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" style="width: 30mm; height: 40mm;"/>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 32mm; width: 76mm;">
-      <div style="font-weight: 700; font-size: 7mm; line-height: 1.1; margin-bottom: 2mm;">
-        <div style="-webkit-print-color-adjust: exact; overflow: hidden; text-overflow: ellipsis; color: #302050 !important;">
-          {{pa.first_name}}
-        </div>
-        <div style="-webkit-print-color-adjust: exact; overflow: hidden; text-overflow: ellipsis; color: #fff !important; -webkit-text-stroke: 0.3mm #302050;">
-          {{pa.last_name}}
-        </div>
+    <div style="position: absolute; left: 39mm; top: 32mm; width: 76mm; height: 16mm; font-weight: 700; font-size: 7mm; line-height: 1.2;" class="ws-text-fit">
+      <div style="-webkit-print-color-adjust: exact; color: #302050 !important;">
+        {{pa.first_name}}
       </div>
+      <div style="-webkit-print-color-adjust: exact; color: #fff !important; -webkit-text-stroke: 0.3mm #302050;">
+        {{pa.last_name}}
+      </div>
+    </div>
 
+    <div style="position: absolute; left: 39mm; top: 50mm; width: 76mm; height: 10mm;" class="ws-text-fit">
       <div style="font-weight: 400; font-size: 4mm; line-height: 1.2;">
         <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[0]}}</div>
         <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[1]}}</div>
