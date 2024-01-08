@@ -69,7 +69,7 @@
 
                       <div class="dropdown-menu" aria-labelledby="addZoneDropdownMenu">
                         <a class="dropdown-item" (click)="addZone(zone)"
-                           *ngFor="let zone of getZonesToAdd()">{{zone.name}}</a>
+                           *ngFor="let zone of getZonesToAdd()">{{zone.code}} - {{zone.name}}</a>
                       </div>
                     </div>
                     <div class="btn-group ml-2">
@@ -81,7 +81,7 @@
 
                       <div class="dropdown-menu" aria-labelledby="removeZoneDropdownMenu">
                         <a class="dropdown-item" (click)="removeZone(zone)"
-                           *ngFor="let zone of getZonesToRemove()">{{zone.name}}</a>
+                           *ngFor="let zone of getZonesToRemove()">{{zone.code}} - {{zone.name}}</a>
                       </div>
                     </div>
                   </div>
