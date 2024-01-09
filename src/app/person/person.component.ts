@@ -116,14 +116,12 @@ export class PersonComponent extends WsComponent implements OnInit {
   }
 
   addZone(zone: Zone) {
-    const removed = this.personAcr.zones_remove.find(z => z.id === zone.id);
-    if (removed) {
-      this.personAcr.zones_remove = this.personAcr.zones_remove.filter(z => z.id !== zone.id);
+    if (this.personAcr.zones_add == null) {
+      this.personAcr.zones_add = [];
+    }
+    if (this.personAcr.zones_add.filter(z => z.id === zone.id).length > 0) {
+      this.personAcr.zones_add = this.personAcr.zones_add.filter(z => z.id !== zone.id);
     } else {
-      if (this.personAcr.zones_add == null) {
-        this.personAcr.zones_add = [];
-      }
-
       this.personAcr.zones_add.push(zone);
     }
 
@@ -131,13 +129,13 @@ export class PersonComponent extends WsComponent implements OnInit {
   }
 
   removeZone(zone: Zone) {
-    const added = this.personAcr.zones_add.find(z => z.id === zone.id);
-    if (added) {
-      this.personAcr.zones_add = this.personAcr.zones_add.filter(z => z.id !== zone.id);
+    if (this.personAcr.zones_remove == null) {
+      this.personAcr.zones_remove = [];
+    }
+
+    if (this.personAcr.zones_remove.filter(z => z.id === zone.id).length > 0) {
+      this.personAcr.zones_remove = this.personAcr.zones_remove.filter(z => z.id !== zone.id);
     } else {
-      if (this.personAcr.zones_remove == null) {
-        this.personAcr.zones_remove = [];
-      }
       this.personAcr.zones_remove.push(zone);
     }
 
