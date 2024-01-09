@@ -38,6 +38,10 @@ export class PersonAccreditationService extends WsService<any> {
     return this.http.put<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}`, personAccreditation).pipe(share());
   }
 
+  invalidateBadge(eventId: number, personAccreditationId: number): Observable<any> {
+    return this.http.delete(`${this.url(eventId)}/${personAccreditationId}/randomHash`).pipe(share());
+  }
+
   initialiseFetchParams(): PersonAccreditationSummaryReqParams {
     return {
       name: null,

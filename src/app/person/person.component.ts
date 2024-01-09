@@ -12,6 +12,7 @@ import {DelegateTypeService} from "../../services/delegate-type/delegate-type.se
 import {ZoneService} from "../../services/zone/zone.service";
 import {Zone} from "../../types/zone";
 import {Location} from "@angular/common";
+import {ToastService} from "angular-toastify";
 
 @Component({
   selector: 'app-person',
@@ -39,6 +40,7 @@ export class PersonComponent extends WsComponent implements OnInit {
               private zoneService: ZoneService,
               private location: Location,
               private authService: NgAuthService,
+              private toastService: ToastService
   ) {
     super();
   }
@@ -59,9 +61,7 @@ export class PersonComponent extends WsComponent implements OnInit {
       .subscribe(([event, {personAcrId}]) => {
         this.selectedEvent = event;
         this.subscribe(
-          this.personAccreditationService.getPersonAccreditation(this.selectedEvent.id, personAcrId).subscribe(person => {
-            this.personAcr = person;
-          }),
+          this.loadPersonAccreditation(personAcrId),
           this.delegateTypeService.getList(this.selectedEvent.id).subscribe(res => {
             this.delegateTypes = res.delegate_types;
           }),
@@ -75,6 +75,12 @@ export class PersonComponent extends WsComponent implements OnInit {
     this.badgeLinesChange.pipe(debounceTime(400), distinctUntilChanged()).subscribe(lines => {
       this.personAcr.lines = lines;
       this.updatePersonAccreditation();
+    });
+  }
+
+  private loadPersonAccreditation(personAcrId: number) {
+    return this.personAccreditationService.getPersonAccreditation(this.selectedEvent.id, personAcrId).subscribe(person => {
+      this.personAcr = person;
     });
   }
 
@@ -146,5 +152,16 @@ export class PersonComponent extends WsComponent implements OnInit {
 
   backToPeopleList(): void {
     this.location.back();
+  }
+
+  invalidateBadge(): void {
+    if (confirm('This will generate a new random code for the QR code. Any existing badge will no longer be valid. Proceed?')) {
+      this.personAccreditationService.invalidateBadge(this.selectedEvent.id, this.personAcr.id).subscribe(res => {
+        this.toastService.success('New random code for QR code generated, existing badges are now invalid.');
+
+        // reload person accreditation
+        this.subscribe(this.loadPersonAccreditation(this.personAcr.id));
+      });
+    }
   }
 }

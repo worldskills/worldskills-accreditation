@@ -206,7 +206,7 @@
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
             <div class="dropdown-menu">
               <button class="dropdown-item" [disabled]="!hasPrintPermission">{{'mark_as_distributed' | translate}}</button>
-              <button class="dropdown-item" [disabled]="!hasPrintPermission">{{'invalidate_badge' | translate}}</button>
+              <button class="dropdown-item" [disabled]="!hasEditPermission" (click)="invalidateBadge()">{{'invalidate_badge' | translate}}</button>
             </div>
           </div>
         </h5>
