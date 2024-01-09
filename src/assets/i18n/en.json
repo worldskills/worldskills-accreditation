@@ -21,6 +21,7 @@
   "code": "Code",
   "color": "Color",
   "delegate_type": "Delegate Type",
+  "distributed": "Distributed",
   "edit_accreditations": "Edit Accreditations",
   "editing": "Editing",
   "empty_hint": "(empty)",

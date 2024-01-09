@@ -42,6 +42,10 @@ export class PersonAccreditationService extends WsService<any> {
     return this.http.delete(`${this.url(eventId)}/${personAccreditationId}/randomHash`).pipe(share());
   }
 
+  markAsDistributed(eventId: number, personAccreditationId: number): Observable<any> {
+    return this.http.put(`${this.url(eventId)}/${personAccreditationId}/distributed`, null).pipe(share());
+  }
+
   initialiseFetchParams(): PersonAccreditationSummaryReqParams {
     return {
       name: null,

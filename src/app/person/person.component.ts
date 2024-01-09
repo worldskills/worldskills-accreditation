@@ -156,12 +156,21 @@ export class PersonComponent extends WsComponent implements OnInit {
 
   invalidateBadge(): void {
     if (confirm('This will generate a new random code for the QR code. Any existing badge will no longer be valid. Proceed?')) {
-      this.personAccreditationService.invalidateBadge(this.selectedEvent.id, this.personAcr.id).subscribe(res => {
+      this.personAccreditationService.invalidateBadge(this.selectedEvent.id, this.personAcr.id).subscribe(_ => {
         this.toastService.success('New random code for QR code generated, existing badges are now invalid.');
 
         // reload person accreditation
         this.subscribe(this.loadPersonAccreditation(this.personAcr.id));
       });
     }
+  }
+
+  markAsDistributed(): void {
+    this.personAccreditationService.markAsDistributed(this.selectedEvent.id, this.personAcr.id).subscribe(_ => {
+      this.toastService.success('Person accreditation marked as distributed');
+
+      // reload person accreditation
+      this.subscribe(this.loadPersonAccreditation(this.personAcr.id));
+    });
   }
 }

@@ -33,4 +33,5 @@ export interface PersonAccreditation {
   zones_remove: Zone[];
   summary: PersonAccreditationSummary;
   deleted: boolean;
+  distributed: Date;
 }
