@@ -91,6 +91,13 @@ export class PrintComponent extends WsComponent implements OnInit {
   }
 
   openBrowserPrintPreview(): void {
+    window.onbeforeprint = () => {
+      if (!this.adhocPrinting) {
+        this.people.map(p => p.id).forEach(personAcrId => {
+          this.personAcrService.markAsPrinted(this.selectedEvent.id, personAcrId).subscribe();
+        });
+      }
+    }
     window.print();
   }
 
