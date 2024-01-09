@@ -12,6 +12,63 @@
   height: 160mm;
 }
 
+.line {
+  -webkit-print-color-adjust: exact;
+  position: absolute;
+  left: 4mm;
+  height: 0.5mm;
+}
+
+.icon {
+  width: 9mm;
+  height: 10.5mm;
+  color: #fff;
+  font-size: 2.2mm;
+  font-weight: 500;
+  line-height: 1.1;
+  text-align: center;
+  padding-top: 1.4mm;
+  -webkit-print-color-adjust: exact;
+}
+
+.icon-number {
+  font-weight: 800;
+  font-size: 4.6mm;
+  display: block;
+}
+
+.icon-lunch {
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-lunch.svg');
+}
+
+.icon-pink {
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-pink.svg');
+}
+
+.icon-dinner {
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-dinner.svg');
+}
+
+.icon-green {
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-green.svg');
+}
+
+.icon-sponsor {
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-sponsor.svg');
+}
+
+.icon-yellow {
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-yellow.svg');
+}
+
+.icon-farewell {
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-farewell.svg');
+}
+
+.icon-blue {
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-blue.svg');
+}
+
 @media print {
   body {
     min-width: 100% !important; /* important to override https://github.com/worldskills/bootstrap/blob/main/dist/css/bootstrap.css#L10512*/
