@@ -98,7 +98,7 @@
             <td>
               <p class="my-0 py-0" *ngFor="let line of pa.lines">{{line}}</p>
             </td>
-            <td>{{pa.delegate_type.name}}</td>
+            <td>{{pa.delegate_type?.name}}</td>
             <td>
               <ng-container *ngFor="let zone of pa.zones">
                 <div class="badge mr-1 small" [style.background-color]="zone.color"
