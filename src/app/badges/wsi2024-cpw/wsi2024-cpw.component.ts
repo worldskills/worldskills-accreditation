@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, SimpleChanges} from '@angular/core';
 import {PersonAccreditationSummary} from "../../../types/person-accreditation-summary";
 import {Event} from "../../../types/event";
 
@@ -12,11 +12,25 @@ declare var textFit: any;
 export class Wsi2024CpwComponent {
   @Input() pa: PersonAccreditationSummary;
   @Input() currentEvent: Event
-  currentDate = new Date();
+  showComponent = true;
 
   ngOnInit() {
+    this.refreshComponent();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['pa']) {
+      this.refreshComponent();
+    } 
+  }
+
+  refreshComponent() {
+    this.showComponent = false;
     setTimeout(() => { 
-      textFit(document.getElementsByClassName('ws-text-fit'), {multiLine: true});
+      this.showComponent = true;
+      setTimeout(() => { 
+        textFit(document.getElementsByClassName('ws-text-fit'), {multiLine: true});
+      }, 100);
     }, 100);
   }
 
