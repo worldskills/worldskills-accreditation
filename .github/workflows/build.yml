@@ -39,3 +39,22 @@ jobs:
       - name: Invalidate staging
         if: github.ref == 'refs/heads/staging'
         run: aws cloudfront create-invalidation --distribution-id E3JVPI0JFLBPOP --paths /index.html /assets/i18n/*
+
+      - name: Build for production
+        if: github.ref == 'refs/heads/prod'
+        run: ng build --configuration=prod
+      - name: Configure AWS credentials for production
+        if: github.ref == 'refs/heads/prod'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Deploy to production
+        if: github.ref == 'refs/heads/prod'
+        run: |
+          aws s3 sync dist/ s3://accreditation.worldskills.org --exclude index.html --cache-control max-age=31536000
+          aws s3 cp dist/index.html s3://accreditation.worldskills.org/index.html --metadata-directive REPLACE --cache-control max-age=60
+      - name: Invalidate production
+        if: github.ref == 'refs/heads/prod'
+        run: aws cloudfront create-invalidation --distribution-id E2D4OLT6BMIVIC --paths /index.html
