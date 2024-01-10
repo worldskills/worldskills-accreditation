@@ -195,7 +195,7 @@
 
   </div>
   <div class="col-md-8">
-    <div class="card">
+    <div class="card" *ngIf="personAcr">
       <div class="card-header">
         <h5 class="card-title">{{'preview_badge' | translate | titlecase}}
           <div class="btn-group dropdown float-right">
@@ -211,7 +211,7 @@
           </div>
         </h5>
       </div>
-      <div class="card-body p-2 m-0" *ngIf="personAcr">
+      <div class="card-body p-2 m-0">
         <app-person-badge-preview
           style="zoom: 0.9"
           [selectedEvent]="selectedEvent"
