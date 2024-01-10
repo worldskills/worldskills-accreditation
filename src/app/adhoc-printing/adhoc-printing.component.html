@@ -17,7 +17,7 @@
     <div class="row mb-2">
       <div class="col-sm-12">
         <label class="small text-muted font-weight-bold my-0 py-0">{{'badge_lines' | translate}}</label>
-        <textarea class="form-control" rows="3" [(ngModel)]="personEdit.lines"></textarea>
+        <textarea class="form-control" rows="3" [(ngModel)]="badgeLines"></textarea>
       </div>
     </div>
 
@@ -110,7 +110,7 @@
               <button class="btn btn-sm btn-outline-danger" (click)="removePerson(idx)">
                 <i class="fa fa-trash"></i>
               </button>
-              <button class="btn btn-sm btn-outline-secondary" (click)="editPerson(pa)">
+              <button class="btn btn-sm btn-outline-secondary" (click)="editPerson(idx)">
                 <i class="fa fa-edit"></i>
               </button>
             </td>

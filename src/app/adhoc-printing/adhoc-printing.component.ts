@@ -20,8 +20,10 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
   @Input() hasPrintPermission: boolean; // TODO: set this
   selectedEvent: Event;
   delegateTypes: DelegateType[];
+  badgeLines: string = '';
   zones: Zone[];
   personEdit: PersonAccreditationSummary;
+  personEditIndex: number;
 
 
   action: 'ADD' | 'EDIT' = 'ADD';
@@ -81,10 +83,11 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
   }
 
   savePerson(): void {
-    this.personEdit.lines = this.personEdit.lines.toString().split('\n');
+    this.personEdit.lines = this.badgeLines.split('\n');
     if (this.action === 'ADD') {
       this.people.push(this.personEdit);
     } else if (this.action === 'EDIT') {
+      this.people[this.personEditIndex] = this.personEdit;
       this.action = 'ADD';
     }
     this.initializePersonEdit();
@@ -98,9 +101,11 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
     this.savePeople();
   }
 
-  editPerson(pa: PersonAccreditationSummary) {
-    this.personEdit = pa;
-    this.personEdit.lines = [this.personEdit.lines.join('\n')];
+  editPerson(index: number) {
+    this.personEdit = JSON.parse(JSON.stringify(this.people[index]));
+    this.personEditIndex = index;
+    this.badgeLines = '';
+    this.badgeLines = this.personEdit.lines.join('\n');
     this.action = 'EDIT';
   }
 
