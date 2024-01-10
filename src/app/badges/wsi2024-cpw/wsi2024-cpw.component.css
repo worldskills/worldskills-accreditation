@@ -29,6 +29,7 @@
   text-align: center;
   padding-top: 1.4mm;
   -webkit-print-color-adjust: exact;
+  background-size: contain;
 }
 
 .icon-number {
@@ -38,35 +39,35 @@
 }
 
 .icon-lunch {
-  background-image: url('../../../assets/badges/wsi2024-cpw/icon-lunch.svg');
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-lunch.png');
 }
 
 .icon-pink {
-  background-image: url('../../../assets/badges/wsi2024-cpw/icon-pink.svg');
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-pink.png');
 }
 
 .icon-dinner {
-  background-image: url('../../../assets/badges/wsi2024-cpw/icon-dinner.svg');
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-dinner.png');
 }
 
 .icon-green {
-  background-image: url('../../../assets/badges/wsi2024-cpw/icon-green.svg');
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-green.png');
 }
 
 .icon-sponsor {
-  background-image: url('../../../assets/badges/wsi2024-cpw/icon-sponsor.svg');
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-sponsor.png');
 }
 
 .icon-yellow {
-  background-image: url('../../../assets/badges/wsi2024-cpw/icon-yellow.svg');
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-yellow.png');
 }
 
 .icon-farewell {
-  background-image: url('../../../assets/badges/wsi2024-cpw/icon-farewell.svg');
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-farewell.png');
 }
 
 .icon-blue {
-  background-image: url('../../../assets/badges/wsi2024-cpw/icon-blue.svg');
+  background-image: url('../../../assets/badges/wsi2024-cpw/icon-blue.png');
 }
 
 @media print {
