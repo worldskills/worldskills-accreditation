@@ -10,6 +10,7 @@ export interface PersonPosition {
   start: Date;
   end: Date;
   invalid: boolean;
+  open_field: string;
   skill: Skill;
   sector: Sector;
   member: Member;
