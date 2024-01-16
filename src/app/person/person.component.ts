@@ -25,7 +25,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   selectedEvent: Event;
   personAcr: PersonAccreditation;
   delegateTypes: DelegateType[];
-  zones: Zone[];
+  zones: Zone[] = [];
 
   savingPersonAcr = false;
   badgeLinesChange: Subject<string> = new Subject<string>();
