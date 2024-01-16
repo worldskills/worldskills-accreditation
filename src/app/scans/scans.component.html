@@ -13,56 +13,58 @@
           </colgroup>
           <thead>
           <tr>
-            <th class="border-top-0">{{'timestamp' | translate}}</th>
-            <th class="border-top-0">{{'first_name' | translate}}</th>
-            <th class="border-top-0">{{'last_name' | translate}}</th>
-            <th class="border-top-0">{{'delegate_type' | translate}}</th>
-            <th class="border-top-0">{{'zone' | translate}}</th>
-            <th class="border-top-0">{{'allowed' | translate}}</th>
+            <th class="border-top-0">{{ 'timestamp' | translate }}</th>
+            <th class="border-top-0">{{ 'first_name' | translate }}</th>
+            <th class="border-top-0">{{ 'last_name' | translate }}</th>
+            <th class="border-top-0">{{ 'delegate_type' | translate }}</th>
+            <th class="border-top-0">{{ 'zone' | translate }}</th>
+            <th class="border-top-0">{{ 'allowed' | translate }}</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let scan of result?.scans">
-            <td>{{scan.timestamp | date:'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{ scan.timestamp | date:'dd.MM.yyyy HH:mm' }}</td>
             <td>
               <a routerLink="../people/{{scan.accreditation.id}}">
-                <ng-container *ngIf="scan.accreditation.first_name">{{scan.accreditation.first_name}}</ng-container>
-                <ng-container *ngIf="!scan.accreditation.first_name">{{'empty_hint' | translate}}</ng-container>
+                <ng-container *ngIf="scan.accreditation.first_name">{{ scan.accreditation.first_name }}</ng-container>
+                <ng-container *ngIf="!scan.accreditation.first_name">{{ 'empty_hint' | translate }}</ng-container>
               </a>
             </td>
             <td>
               <a routerLink="../people/{{scan.accreditation.id}}">
-                <ng-container *ngIf="scan.accreditation.last_name">{{scan.accreditation.last_name}}</ng-container>
-                <ng-container *ngIf="!scan.accreditation.last_name">{{'empty_hint' | translate}}</ng-container>
+                <ng-container *ngIf="scan.accreditation.last_name">{{ scan.accreditation.last_name }}</ng-container>
+                <ng-container *ngIf="!scan.accreditation.last_name">{{ 'empty_hint' | translate }}</ng-container>
               </a>
             </td>
             <td>
-              {{scan.accreditation.delegate_type.name}}
+              {{ scan.accreditation.delegate_type.name }}
             </td>
             <td>
               <div class="badge mr-1 small" [style.background-color]="scan.zone.color"
                    [ngbTooltip]="scan.zone.name"
-                   [style.color]="scan.zone.text_color">{{scan.zone.code}} - {{scan.zone.name}}</div>
+                   [style.color]="scan.zone.text_color">{{ scan.zone.code }} - {{ scan.zone.name }}
+              </div>
             </td>
-            <td>{{scan.allowed ? 'yes' : 'no'}}</td>
+            <td>{{ scan.allowed ? 'yes' : 'no' }}</td>
           </tr>
           <tr *ngIf="result?.scans.length === 0">
-            <td colspan="6">{{'no_people_found' | translate}}</td>
+            <td colspan="6">{{ 'no_people_found' | translate }}</td>
           </tr>
           </tbody>
         </table>
       </div>
 
-      <span class="text-muted">{{'total_results' | translate}}: {{result?.scans.length}} {{'people' | translate}}</span>
-      <!--      <ngb-pagination-->
-      <!--        class="component-pager"-->
-      <!--        [collectionSize]="result.total_count"-->
-      <!--        [page]="(fetchParams.offset / fetchParams.limit) + 1"-->
-      <!--        [pageSize]="fetchParams.limit"-->
-      <!--        [maxSize]="10"-->
-      <!--        [boundaryLinks]="true"-->
-      <!--        (pageChange)="fetch($event)">-->
-      <!--      </ngb-pagination>-->
+      <span class="text-muted">{{ 'total_results' | translate }}
+        : {{ result?.total_count }} {{ 'people' | translate }}</span>
+      <ngb-pagination
+        class="component-pager"
+        [collectionSize]="result?.total_count"
+        [page]="(fetchParams.offset / fetchParams.limit) + 1"
+        [pageSize]="fetchParams.limit"
+        [maxSize]="10"
+        [boundaryLinks]="true"
+        (pageChange)="fetch($event)">
+      </ngb-pagination>
     </ng-container>
 
     <ng-template #loadingAnimation>

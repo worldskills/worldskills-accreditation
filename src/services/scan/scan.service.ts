@@ -7,6 +7,7 @@ import {
   PersonAccreditationScanContainer,
   PersonAccreditationScanReqParams
 } from "../../types/person-accreditation-scan";
+import {Event} from "../../types/event";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,20 @@ export class ScanService extends WsService<any> {
 
   constructor(private http: HttpClient) {
     super();
+  }
+
+  initialiseFetchParams(selectedEvent: Event): PersonAccreditationScanReqParams {
+    return {
+      from: null,
+      to: null,
+      eventId: selectedEvent.id,
+      zone: null,
+      delegate_type: null,
+      member: null,
+      accreditation: null,
+      offset: 0,
+      limit: 10
+    }
   }
 
   getScans(eventId: number, params: PersonAccreditationScanReqParams): Observable<PersonAccreditationScanContainer> {

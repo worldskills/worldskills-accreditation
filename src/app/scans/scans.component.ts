@@ -30,7 +30,7 @@ export class ScansComponent extends WsComponent implements OnInit {
     this.subscribe(
       this.appService.selectedEvent.subscribe(event => {
         this.selectedEvent = event;
-        this.resetFilter(this.selectedEvent);
+        this.fetchParams = this.scanService.initialiseFetchParams(this.selectedEvent);
       })
     );
   }
@@ -45,21 +45,19 @@ export class ScansComponent extends WsComponent implements OnInit {
     );
   }
 
-  private resetFilter(selectedEvent: Event): void {
-    this.fetchParams = {
-      from: null,
-      to: null,
-      eventId: selectedEvent.id,
-      zone: null,
-      delegate_type: null,
-      member: null,
-      accreditation: null
-    }
-  }
-
   filter(params: PersonAccreditationScanReqParams) {
     this.fetchParams = {...params};
     this.loadData();
   }
 
+  fetch(page: number) {
+    if ((this.fetchParams.offset / this.fetchParams.limit) !== (page - 1)) {
+      this.fetchParams = {
+        ...this.fetchParams,
+        limit: this.fetchParams.limit,
+        offset: this.fetchParams.limit ? this.fetchParams.limit * (page - 1) : 0,
+      };
+      this.loadData();
+    }
+  }
 }

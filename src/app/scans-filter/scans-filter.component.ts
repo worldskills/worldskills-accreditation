@@ -12,6 +12,7 @@ import {DelegateTypeService} from "../../services/delegate-type/delegate-type.se
 import {MemberService} from "../../services/member/member.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {ZoneService} from "../../services/zone/zone.service";
+import {ScanService} from "../../services/scan/scan.service";
 
 @Component({
   selector: 'app-scans-filter',
@@ -37,6 +38,7 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
   constructor(private appService: AppService,
               private delegateTypeService: DelegateTypeService,
               private memberService: MemberService,
+              private scanService: ScanService,
               private skillService: SkillService,
               private zoneService: ZoneService) {
     super();
@@ -72,15 +74,7 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
   }
 
   private resetFilter(selectedEvent: Event): void {
-    this.fetchParams = {
-      from: null,
-      to: null,
-      eventId: selectedEvent.id,
-      zone: null,
-      delegate_type: null,
-      member: null,
-      accreditation: null
-    }
+    this.fetchParams = this.scanService.initialiseFetchParams(selectedEvent);
 
     // set default date filter value
     const eventStart = new Date(selectedEvent.start_date);
