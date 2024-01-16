@@ -20,21 +20,22 @@
 }
 
 .icon {
-  width: 9mm;
-  height: 10.5mm;
+  width: 10mm;
+  height: 12mm;
   color: #fff;
-  font-size: 2.2mm;
+  font-size: 2.3mm;
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1.14;
   text-align: center;
   padding-top: 1.4mm;
   -webkit-print-color-adjust: exact;
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .icon-number {
   font-weight: 800;
-  font-size: 4.6mm;
+  font-size: 4.9mm;
   display: block;
 }
 

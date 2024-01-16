@@ -25,50 +25,50 @@
         <div *ngIf="(pa.lines[1] && !pa.lines[2]) || (pa.lines[2] && !pa.lines[1])">&nbsp;</div>
     </div>
 
-    <div style="position: absolute; left: 6mm; right: 6mm; top: 76mm;">
+    <div style="position: absolute; left: 6mm; right: 6mm; top: 75mm; height: 64mm;">
 
         <div *ngIf="hasAnyZone(['L29', 'L30', 'L31', 'L1', 'L2'])">
-          <div class="line" style="top: 7mm; background-color: #da0e69;" [ngStyle]="{'width': hasFirstZone({'L2': '91mm', 'L1': '77mm', 'L31': '63mm', 'L30': '49mm', 'L29': '35mm'})}"></div>
-          <div class="icon icon-lunch" style="position: absolute; left: 0; top: 2mm;"></div>
-          <div class="icon icon-pink" style="position: absolute; left: 34mm; top: 2mm;" *ngIf="hasZone('L29')"><span class="icon-number">29</span> JAN</div>
-          <div class="icon icon-pink" style="position: absolute; left: 48mm; top: 2mm;" *ngIf="hasZone('L30')"><span class="icon-number">30</span> JAN</div>
-          <div class="icon icon-pink" style="position: absolute; left: 62mm; top: 2mm;" *ngIf="hasZone('L31')"><span class="icon-number">31</span> JAN</div>
-          <div class="icon icon-pink" style="position: absolute; left: 76mm; top: 2mm;" *ngIf="hasZone('L1')"><span class="icon-number">1</span> FEB</div>
-          <div class="icon icon-pink" style="position: absolute; left: 90mm; top: 2mm;" *ngIf="hasZone('L2')"><span class="icon-number">2</span> FEB</div>
+          <div class="line" style="top: 5.7mm; background-color: #da0e69;" [ngStyle]="{'width': hasFirstZone({'L2': '91mm', 'L1': '77mm', 'L31': '63mm', 'L30': '49mm', 'L29': '35mm'})}"></div>
+          <div class="icon icon-lunch" style="position: absolute; left: 0; top: 0;"></div>
+          <div class="icon icon-pink" style="position: absolute; left: 35mm; top: 0;" *ngIf="hasZone('L29')"><span class="icon-number">29</span> JAN</div>
+          <div class="icon icon-pink" style="position: absolute; left: 50mm; top: 0;" *ngIf="hasZone('L30')"><span class="icon-number">30</span> JAN</div>
+          <div class="icon icon-pink" style="position: absolute; left: 65mm; top: 0;" *ngIf="hasZone('L31')"><span class="icon-number">31</span> JAN</div>
+          <div class="icon icon-pink" style="position: absolute; left: 80mm; top: 0;" *ngIf="hasZone('L1')"><span class="icon-number">1</span> FEB</div>
+          <div class="icon icon-pink" style="position: absolute; left: 95mm; top: 0;" *ngIf="hasZone('L2')"><span class="icon-number">2</span> FEB</div>
         </div>
 
         <div *ngIf="hasAnyZone(['D28', 'D29', 'D31'])">
-          <div class="line" style="top: 21mm; background-color: #3aaa36;" [ngStyle]="{'width': hasFirstZone({'D31': '63mm', 'D29': '35mm', 'D28': '21mm'})}"></div>
-          <div class="icon icon-dinner" style="position: absolute; left: 0; top: 16mm;"></div>
-          <div class="icon icon-green" style="position: absolute; left: 20mm; top: 16mm;" *ngIf="hasZone('D28')"><span class="icon-number">28</span> JAN</div>
-          <div class="icon icon-green" style="position: absolute; left: 34mm; top: 16mm;" *ngIf="hasZone('D29')"><span class="icon-number">29</span> JAN</div>
-          <div class="icon icon-green" style="position: absolute; left: 62mm; top: 16mm;" *ngIf="hasZone('D31')"><span class="icon-number">31</span> JAN</div>
+          <div class="line" style="top: 20.7mm; background-color: #3aaa36;" [ngStyle]="{'width': hasFirstZone({'D31': '63mm', 'D29': '35mm', 'D28': '21mm'})}"></div>
+          <div class="icon icon-dinner" style="position: absolute; left: 0; top: 15mm;"></div>
+          <div class="icon icon-green" style="position: absolute; left: 20mm; top: 15mm;" *ngIf="hasZone('D28')"><span class="icon-number">28</span> JAN</div>
+          <div class="icon icon-green" style="position: absolute; left: 35mm; top: 15mm;" *ngIf="hasZone('D29')"><span class="icon-number">29</span> JAN</div>
+          <div class="icon icon-green" style="position: absolute; left: 65mm; top: 15mm;" *ngIf="hasZone('D31')"><span class="icon-number">31</span> JAN</div>
         </div>
 
         <div *ngIf="hasZone('SD30')">
-          <div class="line" style="top: 35mm; width: 49mm; background-color: #f9b232;"></div>
+          <div class="line" style="top: 35.7mm; width: 49mm; background-color: #f9b232;"></div>
           <div class="icon icon-sponsor" style="position: absolute; left: 0; top: 30mm;"></div>
-          <div class="icon icon-yellow" style="position: absolute; left: 48mm; top: 30mm;"><span class="icon-number">30</span> JAN</div>
+          <div class="icon icon-yellow" style="position: absolute; left: 50mm; top: 30mm;"><span class="icon-number">30</span> JAN</div>
         </div>
 
         <div *ngIf="hasZone('FD1')">
-          <div class="line" style="top: 49mm; width: 77mm; background-color: #009fe3;"></div>
-          <div class="icon icon-farewell" style="position: absolute; left: 0; top: 44mm;"></div>
-          <div class="icon icon-blue" style="position: absolute; left: 76mm; top: 44mm;"><span class="icon-number">1</span> FEB</div>
+          <div class="line" style="top: 50.7mm; width: 77mm; background-color: #009fe3;"></div>
+          <div class="icon icon-farewell" style="position: absolute; left: 0; top: 45mm;"></div>
+          <div class="icon icon-blue" style="position: absolute; left: 80mm; top: 45mm;"><span class="icon-number">1</span> FEB</div>
         </div>
     </div>
     
-    <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type?.color}} !important; height: 9mm; width: 40mm; position: absolute; left: 3mm; bottom: 3mm; display: flex; justify-content: center; align-items: center;">
+    <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type?.color}} !important; height: 9mm; width: 40mm; position: absolute; left: 3mm; bottom: 5mm; display: flex; justify-content: center; align-items: center;">
       <div style="flex-grow: 1; text-align: center;">
         <div style="white-space: nowrap; font-weight: 700; font-size: 4mm; -webkit-print-color-adjust: exact; color: {{pa.delegate_type?.text_color}} !important;">{{pa.delegate_type?.code}}</div>
       </div>
     </div>
 
-    <div style="position: absolute; left: 49mm; bottom: 2mm;">
+    <div style="position: absolute; left: 49mm; bottom: 4.2mm;">
       <img src="{{pa.qr_code}}" style="height: 22mm;">
     </div>
 
-    <div style="position: absolute; left: 88mm; bottom: 5mm;" *ngIf="hasZone('VT')">
+    <div style="position: absolute; left: 88mm; bottom: 6mm;" *ngIf="hasZone('VT')">
       <img src="assets/badges/wsi2024-cpw/venue-tour.png" style="width: 18mm;">
     </div>
 
