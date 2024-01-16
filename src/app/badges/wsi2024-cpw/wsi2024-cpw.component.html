@@ -22,7 +22,7 @@
     <div style="position: absolute; left: 39mm; top: 58mm; width: 76mm; height: 11mm; font-weight: 400; font-size: 5mm; line-height: 1.4; -webkit-print-color-adjust: exact; color: #D51067 !important;" class="ws-text-fit">
         <div>{{pa.lines[1]}}</div>
         <div>{{pa.lines[2]}}</div>
-        <div *ngIf="pa.lines[2] && !pa.lines[1]">&nbsp;</div>
+        <div *ngIf="(pa.lines[1] && !pa.lines[2]) || (pa.lines[2] && !pa.lines[1])">&nbsp;</div>
     </div>
 
     <div style="position: absolute; left: 6mm; right: 6mm; top: 76mm;">
