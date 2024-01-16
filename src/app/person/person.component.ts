@@ -31,6 +31,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   badgeLinesChange: Subject<string> = new Subject<string>();
   hasEditPermission = false;
   hasPrintPermission = false;
+  hasAdminPermission = false;
 
   constructor(private appService: AppService,
               private router: Router,
@@ -53,6 +54,7 @@ export class PersonComponent extends WsComponent implements OnInit {
       this.authService.currentUser.subscribe(currentUser => {
         this.hasEditPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.EDIT);
         this.hasPrintPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.PRINT);
+        this.hasAdminPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN);
       })
     )
 

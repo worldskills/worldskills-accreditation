@@ -175,7 +175,7 @@
               </p>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="hasAdminPermission">
               <a href="{{peopleURL + '/people/' + personAcr.person.id}}" target="_blank"><span
                 class="fa fa-external-link"></span> {{'view_in_people' | translate}}</a>
             </div>
