@@ -42,8 +42,7 @@
               </ng-container>
             </td>
             <td><span *ngIf="personAcr.member && doesResultHasMember()">{{personAcr.member.name.text}}</span></td>
-            <td><span *ngIf="personAcr.skill && doesResultHasSkill()">{{personAcr.skill.name.text}}
-              ({{personAcr.skill.skill_number}})</span></td>
+            <td><span *ngIf="personAcr.skill && doesResultHasSkill()">{{personAcr.skill.skill_number}} {{personAcr.skill.name.text}}</span></td>
           </tr>
           <tr *ngIf="result.total_count === 0">
             <td colspan="6">{{'no_people_found' | translate}}</td>
