@@ -41,4 +41,13 @@ export class ScanService extends WsService<any> {
 
     return this.http.get<PersonAccreditationScanContainer>(this.url(eventId), {params: httpParams}).pipe(share());
   }
+
+  exportScans(eventId: number, params: PersonAccreditationScanReqParams): Observable<any> {
+    let httpParams = HttpUtil.objectToParams(ObjectUtil.stripNullOrUndefined(params || {}));
+
+    return this.http.get(this.url(eventId) + "/export", {
+      responseType: 'arraybuffer',
+      params: httpParams
+    }).pipe(share());
+  }
 }

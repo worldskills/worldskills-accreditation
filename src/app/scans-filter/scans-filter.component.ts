@@ -22,6 +22,7 @@ import {ScanService} from "../../services/scan/scan.service";
 export class ScansFilterComponent extends WsComponent implements OnInit {
 
   @Output() filter = new EventEmitter<PersonAccreditationScanReqParams>();
+  @Output() export = new EventEmitter<PersonAccreditationScanReqParams>();
   @Input() loading: boolean;
   @ViewChild('form') form: NgForm;
 
@@ -100,10 +101,18 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
   }
 
   submit(): void {
+    this.filter.emit(this.getFetchParams());
+  }
+
+  exportResult() {
+    this.export.emit(this.getFetchParams());
+  }
+
+  private getFetchParams() {
     this.fetchParams.from = this.fixDateFormat(this.from.toString());
     this.fetchParams.to = this.fixDateFormat(this.to.toString());
 
-    this.filter.emit({...this.fetchParams, ...this.form?.value});
+    return {...this.fetchParams, ...this.form?.value};
   }
 
   private fixDateFormat(value: string): string {
@@ -115,4 +124,6 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
       return value;
     }
   }
+
+
 }
