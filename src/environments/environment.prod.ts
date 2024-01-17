@@ -21,6 +21,8 @@ export const environment = {
     EDIT_POSITIONS: 'EditPositions',
     EDIT_ZONES: 'EditZones',
     EDIT_PACKAGE_OPTIONS: 'EditPackageOptions',
-    PRINT: 'Print'
+    PRINT: 'Print',
+    AD_HOC_PRINT: 'AdHocPrint',
+    SET_UP_SCAN_APP: 'SetUpScanApp'
   }
 };
