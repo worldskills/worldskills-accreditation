@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WsComponent} from "@worldskills/worldskills-angular-lib";
+import {NgAuthService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Event} from "../../types/event";
@@ -26,10 +26,13 @@ export class EventComponent extends WsComponent implements OnInit {
   selectedTabIndex = 0;
   showMenuTabs = true;
   setupScanApp: boolean;
+  hasAdHocPrintPermission = false;
+  hasSetUpScanAppPermission = false;
 
   constructor(private eventService: EventService,
               private router: Router,
               private route: ActivatedRoute,
+              private authService: NgAuthService,
               private appService: AppService) {
     super();
   }
@@ -51,6 +54,14 @@ export class EventComponent extends WsComponent implements OnInit {
     if (selectedTabIndex !== -1) {
       this.selectedTabIndex = selectedTabIndex;
     }
+
+    // load current user and check permissions
+    this.subscribe(
+      this.authService.currentUser.subscribe(currentUser => {
+        this.hasAdHocPrintPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.AD_HOC_PRINT);
+        this.hasSetUpScanAppPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.SET_UP_SCAN_APP);
+      })
+    )
   }
 
   navigate(selectedTab: any): void {

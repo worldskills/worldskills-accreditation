@@ -10,15 +10,15 @@
       <p class="text-muted small">{{currentEvent.start_date | date:'dd MMM yyy'}}
         to {{currentEvent.end_date | date:'dd MMM yyy'}}</p>
     </div>
-    <div class="col-md-2 text-right" *wsUserRole="[env.appRoles.ADMIN]; appId: env.worldskillsAppId">
+    <div class="col-md-2 text-right" *ngIf="hasAdHocPrintPermission || hasSetUpScanAppPermission">
       <div class="dropdown">
         <button class="btn btn-sm btn-outline-dark dropdown-toggle"
                 type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{'tools' | translate}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" (click)="setupScanApp = true">{{'setup_scan_app' | translate}}</a>
-          <a class="dropdown-item" (click)="openAdHocPrinting()">{{'ad_hoc_printing' | translate}}</a>
+          <a class="dropdown-item" *ngIf="hasSetUpScanAppPermission" (click)="setupScanApp = true">{{'setup_scan_app' | translate}}</a>
+          <a class="dropdown-item" *ngIf="hasAdHocPrintPermission" (click)="openAdHocPrinting()">{{'ad_hoc_printing' | translate}}</a>
         </div>
       </div>
     </div>
