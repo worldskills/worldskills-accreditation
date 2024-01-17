@@ -90,6 +90,15 @@ export class PeopleComponent extends WsComponent implements OnInit {
     }
   }
 
+  changeLimit(limit: number) {
+    this.fetchParams = {
+      ...this.fetchParams,
+      limit: limit,
+      offset: 0,
+    };
+    this.updateSearchQueryParams();
+  }
+
   doesResultHasSkill(): boolean {
     return this.result.people.filter(p => !GenericUtil.isNullOrUndefined(p.skill)).length > 0;
   }

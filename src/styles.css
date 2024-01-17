@@ -15,3 +15,7 @@ ngb-modal-backdrop {
 .event-tabs .mat-mdc-tab-header {
   border-bottom: 1px solid #e8e8e8;
 }
+
+.pagination {
+  margin-top: 1.5rem !important
+}
