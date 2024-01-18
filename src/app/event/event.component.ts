@@ -13,15 +13,17 @@ import {environment} from "../../environments/environment";
 })
 export class EventComponent extends WsComponent implements OnInit {
 
-  env = environment;
+  private env = environment;
+  private appRoles = this.env.appRoles;
+  appId = environment.worldskillsAppId;
   currentEvent: Event;
   tabs = [
-    {label: 'People', path: 'people'},
-    {label: 'Scans', path: 'scans'},
-    {label: 'Delegate Types', path: 'delegate-types'},
-    {label: 'Positions', path: 'positions'},
-    {label: 'Package Options', path: 'package-options'},
-    {label: 'Zones', path: 'zones'},
+    {label: 'People', path: 'people', requiredRoles: Object.values(this.appRoles)},
+    {label: 'Scans', path: 'scans', requiredRoles: [this.appRoles.ADMIN]},
+    {label: 'Delegate Types', path: 'delegate-types', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_DELEGATE_TYPES]},
+    {label: 'Positions', path: 'positions', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_POSITIONS]},
+    {label: 'Package Options', path: 'package-options', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_PACKAGE_OPTIONS]},
+    {label: 'Zones', path: 'zones', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_ZONES]},
   ];
   selectedTabIndex = 0;
   showMenuTabs = true;

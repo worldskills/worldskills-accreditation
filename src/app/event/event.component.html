@@ -29,7 +29,12 @@
                  *ngIf="showMenuTabs"
                  [(selectedIndex)]="selectedTabIndex"
                  (selectedTabChange)="navigate($event)">
-    <mat-tab *ngFor="let tab of tabs" [label]="tab.label"></mat-tab>
+    <ng-container *ngFor="let tab of tabs">
+      <mat-tab
+        *wsUserRole="tab.requiredRoles; appId: appId"
+        [label]="tab.label"></mat-tab>
+    </ng-container>
+
   </mat-tab-group>
   <div class="my-3"></div>
   <router-outlet></router-outlet>

@@ -70,7 +70,10 @@ const routes: Routes = [
           },
           {
             path: 'scans',
-            data: {breadcrumb: 'Scan'},
+            data: {
+              breadcrumb: 'Scan',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN])
+            },
             component: ScansComponent
           },
           {
