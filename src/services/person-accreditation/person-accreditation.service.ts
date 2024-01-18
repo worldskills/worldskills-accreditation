@@ -31,7 +31,7 @@ export class PersonAccreditationService extends WsService<any> {
   }
 
   getPersonAccreditation(eventId: number, personAccreditationId: number): Observable<PersonAccreditation> {
-    return this.http.get<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}`).pipe(share());
+    return this.http.get<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}`, {params: {l: 'en'}}).pipe(share()); // TODO dynamic locale
   }
 
   updatePersonAccreditation(eventId: number, personAccreditationId: number, personAccreditation: PersonAccreditation): Observable<PersonAccreditation> {
