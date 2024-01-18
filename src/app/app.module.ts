@@ -46,7 +46,7 @@ import {SetupScanAppComponent} from './setup-scan-app/setup-scan-app.component';
 import {AdhocPrintingComponent} from './adhoc-printing/adhoc-printing.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20231109');
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240118');
 }
 
 @NgModule({
