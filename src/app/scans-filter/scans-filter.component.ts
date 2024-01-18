@@ -12,6 +12,7 @@ import {DelegateTypeService} from "../../services/delegate-type/delegate-type.se
 import {MemberService} from "../../services/member/member.service";
 import {SkillService} from "../../services/skill/skill.service";
 import {ZoneService} from "../../services/zone/zone.service";
+import {ScanService} from "../../services/scan/scan.service";
 
 @Component({
   selector: 'app-scans-filter',
@@ -21,6 +22,7 @@ import {ZoneService} from "../../services/zone/zone.service";
 export class ScansFilterComponent extends WsComponent implements OnInit {
 
   @Output() filter = new EventEmitter<PersonAccreditationScanReqParams>();
+  @Output() export = new EventEmitter<PersonAccreditationScanReqParams>();
   @Input() loading: boolean;
   @ViewChild('form') form: NgForm;
 
@@ -37,6 +39,7 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
   constructor(private appService: AppService,
               private delegateTypeService: DelegateTypeService,
               private memberService: MemberService,
+              private scanService: ScanService,
               private skillService: SkillService,
               private zoneService: ZoneService) {
     super();
@@ -72,15 +75,7 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
   }
 
   private resetFilter(selectedEvent: Event): void {
-    this.fetchParams = {
-      from: null,
-      to: null,
-      eventId: selectedEvent.id,
-      zone: null,
-      delegate_type: null,
-      member: null,
-      accreditation: null
-    }
+    this.fetchParams = this.scanService.initialiseFetchParams(selectedEvent);
 
     // set default date filter value
     const eventStart = new Date(selectedEvent.start_date);
@@ -106,10 +101,18 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
   }
 
   submit(): void {
+    this.filter.emit(this.getFetchParams());
+  }
+
+  exportResult() {
+    this.export.emit(this.getFetchParams());
+  }
+
+  private getFetchParams() {
     this.fetchParams.from = this.fixDateFormat(this.from.toString());
     this.fetchParams.to = this.fixDateFormat(this.to.toString());
 
-    this.filter.emit({...this.fetchParams, ...this.form?.value});
+    return {...this.fetchParams, ...this.form?.value};
   }
 
   private fixDateFormat(value: string): string {
@@ -121,4 +124,6 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
       return value;
     }
   }
+
+
 }

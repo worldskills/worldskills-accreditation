@@ -81,7 +81,7 @@
 
       <div class="row mb-2 text-right">
         <div class="col-sm-12">
-          <button class="btn btn-sm btn-outline-primary" [disabled]="loading">{{'export' | translate}}</button>
+          <button class="btn btn-sm btn-outline-primary" [disabled]="loading" (click)="exportResult()">{{'export' | translate}}</button>
           <button class="btn btn-sm btn-primary ml-2" type="submit" [disabled]="loading">{{'set_filter' | translate}}</button>
         </div>
       </div>

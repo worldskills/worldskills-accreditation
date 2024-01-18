@@ -7,6 +7,7 @@ import {
   PersonAccreditationScanReqParams
 } from "../../types/person-accreditation-scan";
 import {ScanService} from "../../services/scan/scan.service";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-scans',
@@ -30,7 +31,7 @@ export class ScansComponent extends WsComponent implements OnInit {
     this.subscribe(
       this.appService.selectedEvent.subscribe(event => {
         this.selectedEvent = event;
-        this.resetFilter(this.selectedEvent);
+        this.fetchParams = this.scanService.initialiseFetchParams(this.selectedEvent);
       })
     );
   }
@@ -45,21 +46,36 @@ export class ScansComponent extends WsComponent implements OnInit {
     );
   }
 
-  private resetFilter(selectedEvent: Event): void {
-    this.fetchParams = {
-      from: null,
-      to: null,
-      eventId: selectedEvent.id,
-      zone: null,
-      delegate_type: null,
-      member: null,
-      accreditation: null
-    }
-  }
-
   filter(params: PersonAccreditationScanReqParams) {
     this.fetchParams = {...params};
     this.loadData();
+  }
+
+  fetch(page: number) {
+    if ((this.fetchParams.offset / this.fetchParams.limit) !== (page - 1)) {
+      this.fetchParams = {
+        ...this.fetchParams,
+        limit: this.fetchParams.limit,
+        offset: this.fetchParams.limit ? this.fetchParams.limit * (page - 1) : 0,
+      };
+      this.loadData();
+    }
+  }
+
+  exportCurrentSearchResults(params: PersonAccreditationScanReqParams) {
+    // refresh current search result
+    this.filter(params);
+
+    // export to file
+    this.scanService.exportScans(this.selectedEvent.id, {...this.fetchParams, offset: 0, limit: 9999999})
+      .subscribe(response => {
+        const objectURL = window.URL.createObjectURL(new Blob([response], {type: 'application/octet-stream'}));
+        const downloadLink = document.createElement('a');
+        downloadLink.href = objectURL;
+        downloadLink.setAttribute('download', `${this.selectedEvent.name.text}_accreditation_scans_${moment().format("yyyyMMDDHHmmss")}.xlsx`);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+      });
   }
 
 }
