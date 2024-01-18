@@ -196,6 +196,7 @@
   </div>
   <div class="col-md-8">
     <div class="alert alert-info small" *ngIf="personAcr?.printed">{{'badge_has_been_printed' | translate}}</div>
+    <div class="alert alert-warning small" *ngIf="personAcr?.distributed">{{'badge_has_been_distributed' | translate}}</div>
     <div class="card" *ngIf="personAcr">
       <div class="card-header">
         <h5 class="card-title">{{'preview_badge' | translate | titlecase}}
