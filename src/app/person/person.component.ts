@@ -31,7 +31,7 @@ export class PersonComponent extends WsComponent implements OnInit {
 
   // upload ACR photo variables
   overrideACRPhoto: File;
-  openModalMode : 'CLOSED' | 'CAMERA' | 'UPLOAD' = 'CLOSED';
+  openModalMode: 'CLOSED' | 'CAMERA' | 'UPLOAD' = 'CLOSED';
 
   // override person acr
   personAcr: PersonAccreditation;
@@ -216,8 +216,11 @@ export class PersonComponent extends WsComponent implements OnInit {
           this.overrideACRPhoto = null;
           this.openModalMode = 'CLOSED';
 
-          // reload person accreditation
-          this.subscribe(this.loadPersonAccreditation(this.personAcr.id));
+          // use timeout to wait for RabbitMQ message arrives back
+          setTimeout(() => {
+            // reload person accreditation
+            this.subscribe(this.loadPersonAccreditation(this.personAcr.id));
+          }, 100);
         });
       });
   }
