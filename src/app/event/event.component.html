@@ -30,9 +30,7 @@
                  [(selectedIndex)]="selectedTabIndex"
                  (selectedTabChange)="navigate($event)">
     <ng-container *ngFor="let tab of tabs">
-      <mat-tab
-        *wsUserRole="tab.requiredRoles; appId: appId"
-        [label]="tab.label"></mat-tab>
+      <mat-tab [label]="tab.label"></mat-tab>
     </ng-container>
 
   </mat-tab-group>

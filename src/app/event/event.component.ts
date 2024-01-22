@@ -62,6 +62,11 @@ export class EventComponent extends WsComponent implements OnInit {
       this.authService.currentUser.subscribe(currentUser => {
         this.hasAdHocPrintPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.AD_HOC_PRINT);
         this.hasSetUpScanAppPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.SET_UP_SCAN_APP);
+
+        // hide tabs that user does not have permission to access
+        this.tabs = this.tabs.filter(tab => {
+          return tab.requiredRoles.some(role => UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, role));
+        });
       })
     )
   }

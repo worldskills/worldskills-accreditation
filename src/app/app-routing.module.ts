@@ -66,6 +66,7 @@ const routes: Routes = [
               breadcrumb: 'Person',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.PRINT])
             },
+            canActivate: [GuardService],
             component: PersonComponent
           },
           {
@@ -74,6 +75,7 @@ const routes: Routes = [
               breadcrumb: 'Scan',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN])
             },
+            canActivate: [GuardService],
             component: ScansComponent
           },
           {
@@ -82,6 +84,7 @@ const routes: Routes = [
               breadcrumb: 'Delegate Types',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_DELEGATE_TYPES])
             },
+            canActivate: [GuardService],
             component: DelegateTypesComponent
           },
           {
@@ -90,6 +93,7 @@ const routes: Routes = [
               breadcrumb: 'Positions',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_POSITIONS])
             },
+            canActivate: [GuardService],
             component: PositionsComponent
           },
           {
@@ -98,6 +102,7 @@ const routes: Routes = [
               breadcrumb: 'Package Options',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_PACKAGE_OPTIONS])
             },
+            canActivate: [GuardService],
             component: PackageOptionsComponent
           },
           {
@@ -106,6 +111,7 @@ const routes: Routes = [
               breadcrumb: 'Zones',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_ZONES])
             },
+            canActivate: [GuardService],
             component: ZonesComponent
           }
         ]
