@@ -4,6 +4,7 @@ export const environment = {
   worldskillsAppId: 2100,
   worldskillsApi: 'https://api.worldskills.show',
   worldskillsApiAccreditation: 'https://api.worldskills.show/accreditation',
+  worldskillsApiImages: 'https://api.worldskills.show/images',
   worldskillsApiOrg: 'https://api.worldskills.show/org',
   worldskillsApiPeople: 'https://api.worldskills.show/people',
   worldskillsPeople: 'https://people.worldskills.org',
@@ -17,6 +18,7 @@ export const environment = {
   appRoles: {
     ADMIN: 'Admin',
     EDIT: 'Edit',
+    UPLOAD_PHOTO: 'UploadPhoto',
     EDIT_DELEGATE_TYPES: 'EditDelegateTypes',
     EDIT_POSITIONS: 'EditPositions',
     EDIT_ZONES: 'EditZones',

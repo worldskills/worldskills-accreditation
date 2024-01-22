@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgAuthService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {NgAuthService, UploadService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
 import {Event} from "../../types/event";
@@ -13,6 +13,9 @@ import {ZoneService} from "../../services/zone/zone.service";
 import {Zone} from "../../types/zone";
 import {Location} from "@angular/common";
 import {ToastService} from "angular-toastify";
+import {ImageService} from "../../services/image/image.service";
+import {Image} from "../../types/image";
+import {HttpEventType} from "@angular/common/http";
 
 @Component({
   selector: 'app-person',
@@ -23,15 +26,23 @@ export class PersonComponent extends WsComponent implements OnInit {
 
   readonly peopleURL = environment.worldskillsPeople;
   selectedEvent: Event;
-  personAcr: PersonAccreditation;
   delegateTypes: DelegateType[];
   zones: Zone[] = [];
 
+  // upload ACR photo variables
+  overrideACRPhoto: File;
+  openModalMode: 'CLOSED' | 'CAMERA' | 'UPLOAD' = 'CLOSED';
+
+  // override person acr
+  personAcr: PersonAccreditation;
   savingPersonAcr = false;
   badgeLinesChange: Subject<string> = new Subject<string>();
+
+  // permissions
   hasEditPermission = false;
   hasPrintPermission = false;
   hasAdminPermission = false;
+  hasUploadPhotoPermission = true;
 
   constructor(private appService: AppService,
               private router: Router,
@@ -41,7 +52,9 @@ export class PersonComponent extends WsComponent implements OnInit {
               private zoneService: ZoneService,
               private location: Location,
               private authService: NgAuthService,
-              private toastService: ToastService
+              private toastService: ToastService,
+              private imageService: ImageService,
+              private uploadService: UploadService,
   ) {
     super();
   }
@@ -55,6 +68,7 @@ export class PersonComponent extends WsComponent implements OnInit {
         this.hasEditPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.EDIT);
         this.hasPrintPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.PRINT);
         this.hasAdminPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN);
+        this.hasUploadPhotoPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.UPLOAD_PHOTO);
       })
     )
 
@@ -172,5 +186,46 @@ export class PersonComponent extends WsComponent implements OnInit {
       // reload person accreditation
       this.subscribe(this.loadPersonAccreditation(this.personAcr.id));
     });
+  }
+
+  setFileFromInput(event: any) {
+    const input = event.target as HTMLInputElement;
+    if (input.files.length > 0) {
+      this.overrideACRPhoto = input.files.item(0);
+    } else {
+      this.overrideACRPhoto = null;
+    }
+  }
+
+
+  uploadACRPhoto(): void {
+    const request = this.imageService.httpRequest(this.overrideACRPhoto);
+    this.uploadService.listen<Image>(
+      request,
+      ({loaded, total, type}) => {
+        if (type === HttpEventType.UploadProgress) {
+          // this.resourceProgress = loaded / total;
+        }
+      },
+      image => {
+        this.personAccreditationService.uploadAccreditationPhoto(this.selectedEvent.id, this.personAcr.id, {
+          id: image.body.id,
+          thumbnail_hash: image.body.thumbnail_hash
+        }).subscribe(() => {
+          this.toastService.success('Photo uploaded!');
+          this.overrideACRPhoto = null;
+          this.openModalMode = 'CLOSED';
+
+          // use timeout to wait for RabbitMQ message arrives back
+          setTimeout(() => {
+            // reload person accreditation
+            this.subscribe(this.loadPersonAccreditation(this.personAcr.id));
+          }, 100);
+        });
+      });
+  }
+
+  captureImage(imageDataURL: File) {
+    this.overrideACRPhoto = imageDataURL;
   }
 }

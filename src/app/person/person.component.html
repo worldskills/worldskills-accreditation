@@ -1,7 +1,8 @@
 <div class="row mb-2">
   <div class="col-md-12">
     <button class="btn btn-sm btn-link" (click)="backToPeopleList()"><span
-      class="fa fa-arrow-left"></span> {{'people_list' | translate}}</button>
+      class="fa fa-arrow-left"></span> {{ 'people_list' | translate }}
+    </button>
   </div>
 </div>
 <div class="row">
@@ -11,18 +12,37 @@
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">
-              {{'manual_override' | translate | titlecase}}
+              {{ 'manual_override' | translate | titlecase }}
               <span class="fa fa-info-circle"
                     ngbTooltip="This gives you the ability to override or customise person's badge"></span>
             </h5>
           </div>
           <div class="card-body" *ngIf="personAcr">
 
-            <div class="alert alert-warning small" *ngIf="!hasEditPermission">{{'no_permission_to_edit_person_msg' | translate}}</div>
+            <div class="alert alert-warning small"
+                 *ngIf="!hasEditPermission">{{ 'no_permission_to_edit_person_msg' | translate }}
+            </div>
 
             <div class="row mb-2">
               <div class="col-sm-12">
-                <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
+                <p class="small text-muted font-weight-bold my-0 py-0">{{ 'photo' | translate | titlecase }}</p>
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline-dark mr-2" (click)="openModalMode = 'UPLOAD'"
+                          [disabled]="!hasUploadPhotoPermission">
+                    <span class="fa fa-file-image-o"></span> {{ 'upload_file' | translate }}
+                  </button>
+
+                  <button class="btn btn-sm btn-outline-dark" (click)="openModalMode = 'CAMERA'"
+                          [disabled]="!hasUploadPhotoPermission">
+                    <span class="fa fa-camera"></span> {{ 'take_photo' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'delegate_type' | translate }}</label>
                 <ng-select
                   name="del_types"
                   [items]="delegateTypes"
@@ -34,12 +54,12 @@
                   <ng-template ng-label-tmp let-item="item">
                     <div class="d-inline-block" style="width: 15px; height: 15px; "
                          [style.background-color]="item.color"></div>
-                    <div class="d-inline-block ml-2">{{item.name}}</div>
+                    <div class="d-inline-block ml-2">{{ item.name }}</div>
                   </ng-template>
                   <ng-template ng-option-tmp let-item="item" let-index="index">
                     <div class="d-inline-block" style="width: 15px; height: 15px; "
                          [style.background-color]="item.color"></div>
-                    <div class="d-inline-block ml-2">{{item.name}}</div>
+                    <div class="d-inline-block ml-2">{{ item.name }}</div>
                   </ng-template>
                 </ng-select>
               </div>
@@ -47,7 +67,7 @@
 
             <div class="row mb-2">
               <div class="col-sm-12">
-                <label class="small text-muted font-weight-bold my-0 py-0">{{'badge_lines' | translate}}</label>
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'badge_lines' | translate }}</label>
                 <textarea class="form-control" rows="3" [ngModel]="personAcr.lines"
                           [disabled]="!hasEditPermission"
                           (ngModelChange)="onBadgeLinesChange($event)"></textarea>
@@ -56,32 +76,34 @@
 
             <div class="row mb-2">
               <div class="col-sm-12">
-                <label class="small text-muted font-weight-bold my-0 py-0">{{'additional_zones' | translate}}</label>
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'additional_zones' | translate }}</label>
 
                 <div class="row">
                   <div class="col-md-12">
                     <div class="btn-group">
                       <button class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
                               [disabled]="!hasEditPermission || getZonesToAdd().length === 0"
-                         id="addZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{'add_zone' | translate}}
+                              id="addZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false">
+                        {{ 'add_zone' | translate }}
                       </button>
 
                       <div class="dropdown-menu" aria-labelledby="addZoneDropdownMenu">
                         <a class="dropdown-item" (click)="addZone(zone)"
-                           *ngFor="let zone of getZonesToAdd()">{{zone.code}} - {{zone.name}}</a>
+                           *ngFor="let zone of getZonesToAdd()">{{ zone.code }} - {{ zone.name }}</a>
                       </div>
                     </div>
                     <div class="btn-group ml-2">
                       <button class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
                               [disabled]="!hasEditPermission || getZonesToRemove().length === 0"
-                         id="removeZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{'remove_zone' | translate}}
+                              id="removeZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false">
+                        {{ 'remove_zone' | translate }}
                       </button>
 
                       <div class="dropdown-menu" aria-labelledby="removeZoneDropdownMenu">
                         <a class="dropdown-item" (click)="removeZone(zone)"
-                           *ngFor="let zone of getZonesToRemove()">{{zone.code}} - {{zone.name}}</a>
+                           *ngFor="let zone of getZonesToRemove()">{{ zone.code }} - {{ zone.name }}</a>
                       </div>
                     </div>
                   </div>
@@ -90,22 +112,22 @@
                 <div class="mt-2">
                   <p class="py-0 my-0 small" *ngFor="let zone of personAcr.zones_add">
                     <a class="text-black" ngbTooltip="Click to remove zone" routerLink="." (click)="addZone(zone)">
-                      {{zone.code}} - {{zone.name}}
+                      {{ zone.code }} - {{ zone.name }}
                     </a>
                   </p>
 
                   <p class="py-0 my-0 small" *ngFor="let zone of personAcr.zones_remove">
                     <a class="text-black" ngbTooltip="Click to add zone back" routerLink="." (click)="removeZone(zone)">
-                      <s>{{zone.code}} - {{zone.name}}</s>
+                      <s>{{ zone.code }} - {{ zone.name }}</s>
                     </a>
                   </p>
                 </div>
               </div>
             </div>
 
-            <p class="text-muted small text-right" *ngIf="savingPersonAcr">{{'saving' | translate}}...</p>
+            <p class="text-muted small text-right" *ngIf="savingPersonAcr">{{ 'saving' | translate }}...</p>
             <p class="text-muted small text-right"
-               *ngIf="!savingPersonAcr">{{'changes_saved_automatically'| translate}}</p>
+               *ngIf="!savingPersonAcr">{{ 'changes_saved_automatically'| translate }}</p>
           </div>
           <div class="card-body" *ngIf="!personAcr">
             <ngx-skeleton-loader
@@ -125,7 +147,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">{{'existing_information' | translate | titlecase}}</h5>
+            <h5 class="card-title">{{ 'existing_information' | translate | titlecase }}</h5>
           </div>
           <div class="card-body" *ngIf="personAcr">
             <div class="row mb-2">
@@ -140,44 +162,44 @@
             </div>
 
             <div class="form-group">
-              <label class="small text-muted font-weight-bold my-0 py-0">{{'name' | translate}}</label>
-              <p>{{personAcr.person.first_name}} {{personAcr.person.last_name}}</p>
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'name' | translate }}</label>
+              <p>{{ personAcr.person.first_name }} {{ personAcr.person.last_name }}</p>
             </div>
 
             <div class="form-group">
-              <label class="small text-muted font-weight-bold my-0 py-0">{{'position' | translate}}</label>
-              <div>{{personAcr.person_position.position.name.text}}</div>
-              <div>{{personAcr.person_position.open_field}}</div>
-              <div>{{personAcr.person_position.organization?.name.text}}</div>
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'position' | translate }}</label>
+              <div>{{ personAcr.person_position.position.name.text }}</div>
+              <div>{{ personAcr.person_position.open_field }}</div>
+              <div>{{ personAcr.person_position.organization?.name.text }}</div>
             </div>
 
             <div class="form-group">
-              <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
-              <div>{{personAcr.position_delegate_type.delegate_type.name}}</div>
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'delegate_type' | translate }}</label>
+              <div>{{ personAcr.position_delegate_type.delegate_type.name }}</div>
               <div>
                 <ng-container *ngFor="let zone of personAcr.position_delegate_type.delegate_type.zones">
                   <span class="badge mr-1 small" [style.background-color]="zone.color"
-                    [ngbTooltip]="zone.name"
-                    [style.color]="zone.text_color">{{zone.code}}</span>
+                        [ngbTooltip]="zone.name"
+                        [style.color]="zone.text_color">{{ zone.code }}</span>
                 </ng-container>
               </div>
             </div>
 
             <div class="form-group" *ngIf="personAcr.package_option_zones.length > 0">
-              <label class="small text-muted font-weight-bold my-0 py-0">{{'package_options' | translate}}</label>
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'package_options' | translate }}</label>
               <p>
             <span *ngFor="let poz of personAcr.package_option_zones">
-              {{poz.package_option.name.text}}: 
+              {{ poz.package_option.name.text }}:
               <span class="badge mr-1 small" [style.background-color]="poz.zone.color"
                     [ngbTooltip]="poz.zone.name"
-                    [style.color]="poz.zone.text_color">{{poz.zone.code}}</span><br>
+                    [style.color]="poz.zone.text_color">{{ poz.zone.code }}</span><br>
             </span>
               </p>
             </div>
 
             <div class="form-group" *ngIf="hasAdminPermission">
               <a href="{{peopleURL + '/people/' + personAcr.person.id}}" target="_blank"><span
-                class="fa fa-external-link"></span> {{'view_in_people' | translate}}</a>
+                class="fa fa-external-link"></span> {{ 'view_in_people' | translate }}</a>
             </div>
 
           </div>
@@ -195,20 +217,29 @@
 
   </div>
   <div class="col-md-8">
-    <div class="alert alert-info small" *ngIf="personAcr?.printed">{{'badge_has_been_printed' | translate}}</div>
-    <div class="alert alert-warning small" *ngIf="personAcr?.distributed">{{'badge_has_been_distributed' | translate}}</div>
+    <div class="alert alert-info small" *ngIf="personAcr?.printed">{{ 'badge_has_been_printed' | translate }}</div>
+    <div class="alert alert-warning small"
+         *ngIf="personAcr?.distributed">{{ 'badge_has_been_distributed' | translate }}
+    </div>
     <div class="card" *ngIf="personAcr">
       <div class="card-header">
-        <h5 class="card-title">{{'preview_badge' | translate | titlecase}}
+        <h5 class="card-title">{{ 'preview_badge' | translate | titlecase }}
           <div class="btn-group dropdown float-right">
-            <button type="button" class="btn btn-sm btn-primary" (click)="printPreview()" [disabled]="!hasPrintPermission">
-              {{'print_preview' | translate | titlecase}}
+            <button type="button" class="btn btn-sm btn-primary" (click)="printPreview()"
+                    [disabled]="!hasPrintPermission">
+              {{ 'print_preview' | translate | titlecase }}
             </button>
             <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
             <div class="dropdown-menu">
-              <button class="dropdown-item" [disabled]="(!hasEditPermission && !hasPrintPermission) || !!personAcr.distributed" (click)="markAsDistributed()">{{'mark_as_distributed' | translate}} <span class="badge badge-success" *ngIf="!!personAcr.distributed">{{'distributed' | translate}}</span></button>
-              <button class="dropdown-item" [disabled]="!hasEditPermission" (click)="invalidateBadge()">{{'invalidate_badge' | translate}}</button>
+              <button class="dropdown-item"
+                      [disabled]="(!hasEditPermission && !hasPrintPermission) || !!personAcr.distributed"
+                      (click)="markAsDistributed()">{{ 'mark_as_distributed' | translate }} <span
+                class="badge badge-success" *ngIf="!!personAcr.distributed">{{ 'distributed' | translate }}</span>
+              </button>
+              <button class="dropdown-item" [disabled]="!hasEditPermission"
+                      (click)="invalidateBadge()">{{ 'invalidate_badge' | translate }}
+              </button>
             </div>
           </div>
         </h5>
@@ -227,31 +258,52 @@
     </div>
     <div class="card mt-4" *ngIf="personAcr">
       <div class="card-header">
-        <h5 class="card-title">{{'all_zones' | translate | titlecase}}</h5>
+        <h5 class="card-title">{{ 'all_zones' | translate | titlecase }}</h5>
       </div>
       <div class="card-body">
         <div class="table-responsive-md">
           <table class="table">
             <tbody>
-              <tr *ngFor="let zone of personAcr.summary.zones">
-                <td>
+            <tr *ngFor="let zone of personAcr.summary.zones">
+              <td>
                   <span class="badge mr-1 small" [style.background-color]="zone.color"
                         [ngbTooltip]="zone.name"
-                        [style.color]="zone.text_color">{{zone.code}}</span>
-                </td>
-                <td>
-                  {{zone.name}}
-                </td>
-              </tr>
-              <tr *ngIf="personAcr.summary.zones.length === 0">
-                <td colspan="2">{{'no_zones' | translate}}</td>
-              </tr>
+                        [style.color]="zone.text_color">{{ zone.code }}</span>
+              </td>
+              <td>
+                {{ zone.name }}
+              </td>
+            </tr>
+            <tr *ngIf="personAcr.summary.zones.length === 0">
+              <td colspan="2">{{ 'no_zones' | translate }}</td>
+            </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-
-
 </div>
+
+
+<ws-modal [open]="openModalMode !== 'CLOSED'" (onClose)="openModalMode = 'CLOSED'" [options]="{size: 'xl'}">
+  <ng-container header>
+    <h4>{{ (openModalMode === 'CAMERA' ? 'take_photo' : 'upload_photo') | translate }}</h4>
+  </ng-container>
+  <ng-container body>
+    <div class="container">
+      <app-webcam-capture *ngIf="openModalMode === 'CAMERA'"
+                          (captureImage)="captureImage($event)"></app-webcam-capture>
+      <input *ngIf="openModalMode === 'UPLOAD'"
+             type="file" name="file" class="form-control form-control-sm form-control-file"
+             (change)="setFileFromInput($event)" accept="image/*">
+    </div>
+  </ng-container>
+  <ng-container footer>
+    <button type="button" class="btn btn-warning btn-sm" (click)="openModalMode = 'CLOSED'">{{ 'cancel' | translate }}
+    </button>
+    <button type="button" [disabled]="!(!!overrideACRPhoto)" (click)="uploadACRPhoto()"
+            class="btn btn-success btn-sm ml-1">{{ 'upload' | translate }}
+    </button>
+  </ng-container>
+</ws-modal>
