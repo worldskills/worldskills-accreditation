@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-6">
+    <p class="alert alert-warning" *ngIf="cameraInitErrorMsg != null">{{ cameraInitErrorMsg }}</p>
+    <webcam [width]="PHOTO_WIDTH"
+            [allowCameraSwitch]="true"
+            [imageQuality]="1"
+            [trigger]="webcamTriggerObservable"
+            (imageCapture)="handleImage($event)"
+            [switchCamera]="nextWebcamObservable"
+            [videoOptions]="videoOptions"
+            (initError)="handleCameraInitError($event)"></webcam>
+    <br>
+    <button class="btn btn-sm btn-outline-primary mr-2" (click)="showNextWebcam(true)"  [disabled]="!multipleWebcamsAvailable">{{ 'change_webcam' | translate }}</button>
+    <button class="btn btn-sm btn-primary" (click)="triggerSnapshot()">{{ 'capture' | translate }}</button>
+  </div>
+  <div class="col-md-6">
+    <img [src]="webcamImage?.imageAsDataUrl" class="img-fluid" width="360" height="480">
+  </div>
+</div>

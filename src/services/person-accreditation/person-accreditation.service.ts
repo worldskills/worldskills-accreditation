@@ -10,6 +10,7 @@ import {
 import {PersonAccreditation} from "../../types/person-accreditation";
 import {Params} from "@angular/router";
 import {isEmpty} from "../../utils/StringUtil";
+import {Image} from "../../types/image";
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,10 @@ export class PersonAccreditationService extends WsService<any> {
 
   markAsPrinted(eventId: number, personAccreditationId: number): Observable<any> {
     return this.http.put(`${this.url(eventId)}/${personAccreditationId}/printed`, null).pipe(share());
+  }
+
+  uploadAccreditationPhoto(eventId: number, personAccreditationId: number, image: Image): Observable<PersonAccreditation> {
+    return this.http.post<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}/photo`, image).pipe(share());
   }
 
   initialiseFetchParams(): PersonAccreditationSummaryReqParams {

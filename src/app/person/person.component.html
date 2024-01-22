@@ -27,12 +27,12 @@
               <div class="col-sm-12">
                 <p class="small text-muted font-weight-bold my-0 py-0">{{ 'photo' | translate | titlecase }}</p>
                 <div class="btn-group">
-                  <button class="btn btn-sm btn-outline-dark mr-2" (click)="openUploadPhotoModal = true"
+                  <button class="btn btn-sm btn-outline-dark mr-2" (click)="openModalMode = 'UPLOAD'"
                           [disabled]="!hasUploadPhotoPermission">
                     <span class="fa fa-file-image-o"></span> {{ 'upload_file' | translate }}
                   </button>
 
-                  <button class="btn btn-sm btn-outline-dark" (click)="openCameraModal = true"
+                  <button class="btn btn-sm btn-outline-dark" (click)="openModalMode = 'CAMERA'"
                           [disabled]="!hasUploadPhotoPermission">
                     <span class="fa fa-camera"></span> {{ 'take_photo' | translate }}
                   </button>
@@ -286,56 +286,24 @@
 </div>
 
 
-<ws-modal *ngIf="openCameraModal" [open]="openCameraModal" (onClose)="openCameraModal = false" [options]="{size: 'xl'}">
+<ws-modal [open]="openModalMode !== 'CLOSED'" (onClose)="openModalMode = 'CLOSED'" [options]="{size: 'xl'}">
   <ng-container header>
-    <h4>{{ 'take_photo' | translate }}</h4>
+    <h4>{{ (openModalMode === 'CAMERA' ? 'take_photo' : 'upload_photo') | translate }}</h4>
   </ng-container>
   <ng-container body>
     <div class="container">
-      <p class="alert alert-warning" *ngIf="cameraInitErrorMsg != null">{{ cameraInitErrorMsg }}</p>
-      <div class="row">
-        <div class="col-md-6">
-          <webcam [height]="800" [width]="600"
-                  [allowCameraSwitch]="true"
-                  [imageQuality]="1"
-                  [trigger]="webcamTriggerObservable"
-                  (imageCapture)="handleImage($event)"
-                  [switchCamera]="nextWebcamObservable"
-                  (initError)="handleCameraInitError($event)"></webcam>
-          <br>
-          <button class="btn btn-sm btn-outline-primary" (click)="showNextWebcam(true)">{{ 'toggle_webcam' | translate }}</button>
-          <button class="btn btn-sm btn-primary" (click)="triggerSnapshot()">{{ 'capture' | translate }}</button>
-        </div>
-        <div class="col-md-6">
-          <img [src]="webcamImage?.imageAsDataUrl" height="800" width="600">
-        </div>
-      </div>
-    </div>
-  </ng-container>
-  <ng-container footer>
-    <button type="button" class="btn btn-warning btn-sm" (click)="openCameraModal = false">{{ 'cancel' | translate }}
-    </button>
-    <button type="button" (click)="uploadACRPhoto()" class="btn btn-success btn-sm ml-1">{{ 'upload' | translate }}
-    </button>
-  </ng-container>
-</ws-modal>
-
-<ws-modal *ngIf="openUploadPhotoModal" [open]="openUploadPhotoModal" (onClose)="openUploadPhotoModal = false"
-          [options]="{size: 'xl'}">
-  <ng-container header>
-    <h4>{{ 'upload_photo' | translate | titlecase }}</h4>
-  </ng-container>
-  <ng-container body>
-    <div class="container text-center">
-      <input type="file" name="file" class="form-control form-control-sm form-control-file"
+      <app-webcam-capture *ngIf="openModalMode === 'CAMERA'"
+                          (captureImage)="captureImage($event)"></app-webcam-capture>
+      <input *ngIf="openModalMode === 'UPLOAD'"
+             type="file" name="file" class="form-control form-control-sm form-control-file"
              (change)="setFileFromInput($event)" accept="image/*">
     </div>
   </ng-container>
   <ng-container footer>
-    <button type="button" class="btn btn-warning btn-sm"
-            (click)="openUploadPhotoModal = false">{{ 'cancel' | translate }}
+    <button type="button" class="btn btn-warning btn-sm" (click)="openModalMode = 'CLOSED'">{{ 'cancel' | translate }}
     </button>
-    <button type="button" (click)="uploadACRPhoto()" class="btn btn-success btn-sm ml-1">{{ 'upload' | translate }}
+    <button type="button" [disabled]="!(!!overrideACRPhoto)" (click)="uploadACRPhoto()"
+            class="btn btn-success btn-sm ml-1">{{ 'upload' | translate }}
     </button>
   </ng-container>
 </ws-modal>

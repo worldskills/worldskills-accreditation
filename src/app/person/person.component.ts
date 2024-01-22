@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {NgAuthService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {NgAuthService, UploadService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
 import {Event} from "../../types/event";
 import {AppService} from "../../services/app/app.service";
-import {combineLatest, debounceTime, distinctUntilChanged, Observable, Subject} from "rxjs";
+import {combineLatest, debounceTime, distinctUntilChanged, Subject} from "rxjs";
 import {PersonAccreditation} from "../../types/person-accreditation";
 import {environment} from "../../environments/environment";
 import {DelegateType} from "../../types/delegate-type";
@@ -13,7 +13,9 @@ import {ZoneService} from "../../services/zone/zone.service";
 import {Zone} from "../../types/zone";
 import {Location} from "@angular/common";
 import {ToastService} from "angular-toastify";
-import {WebcamImage, WebcamInitError} from "ngx-webcam";
+import {ImageService} from "../../services/image/image.service";
+import {Image} from "../../types/image";
+import {HttpEventType} from "@angular/common/http";
 
 @Component({
   selector: 'app-person',
@@ -29,12 +31,7 @@ export class PersonComponent extends WsComponent implements OnInit {
 
   // upload ACR photo variables
   overrideACRPhoto: File;
-  cameraInitErrorMsg: string = null;
-  openCameraModal = false;
-  openUploadPhotoModal = false;
-  webcamImage: WebcamImage = null;
-  webcamTrigger: Subject<void> = new Subject<void>();
-  nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
+  openModalMode : 'CLOSED' | 'CAMERA' | 'UPLOAD' = 'CLOSED';
 
   // override person acr
   personAcr: PersonAccreditation;
@@ -55,7 +52,9 @@ export class PersonComponent extends WsComponent implements OnInit {
               private zoneService: ZoneService,
               private location: Location,
               private authService: NgAuthService,
-              private toastService: ToastService
+              private toastService: ToastService,
+              private imageService: ImageService,
+              private uploadService: UploadService,
   ) {
     super();
   }
@@ -197,39 +196,32 @@ export class PersonComponent extends WsComponent implements OnInit {
     }
   }
 
-  public handleCameraInitError(error: WebcamInitError): void {
-    if (error.mediaStreamError && error.mediaStreamError.name === "NotAllowedError") {
-      this.cameraInitErrorMsg = "Camera access was not allowed by user. Refresh page and try again.";
-    } else {
-      this.cameraInitErrorMsg = null;
-    }
-  }
-
-  capture() : void{
-
-  }
 
   uploadACRPhoto(): void {
+    const request = this.imageService.httpRequest(this.overrideACRPhoto);
+    this.uploadService.listen<Image>(
+      request,
+      ({loaded, total, type}) => {
+        if (type === HttpEventType.UploadProgress) {
+          // this.resourceProgress = loaded / total;
+        }
+      },
+      image => {
+        this.personAccreditationService.uploadAccreditationPhoto(this.selectedEvent.id, this.personAcr.id, {
+          id: image.body.id,
+          thumbnail_hash: image.body.thumbnail_hash
+        }).subscribe(() => {
+          this.toastService.success('Photo uploaded!');
+          this.overrideACRPhoto = null;
+          this.openModalMode = 'CLOSED';
 
+          // reload person accreditation
+          this.subscribe(this.loadPersonAccreditation(this.personAcr.id));
+        });
+      });
   }
 
-  public triggerSnapshot(): void {
-    this.webcamTrigger.next();
-  }
-
-  handleImage(webcamImage: WebcamImage): void {
-    this.webcamImage = webcamImage;
-  }
-
-  get webcamTriggerObservable(): Observable<void> {
-    return this.webcamTrigger.asObservable();
-  }
-
-  get nextWebcamObservable(): Observable<boolean|string> {
-    return this.nextWebcam.asObservable();
-  }
-
-  public showNextWebcam(directionOrDeviceId: boolean|string): void {
-    this.nextWebcam.next(directionOrDeviceId);
+  captureImage(imageDataURL: File) {
+    this.overrideACRPhoto = imageDataURL;
   }
 }
