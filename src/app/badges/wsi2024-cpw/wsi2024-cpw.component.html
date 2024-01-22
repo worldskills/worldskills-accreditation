@@ -56,6 +56,13 @@
           <div class="icon icon-farewell" style="position: absolute; left: 0; top: 45mm;"></div>
           <div class="icon icon-blue" style="position: absolute; left: 80mm; top: 45mm;"><span class="icon-number">1</span> FEB</div>
         </div>
+
+        <div *ngIf="hasZone('DP')">
+          <div style="-webkit-print-color-adjust: exact; color: #302050 !important; text-transform: uppercase; font-weight: 700; font-size: 17mm; padding-top: 8mm; line-height: 1; text-transform: uppercase; text-align: center;">Day<br>Pass</div>
+        </div>
+        <div *ngIf="hasZone('VL')">
+          <div style="-webkit-print-color-adjust: exact; color: #302050 !important; text-transform: uppercase; font-weight: 700; font-size: 14mm; padding-top: 18mm; line-height: 1; text-transform: uppercase; text-align: center;">Volunteer</div>
+        </div>
     </div>
     
     <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type?.color}} !important; height: 7.2mm; width: 40mm; position: absolute; left: 3mm; bottom: 5mm; display: flex; justify-content: center; align-items: center;">
