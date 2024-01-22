@@ -1,4 +1,5 @@
 {
+  "accreditation_photo": "Accreditation photo",
   "badge_has_been_printed": "This badge has already been printed.",
   "badge_has_been_distributed": "This badge has already been marked as distributed.",
   "all_zones": "All zones",
@@ -32,7 +33,7 @@
   "editing": "Editing",
   "empty_hint": "(empty)",
   "end_date": "End Date",
-  "existing_information": "Existing information",
+  "person_data": "Person data",
   "export": "Export",
   "fetching_information": "Fetching information",
   "filter": "Filter",

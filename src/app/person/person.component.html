@@ -25,23 +25,6 @@
 
             <div class="row mb-2">
               <div class="col-sm-12">
-                <p class="small text-muted font-weight-bold my-0 py-0">{{ 'photo' | translate | titlecase }}</p>
-                <div class="btn-group">
-                  <button class="btn btn-sm btn-outline-dark mr-2" (click)="openModalMode = 'UPLOAD'"
-                          [disabled]="!hasUploadPhotoPermission">
-                    <span class="fa fa-file-image-o"></span> {{ 'upload_file' | translate }}
-                  </button>
-
-                  <button class="btn btn-sm btn-outline-dark" (click)="openModalMode = 'CAMERA'"
-                          [disabled]="!hasUploadPhotoPermission">
-                    <span class="fa fa-camera"></span> {{ 'take_photo' | translate }}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="row mb-2">
-              <div class="col-sm-12">
                 <label class="small text-muted font-weight-bold my-0 py-0">{{ 'delegate_type' | translate }}</label>
                 <ng-select
                   name="del_types"
@@ -147,9 +130,10 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">{{ 'existing_information' | translate | titlecase }}</h5>
+            <h5 class="card-title">{{ 'person_data' | translate | titlecase }}</h5>
           </div>
           <div class="card-body" *ngIf="personAcr">
+
             <div class="row mb-2">
               <div class="col-md-4" *ngFor="let pi of personAcr.person.images">
                 <img src="{{pi.thumbnail}}"
@@ -158,6 +142,21 @@
                      height="125"
                      class="object-fit-cover"
                      alt="{{pi.type}} photo of {{personAcr.person.first_name}} {{personAcr.person.last_name}}">
+              </div>
+            </div>
+
+            <div class="row mb-3" *ngIf="hasUploadPhotoPermission">
+              <div class="col-sm-12">
+                <p class="small text-muted font-weight-bold my-0 py-0">{{ 'accreditation_photo' | translate | titlecase }}</p>
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-outline-dark mr-2" (click)="openModalMode = 'UPLOAD'">
+                    <span class="fa fa-file-image-o"></span> {{ 'upload_file' | translate }}
+                  </button>
+
+                  <button class="btn btn-sm btn-outline-dark" (click)="openModalMode = 'CAMERA'">
+                    <span class="fa fa-camera"></span> {{ 'take_photo' | translate }}
+                  </button>
+                </div>
               </div>
             </div>
 
