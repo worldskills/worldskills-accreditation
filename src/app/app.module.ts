@@ -44,6 +44,7 @@ import {Wsi2023GaComponent} from './badges/wsi2023-ga/wsi2023-ga.component';
 import {Wsi2024CpwComponent} from './badges/wsi2024-cpw/wsi2024-cpw.component';
 import {SetupScanAppComponent} from './setup-scan-app/setup-scan-app.component';
 import {AdhocPrintingComponent} from './adhoc-printing/adhoc-printing.component';
+import {WebcamModule} from "ngx-webcam";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240118');
@@ -101,7 +102,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTabsModule,
     FormsModule,
     NgxSkeletonLoaderModule,
-    AngularToastifyModule
+    AngularToastifyModule,
+    WebcamModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

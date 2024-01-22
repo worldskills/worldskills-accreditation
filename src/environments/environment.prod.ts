@@ -17,6 +17,7 @@ export const environment = {
   appRoles: {
     ADMIN: 'Admin',
     EDIT: 'Edit',
+    UPLOAD_PHOTO: 'UploadPhoto',
     EDIT_DELEGATE_TYPES: 'EditDelegateTypes',
     EDIT_POSITIONS: 'EditPositions',
     EDIT_ZONES: 'EditZones',

@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
 import {Event} from "../../types/event";
 import {AppService} from "../../services/app/app.service";
-import {combineLatest, debounceTime, distinctUntilChanged, Subject} from "rxjs";
+import {combineLatest, debounceTime, distinctUntilChanged, Observable, Subject} from "rxjs";
 import {PersonAccreditation} from "../../types/person-accreditation";
 import {environment} from "../../environments/environment";
 import {DelegateType} from "../../types/delegate-type";
@@ -13,6 +13,7 @@ import {ZoneService} from "../../services/zone/zone.service";
 import {Zone} from "../../types/zone";
 import {Location} from "@angular/common";
 import {ToastService} from "angular-toastify";
+import {WebcamImage, WebcamInitError} from "ngx-webcam";
 
 @Component({
   selector: 'app-person',
@@ -23,15 +24,28 @@ export class PersonComponent extends WsComponent implements OnInit {
 
   readonly peopleURL = environment.worldskillsPeople;
   selectedEvent: Event;
-  personAcr: PersonAccreditation;
   delegateTypes: DelegateType[];
   zones: Zone[] = [];
 
+  // upload ACR photo variables
+  overrideACRPhoto: File;
+  cameraInitErrorMsg: string = null;
+  openCameraModal = false;
+  openUploadPhotoModal = false;
+  webcamImage: WebcamImage = null;
+  webcamTrigger: Subject<void> = new Subject<void>();
+  nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
+
+  // override person acr
+  personAcr: PersonAccreditation;
   savingPersonAcr = false;
   badgeLinesChange: Subject<string> = new Subject<string>();
+
+  // permissions
   hasEditPermission = false;
   hasPrintPermission = false;
   hasAdminPermission = false;
+  hasUploadPhotoPermission = true; // TODO: implement permission
 
   constructor(private appService: AppService,
               private router: Router,
@@ -172,5 +186,50 @@ export class PersonComponent extends WsComponent implements OnInit {
       // reload person accreditation
       this.subscribe(this.loadPersonAccreditation(this.personAcr.id));
     });
+  }
+
+  setFileFromInput(event: any) {
+    const input = event.target as HTMLInputElement;
+    if (input.files.length > 0) {
+      this.overrideACRPhoto = input.files.item(0);
+    } else {
+      this.overrideACRPhoto = null;
+    }
+  }
+
+  public handleCameraInitError(error: WebcamInitError): void {
+    if (error.mediaStreamError && error.mediaStreamError.name === "NotAllowedError") {
+      this.cameraInitErrorMsg = "Camera access was not allowed by user. Refresh page and try again.";
+    } else {
+      this.cameraInitErrorMsg = null;
+    }
+  }
+
+  capture() : void{
+
+  }
+
+  uploadACRPhoto(): void {
+
+  }
+
+  public triggerSnapshot(): void {
+    this.webcamTrigger.next();
+  }
+
+  handleImage(webcamImage: WebcamImage): void {
+    this.webcamImage = webcamImage;
+  }
+
+  get webcamTriggerObservable(): Observable<void> {
+    return this.webcamTrigger.asObservable();
+  }
+
+  get nextWebcamObservable(): Observable<boolean|string> {
+    return this.nextWebcam.asObservable();
+  }
+
+  public showNextWebcam(directionOrDeviceId: boolean|string): void {
+    this.nextWebcam.next(directionOrDeviceId);
   }
 }
