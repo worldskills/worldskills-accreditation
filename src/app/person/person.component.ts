@@ -42,7 +42,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   hasEditPermission = false;
   hasPrintPermission = false;
   hasAdminPermission = false;
-  hasUploadPhotoPermission = true; // TODO: implement permission
+  hasUploadPhotoPermission = true;
 
   constructor(private appService: AppService,
               private router: Router,
@@ -68,6 +68,7 @@ export class PersonComponent extends WsComponent implements OnInit {
         this.hasEditPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.EDIT);
         this.hasPrintPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.PRINT);
         this.hasAdminPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN);
+        this.hasUploadPhotoPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.UPLOAD_PHOTO);
       })
     )
 
