@@ -10,7 +10,9 @@
             [videoOptions]="videoOptions"
             (initError)="handleCameraInitError($event)"></webcam>
     <br>
-    <button class="btn btn-sm btn-primary" (click)="triggerSnapshot()">{{ 'capture' | translate }}</button>
+    <button class="btn btn-sm btn-primary"
+            [disabled]="cameraInitErrorMsg != null"
+            (click)="triggerSnapshot()">{{ 'capture' | translate }}</button>
   </div>
   <div class="col-md-6">
     <img *ngIf="webcamImage" [src]="webcamImage.imageAsDataUrl" class="img-fluid" width="360" height="480">
