@@ -48,7 +48,7 @@ import {WebcamModule} from "ngx-webcam";
 import {WebcamCaptureComponent} from './webcam-capture/webcam-capture.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240123');
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
 
 @NgModule({
