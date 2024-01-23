@@ -57,4 +57,4 @@ jobs:
           aws s3 cp dist/index.html s3://accreditation.worldskills.org/index.html --metadata-directive REPLACE --cache-control max-age=60
       - name: Invalidate production
         if: github.ref == 'refs/heads/prod'
-        run: aws cloudfront create-invalidation --distribution-id E2D4OLT6BMIVIC --paths /index.html
+        run: aws cloudfront create-invalidation --distribution-id E2D4OLT6BMIVIC --paths /index.html /assets/i18n/*
