@@ -32,6 +32,8 @@ export class PersonComponent extends WsComponent implements OnInit {
   // upload ACR photo variables
   overrideACRPhoto: File;
   openModalMode: 'CLOSED' | 'CAMERA' | 'UPLOAD' = 'CLOSED';
+  isUploadingPhoto = false;
+  uploadingPhotoProgress: number = 0;
 
   // override person acr
   personAcr: PersonAccreditation;
@@ -199,12 +201,15 @@ export class PersonComponent extends WsComponent implements OnInit {
 
 
   uploadACRPhoto(): void {
+    this.isUploadingPhoto = true;
+    this.uploadingPhotoProgress = 0;
+
     const request = this.imageService.httpRequest(this.overrideACRPhoto);
     this.uploadService.listen<Image>(
       request,
       ({loaded, total, type}) => {
         if (type === HttpEventType.UploadProgress) {
-          // this.resourceProgress = loaded / total;
+          this.uploadingPhotoProgress = loaded / total;
         }
       },
       image => {
@@ -212,6 +217,7 @@ export class PersonComponent extends WsComponent implements OnInit {
           id: image.body.id,
           thumbnail_hash: image.body.thumbnail_hash
         }).subscribe(() => {
+          this.isUploadingPhoto = false;
           this.toastService.success('Photo uploaded!');
           this.overrideACRPhoto = null;
           this.openModalMode = 'CLOSED';

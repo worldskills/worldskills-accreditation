@@ -299,10 +299,30 @@
     </div>
   </ng-container>
   <ng-container footer>
-    <button type="button" class="btn btn-warning btn-sm" (click)="openModalMode = 'CLOSED'">{{ 'cancel' | translate }}
-    </button>
-    <button type="button" [disabled]="!(!!overrideACRPhoto)" (click)="uploadACRPhoto()"
-            class="btn btn-success btn-sm ml-1">{{ 'upload' | translate }}
-    </button>
+    <div class="container">
+      <div class="row text-right">
+        <div class="col-md-12">
+          <button type="button"
+                  [disabled]="isUploadingPhoto"
+                  class="btn btn-warning btn-sm" (click)="openModalMode = 'CLOSED'">{{ 'cancel' | translate }}
+          </button>
+          <button type="button" [disabled]="!(!!overrideACRPhoto) || isUploadingPhoto" (click)="uploadACRPhoto()"
+                  class="btn btn-success btn-sm ml-1">{{ 'upload' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-md-12">
+          <ngb-progressbar
+            *ngIf="isUploadingPhoto"
+            type="info"
+            [value]="uploadingPhotoProgress * 100"
+            [striped]="true"
+            [showValue]="true"
+          ></ngb-progressbar>
+        </div>
+      </div>
+    </div>
   </ng-container>
 </ws-modal>
