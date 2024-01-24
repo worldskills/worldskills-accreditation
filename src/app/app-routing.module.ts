@@ -37,7 +37,7 @@ const routes: Routes = [
     path: 'events',
     canActivate: [GuardService],
     data: {
-      roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.EDIT_DELEGATE_TYPES, ACR_ROLES.EDIT_POSITIONS, ACR_ROLES.EDIT_ZONES, ACR_ROLES.PRINT])
+      roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.UPLOAD_PHOTO, ACR_ROLES.EDIT_DELEGATE_TYPES, ACR_ROLES.EDIT_POSITIONS, ACR_ROLES.EDIT_ZONES, ACR_ROLES.PRINT])
     },
     children: [
       {
@@ -64,7 +64,7 @@ const routes: Routes = [
             path: 'people/:personAcrId',
             data: {
               breadcrumb: 'Person',
-              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.PRINT])
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.UPLOAD_PHOTO, ACR_ROLES.PRINT])
             },
             canActivate: [GuardService],
             component: PersonComponent
