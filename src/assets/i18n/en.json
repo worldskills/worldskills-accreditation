@@ -29,6 +29,7 @@
   "color": "Color",
   "delegate_type": "Delegate Type",
   "distributed": "Distributed",
+  "download_excel_template": "Download excel template",
   "edit_accreditations": "Edit Accreditations",
   "editing": "Editing",
   "empty_hint": "(empty)",

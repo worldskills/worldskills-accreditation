@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DelegateType} from "../../types/delegate-type";
 import {WsComponent} from "@worldskills/worldskills-angular-lib";
 import {AppService} from "../../services/app/app.service";
@@ -7,6 +7,10 @@ import {ZoneService} from "../../services/zone/zone.service";
 import {Zone} from "../../types/zone";
 import {Event} from "../../types/event";
 import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";
+import * as XLSX from 'xlsx';
+import {HttpClient} from "@angular/common/http";
+import {share} from "rxjs";
+import {createDownloadLink} from "../../utils/FileUtil";
 
 @Component({
   selector: 'app-adhoc-printing',
@@ -24,13 +28,12 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
   personEdit: PersonAccreditationSummary;
   personEditIndex: number;
 
-
   action: 'ADD' | 'EDIT' = 'ADD';
-
 
   constructor(private appService: AppService,
               private zoneService: ZoneService,
-              private delegateTypeService: DelegateTypeService) {
+              private delegateTypeService: DelegateTypeService,
+              private http: HttpClient) {
     super();
   }
 
@@ -112,7 +115,70 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
     this.save.emit(this.people);
   }
 
-  printPreview(twoBadgesPerPage: boolean): void {
+  handleFileInput(event: any): void {
+    const file = event.target.files[0];
 
+    if (file) {
+      this.readExcelFile(file);
+    }
+  }
+
+  readExcelFile(file: File): void {
+    const reader: FileReader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const data: ArrayBuffer = e.target.result;
+      const workbook: XLSX.WorkBook = XLSX.read(data, {type: 'array'});
+
+      // Get the first worksheet
+      const sheetName: string = workbook.SheetNames[0];
+      const worksheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
+
+      // Convert the worksheet to a JSON object
+      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, {raw: true});
+
+      // loop through the rows and add to the people array
+      for (const d of jsonData) {
+        const firstname = d["First Name"] ?? "";
+        const lastname = d["Last Name"] ?? "";
+        const badgeLines: string = d["Badge Lines"] ?? "";
+        const delegateType = d["Delegate Type"] ?? null;
+
+        const delType = this.delegateTypes.find(dt => dt.name === delegateType) ?? null;
+
+        this.people.push({
+          first_name: firstname,
+          last_name: lastname,
+          lines: badgeLines.split('\n'),
+          delegate_type: delType,
+          id: null,
+          person_id: null,
+          email_address: null,
+          date_of_birth: null,
+          position: null,
+          details: null,
+          skill: null,
+          sector: null,
+          member: null,
+          country: null,
+          organization: null,
+          group_name: null,
+          image: null,
+          random_hash: null,
+          qr_code: null,
+          zones: [],
+          custom_field_data: new Map<string, string>(),
+        });
+      }
+    };
+
+    reader.readAsArrayBuffer(file);
+  }
+
+
+  downloadExcelTemplate(): void {
+    this.http.get(`assets/import_adhoc_template.xlsx`, {responseType: 'blob'}).pipe(share()).subscribe(res => {
+      createDownloadLink(res, 'import_adhoc_template.xlsx');
+    });
   }
 }

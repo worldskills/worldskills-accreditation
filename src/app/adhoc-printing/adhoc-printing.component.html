@@ -2,28 +2,28 @@
   <div class="col-md-4">
     <div class="row mb-2">
       <div class="col-sm-12">
-        <label class="small text-muted font-weight-bold my-0 py-0">{{'first_name' | translate}}</label>
+        <label class="small text-muted font-weight-bold my-0 py-0">{{ 'first_name' | translate }}</label>
         <input type="text" class="form-control" name="first_name" [(ngModel)]="personEdit.first_name">
       </div>
     </div>
 
     <div class="row mb-2">
       <div class="col-sm-12">
-        <label class="small text-muted font-weight-bold my-0 py-0">{{'last_name' | translate}}</label>
+        <label class="small text-muted font-weight-bold my-0 py-0">{{ 'last_name' | translate }}</label>
         <input type="text" class="form-control" name="last_name" [(ngModel)]="personEdit.last_name">
       </div>
     </div>
 
     <div class="row mb-2">
       <div class="col-sm-12">
-        <label class="small text-muted font-weight-bold my-0 py-0">{{'badge_lines' | translate}}</label>
+        <label class="small text-muted font-weight-bold my-0 py-0">{{ 'badge_lines' | translate }}</label>
         <textarea class="form-control" rows="3" [(ngModel)]="badgeLines"></textarea>
       </div>
     </div>
 
     <div class="row mb-2">
       <div class="col-sm-12">
-        <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
+        <label class="small text-muted font-weight-bold my-0 py-0">{{ 'delegate_type' | translate }}</label>
         <ng-select
           name="delegate_type"
           [items]="delegateTypes"
@@ -33,12 +33,12 @@
           <ng-template ng-label-tmp let-item="item">
             <div class="d-inline-block" style="width: 15px; height: 15px; "
                  [style.background-color]="item.color"></div>
-            <div class="d-inline-block ml-2">{{item.name}}</div>
+            <div class="d-inline-block ml-2">{{ item.name }}</div>
           </ng-template>
           <ng-template ng-option-tmp let-item="item" let-index="index">
             <div class="d-inline-block" style="width: 15px; height: 15px; "
                  [style.background-color]="item.color"></div>
-            <div class="d-inline-block ml-2">{{item.name}}</div>
+            <div class="d-inline-block ml-2">{{ item.name }}</div>
           </ng-template>
         </ng-select>
       </div>
@@ -46,7 +46,7 @@
 
     <div class="row mb-2">
       <div class="col-sm-12">
-        <label class="small text-muted font-weight-bold my-0 py-0">{{'zone' | translate}}</label>
+        <label class="small text-muted font-weight-bold my-0 py-0">{{ 'zone' | translate }}</label>
         <ng-select
           name="zones"
           [multiple]="true"
@@ -57,12 +57,12 @@
           <ng-template ng-label-tmp let-item="item">
             <div class="d-inline-block" style="width: 15px; height: 15px; "
                  [style.background-color]="item.color"></div>
-            <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+            <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
           </ng-template>
           <ng-template ng-option-tmp let-item="item" let-index="index">
             <div class="d-inline-block" style="width: 15px; height: 15px; "
                  [style.background-color]="item.color"></div>
-            <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+            <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
           </ng-template>
         </ng-select>
       </div>
@@ -78,32 +78,48 @@
 
   </div>
   <div class="col-md-8">
+    <div class="btn-group float-right">
+      <input hidden type="file" (change)="handleFileInput($event)" #inputFile accept=".xls,.xlsx">
+      <button class="btn btn-primary btn-sm"
+              triggers="hover" (click)="inputFile.click()">
+        <span><i class="fa fa-file-excel-o"></i>&nbsp;{{ 'import_excel' | translate }}</span>
+      </button>
+      <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+      <div class="dropdown-menu">
+        <button class="dropdown-item"
+                (click)="downloadExcelTemplate()">{{ 'download_excel_template' | translate }}
+        </button>
+      </div>
+    </div>
+
     <div class="table-responsive-md">
       <table class="table table-striped">
         <thead>
         <tr>
-          <th class="border-top-0">{{'first_name' | translate}}</th>
-          <th class="border-top-0">{{'last_name' | translate}}</th>
-          <th class="border-top-0">{{'badge_lines' | translate}}</th>
-          <th class="border-top-0">{{'delegate_type' | translate}}</th>
-          <th class="border-top-0">{{'zones' | translate}}</th>
-          <th class="border-top-0">{{'action' | translate}}</th>
+          <th class="border-top-0">{{ 'first_name' | translate }}</th>
+          <th class="border-top-0">{{ 'last_name' | translate }}</th>
+          <th class="border-top-0">{{ 'badge_lines' | translate }}</th>
+          <th class="border-top-0">{{ 'delegate_type' | translate }}</th>
+          <th class="border-top-0">{{ 'zones' | translate }}</th>
+          <th class="border-top-0">{{ 'action' | translate }}</th>
         </tr>
         </thead>
         <tbody>
         <ng-container *ngIf="people.length > 0; else emptyList">
           <tr *ngFor="let pa of people; index as idx">
-            <td>{{pa.first_name}}</td>
-            <td>{{pa.last_name}}</td>
+            <td>{{ pa.first_name }}</td>
+            <td>{{ pa.last_name }}</td>
             <td>
-              <p class="my-0 py-0" *ngFor="let line of pa.lines">{{line}}</p>
+              <p class="my-0 py-0" *ngFor="let line of pa.lines">{{ line }}</p>
             </td>
-            <td>{{pa.delegate_type?.name}}</td>
+            <td>{{ pa.delegate_type?.name }}</td>
             <td>
               <ng-container *ngFor="let zone of pa.zones">
                 <div class="badge mr-1 small" [style.background-color]="zone.color"
                      [ngbTooltip]="zone.name"
-                     [style.color]="zone.text_color">{{zone.code}}</div>
+                     [style.color]="zone.text_color">{{ zone.code }}
+                </div>
               </ng-container>
             </td>
             <td>
