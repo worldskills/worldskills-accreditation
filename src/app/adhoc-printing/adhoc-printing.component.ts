@@ -17,7 +17,6 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
 
   @Output() save: EventEmitter<PersonAccreditationSummary[]> = new EventEmitter<PersonAccreditationSummary[]>();
   @Input() people: PersonAccreditationSummary[] = [];
-  @Input() hasPrintPermission: boolean; // TODO: set this
   selectedEvent: Event;
   delegateTypes: DelegateType[];
   badgeLines: string = '';

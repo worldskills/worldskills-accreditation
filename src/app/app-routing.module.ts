@@ -123,6 +123,7 @@ const routes: Routes = [
     data: {
       roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.PRINT])
     },
+    canActivate: [GuardService],
     component: PrintComponent,
   },
   {
@@ -130,6 +131,7 @@ const routes: Routes = [
     data: {
       roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.PRINT])
     },
+    canActivate: [GuardService],
     component: PrintComponent,
   },
   {
