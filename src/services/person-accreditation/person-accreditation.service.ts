@@ -57,6 +57,7 @@ export class PersonAccreditationService extends WsService<any> {
 
   initialiseFetchParams(): PersonAccreditationSummaryReqParams {
     return {
+      l: 'en', // TODO dynamic locale
       name: null,
       country: null,
       member: null,
