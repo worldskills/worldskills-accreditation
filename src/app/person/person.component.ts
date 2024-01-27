@@ -173,7 +173,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   invalidateBadge(): void {
     if (confirm('This will generate a new random code for the QR code. Any existing badge will no longer be valid. Proceed?')) {
       this.personAccreditationService.invalidateBadge(this.selectedEvent.id, this.personAcr.id).subscribe(_ => {
-        this.toastService.success('New random code for QR code generated, existing badges are now invalid.');
+        this.toastService.success('New random code for QR code generated.');
 
         // reload person accreditation
         this.subscribe(this.loadPersonAccreditation(this.personAcr.id));
