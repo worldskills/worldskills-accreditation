@@ -46,6 +46,7 @@ export interface PersonAccreditationSummaryReqParams extends FetchParams {
   group?: string;
   zone?: number[];
   printed?: boolean;
+  distributed?: boolean;
   photo?: boolean;
   del_types?: number[];
   sort?: string;
