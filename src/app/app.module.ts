@@ -47,6 +47,8 @@ import {AdhocPrintingComponent} from './adhoc-printing/adhoc-printing.component'
 import {WebcamModule} from "ngx-webcam";
 import {WebcamCaptureComponent} from './webcam-capture/webcam-capture.component';
 import { Fi2024Component } from './badges/fi2024/fi2024.component';
+import { ZoneRequestComponent } from './zone-request/zone-request.component';
+import { ZoneRequestAllocationComponent } from './zone-request-allocation/zone-request-allocation.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -84,7 +86,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     SetupScanAppComponent,
     AdhocPrintingComponent,
     WebcamCaptureComponent,
-    Fi2024Component
+    Fi2024Component,
+    ZoneRequestComponent,
+    ZoneRequestAllocationComponent
   ],
   imports: [
     BrowserModule,

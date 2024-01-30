@@ -14,6 +14,7 @@ import {PositionsComponent} from "./positions/positions.component";
 import {PackageOptionsComponent} from "./package-options/package-options.component";
 import {PersonComponent} from "./person/person.component";
 import {PrintComponent} from "./print/print.component";
+import {ZoneRequestComponent} from "./zone-request/zone-request.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -54,6 +55,14 @@ const routes: Routes = [
             path: '',
             pathMatch: 'full',
             redirectTo: 'people'
+          },
+          {
+            path: 'zone-requests',
+            data: {
+              breadcrumb: 'Zone Requests',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN])
+            },
+            component: ZoneRequestComponent
           },
           {
             path: 'people',

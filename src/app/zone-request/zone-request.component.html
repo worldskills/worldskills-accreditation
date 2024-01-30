@@ -1,0 +1,77 @@
+<h3>Zone Request</h3>
+
+<form class="form-horizontal" (ngSubmit)="submit()" #form="ngForm" novalidate>
+  <p class="">
+    Hello, <b>John Doe</b> from <b>CCTV</b>
+
+    <br>
+    Please fill out the form below to request a zone at the Opening and Closing Ceremony.
+  </p>
+
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <p class="font-weight-bold mb-0">{{ 'preferred_zones' | translate }}</p>
+      <label class="small font-weight-bold">{{ 'first_choice' | translate }}</label>
+      <ng-select
+        name="preferred_zones_1st"
+        [items]="zones"
+        bindValue="id"
+        bindLabel="name"
+      >
+        <ng-template ng-label-tmp let-item="item">
+          <div class="d-inline-block" style="width: 15px; height: 15px; "
+               [style.background-color]="item.color"></div>
+          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+          <div class="d-inline-block" style="width: 15px; height: 15px; "
+               [style.background-color]="item.color"></div>
+          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+        </ng-template>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-md-12">
+      <label class="small font-weight-bold mb-0">{{ 'second_choice' | translate }}</label>
+      <p class="text-muted small">If your 1st choice is not available, please outline your second choice</p>
+      <ng-select
+        name="preferred_zones_1st"
+        [items]="zones"
+        bindValue="id"
+        bindLabel="name"
+      >
+        <ng-template ng-label-tmp let-item="item">
+          <div class="d-inline-block" style="width: 15px; height: 15px; "
+               [style.background-color]="item.color"></div>
+          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+          <div class="d-inline-block" style="width: 15px; height: 15px; "
+               [style.background-color]="item.color"></div>
+          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+        </ng-template>
+      </ng-select>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="font-weight-bold mb-0">{{ 'objective' | translate }}</label>
+      <p class="text-muted small">{{ 'zone_request_objective_subtitle' | translate }}</p>
+      <textarea
+        class="form-control"
+        name="objectives"
+        rows="3"></textarea>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12 text-center">
+<!--      submit -->
+      <button type="submit" class="btn btn-primary">{{ 'submit_request' | translate }}</button>
+    </div>
+  </div>
+</form>
