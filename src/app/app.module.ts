@@ -49,7 +49,7 @@ import {WebcamCaptureComponent} from './webcam-capture/webcam-capture.component'
 import { Fi2024Component } from './badges/fi2024/fi2024.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240123');
 }
 
 @NgModule({
