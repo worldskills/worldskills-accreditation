@@ -15,6 +15,7 @@ import {PackageOptionsComponent} from "./package-options/package-options.compone
 import {PersonComponent} from "./person/person.component";
 import {PrintComponent} from "./print/print.component";
 import {ZoneRequestComponent} from "./zone-request/zone-request.component";
+import {ZoneRequestAllocationComponent} from "./zone-request-allocation/zone-request-allocation.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -63,6 +64,14 @@ const routes: Routes = [
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN])
             },
             component: ZoneRequestComponent
+          },
+          {
+            path: 'zone-request-allocation',
+            data: {
+              breadcrumb: 'Zone Request Allocation',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN])
+            },
+            component: ZoneRequestAllocationComponent
           },
           {
             path: 'people',

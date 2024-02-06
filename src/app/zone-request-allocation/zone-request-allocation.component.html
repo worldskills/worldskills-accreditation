@@ -1,1 +1,198 @@
-<p>zone-request-allocation works!</p>
+<h3>{{ 'allocation' | translate | titlecase }} <br><span
+  class="text-muted small font-weight-light">{{ zoneReqForm.name }}</span></h3>
+
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="card w-100">
+      <div class="card-header">
+        <h5 class="card-title">{{ 'requests' | translate | titlecase }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="row small mb-3">
+          <div class="col-md-5">
+            <label class="small mb-0 font-weight-bold">{{ 'choose_zone' | translate }}</label>
+            <ng-select
+              name="zone"
+              [items]="zones"
+              bindValue="id"
+              bindLabel="name"
+              placeholder="All Zones"
+            >
+              <ng-template ng-label-tmp let-item="item">
+                <div class="d-inline-block" style="width: 15px; height: 15px; "
+                     [style.background-color]="item.color"></div>
+                <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item" let-index="index">
+                <div class="d-inline-block" style="width: 15px; height: 15px; "
+                     [style.background-color]="item.color"></div>
+                <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+              </ng-template>
+            </ng-select>
+          </div>
+          <div class="col-md-5">
+            <label class="small mb-0 font-weight-bold">{{ 'choose_organization' | translate }}</label>
+            <ng-select
+              name="organization"
+              [items]="organizationNames"
+              placeholder="All Organizations"></ng-select>
+          </div>
+        </div>
+
+        <hr class="my-2">
+        <p class="text-muted small">{{ 'total_requests' | translate }}: {{ zoneRequests?.length }}</p>
+        <div>
+          <table class="table table-sm small">
+            <colgroup>
+              <col style="width: 20%">
+              <col style="width: 15%">
+              <col style="width: 20%">
+              <col style="width: 20%">
+              <col style="width: 25%">
+            </colgroup>
+            <thead>
+            <tr>
+              <th>{{ 'organization' | translate | titlecase }}</th>
+              <th>{{ 'name' | translate | titlecase }}</th>
+              <th>{{ 'first_choice' | translate | titlecase }}</th>
+              <th>{{ 'second_choice' | translate | titlecase }}</th>
+              <th>{{ 'action' | translate | titlecase }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let req of zoneRequests">
+              <tr>
+                <td class="border-bottom-0">{{ req.person_accreditation.organization_name }}</td>
+                <td
+                  class="border-bottom-0">{{ req.person_accreditation.person.first_name }} {{ req.person_accreditation.person.last_name }}
+                </td>
+                <td class="border-bottom-0">{{ req.first_choice_zone.name }}</td>
+                <td class="border-bottom-0">{{ req.second_choice_zone.name }}</td>
+                <td rowspan="2">
+                  <ng-select
+                    name="zone"
+                    [items]="zones"
+                    bindLabel="name"
+                    placeholder="Allocate to zone"
+                    #allocateZoneDropdown
+                  >
+                    <ng-template ng-label-tmp let-item="item">
+                      <div class="d-inline-block" style="width: 15px; height: 15px; "
+                           [style.background-color]="item.color"></div>
+                      <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                      <div class="d-inline-block" style="width: 15px; height: 15px; "
+                           [style.background-color]="item.color"></div>
+                      <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                    </ng-template>
+                  </ng-select>
+                  <button class="btn btn-sm btn-primary mt-2 float-right" (click)="allocate(req, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="border-top-0"></td>
+                <td colspan="3" class="border-top-0 small">
+                  <p class="text-muted">
+                    <b>Objective</b>:
+                    {{ req.objective }}
+                  </p>
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">{{ 'allocated' | translate | titlecase }}</h5>
+      </div>
+      <div class="card-body">
+        <p class="text-muted small">
+          {{ 'total_zones' | translate }}: {{ zoneReqFormZones?.length }} &nbsp;|&nbsp;
+          {{ 'total_allocated' | translate }}: {{ allocations?.length }} &nbsp;|&nbsp;
+
+          Wristband distributed: <span class="badge badge-success">Y</span>&nbsp;<span class="badge badge-secondary">N</span>
+        </p>
+        <div class="table-responsive-md">
+          <table class="table table-sm small">
+            <colgroup>
+              <col style="width: 30%">
+              <col style="width: 30%">
+              <col style="width: 40%">
+            </colgroup>
+            <thead>
+            <tr>
+              <th>{{ 'zone' | translate | titlecase }}</th>
+              <th>{{ 'quota' | translate | titlecase }}</th>
+              <th>{{ 'organizations' | translate | titlecase }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let zoneReq of zoneReqFormZones">
+              <td>
+                <span class="badge mr-1 small" [style.background-color]="zoneReq.zone.color"
+                      [ngbTooltip]="zoneReq.zone.name"
+                      [style.color]="zoneReq.zone.text_color">{{ zoneReq.zone.code }}</span>
+                <br>
+                {{ zoneReq.zone.name }}
+              </td>
+              <td>
+                <span class="badge badge-light small">
+                  {{ getAllocationsForZone(zoneReq.zone)?.length }} out of {{ zoneReq.quota }} allocated
+                </span>
+              </td>
+              <td>
+                <ul class="list-unstyled">
+                  <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone)">
+                    <span
+                      class="badge badge-pill small"
+                      [ngClass]="allocation.wristband_distributed_at !== null ? 'badge-success' : 'badge-secondary'">{{ allocation.zone_request.person_accreditation.organization_name }}</span>
+                  </li>
+                </ul>
+              </td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="false" class="card mt-4">
+      <div class="card-header">
+        <h5 class="card-title">{{ 'zones' | translate | titlecase }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive-md">
+          <table class="table">
+            <colgroup>
+              <col style="width: 50%">
+              <col style="width: 50%">
+            </colgroup>
+            <thead>
+            <tr>
+              <th>{{ 'name' | translate | titlecase }}</th>
+              <th>{{ 'quota' | translate | titlecase }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let zone of zones">
+              <td>
+                <span class="badge mr-1 small" [style.background-color]="zone.color"
+                      [ngbTooltip]="zone.name"
+                      [style.color]="zone.text_color">{{ zone.code }}</span>
+                {{ zone.name }}
+              </td>
+              <td>X out of Y allocated</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
