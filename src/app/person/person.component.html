@@ -281,6 +281,19 @@
         </div>
       </div>
     </div>
+    <div class="card mt-4" *ngIf="logs && logs.length > 0">
+      <div class="card-header">
+        <h5 class="card-title">{{ 'logs' | translate | titlecase }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive-md">
+          <div *ngFor="let log of logs" class="border-bottom mb-3">
+            <p class="mb-0">{{ log.message | translate }}</p>
+            <p class="text-muted small">{{ log.occured | date:'dd.MM.yyyy HH:mm' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

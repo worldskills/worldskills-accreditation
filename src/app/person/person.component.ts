@@ -16,6 +16,8 @@ import {ToastService} from "angular-toastify";
 import {ImageService} from "../../services/image/image.service";
 import {Image} from "../../types/image";
 import {HttpEventType} from "@angular/common/http";
+import { LogsService } from '../../services/logs/logs.service';
+import { Log } from '../../types/log';
 
 @Component({
   selector: 'app-person',
@@ -28,6 +30,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   selectedEvent: Event;
   delegateTypes: DelegateType[];
   zones: Zone[] = [];
+  logs: Log[] = [];
 
   // upload ACR photo variables
   overrideACRPhoto: File;
@@ -52,6 +55,7 @@ export class PersonComponent extends WsComponent implements OnInit {
               private personAccreditationService: PersonAccreditationService,
               private delegateTypeService: DelegateTypeService,
               private zoneService: ZoneService,
+              private logsService: LogsService,
               private location: Location,
               private authService: NgAuthService,
               private toastService: ToastService,
@@ -85,6 +89,19 @@ export class PersonComponent extends WsComponent implements OnInit {
           }),
           this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
             this.zones = res.zones;
+          })
+        );
+
+        // fetch logs
+        const params = {
+          ws_entity: this.selectedEvent.ws_entity.id,
+          web_service_code: environment.worldskillsAppId,
+          logData: 'person_accreditation_id:' + personAcrId,
+          limit: 100,
+        };
+        this.subscribe(
+          this.logsService.getLogs(params).subscribe(logList => {
+            this.logs = logList.logs.reverse();
           })
         );
       });
