@@ -9,24 +9,28 @@
   <div style="display: flex; height: 148mm; color: #111 !important;">
 
     <div style="flex: 1; display: flex;">
-      <div style="flex: 1; position: relative; padding: 5mm;">
+      <div style="flex: 1; position: relative; padding: 6mm;">
 
-        <div style="position: absolute; top: 10mm; right: 5mm; width: 40mm;">
+        <div style="position: absolute; top: 10mm; right: 6mm; width: 40mm;">
           {{currentEvent.name.text}}
         </div>
 
-        <div style="height: 44mm; padding-top: 4mm; text-align: right;">
-          <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="height: 36mm;">
+        <div style="">
+          <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="height: 40mm;">
         </div>
 
-        <div style="-webkit-print-color-adjust: exact;  font-weight: 900; font-size: 10mm; line-height: 1; text-transform: uppercase;">
-          <div class="ws-text-fit" style="height: 12mm;">{{pa.first_name}}</div>
-          <div class="ws-text-fit" style="height: 12mm;">{{pa.last_name}}</div>
+        <div style="position: absolute; top: 55mm">
+          <div style="font-weight: 900; font-size: 8mm; line-height: 1; text-transform: uppercase; height: 15mm;" class="ws-text-fit">
+            <div>{{pa.first_name}}</div>
+            <div>{{pa.last_name}}</div>
+          </div>
         </div>
 
-        <div style="font-weight: 500; font-size: 8mm; line-height: 1.2;">
-          <div class="ws-text-fit" style="height: 12mm; margin-bottom: 3mm;">{{pa.lines[0]}}</div>
-          <div class="ws-text-fit" style="height: 12mm; margin-bottom: 3mm;">{{pa.lines[1]}}</div>
+        <div style="position: absolute; top: 75mm;">
+          <div style="font-weight: 300; font-size: 6mm; line-height: 1; height: 12mm;" class="ws-text-fit">
+            <div>{{pa.lines[0]}}</div>
+            <div>{{pa.lines[1] || "&nbsp;"}}</div>
+          </div>
         </div>
 
         <div style="display: flex; flex-flow: row wrap; position: absolute; bottom: 20mm;">
