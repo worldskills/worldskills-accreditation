@@ -3,6 +3,7 @@ import {MenuItem, NgAuthService, User, WorldskillsAngularLibService} from "@worl
 import {environment} from "../environments/environment";
 import {Router} from "@angular/router";
 import {AppService} from "../services/app/app.service";
+import {appConfig} from './app.config';
 
 @Component({
   selector: 'app-root',
@@ -49,7 +50,7 @@ export class AppComponent implements OnInit {
     });
 
     this.wsi.serviceConfigSubject.next({
-      appCode: [environment.worldskillsAppId],
+      appCode: [environment.worldskillsAppId, appConfig.worldskillsLogsAppId],
       apiEndpoint: environment.worldskillsApi
     });
 

@@ -18,6 +18,7 @@ import {Image} from "../../types/image";
 import {HttpEventType} from "@angular/common/http";
 import { LogsService } from '../../services/logs/logs.service';
 import { Log } from '../../types/log';
+import { appConfig } from '../app.config';
 
 @Component({
   selector: 'app-person',
@@ -48,6 +49,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   hasPrintPermission = false;
   hasAdminPermission = false;
   hasUploadPhotoPermission = true;
+  hasLogsPermission = false;
 
   constructor(private appService: AppService,
               private router: Router,
@@ -79,8 +81,8 @@ export class PersonComponent extends WsComponent implements OnInit {
     )
 
     // load selectedEvent and data depending on it
-    combineLatest([this.appService.selectedEvent, this.route.params])
-      .subscribe(([event, {personAcrId}]) => {
+    combineLatest([this.appService.selectedEvent, this.authService.currentUser, this.route.params])
+      .subscribe(([event, currentUser, {personAcrId}]) => {
         this.selectedEvent = event;
         this.subscribe(
           this.loadPersonAccreditation(personAcrId),
@@ -92,18 +94,20 @@ export class PersonComponent extends WsComponent implements OnInit {
           })
         );
 
-        // fetch logs
-        const params = {
-          ws_entity: this.selectedEvent.ws_entity.id,
-          web_service_code: environment.worldskillsAppId,
-          logData: 'person_accreditation_id:' + personAcrId,
-          limit: 100,
-        };
-        this.subscribe(
-          this.logsService.getLogs(params).subscribe(logList => {
-            this.logs = logList.logs.reverse();
-          })
-        );
+        if (UserRoleUtil.userHasRoles(currentUser, appConfig.worldskillsLogsAppId, 'Admin', 'ViewLogs')) {
+          // fetch logs
+          const params = {
+            ws_entity: this.selectedEvent.ws_entity.id,
+            web_service_code: environment.worldskillsAppId,
+            logData: 'person_accreditation_id:' + personAcrId,
+            limit: 100,
+          };
+          this.subscribe(
+            this.logsService.getLogs(params).subscribe(logList => {
+              this.logs = logList.logs.reverse();
+            })
+          );
+        }
       });
 
     // saving badge lines only when user stops typing for 400ms and when the lines have changed
