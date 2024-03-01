@@ -77,7 +77,7 @@ export class PrintComponent extends WsComponent implements OnInit {
   private loadPeople() {
     this.loading = true;
     this.personAcrService.getAccreditations(this.selectedEvent.id, this.fetchParams).subscribe(res => {
-      this.people = res.people;
+      this.people = res.people.filter(p => this.personAcrService.canBePrinted(this.selectedEvent, p));
       this.loading = false;
     })
   }
@@ -85,7 +85,7 @@ export class PrintComponent extends WsComponent implements OnInit {
   private loadPerson(personAcrId: number) {
     this.loading = true;
     this.personAcrService.getPersonAccreditation(this.selectedEvent.id, personAcrId).subscribe(res => {
-      this.people = [res.summary];
+      this.people = [res.summary].filter(p => this.personAcrService.canBePrinted(this.selectedEvent, p));
       this.loading = false;
     })
   }

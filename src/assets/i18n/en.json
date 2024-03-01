@@ -1,4 +1,6 @@
 {
+  "host_info_status": "Approval status",
+  "person_pending_approved_badge_cannot_be_printed": "This person is pending approval. The badge cannot be printed.",
   "accreditation_photo": "Accreditation photo",
   "badge_has_been_printed": "This badge has already been printed.",
   "badge_has_been_distributed": "This badge has already been marked as distributed.",

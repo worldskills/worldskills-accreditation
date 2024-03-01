@@ -8,6 +8,7 @@ export interface Event {
   end_date: Date;
   type: string;
   member_id?: number;
+  require_host_approval: boolean;
 }
 
 export interface EventContainer {

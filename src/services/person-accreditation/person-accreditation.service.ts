@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable, share} from "rxjs";
 import {
+  PersonAccreditationSummary,
   PersonAccreditationSummaryContainer,
   PersonAccreditationSummaryReqParams
 } from "../../types/person-accreditation-summary";
@@ -11,6 +12,7 @@ import {PersonAccreditation} from "../../types/person-accreditation";
 import {Params} from "@angular/router";
 import {isEmpty} from "../../utils/StringUtil";
 import {Image} from "../../types/image";
+import { Event } from '../../types/event';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +55,14 @@ export class PersonAccreditationService extends WsService<any> {
 
   uploadAccreditationPhoto(eventId: number, personAccreditationId: number, image: Image): Observable<PersonAccreditation> {
     return this.http.post<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}/photo`, image).pipe(share());
+  }
+
+  canBePrinted(event: Event, personAccreditation: PersonAccreditationSummary): boolean {
+    return event.require_host_approval && this.hasBeenApproved(personAccreditation);
+  }
+
+  hasBeenApproved(personAccreditation: PersonAccreditationSummary): boolean {
+    return personAccreditation?.host_info_status === 'APPROVED';
   }
 
   initialiseFetchParams(): PersonAccreditationSummaryReqParams {

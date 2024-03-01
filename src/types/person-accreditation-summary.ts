@@ -25,6 +25,7 @@ export interface PersonAccreditationSummary {
   group_name: string;
   image: Image;
   delegate_type: DelegateType;
+  host_info_status: string;
   random_hash: string;
   qr_code: string;
   zones: Zone[];

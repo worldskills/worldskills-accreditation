@@ -142,6 +142,10 @@ export class PersonComponent extends WsComponent implements OnInit {
     this.badgeLinesChange.next(lines);
   }
 
+  canBePrinted(): boolean {
+    return this.personAccreditationService.canBePrinted(this.selectedEvent, this.personAcr?.summary);
+  }
+
   private hasZone(zone: Zone): boolean {
     return this.personAcr.summary.zones.map(z => z.id).includes(zone.id);
   }
