@@ -212,10 +212,10 @@
     </div>
 
     <div style="flex: 1; display: flex; font-size: 4mm;">
-      <div style="flex: 1; position: relative; padding: 6mm;">
+      <div style="flex: 1; position: relative; padding: 0 6mm;">
 
-        <div style="height: 100mm; display: flex; flex-flow: column wrap;">
-          <div style="display: flex; align-items: center; height: 16mm;" *ngFor="let zone of zones">
+        <div style="height: 72mm; display: flex; flex-flow: column wrap;">
+          <div style="display: flex; align-items: center; height: 14mm;" *ngFor="let zone of zones">
             <div style="-webkit-print-color-adjust: exact; text-align: center; vertical-align: middle; width: 10mm; height: 10mm; line-height: 10mm; font-size: 6mm; font-weight: 700; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important; border: 1px solid #000">{{ zone.code }}</div>
             <div style="line-height: 5mm; width: 26mm; margin: 1mm 3mm;">{{zone.name}}</div>
           </div>
