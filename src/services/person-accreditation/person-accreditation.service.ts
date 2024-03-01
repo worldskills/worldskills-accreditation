@@ -58,7 +58,7 @@ export class PersonAccreditationService extends WsService<any> {
   }
 
   canBePrinted(event: Event, personAccreditation: PersonAccreditationSummary): boolean {
-    return event.require_host_approval && this.hasBeenApproved(personAccreditation);
+    return !event.require_host_approval || this.hasBeenApproved(personAccreditation);
   }
 
   hasBeenApproved(personAccreditation: PersonAccreditationSummary): boolean {
