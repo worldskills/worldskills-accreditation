@@ -1,89 +1,95 @@
-<h3>{{zoneReqForm.name}}</h3>
-<p class="text-muted font-italic">{{zoneReqForm.header_notes}}</p>
+<ng-container *ngIf="zoneReqForm; else loadingForm">
+  <h3 class="ws-heading-title">{{ zoneReqForm.name.text }}</h3>
+  <p class="ws-heading-standfirst">{{ zoneReqForm.header_text.text }}</p>
 
-<form class="form-horizontal" (ngSubmit)="submit()" #form="ngForm" novalidate>
+  <div class="alert alert-warning" *ngIf="!zoneReqForm.open_for_request">{{'zone_req_form_not_open' | translate}}</div>
+  <form class="form-horizontal" [ngClass]="{'was-validated': this.form.submitted}" (ngSubmit)="submit()" #form="ngForm" novalidate>
 
-  <p class="font-weight-bold mb-0">{{ 'your_details' | translate }}</p>
-  <div class="row">
-    <div class="col-sm-12">
-      <label class="small font-weight-bold mb-0">{{ 'organization' | translate }}</label>
-      <input type="text" class="form-control" disabled value="CCTV">
+    <p class="font-weight-bold mb-0">{{ 'preferred_zones' | translate }}</p>
+    <div class="row mb-3">
+      <div class="col-sm-12">
+        <label class="small font-weight-bold">{{ 'first_choice' | translate }}
+          <span class="text-muted small font-weight-bold">({{ 'required' | translate | titlecase }})</span>
+        </label>
+        <ng-select
+          name="first_choice_zone"
+          [ngModel]=""
+          [items]="zones"
+          bindLabel="name"
+          required
+        >
+          <ng-template ng-label-tmp let-item="item">
+            <div class="d-inline-block" style="width: 15px; height: 15px; "
+                 [style.background-color]="item.color"></div>
+            <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item" let-index="index">
+            <div class="d-inline-block" style="width: 15px; height: 15px; "
+                 [style.background-color]="item.color"></div>
+            <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+          </ng-template>
+        </ng-select>
+      </div>
     </div>
-  </div>
-  <div class="row mb-4">
-    <div class="col-md-6">
-      <label class="small font-weight-bold mb-0">{{ 'first_name' | translate }}</label>
-      <input type="text" class="form-control" disabled value="John">
-    </div>
-    <div class="col-md-6">
-      <label class="small font-weight-bold mb-0">{{ 'last_name' | translate }}</label>
-      <input type="text" class="form-control" disabled value="Doe">
-    </div>
-  </div>
 
-  <p class="font-weight-bold mb-0">{{ 'preferred_zones' | translate }}</p>
-  <div class="row mb-3">
-    <div class="col-sm-12">
-      <label class="small font-weight-bold">{{ 'first_choice' | translate }}</label>
-      <ng-select
-        name="preferred_zones_1st"
-        [items]="zones"
-        bindValue="id"
-        bindLabel="name"
-      >
-        <ng-template ng-label-tmp let-item="item">
-          <div class="d-inline-block" style="width: 15px; height: 15px; "
-               [style.background-color]="item.color"></div>
-          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
-        </ng-template>
-        <ng-template ng-option-tmp let-item="item" let-index="index">
-          <div class="d-inline-block" style="width: 15px; height: 15px; "
-               [style.background-color]="item.color"></div>
-          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
-        </ng-template>
-      </ng-select>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <label class="small font-weight-bold mb-0">{{ 'second_choice' | translate }}
+          <span class="text-danger small text-muted font-weight-light">({{ 'optional' | translate | titlecase }})</span>
+        </label>
+        <p class="text-muted small">If your 1st choice is not available, please outline your second choice</p>
+        <ng-select
+          name="second_choice_zone"
+          [ngModel]=""
+          [items]="zones"
+          bindLabel="name"
+        >
+          <ng-template ng-label-tmp let-item="item">
+            <div class="d-inline-block" style="width: 15px; height: 15px; "
+                 [style.background-color]="item.color"></div>
+            <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item" let-index="index">
+            <div class="d-inline-block" style="width: 15px; height: 15px; "
+                 [style.background-color]="item.color"></div>
+            <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+          </ng-template>
+        </ng-select>
+      </div>
     </div>
-  </div>
 
-  <div class="row mb-3">
-    <div class="col-md-12">
-      <label class="small font-weight-bold mb-0">{{ 'second_choice' | translate }}</label>
-      <p class="text-muted small">If your 1st choice is not available, please outline your second choice</p>
-      <ng-select
-        name="preferred_zones_1st"
-        [items]="zones"
-        bindValue="id"
-        bindLabel="name"
-      >
-        <ng-template ng-label-tmp let-item="item">
-          <div class="d-inline-block" style="width: 15px; height: 15px; "
-               [style.background-color]="item.color"></div>
-          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
-        </ng-template>
-        <ng-template ng-option-tmp let-item="item" let-index="index">
-          <div class="d-inline-block" style="width: 15px; height: 15px; "
-               [style.background-color]="item.color"></div>
-          <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
-        </ng-template>
-      </ng-select>
+    <div class="row mb-3">
+      <div class="col-sm-12">
+        <label class="font-weight-bold mb-0">{{ 'objective' | translate }}
+          <span class="text-muted small font-weight-bold">({{ 'required' | translate | titlecase }})</span>
+        </label>
+        <p class="text-muted small">{{ 'zone_request_objective_subtitle' | translate }}</p>
+        <textarea
+          class="form-control"
+          [ngModel]=""
+          name="objective"
+          required
+          rows="3"></textarea>
+      </div>
     </div>
-  </div>
 
-  <div class="row mb-3">
-    <div class="col-sm-12">
-      <label class="font-weight-bold mb-0">{{ 'objective' | translate }}</label>
-      <p class="text-muted small">{{ 'zone_request_objective_subtitle' | translate }}</p>
-      <textarea
-        class="form-control"
-        name="objectives"
-        rows="3"></textarea>
+    <div class="row mb-2">
+      <div class="col-sm-12 text-center">
+        <button type="submit" class="btn btn-primary" [disabled]="!zoneReqForm.open_for_request">{{ 'submit_request' | translate }}</button>
+      </div>
     </div>
-  </div>
+  </form>
+</ng-container>
 
-  <div class="row mb-2">
-    <div class="col-sm-12 text-center">
-<!--      submit -->
-      <button type="submit" class="btn btn-primary">{{ 'submit_request' | translate }}</button>
-    </div>
-  </div>
-</form>
+<ng-template #loadingForm>
+  <ngx-skeleton-loader
+    count="1"
+    [theme]="{ 'border-radius': '0', width: '100%', height: '45px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
+  <ngx-skeleton-loader
+    count="1"
+    [theme]="{ 'border-radius': '0', width: '80%', height: '35px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
+
+  <ngx-skeleton-loader
+    count="5"
+    [theme]="{ 'border-radius': '0', width: '60%', height: '35px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
+</ng-template>

@@ -1,9 +1,12 @@
+import {I18nText} from "@worldskills/worldskills-angular-lib";
+import {ZoneRequestFormZone} from "./zone-request-form-zone";
+
 export interface ZoneRequestForm {
   id: number;
-  form_unique_id: string;
-  entity_id: number;
-  name: string;
-  header_notes: string;
-  request_for_date: string;
-  request_open: boolean;
+  random_hash: string;
+  event_id: number;
+  name: I18nText;
+  header_text: I18nText;
+  open_for_request: boolean;
+  zones: ZoneRequestFormZone[];
 }

@@ -7,6 +7,9 @@ import {ZoneRequest} from "../../types/zone-request/zone-request";
 import {PersonAccreditation} from "../../types/person-accreditation";
 import {Person} from "../../types/person";
 import {ZoneRequestAllocation} from "../../types/zone-request/ZoneRequestAllocation";
+import {environment} from "../../environments/environment";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +18,18 @@ export class ZoneRequestService extends WsService<any> {
 
   zoneReqForm: ZoneRequestForm = {
     id: 1,
-    form_unique_id: '9188d942-66bb-4c23-af98-58c76aeb24cb',
-    entity_id: 1,
-    name: 'Media Zone Request for Opening Ceremony',
-    header_notes: 'Please choose your preferred zone for the opening ceremony. Submit your request by 22 August 2024.',
-    request_for_date: '2024-08-22',
-    request_open: true,
+    random_hash: '9188d942-66bb-4c23-af98-58c76aeb24cb',
+    event_id: 1,
+    name: {
+      text: 'Media Zone Request for Opening Ceremony',
+      lang_code: 'en'
+    },
+    header_text: {
+      text: 'Please choose your preferred zone for the opening ceremony. Submit your request by 22 August 2024.',
+      lang_code: 'en'
+    },
+    open_for_request: true,
+    zones: []
   }
   zones: Zone[] = [
     {
@@ -50,21 +59,27 @@ export class ZoneRequestService extends WsService<any> {
   zoneReqFormZone: ZoneRequestFormZone[] = [
     {
       id: 1,
-      zone_request_form: this.zoneReqForm,
+      zone_request_form_id: this.zoneReqForm.id,
       zone: this.zones[0],
-      quota: 10
+      quota: 10,
+      available_for_allocation: true,
+      available_for_request: true
     },
     {
       id: 2,
-      zone_request_form: this.zoneReqForm,
+      zone_request_form_id: this.zoneReqForm.id,
       zone: this.zones[1],
-      quota: 15
+      quota: 15,
+      available_for_allocation: true,
+      available_for_request: true
     },
     {
       id: 3,
-      zone_request_form: this.zoneReqForm,
+      zone_request_form_id: this.zoneReqForm.id,
       zone: this.zones[2],
-      quota: 20
+      quota: 20,
+      available_for_allocation: true,
+      available_for_request: true
     }
   ]
   persons: Person[] = [
@@ -241,17 +256,21 @@ export class ZoneRequestService extends WsService<any> {
     }
   ]
 
-  constructor() {
+  readonly url = (eventId: number) => {
+    return `${environment.worldskillsApiAccreditation}/events/${eventId}/zone-requests`
+  };
+
+  constructor(private http: HttpClient) {
     super();
   }
 
   getZonesForForm(zoneReqFormid: number): Zone[] {
-    return this.zoneReqFormZone.filter(zone => zone.zone_request_form.id === zoneReqFormid)
+    return this.zoneReqFormZone.filter(zone => zone.zone_request_form_id === zoneReqFormid)
       .map(res => this.zones.find(zone => zone.id === res.zone.id) ?? null);
   }
 
   getZoneReqMappingForForm(zoneReqFormid: number): ZoneRequestFormZone[] {
-    return this.zoneReqFormZone.filter(zone => zone.zone_request_form.id === zoneReqFormid);
+    return this.zoneReqFormZone.filter(zone => zone.zone_request_form_id === zoneReqFormid);
   }
 
   getRequestsForForm(zoneReqFormid: number): ZoneRequest[] {
@@ -262,5 +281,14 @@ export class ZoneRequestService extends WsService<any> {
 
   getAllocationsForForm(zoneReqFormid: number): ZoneRequestAllocation[] {
     return this.allocations.filter(allocation => allocation.zone_request.zone_request_form.id === zoneReqFormid);
+  }
+
+  // ------------------- API calls -------------------
+  requestZone(eventId: number, zoneReqFormId: number, request: ZoneRequest): Observable<ZoneRequest> {
+    return this.http.post<ZoneRequest>(this.url(eventId) + `/form/${zoneReqFormId}`, request);
+  }
+
+  getRequest(eventId: number, zoneReqId: number): Observable<ZoneRequest> {
+    return this.http.get<ZoneRequest>(this.url(eventId) + `/${zoneReqId}`);
   }
 }

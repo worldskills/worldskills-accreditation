@@ -25,6 +25,8 @@ export const environment = {
     EDIT_PACKAGE_OPTIONS: 'EditPackageOptions',
     PRINT: 'Print',
     AD_HOC_PRINT: 'AdHocPrint',
-    SET_UP_SCAN_APP: 'SetUpScanApp'
+    SET_UP_SCAN_APP: 'SetUpScanApp',
+    REQUEST_ZONE: 'RequestZone',
+    ALLOCATE_ZONE_REQUEST: 'AllocateZoneRequest',
   }
 };

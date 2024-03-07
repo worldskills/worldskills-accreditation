@@ -26,6 +26,7 @@ export class EventComponent extends WsComponent implements OnInit {
     {label: 'Zones', path: 'zones', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_ZONES]},
   ];
   selectedTabIndex = 0;
+  showEventNameHeader = true;
   showMenuTabs = true;
   setupScanApp: boolean;
   hasAdHocPrintPermission = false;
@@ -41,6 +42,7 @@ export class EventComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.appService.showMenuTabs.subscribe(showMenuTabs => setTimeout(() => (this.showMenuTabs = showMenuTabs)));
+    this.appService.showEventNameHeader.subscribe(showEventNameHeader => setTimeout(() => (this.showEventNameHeader = showEventNameHeader)));
     this.route.params.subscribe(({eventId}) => {
       this.subscribe(
         this.eventService.get(eventId).subscribe(event => {

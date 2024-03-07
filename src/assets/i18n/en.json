@@ -55,6 +55,7 @@
   "no_people_found": "No people found",
   "no_permission_to_edit_person_msg": "You don't have permission to edit",
   "objective": "Objective",
+  "optional": "Optional",
   "organization": "Organization",
   "package_options": "Package options",
   "people": "People",
@@ -95,6 +96,7 @@
   "your_details": "Your details",
   "zone": "Zone",
   "zone_request_allocation": "Zone request allocation",
+  "zone_req_form_not_open": "Form is not open for request. Please check back later.",
   "zones": "Zones",
   "zone_request_objective_subtitle": "Objectives for covering the Ceremony and where the coverage will be used"
 }
