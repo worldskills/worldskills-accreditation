@@ -1,0 +1,144 @@
+<form class="form-horizontal" [ngClass]="{'was-validated': this.form.submitted}" (ngSubmit)="save()" #form="ngForm"
+      novalidate>
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{ 'name' | translate }}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        required
+        [ngModel]="zoneReqForm.name?.text"
+        autocomplete="off"
+        data-1p-ignore
+      >
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{ 'header_text' | translate }}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+      <input
+        type="text"
+        class="form-control"
+        name="header_text"
+        required
+        [ngModel]="zoneReqForm.header_text?.text">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{ 'open_for_request' | translate }}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+        <input
+          type="checkbox"
+          class="form-check"
+          style="transform: scale(2); margin-left: 10px; margin-top: 10px;"
+          name="open_for_request"
+          required
+          [ngModel]="zoneReqForm.open_for_request">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <div class="table-responsive-md">
+        <table class="table table-striped">
+          <colgroup>
+            <col style="width: 30%">
+            <col style="width: 10%">
+            <col style="width: 20%">
+            <col style="width: 20%">
+            <col style="width: 20%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">{{ 'zone' | translate }}</th>
+            <th class="border-top-0">{{ 'quota' | translate }}</th>
+            <th class="border-top-0">{{ 'available_for_request' | translate }}</th>
+            <th class="border-top-0">{{ 'available_for_allocation' | translate }}</th>
+            <th class="border-top-0">{{ 'action' | translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container *ngIf="zoneReqForm.zones.length > 0; else emptyZones">
+            <tr *ngFor="let zfz of zoneReqForm.zones; let i = index">
+              <td>{{ zfz.zone.name }}</td>
+              <td>{{ zfz.quota }}</td>
+              <td>{{ zfz.available_for_request }}</td>
+              <td>{{ zfz.available_for_allocation }}</td>
+              <td>
+                <button type="button" class="btn btn-sm btn-outline-danger"
+                        (click)="removeZoneFormZone(i)">{{ 'remove' | translate }}
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-template #emptyZones>
+            <tr>
+              <td colspan="5" class="text-muted font-italic">Please map the zones to this request form. By clicking on
+                'Add Zone' button.
+              </td>
+            </tr>
+          </ng-template>
+
+          <tr>
+            <td>
+              <ng-select
+                name="zone"
+                [items]="zones"
+                bindLabel="name"
+                [(ngModel)]="manageZoneReqFormZone.zone"
+              >
+                <ng-template ng-label-tmp let-item="item">
+                  <div class="d-inline-block" style="width: 15px; height: 15px; "
+                       [style.background-color]="item.color"></div>
+                  <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <div class="d-inline-block" style="width: 15px; height: 15px; "
+                       [style.background-color]="item.color"></div>
+                  <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                </ng-template>
+              </ng-select>
+            </td>
+            <td>
+              <input type="number" min="1" name="quota" [(ngModel)]="manageZoneReqFormZone.quota">
+            </td>
+            <td>
+              <input type="checkbox" name="available_for_request"
+                     class="form-check"
+                     style="transform: scale(2);"
+                     [(ngModel)]="manageZoneReqFormZone.available_for_request">
+            </td>
+            <td>
+              <input type="checkbox" name="available_for_allocation"
+                     class="form-check"
+                     style="transform: scale(2);"
+                     [(ngModel)]="manageZoneReqFormZone.available_for_allocation">
+            </td>
+            <td>
+              <button type="button" class="btn btn-sm btn-primary"
+                      (click)="addZoneFormZone()">{{ 'add_zone' | translate | titlecase }}
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-2 text-right">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-sm btn-primary">{{ 'save' | translate }}</button>
+      <button type="button" class="btn btn-sm btn-outline-primary ml-2"
+              (click)="cancel()">{{ 'cancel' | translate }}
+      </button>
+    </div>
+  </div>
+
+</form>

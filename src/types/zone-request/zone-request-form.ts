@@ -10,3 +10,7 @@ export interface ZoneRequestForm {
   open_for_request: boolean;
   zones: ZoneRequestFormZone[];
 }
+
+export interface ZoneRequestFormContainer {
+  zone_request_forms: ZoneRequestForm[];
+}

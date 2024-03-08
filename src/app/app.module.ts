@@ -50,6 +50,8 @@ import {Fi2024Component} from './badges/fi2024/fi2024.component';
 import {ZoneRequestComponent} from './zone-request/zone-request.component';
 import {ZoneRequestAllocationComponent} from './zone-request-allocation/zone-request-allocation.component';
 import {ZoneRequestedComponent} from './zone-requested/zone-requested.component';
+import {ZoneRequestFormComponent} from './zone-request-form/zone-request-form.component';
+import {ZoneRequestFormFormComponent} from './zone-request-form-form/zone-request-form-form.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -90,7 +92,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     Fi2024Component,
     ZoneRequestComponent,
     ZoneRequestAllocationComponent,
-    ZoneRequestedComponent
+    ZoneRequestedComponent,
+    ZoneRequestFormComponent,
+    ZoneRequestFormFormComponent
   ],
   imports: [
     BrowserModule,

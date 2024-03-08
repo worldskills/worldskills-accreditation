@@ -9,6 +9,9 @@ import {ZoneRequestService} from "../../services/zone-request/zone-request.servi
 import {ZoneRequest} from "../../types/zone-request/zone-request";
 import {ZoneRequestFormZone} from "../../types/zone-request/zone-request-form-zone";
 import {ZoneRequestAllocation} from "../../types/zone-request/ZoneRequestAllocation";
+import {combineLatest} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+import {ZoneRequestFormService} from "../../services/zone-request-form/zone-request-form.service";
 
 @Component({
   selector: 'app-zone-request-allocation',
@@ -18,32 +21,44 @@ import {ZoneRequestAllocation} from "../../types/zone-request/ZoneRequestAllocat
 export class ZoneRequestAllocationComponent extends WsComponent implements OnInit {
 
   selectedEvent: Event;
-  zones: Zone[];
   loading = false;
   zoneReqForm: ZoneRequestForm;
   zoneRequests: ZoneRequest[];
+  allocatableZones: Zone[];
+
+  zones: Zone[];
   organizationNames: string[];
   zoneReqFormZones: ZoneRequestFormZone[];
   allocations: ZoneRequestAllocation[];
 
   constructor(private appService: AppService,
               private zoneService: ZoneService,
+              private route: ActivatedRoute,
+              private zoneReqFormService: ZoneRequestFormService,
               private zoneReqService: ZoneRequestService) {
     super();
   }
 
   ngOnInit(): void {
     this.appService.showMenuTabs.next(false);
-    this.zoneReqForm = this.zoneReqService.zoneReqForm;
 
-    this.subscribe(
-      this.appService.selectedEvent.subscribe(event => {
+    combineLatest([this.appService.selectedEvent, this.route.params])
+      .subscribe(([event, {zoneRequestFormHash}]) => {
         this.selectedEvent = event;
 
-        // load zones for selected event
-        this.loadData();
-      })
-    )
+        this.subscribe(
+          // load ZoneRequestForm
+          this.zoneReqFormService.getZoneReqForm(this.selectedEvent.id, zoneRequestFormHash).subscribe(zoneReqForm => {
+            this.zoneReqForm = zoneReqForm;
+            this.allocatableZones = this.zoneReqForm.zones.filter(zone => zone.available_for_allocation).map(z => z.zone);
+
+            this.zoneReqService.getRequests(this.selectedEvent.id, this.zoneReqForm.id).subscribe(res => {
+              this.zoneRequests = res.zone_requests;
+              console.log(res);
+            })
+          }),
+        )
+      });
   }
 
   private loadData() {

@@ -11,3 +11,7 @@ export interface ZoneRequest {
   objective: string;
   zone_request_form: ZoneRequestForm;
 }
+
+export interface ZoneRequestContainer {
+  zone_requests: ZoneRequest[];
+}

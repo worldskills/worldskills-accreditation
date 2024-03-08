@@ -8,6 +8,7 @@ export const environment = {
   worldskillsApiOrg: 'https://api.worldskills.show/org',
   worldskillsApiPeople: 'https://api.worldskills.show/people',
   worldskillsPeople: 'https://people.worldskills.org',
+  worldskillsAccreditation: 'https://accreditation.worldskills.org',
   worldskillsClientId: '842ea70be298',
   worldskillsAuthorizeUrl: 'https://auth.worldskills.show/oauth/authorize',
   worldskillsAuthorizeRedirect: 'http://localhost:4200/',

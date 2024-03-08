@@ -1,5 +1,5 @@
 <h3>{{ 'allocation' | translate | titlecase }} <br><span
-  class="text-muted small font-weight-light">{{ zoneReqForm.name }}</span></h3>
+  class="text-muted small font-weight-light">{{ zoneReqForm.name.text }}</span></h3>
 
 
 <div class="row">
@@ -63,16 +63,16 @@
             <tbody>
             <ng-container *ngFor="let req of zoneRequests">
               <tr>
-                <td class="border-bottom-0">{{ req.person_accreditation.organization_name }}</td>
+                <td class="border-bottom-0">{{ req.person_accreditation?.organization_name ?? '-' }}</td>
                 <td
                   class="border-bottom-0">{{ req.person_accreditation.person.first_name }} {{ req.person_accreditation.person.last_name }}
                 </td>
                 <td class="border-bottom-0">{{ req.first_choice_zone.name }}</td>
-                <td class="border-bottom-0">{{ req.second_choice_zone.name }}</td>
+                <td class="border-bottom-0">{{ req.second_choice_zone?.name ?? '-' }}</td>
                 <td rowspan="2">
                   <ng-select
                     name="zone"
-                    [items]="zones"
+                    [items]="allocatableZones"
                     bindLabel="name"
                     placeholder="Allocate to zone"
                     #allocateZoneDropdown

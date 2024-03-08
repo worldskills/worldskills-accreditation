@@ -3,7 +3,7 @@ import {WsService} from "@worldskills/worldskills-angular-lib";
 import {ZoneRequestForm} from "../../types/zone-request/zone-request-form";
 import {ZoneRequestFormZone} from "../../types/zone-request/zone-request-form-zone";
 import {Zone} from "../../types/zone";
-import {ZoneRequest} from "../../types/zone-request/zone-request";
+import {ZoneRequest, ZoneRequestContainer} from "../../types/zone-request/zone-request";
 import {PersonAccreditation} from "../../types/person-accreditation";
 import {Person} from "../../types/person";
 import {ZoneRequestAllocation} from "../../types/zone-request/ZoneRequestAllocation";
@@ -290,5 +290,9 @@ export class ZoneRequestService extends WsService<any> {
 
   getRequest(eventId: number, zoneReqId: number): Observable<ZoneRequest> {
     return this.http.get<ZoneRequest>(this.url(eventId) + `/${zoneReqId}`);
+  }
+
+  getRequests(eventId: number, zoneReqFormId: number): Observable<ZoneRequestContainer> {
+    return this.http.get<ZoneRequestContainer>(this.url(eventId) + `/form/${zoneReqFormId}`);
   }
 }

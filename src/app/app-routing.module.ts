@@ -17,6 +17,7 @@ import {PrintComponent} from "./print/print.component";
 import {ZoneRequestComponent} from "./zone-request/zone-request.component";
 import {ZoneRequestAllocationComponent} from "./zone-request-allocation/zone-request-allocation.component";
 import {ZoneRequestedComponent} from "./zone-requested/zone-requested.component";
+import {ZoneRequestFormComponent} from "./zone-request-form/zone-request-form.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -59,6 +60,14 @@ const routes: Routes = [
             redirectTo: 'people'
           },
           {
+            path: 'zone-request-form',
+            data: {
+              breadcrumb: 'Zone Request Form',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.ALLOCATE_ZONE_REQUEST])
+            },
+            component: ZoneRequestFormComponent
+          },
+          {
             path: 'zone-request-form/:zoneRequestFormHash',
             data: {
               breadcrumb: 'Zone Request Form',
@@ -75,7 +84,7 @@ const routes: Routes = [
             component: ZoneRequestedComponent
           },
           {
-            path: 'zone-request-allocation',
+            path: 'zone-request-form/:zoneRequestFormHash/allocate',
             data: {
               breadcrumb: 'Zone Request Allocation',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.ALLOCATE_ZONE_REQUEST])
