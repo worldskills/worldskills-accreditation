@@ -1,5 +1,5 @@
 <h3>{{ 'allocation' | translate | titlecase }} <br><span
-  class="text-muted small font-weight-light">{{ zoneReqForm.name.text }}</span></h3>
+  class="text-muted small font-weight-light">{{ currentForm?.name.text }}</span></h3>
 
 
 <div class="row">
@@ -9,12 +9,12 @@
         <h5 class="card-title">{{ 'requests' | translate | titlecase }}</h5>
       </div>
       <div class="card-body">
-        <div class="row small mb-3">
+        <div class="row mb-3">
           <div class="col-md-5">
             <label class="small mb-0 font-weight-bold">{{ 'choose_zone' | translate }}</label>
             <ng-select
               name="zone"
-              [items]="zones"
+              [items]="pendingReqZones"
               bindValue="id"
               bindLabel="name"
               placeholder="All Zones"
@@ -35,15 +35,15 @@
             <label class="small mb-0 font-weight-bold">{{ 'choose_organization' | translate }}</label>
             <ng-select
               name="organization"
-              [items]="organizationNames"
+              [items]="pendingReqOrgNames"
               placeholder="All Organizations"></ng-select>
           </div>
         </div>
 
         <hr class="my-2">
-        <p class="text-muted small">{{ 'total_requests' | translate }}: {{ zoneRequests?.length }}</p>
+        <p class="text-muted small">{{ 'total_requests' | translate }}: {{ pendingRequests?.length }}</p>
         <div>
-          <table class="table table-sm small">
+          <table class="table table-sm">
             <colgroup>
               <col style="width: 20%">
               <col style="width: 15%">
@@ -53,15 +53,39 @@
             </colgroup>
             <thead>
             <tr>
-              <th>{{ 'organization' | translate | titlecase }}</th>
-              <th>{{ 'name' | translate | titlecase }}</th>
-              <th>{{ 'first_choice' | translate | titlecase }}</th>
-              <th>{{ 'second_choice' | translate | titlecase }}</th>
-              <th>{{ 'action' | translate | titlecase }}</th>
+              <th class="small font-weight-bold">
+                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingRequestsSorting === 'org-asc' ? 'org-desc' : 'org-asc')">
+                  {{'organization' | translate}}&nbsp;
+                  <ng-container *ngIf="pendingRequestsSorting !== 'org-asc'">&darr;</ng-container>
+                  <ng-container *ngIf="pendingRequestsSorting !== 'org-desc'">&uarr;</ng-container>
+                </a>
+              </th>
+              <th class="small font-weight-bold">
+                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingRequestsSorting === 'name-asc' ? 'name-desc' : 'name-asc')">
+                  {{ 'name' | translate | titlecase }}
+                  <ng-container *ngIf="pendingRequestsSorting !== 'name-asc'">&darr;</ng-container>
+                  <ng-container *ngIf="pendingRequestsSorting !== 'name-desc'">&uarr;</ng-container>
+                </a>
+              </th>
+              <th class="small font-weight-bold">
+                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingRequestsSorting === 'first-choice-asc' ? 'first-choice-desc' : 'first-choice-asc')">
+                  {{ 'first_choice' | translate | titlecase }}
+                  <ng-container *ngIf="pendingRequestsSorting !== 'first-choice-asc'">&darr;</ng-container>
+                  <ng-container *ngIf="pendingRequestsSorting !== 'first-choice-desc'">&uarr;</ng-container>
+                </a>
+              </th>
+              <th class="small font-weight-bold">
+                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingRequestsSorting === 'second-choice-asc' ? 'second-choice-desc' : 'second-choice-asc')">
+                  {{ 'second_choice' | translate | titlecase }}
+                  <ng-container *ngIf="pendingRequestsSorting !== 'second-choice-asc'">&darr;</ng-container>
+                  <ng-container *ngIf="pendingRequestsSorting !== 'second-choice-desc'">&uarr;</ng-container>
+                </a>
+              </th>
+              <th class="small font-weight-bold">{{ 'action' | translate | titlecase }}</th>
             </tr>
             </thead>
             <tbody>
-            <ng-container *ngFor="let req of zoneRequests">
+            <ng-container *ngFor="let req of pendingRequests">
               <tr>
                 <td class="border-bottom-0">{{ req.person_accreditation?.organization_name ?? '-' }}</td>
                 <td
@@ -120,7 +144,7 @@
           Wristband distributed: <span class="badge badge-success">Y</span>&nbsp;<span class="badge badge-secondary">N</span>
         </p>
         <div class="table-responsive-md">
-          <table class="table table-sm small">
+          <table class="table table-sm">
             <colgroup>
               <col style="width: 30%">
               <col style="width: 30%">

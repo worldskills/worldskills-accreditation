@@ -22,12 +22,17 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
 
   selectedEvent: Event;
   loading = false;
-  zoneReqForm: ZoneRequestForm;
-  zoneRequests: ZoneRequest[];
-  allocatableZones: Zone[];
-
   zones: Zone[];
-  organizationNames: string[];
+  currentForm: ZoneRequestForm;
+
+  // pending requests
+  pendingReqOrgNames: string[] = [];
+  pendingReqZones: Zone[] = [];
+  pendingRequests: ZoneRequest[];
+  allocatableZones: Zone[];
+  pendingRequestsSorting: 'org-asc' | 'org-desc' | 'name-asc' | 'name-desc' | 'first-choice-asc' | 'first-choice-desc' | 'second-choice-asc' | 'second-choice-desc';
+
+  // allocations
   zoneReqFormZones: ZoneRequestFormZone[];
   allocations: ZoneRequestAllocation[];
 
@@ -47,33 +52,70 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
         this.selectedEvent = event;
 
         this.subscribe(
+          // load zones
+          this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
+            this.zones = res.zones;
+          }),
           // load ZoneRequestForm
           this.zoneReqFormService.getZoneReqForm(this.selectedEvent.id, zoneRequestFormHash).subscribe(zoneReqForm => {
-            this.zoneReqForm = zoneReqForm;
-            this.allocatableZones = this.zoneReqForm.zones.filter(zone => zone.available_for_allocation).map(z => z.zone);
+            this.currentForm = zoneReqForm;
+            this.allocatableZones = this.currentForm.zones.filter(zone => zone.available_for_allocation).map(z => z.zone);
 
-            this.zoneReqService.getRequests(this.selectedEvent.id, this.zoneReqForm.id).subscribe(res => {
-              this.zoneRequests = res.zone_requests;
-              console.log(res);
-            })
+            // load ZoneRequest for current form
+            this.loadRequests();
           }),
         )
       });
   }
 
-  private loadData() {
-    // this.loading = true;
-    // this.subscribe(
-    //   this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
-    //     this.zones = res.zones;
-    //     this.loading = false;
-    //   })
-    // );
-    this.zoneRequests = this.zoneReqService.getRequestsForForm(this.zoneReqForm.id);
-    this.zoneReqFormZones = this.zoneReqService.getZoneReqMappingForForm(this.zoneReqForm.id);
-    this.zones = this.zoneReqService.getZonesForForm(this.zoneReqForm.id);
-    this.organizationNames = this.zoneRequests.map(zoneRequest => zoneRequest.person_accreditation.organization.name.text);
-    this.allocations = this.zoneReqService.getAllocationsForForm(this.zoneReqForm.id);
+  private loadRequests() {
+    this.subscribe(
+      this.zoneReqService.getRequests(this.selectedEvent.id, this.currentForm.id).subscribe(res => {
+        // load pending requests from API and sort them
+        this.pendingRequests = res.zone_requests;
+        this.sortPendingRequests('org-asc');
+
+        // get unique org names from pending requests for filters
+        this.pendingReqOrgNames = [...(new Set(res.zone_requests.map(req => req.person_accreditation.organization_name)))];
+
+        // get unique zones from pending requests for filters
+        this.pendingReqZones = [];
+        [...(new Set(res.zone_requests.map(req => req.first_choice_zone.id)))].forEach(zoneId => {
+          this.pendingReqZones.push(this.zones.find(zone => zone.id === zoneId));
+        });
+      })
+    )
+  }
+
+  public sortPendingRequests(sorting: string): ZoneRequest[] {
+    this.pendingRequestsSorting = sorting as any;
+
+    return this.pendingRequests.sort((a, b) => {
+      try {
+        switch (sorting) {
+          case "org-asc":
+            return a.person_accreditation.organization_name.localeCompare(b.person_accreditation.organization_name);
+          case "org-desc":
+            return b.person_accreditation.organization_name.localeCompare(a.person_accreditation.organization_name);
+          case "name-asc":
+            return a.person_accreditation.person.first_name.localeCompare(b.person_accreditation.person.first_name);
+          case "name-desc":
+            return b.person_accreditation.person.first_name.localeCompare(a.person_accreditation.person.first_name);
+          case "first-choice-asc":
+            return a.first_choice_zone.name.localeCompare(b.first_choice_zone.name);
+          case "first-choice-desc":
+            return b.first_choice_zone.name.localeCompare(a.first_choice_zone.name);
+          case "second-choice-asc":
+            return a.second_choice_zone?.name.localeCompare(b.second_choice_zone?.name);
+          case "second-choice-desc":
+            return b.second_choice_zone?.name.localeCompare(a.second_choice_zone?.name);
+          default:
+            return 0;
+        }
+      } catch (e) {
+        return 0;
+      }
+    });
   }
 
   getAllocationsForZone(zone: Zone): ZoneRequestAllocation[] {
