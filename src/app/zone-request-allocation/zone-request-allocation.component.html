@@ -6,7 +6,7 @@
   <div class="col-md-7">
     <div class="card w-100">
       <div class="card-header">
-        <h5 class="card-title">{{ 'requests' | translate | titlecase }}</h5>
+        <h5 class="card-title">{{ 'pending_requests' | translate | titlecase }}</h5>
       </div>
       <div class="card-body">
         <div class="row mb-3">
@@ -15,9 +15,10 @@
             <ng-select
               name="zone"
               [items]="pendingReqZones"
-              bindValue="id"
               bindLabel="name"
               placeholder="All Zones"
+              [(ngModel)]="pendingReqZone"
+              (ngModelChange)="loadRequests()"
             >
               <ng-template ng-label-tmp let-item="item">
                 <div class="d-inline-block" style="width: 15px; height: 15px; "
@@ -36,6 +37,8 @@
             <ng-select
               name="organization"
               [items]="pendingReqOrgNames"
+              [(ngModel)]="pendingReqOrgName"
+              (ngModelChange)="loadRequests()"
               placeholder="All Organizations"></ng-select>
           </div>
         </div>
@@ -54,31 +57,31 @@
             <thead>
             <tr>
               <th class="small font-weight-bold">
-                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingRequestsSorting === 'org-asc' ? 'org-desc' : 'org-asc')">
+                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingReqsSorting === 'org-asc' ? 'org-desc' : 'org-asc')">
                   {{'organization' | translate}}&nbsp;
-                  <ng-container *ngIf="pendingRequestsSorting !== 'org-asc'">&darr;</ng-container>
-                  <ng-container *ngIf="pendingRequestsSorting !== 'org-desc'">&uarr;</ng-container>
+                  <ng-container *ngIf="pendingReqsSorting !== 'org-asc'">&darr;</ng-container>
+                  <ng-container *ngIf="pendingReqsSorting !== 'org-desc'">&uarr;</ng-container>
                 </a>
               </th>
               <th class="small font-weight-bold">
-                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingRequestsSorting === 'name-asc' ? 'name-desc' : 'name-asc')">
+                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingReqsSorting === 'name-asc' ? 'name-desc' : 'name-asc')">
                   {{ 'name' | translate | titlecase }}
-                  <ng-container *ngIf="pendingRequestsSorting !== 'name-asc'">&darr;</ng-container>
-                  <ng-container *ngIf="pendingRequestsSorting !== 'name-desc'">&uarr;</ng-container>
+                  <ng-container *ngIf="pendingReqsSorting !== 'name-asc'">&darr;</ng-container>
+                  <ng-container *ngIf="pendingReqsSorting !== 'name-desc'">&uarr;</ng-container>
                 </a>
               </th>
               <th class="small font-weight-bold">
-                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingRequestsSorting === 'first-choice-asc' ? 'first-choice-desc' : 'first-choice-asc')">
+                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingReqsSorting === 'first-choice-asc' ? 'first-choice-desc' : 'first-choice-asc')">
                   {{ 'first_choice' | translate | titlecase }}
-                  <ng-container *ngIf="pendingRequestsSorting !== 'first-choice-asc'">&darr;</ng-container>
-                  <ng-container *ngIf="pendingRequestsSorting !== 'first-choice-desc'">&uarr;</ng-container>
+                  <ng-container *ngIf="pendingReqsSorting !== 'first-choice-asc'">&darr;</ng-container>
+                  <ng-container *ngIf="pendingReqsSorting !== 'first-choice-desc'">&uarr;</ng-container>
                 </a>
               </th>
               <th class="small font-weight-bold">
-                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingRequestsSorting === 'second-choice-asc' ? 'second-choice-desc' : 'second-choice-asc')">
+                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingReqsSorting === 'second-choice-asc' ? 'second-choice-desc' : 'second-choice-asc')">
                   {{ 'second_choice' | translate | titlecase }}
-                  <ng-container *ngIf="pendingRequestsSorting !== 'second-choice-asc'">&darr;</ng-container>
-                  <ng-container *ngIf="pendingRequestsSorting !== 'second-choice-desc'">&uarr;</ng-container>
+                  <ng-container *ngIf="pendingReqsSorting !== 'second-choice-asc'">&darr;</ng-container>
+                  <ng-container *ngIf="pendingReqsSorting !== 'second-choice-desc'">&uarr;</ng-container>
                 </a>
               </th>
               <th class="small font-weight-bold">{{ 'action' | translate | titlecase }}</th>
@@ -91,8 +94,12 @@
                 <td
                   class="border-bottom-0">{{ req.person_accreditation.person.first_name }} {{ req.person_accreditation.person.last_name }}
                 </td>
-                <td class="border-bottom-0">{{ req.first_choice_zone.name }}</td>
-                <td class="border-bottom-0">{{ req.second_choice_zone?.name ?? '-' }}</td>
+                <td class="border-bottom-0">
+                  <span [class.alert-warning]="req.first_choice_zone?.id === pendingReqZone?.id">{{ req.first_choice_zone.name }}</span>
+                </td>
+                <td class="border-bottom-0">
+                  <span [class.alert-warning]="req.second_choice_zone !== null && req.second_choice_zone?.id === pendingReqZone?.id">{{ req.second_choice_zone?.name ?? '-' }}</span>
+                </td>
                 <td rowspan="2">
                   <ng-select
                     name="zone"
@@ -134,12 +141,12 @@
   <div class="col-md-5">
     <div class="card">
       <div class="card-header">
-        <h5 class="card-title">{{ 'allocated' | translate | titlecase }}</h5>
+        <h5 class="card-title">{{ 'allocated_requests' | translate | titlecase }}</h5>
       </div>
       <div class="card-body">
         <p class="text-muted small">
-          {{ 'total_zones' | translate }}: {{ zoneReqFormZones?.length }} &nbsp;|&nbsp;
-          {{ 'total_allocated' | translate }}: {{ allocations?.length }} &nbsp;|&nbsp;
+          {{ 'total_zones' | translate }}: {{ zoneReqFormZones?.length ?? 0 }} &nbsp;|&nbsp;
+          {{ 'total_allocated' | translate }}: {{ allocations?.length ?? 0 }} &nbsp;|&nbsp;
 
           Wristband distributed: <span class="badge badge-success">Y</span>&nbsp;<span class="badge badge-secondary">N</span>
         </p>
@@ -180,6 +187,7 @@
                   </li>
                 </ul>
               </td>
+
             </tbody>
           </table>
         </div>

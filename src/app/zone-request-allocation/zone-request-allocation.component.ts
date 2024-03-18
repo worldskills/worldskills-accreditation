@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WsComponent} from "@worldskills/worldskills-angular-lib";
+import {GenericUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Zone} from "../../types/zone";
 import {AppService} from "../../services/app/app.service";
@@ -26,11 +26,13 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
   currentForm: ZoneRequestForm;
 
   // pending requests
-  pendingReqOrgNames: string[] = [];
-  pendingReqZones: Zone[] = [];
   pendingRequests: ZoneRequest[];
+  pendingReqsSorting: 'org-asc' | 'org-desc' | 'name-asc' | 'name-desc' | 'first-choice-asc' | 'first-choice-desc' | 'second-choice-asc' | 'second-choice-desc';
+  pendingReqOrgNames: string[] = [];
+  pendingReqOrgName: string;
+  pendingReqZones: Zone[] = [];
+  pendingReqZone: Zone;
   allocatableZones: Zone[];
-  pendingRequestsSorting: 'org-asc' | 'org-desc' | 'name-asc' | 'name-desc' | 'first-choice-asc' | 'first-choice-desc' | 'second-choice-asc' | 'second-choice-desc';
 
   // allocations
   zoneReqFormZones: ZoneRequestFormZone[];
@@ -59,6 +61,7 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
           // load ZoneRequestForm
           this.zoneReqFormService.getZoneReqForm(this.selectedEvent.id, zoneRequestFormHash).subscribe(zoneReqForm => {
             this.currentForm = zoneReqForm;
+            this.zoneReqFormZones = this.currentForm.zones;
             this.allocatableZones = this.currentForm.zones.filter(zone => zone.available_for_allocation).map(z => z.zone);
 
             // load ZoneRequest for current form
@@ -68,11 +71,21 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
       });
   }
 
-  private loadRequests() {
+  public loadRequests() {
     this.subscribe(
       this.zoneReqService.getRequests(this.selectedEvent.id, this.currentForm.id).subscribe(res => {
-        // load pending requests from API and sort them
+        // load pending requests from API
         this.pendingRequests = res.zone_requests;
+
+        // filter pending requests by Zone and/or Org name
+        if (!GenericUtil.isNullOrUndefined(this.pendingReqOrgName)) {
+          this.pendingRequests = this.pendingRequests.filter(req => req.person_accreditation?.organization_name === this.pendingReqOrgName);
+        }
+        if (!GenericUtil.isNullOrUndefined(this.pendingReqZone)) {
+          this.pendingRequests = this.pendingRequests.filter(req => req.first_choice_zone.id === this.pendingReqZone.id || req.second_choice_zone?.id === this.pendingReqZone.id);
+        }
+
+        // sort pending requests by organization name (default)
         this.sortPendingRequests('org-asc');
 
         // get unique org names from pending requests for filters
@@ -88,7 +101,7 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
   }
 
   public sortPendingRequests(sorting: string): ZoneRequest[] {
-    this.pendingRequestsSorting = sorting as any;
+    this.pendingReqsSorting = sorting as any;
 
     return this.pendingRequests.sort((a, b) => {
       try {
@@ -119,7 +132,7 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
   }
 
   getAllocationsForZone(zone: Zone): ZoneRequestAllocation[] {
-    return this.allocations.filter(allocation => allocation.allocated_zone.id === zone.id);
+    return this.allocations?.filter(allocation => allocation.allocated_zone.id === zone.id) ?? [];
   }
 
   allocate(zoneRequest: ZoneRequest, zone: Zone) {
