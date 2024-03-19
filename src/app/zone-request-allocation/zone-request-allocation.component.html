@@ -4,139 +4,12 @@
 
 <div class="row">
   <div class="col-md-7">
-    <div class="card w-100">
-      <div class="card-header">
-        <h5 class="card-title">{{ 'pending_requests' | translate | titlecase }}</h5>
-      </div>
-      <div class="card-body">
-        <div class="row mb-3">
-          <div class="col-md-5">
-            <label class="small mb-0 font-weight-bold">{{ 'choose_zone' | translate }}</label>
-            <ng-select
-              name="zone"
-              [items]="pendingReqZones"
-              bindLabel="name"
-              placeholder="All Zones"
-              [(ngModel)]="pendingReqZone"
-              (ngModelChange)="loadRequests()"
-            >
-              <ng-template ng-label-tmp let-item="item">
-                <div class="d-inline-block" style="width: 15px; height: 15px; "
-                     [style.background-color]="item.color"></div>
-                <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
-              </ng-template>
-              <ng-template ng-option-tmp let-item="item" let-index="index">
-                <div class="d-inline-block" style="width: 15px; height: 15px; "
-                     [style.background-color]="item.color"></div>
-                <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
-              </ng-template>
-            </ng-select>
-          </div>
-          <div class="col-md-5">
-            <label class="small mb-0 font-weight-bold">{{ 'choose_organization' | translate }}</label>
-            <ng-select
-              name="organization"
-              [items]="pendingReqOrgNames"
-              [(ngModel)]="pendingReqOrgName"
-              (ngModelChange)="loadRequests()"
-              placeholder="All Organizations"></ng-select>
-          </div>
-        </div>
-
-        <hr class="my-2">
-        <p class="text-muted small">{{ 'total_requests' | translate }}: {{ pendingRequests?.length }}</p>
-        <div>
-          <table class="table table-sm">
-            <colgroup>
-              <col style="width: 20%">
-              <col style="width: 15%">
-              <col style="width: 20%">
-              <col style="width: 20%">
-              <col style="width: 25%">
-            </colgroup>
-            <thead>
-            <tr>
-              <th class="small font-weight-bold">
-                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingReqsSorting === 'org-asc' ? 'org-desc' : 'org-asc')">
-                  {{'organization' | translate}}&nbsp;
-                  <ng-container *ngIf="pendingReqsSorting !== 'org-asc'">&darr;</ng-container>
-                  <ng-container *ngIf="pendingReqsSorting !== 'org-desc'">&uarr;</ng-container>
-                </a>
-              </th>
-              <th class="small font-weight-bold">
-                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingReqsSorting === 'name-asc' ? 'name-desc' : 'name-asc')">
-                  {{ 'name' | translate | titlecase }}
-                  <ng-container *ngIf="pendingReqsSorting !== 'name-asc'">&darr;</ng-container>
-                  <ng-container *ngIf="pendingReqsSorting !== 'name-desc'">&uarr;</ng-container>
-                </a>
-              </th>
-              <th class="small font-weight-bold">
-                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingReqsSorting === 'first-choice-asc' ? 'first-choice-desc' : 'first-choice-asc')">
-                  {{ 'first_choice' | translate | titlecase }}
-                  <ng-container *ngIf="pendingReqsSorting !== 'first-choice-asc'">&darr;</ng-container>
-                  <ng-container *ngIf="pendingReqsSorting !== 'first-choice-desc'">&uarr;</ng-container>
-                </a>
-              </th>
-              <th class="small font-weight-bold">
-                <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingReqsSorting === 'second-choice-asc' ? 'second-choice-desc' : 'second-choice-asc')">
-                  {{ 'second_choice' | translate | titlecase }}
-                  <ng-container *ngIf="pendingReqsSorting !== 'second-choice-asc'">&darr;</ng-container>
-                  <ng-container *ngIf="pendingReqsSorting !== 'second-choice-desc'">&uarr;</ng-container>
-                </a>
-              </th>
-              <th class="small font-weight-bold">{{ 'action' | translate | titlecase }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <ng-container *ngFor="let req of pendingRequests">
-              <tr>
-                <td class="border-bottom-0">{{ req.person_accreditation?.organization_name ?? '-' }}</td>
-                <td
-                  class="border-bottom-0">{{ req.person_accreditation.person.first_name }} {{ req.person_accreditation.person.last_name }}
-                </td>
-                <td class="border-bottom-0">
-                  <span [class.alert-warning]="req.first_choice_zone?.id === pendingReqZone?.id">{{ req.first_choice_zone.name }}</span>
-                </td>
-                <td class="border-bottom-0">
-                  <span [class.alert-warning]="req.second_choice_zone !== null && req.second_choice_zone?.id === pendingReqZone?.id">{{ req.second_choice_zone?.name ?? '-' }}</span>
-                </td>
-                <td rowspan="2">
-                  <ng-select
-                    name="zone"
-                    [items]="allocatableZones"
-                    bindLabel="name"
-                    placeholder="Allocate to zone"
-                    #allocateZoneDropdown
-                  >
-                    <ng-template ng-label-tmp let-item="item">
-                      <div class="d-inline-block" style="width: 15px; height: 15px; "
-                           [style.background-color]="item.color"></div>
-                      <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
-                    </ng-template>
-                    <ng-template ng-option-tmp let-item="item" let-index="index">
-                      <div class="d-inline-block" style="width: 15px; height: 15px; "
-                           [style.background-color]="item.color"></div>
-                      <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
-                    </ng-template>
-                  </ng-select>
-                  <button class="btn btn-sm btn-primary mt-2 float-right" (click)="allocate(req, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>
-                </td>
-              </tr>
-              <tr>
-                <td class="border-top-0"></td>
-                <td colspan="3" class="border-top-0 small">
-                  <p class="text-muted">
-                    <b>Objective</b>:
-                    {{ req.objective }}
-                  </p>
-                </td>
-              </tr>
-            </ng-container>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    <app-zone-request-allocation-pending *ngIf="!!selectedEvent && !!currentForm"
+                                         [selectedEvent]="selectedEvent"
+                                         [zones]="zones"
+                                         [currentForm]="currentForm"
+                                         [allocatableZones]="allocatableZones">
+    </app-zone-request-allocation-pending>
   </div>
   <div class="col-md-5">
     <div class="card">
@@ -148,7 +21,8 @@
           {{ 'total_zones' | translate }}: {{ zoneReqFormZones?.length ?? 0 }} &nbsp;|&nbsp;
           {{ 'total_allocated' | translate }}: {{ allocations?.length ?? 0 }} &nbsp;|&nbsp;
 
-          Wristband distributed: <span class="badge badge-success">Y</span>&nbsp;<span class="badge badge-secondary">N</span>
+          Wristband distributed: <span class="badge badge-success">Y</span>&nbsp;<span
+          class="badge badge-secondary">N</span>
         </p>
         <div class="table-responsive-md">
           <table class="table table-sm">
