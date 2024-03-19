@@ -1,0 +1,55 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">{{ 'allocated_requests' | translate | titlecase }}</h5>
+  </div>
+  <div class="card-body">
+    <p class="text-muted small">
+      {{ 'total_zones' | translate }}: {{ allocatableZones?.length ?? 0 }} &nbsp;|&nbsp;
+      {{ 'total_allocated' | translate }}: {{ allocations?.length ?? 0 }} &nbsp;|&nbsp;
+
+      Wristband distributed: <span class="badge badge-success">Y: 1</span>&nbsp;<span
+      class="badge badge-secondary">N : 2</span>
+    </p>
+    <div class="table-responsive-md">
+      <table class="table table-sm">
+        <colgroup>
+          <col style="width: 30%">
+          <col style="width: 30%">
+          <col style="width: 40%">
+        </colgroup>
+        <thead>
+        <tr>
+          <th>{{ 'zone' | translate | titlecase }}</th>
+          <th>{{ 'quota' | translate | titlecase }}</th>
+          <th>{{ 'organizations' | translate | titlecase }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let zoneReq of currentForm.zones">
+          <td>
+                <span class="badge mr-1 small" [style.background-color]="zoneReq.zone.color"
+                      [ngbTooltip]="zoneReq.zone.name"
+                      [style.color]="zoneReq.zone.text_color">{{ zoneReq.zone.code }}</span>
+            <br>
+            {{ zoneReq.zone.name }}
+          </td>
+          <td>
+                <span class="badge badge-light small">
+                  {{ getAllocationsForZone(zoneReq.zone)?.length }} out of {{ zoneReq.quota }} allocated
+                </span>
+          </td>
+          <td>
+            <ul class="list-unstyled">
+              <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone)">
+                    <span
+                      class="badge badge-pill small"
+                      [ngClass]="allocation.wristband_distributed_at !== null ? 'badge-success' : 'badge-secondary'">{{ allocation.zone_request.person_accreditation.organization_name }}</span>
+              </li>
+            </ul>
+          </td>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

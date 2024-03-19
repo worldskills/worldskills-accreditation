@@ -12,93 +12,11 @@
     </app-zone-request-allocation-pending>
   </div>
   <div class="col-md-5">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="card-title">{{ 'allocated_requests' | translate | titlecase }}</h5>
-      </div>
-      <div class="card-body">
-        <p class="text-muted small">
-          {{ 'total_zones' | translate }}: {{ zoneReqFormZones?.length ?? 0 }} &nbsp;|&nbsp;
-          {{ 'total_allocated' | translate }}: {{ allocations?.length ?? 0 }} &nbsp;|&nbsp;
-
-          Wristband distributed: <span class="badge badge-success">Y</span>&nbsp;<span
-          class="badge badge-secondary">N</span>
-        </p>
-        <div class="table-responsive-md">
-          <table class="table table-sm">
-            <colgroup>
-              <col style="width: 30%">
-              <col style="width: 30%">
-              <col style="width: 40%">
-            </colgroup>
-            <thead>
-            <tr>
-              <th>{{ 'zone' | translate | titlecase }}</th>
-              <th>{{ 'quota' | translate | titlecase }}</th>
-              <th>{{ 'organizations' | translate | titlecase }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let zoneReq of zoneReqFormZones">
-              <td>
-                <span class="badge mr-1 small" [style.background-color]="zoneReq.zone.color"
-                      [ngbTooltip]="zoneReq.zone.name"
-                      [style.color]="zoneReq.zone.text_color">{{ zoneReq.zone.code }}</span>
-                <br>
-                {{ zoneReq.zone.name }}
-              </td>
-              <td>
-                <span class="badge badge-light small">
-                  {{ getAllocationsForZone(zoneReq.zone)?.length }} out of {{ zoneReq.quota }} allocated
-                </span>
-              </td>
-              <td>
-                <ul class="list-unstyled">
-                  <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone)">
-                    <span
-                      class="badge badge-pill small"
-                      [ngClass]="allocation.wristband_distributed_at !== null ? 'badge-success' : 'badge-secondary'">{{ allocation.zone_request.person_accreditation.organization_name }}</span>
-                  </li>
-                </ul>
-              </td>
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="false" class="card mt-4">
-      <div class="card-header">
-        <h5 class="card-title">{{ 'zones' | translate | titlecase }}</h5>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive-md">
-          <table class="table">
-            <colgroup>
-              <col style="width: 50%">
-              <col style="width: 50%">
-            </colgroup>
-            <thead>
-            <tr>
-              <th>{{ 'name' | translate | titlecase }}</th>
-              <th>{{ 'quota' | translate | titlecase }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let zone of zones">
-              <td>
-                <span class="badge mr-1 small" [style.background-color]="zone.color"
-                      [ngbTooltip]="zone.name"
-                      [style.color]="zone.text_color">{{ zone.code }}</span>
-                {{ zone.name }}
-              </td>
-              <td>X out of Y allocated</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    <app-zone-request-allocation-allocated *ngIf="!!selectedEvent && !!currentForm"
+                                           [selectedEvent]="selectedEvent"
+                                           [zones]="zones"
+                                           [currentForm]="currentForm"
+                                           [allocatableZones]="allocatableZones">
+    </app-zone-request-allocation-allocated>
   </div>
 </div>

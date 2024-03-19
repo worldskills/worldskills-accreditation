@@ -55,6 +55,9 @@ import {ZoneRequestFormFormComponent} from './zone-request-form-form/zone-reques
 import {
   ZoneRequestAllocationPendingComponent
 } from './zone-request-allocation-pending/zone-request-allocation-pending.component';
+import {
+  ZoneRequestAllocationAllocatedComponent
+} from './zone-request-allocation-allocated/zone-request-allocation-allocated.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -98,7 +101,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ZoneRequestedComponent,
     ZoneRequestFormComponent,
     ZoneRequestFormFormComponent,
-    ZoneRequestAllocationPendingComponent
+    ZoneRequestAllocationPendingComponent,
+    ZoneRequestAllocationAllocatedComponent
   ],
   imports: [
     BrowserModule,

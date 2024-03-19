@@ -1,14 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {GenericUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
+import {WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Zone} from "../../types/zone";
 import {AppService} from "../../services/app/app.service";
 import {ZoneService} from "../../services/zone/zone.service";
 import {ZoneRequestForm} from "../../types/zone-request/zone-request-form";
-import {ZoneRequestService} from "../../services/zone-request/zone-request.service";
-import {ZoneRequest} from "../../types/zone-request/zone-request";
-import {ZoneRequestFormZone} from "../../types/zone-request/zone-request-form-zone";
-import {ZoneRequestAllocation} from "../../types/zone-request/ZoneRequestAllocation";
 import {combineLatest} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {ZoneRequestFormService} from "../../services/zone-request-form/zone-request-form.service";
@@ -21,15 +17,10 @@ import {ZoneRequestFormService} from "../../services/zone-request-form/zone-requ
 export class ZoneRequestAllocationComponent extends WsComponent implements OnInit {
 
   selectedEvent: Event;
+  currentForm: ZoneRequestForm;
   loading = false;
   zones: Zone[];
-  currentForm: ZoneRequestForm;
-
   allocatableZones: Zone[];
-
-  // allocations
-  zoneReqFormZones: ZoneRequestFormZone[]; // TODO: revisit, do we need this?
-  allocations: ZoneRequestAllocation[];
 
   constructor(private appService: AppService,
               private zoneService: ZoneService,
@@ -54,15 +45,9 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
           // load ZoneRequestForm
           this.zoneReqFormService.getZoneReqForm(this.selectedEvent.id, zoneRequestFormHash).subscribe(zoneReqForm => {
             this.currentForm = zoneReqForm;
-            this.zoneReqFormZones = this.currentForm.zones;
             this.allocatableZones = this.currentForm.zones.filter(zone => zone.available_for_allocation).map(z => z.zone);
           }),
         )
       });
-  }
-
-
-  getAllocationsForZone(zone: Zone): ZoneRequestAllocation[] {
-    return this.allocations?.filter(allocation => allocation.allocated_zone.id === zone.id) ?? [];
   }
 }
