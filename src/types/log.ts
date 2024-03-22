@@ -5,6 +5,7 @@ export interface Log {
   code: number;
   message: string;
   occured: Date;
+  data: object;
   person_id: number;
   person?: Person;
 }

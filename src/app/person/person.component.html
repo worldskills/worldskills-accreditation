@@ -297,7 +297,12 @@
       <div class="card-body">
         <div class="table-responsive-md">
           <div *ngFor="let log of logs" class="border-bottom mb-3">
-            <p class="mb-0">{{ log.message | translate }}</p>
+            <details>
+              <summary>{{ log.message | translate }}</summary>
+              <div class="p-2">
+                <div class="small" *ngFor="let data of log.data | keyvalue">{{ data.key }}: {{ data.value }}</div>
+              </div>
+            </details>
             <p class="text-muted small">{{ log.occured | date:'dd.MM.yyyy HH:mm' }} - {{ log.person?.first_name }} {{ log.person?.last_name }}</p>
           </div>
         </div>
