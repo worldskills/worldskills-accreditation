@@ -113,12 +113,18 @@ export class PersonComponent extends WsComponent implements OnInit {
               const personIds = new Set<number>();
               this.logs.forEach(log => {
                 personIds.add(log.person_id);
+                if (log.puppeteer_id) {
+                  personIds.add(log.puppeteer_id);
+                }
               });
               personIds.forEach(personId => {
                 this.peopleService.getPerson(personId).subscribe(person => {
                   this.logs.forEach(log => {
                     if (log.person_id === person.id) {
                       log.person = person;
+                    }
+                    if (log.puppeteer_id === person.id) {
+                      log.puppeteer = person;
                     }
                   });
                 });

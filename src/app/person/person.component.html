@@ -303,7 +303,7 @@
                 <div class="small" *ngFor="let data of log.data | keyvalue">{{ data.key }}: {{ data.value }}</div>
               </div>
             </details>
-            <p class="text-muted small">{{ log.occured | date:'dd.MM.yyyy HH:mm' }} - {{ log.person?.first_name }} {{ log.person?.last_name }}</p>
+            <p class="text-muted small">{{ log.occured | date:'dd.MM.yyyy HH:mm' }} - {{ log.person?.first_name }} {{ log.person?.last_name }} <span *ngIf="log.puppeteer">(Puppeteer: {{ log.puppeteer.first_name }} {{ log.puppeteer.last_name }})</span></p>
           </div>
         </div>
       </div>
