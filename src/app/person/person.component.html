@@ -298,7 +298,7 @@
         <div class="table-responsive-md">
           <div *ngFor="let log of logs" class="border-bottom mb-3">
             <p class="mb-0">{{ log.message | translate }}</p>
-            <p class="text-muted small">{{ log.occured | date:'dd.MM.yyyy HH:mm' }}</p>
+            <p class="text-muted small">{{ log.occured | date:'dd.MM.yyyy HH:mm' }} - {{ log.person?.first_name }} {{ log.person?.last_name }}</p>
           </div>
         </div>
       </div>

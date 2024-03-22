@@ -19,6 +19,7 @@ import {HttpEventType} from "@angular/common/http";
 import { LogsService } from '../../services/logs/logs.service';
 import { Log } from '../../types/log';
 import { appConfig } from '../app.config';
+import { PeopleService } from 'src/services/people/people.service';
 
 @Component({
   selector: 'app-person',
@@ -58,6 +59,7 @@ export class PersonComponent extends WsComponent implements OnInit {
               private delegateTypeService: DelegateTypeService,
               private zoneService: ZoneService,
               private logsService: LogsService,
+              private peopleService: PeopleService,
               private location: Location,
               private authService: NgAuthService,
               private toastService: ToastService,
@@ -104,7 +106,24 @@ export class PersonComponent extends WsComponent implements OnInit {
           };
           this.subscribe(
             this.logsService.getLogs(params).subscribe(logList => {
+
               this.logs = logList.logs.reverse();
+
+              // loop through logs, collect unique person ids and fetch person data
+              const personIds = new Set<number>();
+              this.logs.forEach(log => {
+                personIds.add(log.person_id);
+              });
+              personIds.forEach(personId => {
+                this.peopleService.getPerson(personId).subscribe(person => {
+                  this.logs.forEach(log => {
+                    if (log.person_id === person.id) {
+                      log.person = person;
+                    }
+                  });
+                });
+              });
+
             })
           );
         }
