@@ -26,6 +26,9 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
 
   ngOnInit() {
     this.loadAllocations();
+
+    // for other components to refresh the list
+    this.zoneReqAllocService.refresh.subscribe(() => this.loadAllocations());
   }
 
   private loadAllocations() {

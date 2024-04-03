@@ -5,6 +5,8 @@ import {Zone} from "../../types/zone";
 import {ZoneRequestForm} from "../../types/zone-request/zone-request-form";
 import {ZoneRequest} from "../../types/zone-request/zone-request";
 import {ZoneRequestService} from "../../services/zone-request/zone-request.service";
+import {ZoneRequestAllocationService} from "../../services/zone-request-allocation/zone-request-allocation.service";
+import {ToastService} from "angular-toastify";
 
 @Component({
   selector: 'app-zone-request-allocation-pending',
@@ -25,7 +27,9 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
   pendingReqZones: Zone[] = [];
   pendingReqZone: Zone;
 
-  constructor(private zoneReqService: ZoneRequestService) {
+  constructor(private zoneReqService: ZoneRequestService,
+              private zoneReqAllocService: ZoneRequestAllocationService,
+              private toastService: ToastService) {
     super();
   }
 
@@ -94,15 +98,14 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
   }
 
   allocate(zoneRequest: ZoneRequest, zone: Zone) {
-    // const allocation: ZoneRequestAllocation = {
-    //   id: this.allocations.length + 1,
-    //   zone_request: zoneRequest,
-    //   allocated_zone: zone,
-    //   allocated_at: new Date().toISOString(),
-    //   allocated_by_person_id: 1,
-    //   notification_sent_at: null,
-    //   wristband_distributed_at: null
-    // };
-    // this.allocations.push(allocation);
+    this.zoneReqAllocService.allocateRequestToZone(this.selectedEvent.id, zoneRequest, zone.id).subscribe(res => {
+      this.toastService.success('Request allocated to a Zone successfully!');
+      // refresh the pending requests list
+      this.loadRequests();
+      // refresh the allocated requests list
+      this.zoneReqAllocService.refresh.next(true);
+    }, err => {
+      this.toastService.error('Failed to allocate request to a Zone!');
+    });
   }
 }
