@@ -40,6 +40,18 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   }
 
   getAllocationsForZone(zone: Zone): ZoneRequestAllocation[] {
-    return this.allocations?.filter(allocation => allocation.allocated_zone.id === zone.id) ?? [];
+    const allocations = this.allocations?.filter(allocation => allocation.allocated_zone.id === zone.id);
+    if (allocations) {
+      return allocations.sort((a, b) => a.zone_request.person_accreditation.organization_name.localeCompare(b.zone_request.person_accreditation.organization_name));
+    }
+    return [];
+  }
+
+  getWristbandDistributedCount(): number {
+    return this.allocations?.filter(allocation => allocation.wristband_distributed_at !== null)?.length ?? 0;
+  }
+
+  getEmailNotificationSentCount(): number {
+    return this.allocations?.filter(allocation => allocation.notification_sent_at !== null)?.length ?? 0;
   }
 }

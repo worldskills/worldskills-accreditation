@@ -3,19 +3,26 @@
     <h5 class="card-title">{{ 'allocated_requests' | translate | titlecase }}</h5>
   </div>
   <div class="card-body">
-    <p class="text-muted small">
-      {{ 'total_zones' | translate }}: {{ allocatableZones?.length ?? 0 }} &nbsp;|&nbsp;
-      {{ 'total_allocated' | translate }}: {{ allocations?.length ?? 0 }} &nbsp;|&nbsp;
-
-      Wristband distributed: <span class="badge badge-success">Y: x</span>&nbsp;<span
-      class="badge badge-secondary">N : x</span>
-    </p>
+    <div class="text-muted small">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-2">{{ 'total_zones' | translate }}: {{ allocatableZones?.length ?? 0 }}</p>
+          <p class="mb-2">{{ 'total_allocated' | translate }}: {{ allocations?.length ?? 0 }}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="mb-2">{{ 'wristband_distributed' | translate }}: {{ getWristbandDistributedCount() }}
+            / {{ allocations?.length ?? 0 }}</p>
+          <p class="mb-2">{{ 'email_confirmation_sent' | translate }}: {{ getEmailNotificationSentCount() }}
+            / {{ allocations?.length ?? 0 }}</p>
+        </div>
+      </div>
+    </div>
     <div class="table-responsive-md">
       <table class="table table-sm">
         <colgroup>
-          <col style="width: 30%">
-          <col style="width: 30%">
-          <col style="width: 40%">
+          <col style="width: 20%">
+          <col style="width: 10%">
+          <col style="width: 70%">
         </colgroup>
         <thead>
         <tr>
@@ -26,24 +33,34 @@
         </thead>
         <tbody>
         <tr *ngFor="let zoneReq of currentForm.zones">
-          <td>
+          <td class="small">
                 <span class="badge mr-1 small" [style.background-color]="zoneReq.zone.color"
                       [ngbTooltip]="zoneReq.zone.name"
                       [style.color]="zoneReq.zone.text_color">{{ zoneReq.zone.code }}</span>
             <br>
             {{ zoneReq.zone.name }}
+
+            <br>
+            <div class="btn btn-sm btn-link p-0 m-0">Allocate</div>
           </td>
           <td>
-                <span class="badge badge-light small">
-                  {{ getAllocationsForZone(zoneReq.zone)?.length }} out of {{ zoneReq.quota }} allocated
-                </span>
+            <span class="badge badge-light small">{{ getAllocationsForZone(zoneReq.zone)?.length }} / {{ zoneReq.quota }}</span>
           </td>
           <td>
             <ul class="list-unstyled">
               <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone)">
-                    <span
-                      class="badge badge-pill small"
-                      [ngClass]="allocation.wristband_distributed_at !== null ? 'badge-success' : 'badge-secondary'">{{ allocation.zone_request.person_accreditation.organization_name }}</span>
+                <div>
+                  <span class="fa fa-inbox mr-1"
+                        [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"
+                        [ngbTooltip]="allocation.notification_sent_at !== null ? ('Email notification was sent at : ' + allocation.notification_sent_at) : 'Email notification is not sent yet' "></span>
+                  <span class="fa fa-hand-grab-o mr-1"
+                        [ngClass]="allocation.wristband_distributed_at !== null ? 'text-success' : ''"
+                        [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet'"></span>
+                  <span class="badge badge-pill badge-light small">
+                    <b>{{ allocation.zone_request.person_accreditation.organization_name }}</b>,
+                    {{ allocation.zone_request.person_accreditation.person.first_name + ' ' + allocation.zone_request.person_accreditation.person.last_name }}
+                </span>
+                </div>
               </li>
             </ul>
           </td>
