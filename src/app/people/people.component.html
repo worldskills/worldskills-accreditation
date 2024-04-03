@@ -6,6 +6,9 @@
           <thead>
           <tr>
             <th class="border-top-0">
+              <input type="checkbox" [(ngModel)]="allChecked" (change)="checkAll()">
+            </th>
+            <th class="border-top-0">
               <a (click)="$event.preventDefault(); sort('firstname')">{{'first_name' | translate}}</a>
             </th>
             <th class="border-top-0">
@@ -14,11 +17,13 @@
             <th class="border-top-0">{{'delegate_type' | translate}}</th>
             <th class="border-top-0">{{'zones' | translate}}</th>
             <th class="border-top-0" *ngIf="doesResultHasMember()">{{'member' | translate}}</th>
-            <th class="border-top-0" *ngIf="doesResultHasSkill()">{{'skill' | translate}}</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let personAcr of result.people">
+            <td>
+              <input type="checkbox" [(ngModel)]="personAcr.checked">
+            </td>
             <td>
               <a routerLink="{{personAcr.id}}">
                 <ng-container *ngIf="personAcr.first_name">{{personAcr.first_name}}</ng-container>
@@ -42,10 +47,9 @@
               </ng-container>
             </td>
             <td><span *ngIf="personAcr.member && doesResultHasMember()">{{personAcr.member.name.text}}</span></td>
-            <td><span *ngIf="personAcr.skill && doesResultHasSkill()">{{personAcr.skill.skill_number}} {{personAcr.skill.name.text}}</span></td>
           </tr>
           <tr *ngIf="result.total_count === 0">
-            <td colspan="6">{{'no_people_found' | translate}}</td>
+            <td colspan="5">{{'no_people_found' | translate}}</td>
           </tr>
           </tbody>
         </table>
@@ -53,31 +57,41 @@
 
       <div class="row">
         <div class="col-lg-9">
-          <ngb-pagination
-            class="component-pager"
-            [collectionSize]="result.total_count"
-            [page]="(fetchParams.offset / fetchParams.limit) + 1"
-            [pageSize]="fetchParams.limit"
-            [maxSize]="10"
-            [boundaryLinks]="true"
-            (pageChange)="fetch($event)">
-          </ngb-pagination>
+          <div class="dropdown">
+            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+              Actions
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" (click)="printSelected()" href="#" translate [class.disabled]="!hasSelected()">print_selected</a>
+            </div>
+          </div>
         </div>
         <div class="col-lg-3">
-          <div class="dropdown pt-4 pull-right">
+          <div class="dropdown pull-right">
             <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">
               Per page
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" (click)="changeLimit(10)">10</a>
-              <a class="dropdown-item" (click)="changeLimit(100)">100</a>
-              <a class="dropdown-item" (click)="changeLimit(1000)">1000</a>
+              <a class="dropdown-item" (click)="changeLimit(10)" href="#">10</a>
+              <a class="dropdown-item" (click)="changeLimit(100)" href="#">100</a>
+              <a class="dropdown-item" (click)="changeLimit(1000)" href="#">1000</a>
             </div>
           </div>
         </div>
       </div>
 
+      <ngb-pagination
+        class="component-pager"
+        [collectionSize]="result.total_count"
+        [page]="(fetchParams.offset / fetchParams.limit) + 1"
+        [pageSize]="fetchParams.limit"
+        [maxSize]="10"
+        [boundaryLinks]="true"
+        (pageChange)="fetch($event)">
+      </ngb-pagination>
+
       <p><span class="text-muted">{{'total_results' | translate}}: {{result.total_count}} {{'people' | translate}}</span></p>
+
     </ng-container>
 
     <ng-template #loadingAnimation>

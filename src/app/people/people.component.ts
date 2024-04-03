@@ -18,6 +18,7 @@ import {environment} from "../../environments/environment";
 })
 export class PeopleComponent extends WsComponent implements OnInit {
 
+  allChecked = false;
   selectedEvent: Event;
   fetchParams: PersonAccreditationSummaryReqParams;
   result: PersonAccreditationSummaryContainer;
@@ -97,10 +98,29 @@ export class PeopleComponent extends WsComponent implements OnInit {
       offset: 0,
     };
     this.updateSearchQueryParams();
+    return false;
   }
 
-  doesResultHasSkill(): boolean {
-    return this.result.people.filter(p => !GenericUtil.isNullOrUndefined(p.skill)).length > 0;
+  checkAll() {
+    this.result.people.forEach(p => p.checked = this.allChecked);
+  }
+
+  printSelected() {
+
+    const ids = this.result.people.filter(p => p.checked).map(p => p.id);
+
+    const queryParams: Params = {};
+    queryParams['id'] = ids;
+
+    const urlTree = this.router.createUrlTree(['../print'], {relativeTo: this.route, queryParams});
+    const url = this.router.serializeUrl(urlTree);
+    window.open(url, '_blank');
+
+    return false;
+  }
+
+  hasSelected(): boolean {
+    return this.result.people.filter(p => p.checked).length > 0;
   }
 
   doesResultHasMember(): boolean {

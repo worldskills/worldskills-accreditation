@@ -211,7 +211,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   }
 
   printPreview(): void {
-    const urlTree = this.router.createUrlTree(['../../print/' + this.personAcr.id], {relativeTo: this.route});
+    const urlTree = this.router.createUrlTree(['../../print'], {relativeTo: this.route, queryParams: {id: this.personAcr.id}});
     const url = this.router.serializeUrl(urlTree);
     if (this.personAcr.printed) {
       if (confirm('This accreditation badge has already been printed. If the badge has been lost, it should be marked as invalid before reprinting ("Invalidate badge"). Proceed with printing without invalidating the badge?')) {

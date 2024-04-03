@@ -11,6 +11,7 @@ import {EventService} from "../../services/event/event.service";
 import {ActivatedRoute} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
+import { combineLatest } from 'rxjs';
 
 
 @Component({
@@ -46,29 +47,32 @@ export class PrintComponent extends WsComponent implements OnInit {
     this.fetchParams = this.personAcrService.initialiseFetchParams();
 
     // fetch event
-    this.route.params.subscribe(({eventId, personAcrId}) => {
+    this.route.params.subscribe(({eventId}) => {
       this.subscribe(
         this.eventService.get(eventId).subscribe(event => {
           this.selectedEvent = event;
           this.appService.selectedEvent.next(this.selectedEvent);
 
-          if (!GenericUtil.isNullOrUndefined(personAcrId)) {
-            this.loadPerson(personAcrId);
-          } else {
-            // fetch people from query params
-            this.route.queryParams.subscribe(params => {
-              if ('adhocPrinting' in params && !GenericUtil.isNullOrUndefined(params['adhocPrinting'])) {
-                this.adhocPrinting = params['adhocPrinting'] === 'true';
-                this.showAdhocPrintingForm = this.adhocPrinting;
-              } else {
-                this.personAcrService.loadFilterFromQueryParams(params, this.fetchParams);
-                if ('twoBadgesPerPage' in params && !GenericUtil.isNullOrUndefined(params['twoBadgesPerPage'])) {
-                  this.twoBadgesPerPage = params['twoBadgesPerPage'] === 'true';
+          this.route.queryParamMap.subscribe(params => {
+            const ids = params.getAll('id');
+            if (ids.length > 0) {
+              this.loadPeopleByIds(ids.map(id => +id));
+            } else {
+              // fetch people from query params
+              this.route.queryParams.subscribe(params => {
+                if ('adhocPrinting' in params && !GenericUtil.isNullOrUndefined(params['adhocPrinting'])) {
+                  this.adhocPrinting = params['adhocPrinting'] === 'true';
+                  this.showAdhocPrintingForm = this.adhocPrinting;
+                } else {
+                  this.personAcrService.loadFilterFromQueryParams(params, this.fetchParams);
+                  if ('twoBadgesPerPage' in params && !GenericUtil.isNullOrUndefined(params['twoBadgesPerPage'])) {
+                    this.twoBadgesPerPage = params['twoBadgesPerPage'] === 'true';
+                  }
+                  this.loadPeople();
                 }
-                this.loadPeople();
-              }
-            });
-          }
+              });
+            }
+          });
         })
       );
     });
@@ -82,12 +86,13 @@ export class PrintComponent extends WsComponent implements OnInit {
     })
   }
 
-  private loadPerson(personAcrId: number) {
+  private loadPeopleByIds(ids: number[]) {
     this.loading = true;
-    this.personAcrService.getPersonAccreditation(this.selectedEvent.id, personAcrId).subscribe(res => {
-      this.people = [res.summary].filter(p => this.personAcrService.canBePrinted(this.selectedEvent, p));
+    const observables = ids.map(id => this.personAcrService.getPersonAccreditation(this.selectedEvent.id, id));
+    combineLatest(observables).subscribe(people => {
+      this.people = people.map(p => p.summary).filter(p => this.personAcrService.canBePrinted(this.selectedEvent, p));
       this.loading = false;
-    })
+    });
   }
 
   openBrowserPrintPreview(): void {

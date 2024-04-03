@@ -30,6 +30,7 @@ export interface PersonAccreditationSummary {
   qr_code: string;
   zones: Zone[];
   custom_field_data: Map<string, string>;
+  checked?: boolean;
 }
 
 export interface PersonAccreditationSummaryContainer {

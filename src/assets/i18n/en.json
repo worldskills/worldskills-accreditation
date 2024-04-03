@@ -1,4 +1,6 @@
 {
+  "loading": "Loading",
+  "print_selected": "Print selected",
   "host_info_status": "Approval status",
   "person_pending_approved_badge_cannot_be_printed": "This person is pending approval. The badge cannot be printed.",
   "accreditation_photo": "Accreditation photo",
@@ -38,7 +40,6 @@
   "end_date": "End Date",
   "person_data": "Person data",
   "export": "Export",
-  "fetching_information": "Fetching information",
   "filter": "Filter",
   "first_name": "First Name",
   "from": "From",
