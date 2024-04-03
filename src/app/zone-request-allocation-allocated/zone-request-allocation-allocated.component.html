@@ -51,11 +51,15 @@
               <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone)">
                 <div>
                   <span class="fa fa-inbox mr-1"
+                        style="cursor: pointer"
                         [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"
                         [ngbTooltip]="allocation.notification_sent_at !== null ? ('Email notification was sent at : ' + allocation.notification_sent_at) : 'Email notification is not sent yet' "></span>
                   <span class="fa fa-hand-grab-o mr-1"
+                        style="cursor: pointer"
                         [ngClass]="allocation.wristband_distributed_at !== null ? 'text-success' : ''"
-                        [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet'"></span>
+                        [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet. Click to mark as distributed.'"
+                        (click)="updateWristband(allocation.wristband_distributed_at !== null, allocation.id)"
+                  ></span>
                   <span class="badge badge-pill badge-light small">
                     <b>{{ allocation.zone_request.person_accreditation.organization_name }}</b>,
                     {{ allocation.zone_request.person_accreditation.person.first_name + ' ' + allocation.zone_request.person_accreditation.person.last_name }}

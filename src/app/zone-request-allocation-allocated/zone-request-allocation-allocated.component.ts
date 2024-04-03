@@ -5,6 +5,7 @@ import {Zone} from "../../types/zone";
 import {ZoneRequestForm} from "../../types/zone-request/zone-request-form";
 import {ZoneRequestAllocation} from "../../types/zone-request/zone-request-allocation";
 import {ZoneRequestAllocationService} from "../../services/zone-request-allocation/zone-request-allocation.service";
+import {ToastService} from "angular-toastify";
 
 @Component({
   selector: 'app-zone-request-allocation-allocated',
@@ -20,7 +21,8 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
 
   allocations: ZoneRequestAllocation[];
 
-  constructor(private zoneReqAllocService: ZoneRequestAllocationService) {
+  constructor(private zoneReqAllocService: ZoneRequestAllocationService,
+              private toastService: ToastService) {
     super();
   }
 
@@ -53,5 +55,12 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
 
   getEmailNotificationSentCount(): number {
     return this.allocations?.filter(allocation => allocation.notification_sent_at !== null)?.length ?? 0;
+  }
+
+  updateWristband(isDistributed: boolean, zoneReqAllocId: number) {
+    this.zoneReqAllocService.updateWristbandDistribution(this.selectedEvent.id, zoneReqAllocId, !isDistributed).subscribe(() => {
+      this.toastService.success(!isDistributed ? 'Wristband marked as distributed!' : 'Wristband distribution removed');
+      this.loadAllocations();
+    });
   }
 }

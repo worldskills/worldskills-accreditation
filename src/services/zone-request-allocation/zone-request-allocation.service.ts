@@ -28,4 +28,8 @@ export class ZoneRequestAllocationService extends WsService<any> {
   allocateRequestToZone(eventId: number, zoneRequest: ZoneRequest, zoneId: number): Observable<any> {
     return this.http.post(this.url(eventId) + `/zone/${zoneId}`, zoneRequest);
   }
+
+  updateWristbandDistribution(eventId: number, zoneRequestAllocationId: number, isDistributed: boolean): Observable<any> {
+    return this.http.put(this.url(eventId) + `/${zoneRequestAllocationId}/wristband`, isDistributed);
+  }
 }
