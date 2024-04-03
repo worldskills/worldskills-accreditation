@@ -6,6 +6,7 @@ import {ZoneRequestForm} from "../../types/zone-request/zone-request-form";
 import {ZoneRequestAllocation} from "../../types/zone-request/zone-request-allocation";
 import {ZoneRequestAllocationService} from "../../services/zone-request-allocation/zone-request-allocation.service";
 import {ToastService} from "angular-toastify";
+import {PersonAccreditation} from "../../types/person-accreditation";
 
 @Component({
   selector: 'app-zone-request-allocation-allocated',
@@ -20,6 +21,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   @Input() allocatableZones: Zone[];
 
   allocations: ZoneRequestAllocation[];
+  manualAllocationToZone : Zone;
 
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
               private toastService: ToastService) {
@@ -62,5 +64,9 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
       this.toastService.success(!isDistributed ? 'Wristband marked as distributed!' : 'Wristband distribution removed');
       this.loadAllocations();
     });
+  }
+
+  allocate(pa: PersonAccreditation, zone: Zone) {
+
   }
 }

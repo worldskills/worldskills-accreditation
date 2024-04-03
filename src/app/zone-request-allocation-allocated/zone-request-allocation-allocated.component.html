@@ -17,6 +17,11 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="allocations?.length - getEmailNotificationSentCount() !== 0" class="small alert alert-warning">
+      {{ allocations?.length - getEmailNotificationSentCount() }} allocations are awaiting notification emails. <span class="btn btn-sm btn-link p-0 m-0">Click here</span> to send them now.
+    </div>
+
     <div class="table-responsive-md">
       <table class="table table-sm">
         <colgroup>
@@ -41,7 +46,7 @@
             {{ zoneReq.zone.name }}
 
             <br>
-            <div class="btn btn-sm btn-link p-0 m-0">Allocate</div>
+            <div class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToZone = zoneReq.zone">Allocate</div>
           </td>
           <td>
             <span class="badge badge-light small">{{ getAllocationsForZone(zoneReq.zone)?.length }} / {{ zoneReq.quota }}</span>
@@ -74,3 +79,17 @@
     </div>
   </div>
 </div>
+
+
+<ws-modal *ngIf="manualAllocationToZone" [open]="manualAllocationToZone !== null" (onClose)="manualAllocationToZone = null" [options]="{size: 'md', centered: true}">
+  <ng-container header>
+    <h4>{{'manual_allocation' | translate}} to {{manualAllocationToZone?.name}}</h4>
+  </ng-container>
+  <ng-container body>
+    <ng-select name="person">
+
+    </ng-select>
+
+<!--    <button class="btn btn-sm btn-primary mt-2 float-right" (click)="allocate(null, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>-->
+  </ng-container>
+</ws-modal>
