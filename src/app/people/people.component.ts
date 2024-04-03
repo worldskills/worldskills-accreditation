@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {GenericUtil, NgAuthService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
 import {AppService} from "../../services/app/app.service";
@@ -11,12 +11,24 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {combineLatest} from "rxjs";
 import {environment} from "../../environments/environment";
 
+export interface PeopleSearchFunctionalitiesDisplaySetting {
+  print: boolean;
+  person_profile_visit: boolean;
+  select: boolean;
+}
+
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',
   styleUrls: ['./people.component.css']
 })
 export class PeopleComponent extends WsComponent implements OnInit {
+
+  @Input() functionalitiesDisplaySetting: PeopleSearchFunctionalitiesDisplaySetting = {
+    print: true,
+    person_profile_visit: true,
+    select: true,
+  }
 
   allChecked = false;
   selectedEvent: Event;

@@ -25,13 +25,13 @@
               <input type="checkbox" [(ngModel)]="personAcr.checked">
             </td>
             <td>
-              <a routerLink="{{personAcr.id}}">
+              <a [routerLink]="functionalitiesDisplaySetting.person_profile_visit ? personAcr.id +'' : null">
                 <ng-container *ngIf="personAcr.first_name">{{personAcr.first_name}}</ng-container>
                 <ng-container *ngIf="!personAcr.first_name">{{'empty_hint' | translate}}</ng-container>
               </a>
             </td>
             <td>
-              <a routerLink="{{personAcr.id}}">
+              <a [routerLink]="functionalitiesDisplaySetting.person_profile_visit ? personAcr.id +'' : null">
                 <ng-container *ngIf="personAcr.last_name">{{personAcr.last_name}}</ng-container>
                 <ng-container *ngIf="!personAcr.last_name">{{'empty_hint' | translate}}</ng-container>
               </a>
@@ -102,6 +102,7 @@
   </div>
   <div class="col-md-3">
     <app-people-filter (filter)="filter($event)"
+                       [functionalitiesDisplaySetting]="functionalitiesDisplaySetting"
                        [hasPrintPermission]="hasPrintPermission"
                        [fetchParams]="fetchParams"></app-people-filter>
   </div>

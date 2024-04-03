@@ -7,6 +7,7 @@ import {ZoneRequestAllocation} from "../../types/zone-request/zone-request-alloc
 import {ZoneRequestAllocationService} from "../../services/zone-request-allocation/zone-request-allocation.service";
 import {ToastService} from "angular-toastify";
 import {PersonAccreditation} from "../../types/person-accreditation";
+import {PeopleSearchFunctionalitiesDisplaySetting} from "../people/people.component";
 
 @Component({
   selector: 'app-zone-request-allocation-allocated',
@@ -22,6 +23,11 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
 
   allocations: ZoneRequestAllocation[];
   manualAllocationToZone : Zone;
+  functionalitiesDisplaySetting: PeopleSearchFunctionalitiesDisplaySetting = {
+    print: false,
+    person_profile_visit: false,
+    select: false,
+  }
 
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
               private toastService: ToastService) {

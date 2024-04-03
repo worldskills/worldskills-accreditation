@@ -14,6 +14,7 @@ import {Zone} from 'src/types/zone';
 import {NgForm} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
+import {PeopleSearchFunctionalitiesDisplaySetting} from "../people/people.component";
 
 @Component({
   selector: 'app-people-filter',
@@ -25,6 +26,7 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
   @Output() filter = new EventEmitter<PersonAccreditationSummaryReqParams>();
   @Input() fetchParams: PersonAccreditationSummaryReqParams;
   @Input() hasPrintPermission: boolean;
+  @Input() functionalitiesDisplaySetting: PeopleSearchFunctionalitiesDisplaySetting;
   @ViewChild('form') form: NgForm;
 
   delegateTypes: DelegateType[];

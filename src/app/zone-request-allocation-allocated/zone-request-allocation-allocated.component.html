@@ -81,15 +81,12 @@
 </div>
 
 
-<ws-modal *ngIf="manualAllocationToZone" [open]="manualAllocationToZone !== null" (onClose)="manualAllocationToZone = null" [options]="{size: 'md', centered: true}">
+<ws-modal *ngIf="manualAllocationToZone" [open]="manualAllocationToZone !== null" (onClose)="manualAllocationToZone = null" [options]="{size: 'xl', centered: true}">
   <ng-container header>
     <h4>{{'manual_allocation' | translate}} to {{manualAllocationToZone?.name}}</h4>
   </ng-container>
   <ng-container body>
-    <ng-select name="person">
-
-    </ng-select>
-
+    <app-people [functionalitiesDisplaySetting]="functionalitiesDisplaySetting"></app-people>
 <!--    <button class="btn btn-sm btn-primary mt-2 float-right" (click)="allocate(null, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>-->
   </ng-container>
 </ws-modal>
