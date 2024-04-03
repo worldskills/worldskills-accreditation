@@ -16,6 +16,10 @@ import {ToastService} from "angular-toastify";
 import {ImageService} from "../../services/image/image.service";
 import {Image} from "../../types/image";
 import {HttpEventType} from "@angular/common/http";
+import { LogsService } from '../../services/logs/logs.service';
+import { Log } from '../../types/log';
+import { appConfig } from '../app.config';
+import { PeopleService } from 'src/services/people/people.service';
 
 @Component({
   selector: 'app-person',
@@ -28,6 +32,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   selectedEvent: Event;
   delegateTypes: DelegateType[];
   zones: Zone[] = [];
+  logs: Log[] = [];
 
   // upload ACR photo variables
   overrideACRPhoto: File;
@@ -45,6 +50,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   hasPrintPermission = false;
   hasAdminPermission = false;
   hasUploadPhotoPermission = true;
+  hasLogsPermission = false;
 
   constructor(private appService: AppService,
               private router: Router,
@@ -52,6 +58,8 @@ export class PersonComponent extends WsComponent implements OnInit {
               private personAccreditationService: PersonAccreditationService,
               private delegateTypeService: DelegateTypeService,
               private zoneService: ZoneService,
+              private logsService: LogsService,
+              private peopleService: PeopleService,
               private location: Location,
               private authService: NgAuthService,
               private toastService: ToastService,
@@ -75,8 +83,8 @@ export class PersonComponent extends WsComponent implements OnInit {
     )
 
     // load selectedEvent and data depending on it
-    combineLatest([this.appService.selectedEvent, this.route.params])
-      .subscribe(([event, {personAcrId}]) => {
+    combineLatest([this.appService.selectedEvent, this.authService.currentUser, this.route.params])
+      .subscribe(([event, currentUser, {personAcrId}]) => {
         this.selectedEvent = event;
         this.subscribe(
           this.loadPersonAccreditation(personAcrId),
@@ -87,6 +95,44 @@ export class PersonComponent extends WsComponent implements OnInit {
             this.zones = res.zones;
           })
         );
+
+        if (UserRoleUtil.userHasRoles(currentUser, appConfig.worldskillsLogsAppId, 'Admin', 'ViewLogs')) {
+          // fetch logs
+          const params = {
+            ws_entity: this.selectedEvent.ws_entity.id,
+            web_service_code: environment.worldskillsAppId,
+            logData: 'person_accreditation_id:' + personAcrId,
+            limit: 100,
+          };
+          this.subscribe(
+            this.logsService.getLogs(params).subscribe(logList => {
+
+              this.logs = logList.logs.reverse();
+
+              // loop through logs, collect unique person ids and fetch person data
+              const personIds = new Set<number>();
+              this.logs.forEach(log => {
+                personIds.add(log.person_id);
+                if (log.puppeteer_id) {
+                  personIds.add(log.puppeteer_id);
+                }
+              });
+              personIds.forEach(personId => {
+                this.peopleService.getPerson(personId).subscribe(person => {
+                  this.logs.forEach(log => {
+                    if (log.person_id === person.id) {
+                      log.person = person;
+                    }
+                    if (log.puppeteer_id === person.id) {
+                      log.puppeteer = person;
+                    }
+                  });
+                });
+              });
+
+            })
+          );
+        }
       });
 
     // saving badge lines only when user stops typing for 400ms and when the lines have changed
@@ -119,6 +165,10 @@ export class PersonComponent extends WsComponent implements OnInit {
 
   onBadgeLinesChange(lines: string) {
     this.badgeLinesChange.next(lines);
+  }
+
+  canBePrinted(): boolean {
+    return this.personAccreditationService.canBePrinted(this.selectedEvent, this.personAcr?.summary);
   }
 
   private hasZone(zone: Zone): boolean {
@@ -161,9 +211,15 @@ export class PersonComponent extends WsComponent implements OnInit {
   }
 
   printPreview(): void {
-    const urlTree = this.router.createUrlTree(['../../print/' + this.personAcr.id], {relativeTo: this.route});
+    const urlTree = this.router.createUrlTree(['../../print'], {relativeTo: this.route, queryParams: {id: this.personAcr.id}});
     const url = this.router.serializeUrl(urlTree);
-    window.open(url, '_blank');
+    if (this.personAcr.printed) {
+      if (confirm('This accreditation badge has already been printed. If the badge has been lost, it should be marked as invalid before reprinting ("Invalidate badge"). Proceed with printing without invalidating the badge?')) {
+        window.open(url, '_blank');
+      }
+    } else {
+      window.open(url, '_blank');
+    }
   }
 
   backToPeopleList(): void {
@@ -173,7 +229,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   invalidateBadge(): void {
     if (confirm('This will generate a new random code for the QR code. Any existing badge will no longer be valid. Proceed?')) {
       this.personAccreditationService.invalidateBadge(this.selectedEvent.id, this.personAcr.id).subscribe(_ => {
-        this.toastService.success('New random code for QR code generated, existing badges are now invalid.');
+        this.toastService.success('New random code for QR code generated.');
 
         // reload person accreditation
         this.subscribe(this.loadPersonAccreditation(this.personAcr.id));

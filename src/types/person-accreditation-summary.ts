@@ -25,10 +25,12 @@ export interface PersonAccreditationSummary {
   group_name: string;
   image: Image;
   delegate_type: DelegateType;
+  host_info_status: string;
   random_hash: string;
   qr_code: string;
   zones: Zone[];
   custom_field_data: Map<string, string>;
+  checked?: boolean;
 }
 
 export interface PersonAccreditationSummaryContainer {
@@ -46,6 +48,7 @@ export interface PersonAccreditationSummaryReqParams extends FetchParams {
   group?: string;
   zone?: number[];
   printed?: boolean;
+  distributed?: boolean;
   photo?: boolean;
   del_types?: number[];
   sort?: string;

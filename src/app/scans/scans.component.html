@@ -40,9 +40,11 @@
               {{ scan.accreditation.delegate_type.name }}
             </td>
             <td>
-              <div class="badge mr-1 small" [style.background-color]="scan.zone.color"
-                   [ngbTooltip]="scan.zone.name"
-                   [style.color]="scan.zone.text_color">{{ scan.zone.code }} - {{ scan.zone.name }}
+              <div class="badge mr-1 small"
+                   *ngIf="scan.zone !== null"
+                   [style.background-color]="scan?.zone.color"
+                   [ngbTooltip]="scan?.zone.name"
+                   [style.color]="scan?.zone.text_color">{{ scan?.zone.code }} - {{ scan?.zone.name }}
               </div>
             </td>
             <td>{{ scan.allowed ? 'yes' : 'no' }}</td>

@@ -196,6 +196,14 @@
               </p>
             </div>
 
+            <div class="form-group" *ngIf="selectedEvent.require_host_approval">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'host_info_status' | translate }}</label>
+              <p>
+                <ng-template *ngIf="personAcr.summary.host_info_status; else elseBlock">{{ personAcr.summary.host_info_status }}</ng-template>
+                <ng-template #elseBlock><em>Unknown</em></ng-template>
+              </p>
+            </div>
+
             <div class="form-group" *ngIf="hasAdminPermission">
               <a href="{{peopleURL + '/people/' + personAcr.person.id}}" target="_blank"><span
                 class="fa fa-external-link"></span> {{ 'view_in_people' | translate }}</a>
@@ -216,6 +224,7 @@
 
   </div>
   <div class="col-md-8">
+    <div class="alert alert-danger small" *ngIf="!canBePrinted()">{{ 'person_pending_approved_badge_cannot_be_printed' | translate }}</div>
     <div class="alert alert-info small" *ngIf="personAcr?.printed">{{ 'badge_has_been_printed' | translate }}</div>
     <div class="alert alert-warning small"
          *ngIf="personAcr?.distributed">{{ 'badge_has_been_distributed' | translate }}
@@ -225,7 +234,7 @@
         <h5 class="card-title">{{ 'preview_badge' | translate | titlecase }}
           <div class="btn-group dropdown float-right">
             <button type="button" class="btn btn-sm btn-primary" (click)="printPreview()"
-                    [disabled]="!hasPrintPermission">
+                    [disabled]="!hasPrintPermission || !canBePrinted()">
               {{ 'print_preview' | translate | titlecase }}
             </button>
             <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
@@ -278,6 +287,24 @@
             </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-4" *ngIf="logs && logs.length > 0">
+      <div class="card-header">
+        <h5 class="card-title">{{ 'logs' | translate | titlecase }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive-md">
+          <div *ngFor="let log of logs" class="border-bottom mb-3">
+            <details>
+              <summary>{{ log.message | translate }}</summary>
+              <div class="p-2">
+                <div class="small" *ngFor="let data of log.data | keyvalue">{{ data.key }}: {{ data.value }}</div>
+              </div>
+            </details>
+            <p class="text-muted small">{{ log.occured | date:'dd.MM.yyyy HH:mm' }} - {{ log.person?.first_name }} {{ log.person?.last_name }} <span *ngIf="log.puppeteer">(Puppeteer: {{ log.puppeteer.first_name }} {{ log.puppeteer.last_name }})</span></p>
+          </div>
         </div>
       </div>
     </div>

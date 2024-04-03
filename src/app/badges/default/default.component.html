@@ -7,8 +7,8 @@
         <div
           style="-webkit-print-color-adjust: exact !important; background-color: #4A0D66 !important; padding: 1em 0.8em 0.8em 0.8em;">
 
-          <div class="ws-header">
-            <div class="ws-event-name">
+          <div class="ws-header row">
+            <div class="ws-event-name col-9">
               <div style="font-weight: 400;">
                 <div
                   style="-webkit-print-color-adjust: exact !important; overflow: hidden; max-height: 3em; padding-right: 1em; color: #fff !important;">
@@ -16,7 +16,7 @@
                 </div>
               </div>
             </div>
-            <div class="ws-logo">
+            <div class="ws-logo col-3">
               <svg width="68px" height="40px" viewBox="0 0 220 129" version="1.1" xmlns="http://www.w3.org/2000/svg"
                    xml:space="preserve"
                    style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
@@ -87,19 +87,19 @@
         </div>
 
         <div class="row">
-          <div class="col-xs-5">
+          <div class="col-5">
 
             <p>
               <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation"
-                   class="img-responsive" width="150" alt="User Image"/>
+                   class="img-responsive" width="120" alt="User Image"/>
             </p>
 
           </div>
-          <div class="col-xs-7 text-center">
+          <div class="col-7 text-center">
 
             <div>
               <div class=""><img src="{{pa.qr_code}}" class="img-responsive center-block" width="120"
-                                 style="margin-top: 20px; margin-bottom: 20px;"></div>
+                                 style="margin-bottom: 20px;"></div>
               <div class="text-center">{{pa.id}}-{{pa.random_hash}}</div>
             </div>
 

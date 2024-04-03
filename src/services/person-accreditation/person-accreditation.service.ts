@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable, share} from "rxjs";
 import {
+  PersonAccreditationSummary,
   PersonAccreditationSummaryContainer,
   PersonAccreditationSummaryReqParams
 } from "../../types/person-accreditation-summary";
@@ -11,6 +12,7 @@ import {PersonAccreditation} from "../../types/person-accreditation";
 import {Params} from "@angular/router";
 import {isEmpty} from "../../utils/StringUtil";
 import {Image} from "../../types/image";
+import { Event } from '../../types/event';
 
 @Injectable({
   providedIn: 'root'
@@ -55,8 +57,17 @@ export class PersonAccreditationService extends WsService<any> {
     return this.http.post<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}/photo`, image).pipe(share());
   }
 
+  canBePrinted(event: Event, personAccreditation: PersonAccreditationSummary): boolean {
+    return !event.require_host_approval || this.hasBeenApproved(personAccreditation);
+  }
+
+  hasBeenApproved(personAccreditation: PersonAccreditationSummary): boolean {
+    return personAccreditation?.host_info_status === 'APPROVED';
+  }
+
   initialiseFetchParams(): PersonAccreditationSummaryReqParams {
     return {
+      l: 'en', // TODO dynamic locale
       name: null,
       country: null,
       member: null,
@@ -66,6 +77,7 @@ export class PersonAccreditationService extends WsService<any> {
       group: null,
       zone: [],
       printed: null,
+      distributed: null,
       photo: null,
       del_types: [],
       offset: 0,
@@ -128,6 +140,12 @@ export class PersonAccreditationService extends WsService<any> {
       queryParams['printed'] = fetchParams.printed;
     } else {
       queryParams['printed'] = null;
+    }
+
+    if (!GenericUtil.isNullOrUndefined(fetchParams.distributed)) {
+      queryParams['distributed'] = fetchParams.distributed;
+    } else {
+      queryParams['distributed'] = null;
     }
 
     if (!GenericUtil.isNullOrUndefined(fetchParams.photo)) {
@@ -197,6 +215,10 @@ export class PersonAccreditationService extends WsService<any> {
 
     if ('printed' in params && !GenericUtil.isNullOrUndefined(params['printed'])) {
       fetchParams.printed = params['printed'] === 'true';
+    }
+
+    if ('distributed' in params && !GenericUtil.isNullOrUndefined(params['distributed'])) {
+      fetchParams.distributed = params['distributed'] === 'true';
     }
 
     if ('photo' in params && !GenericUtil.isNullOrUndefined(params['photo'])) {

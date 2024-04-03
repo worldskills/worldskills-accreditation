@@ -7,6 +7,7 @@ export const environment = {
   worldskillsApiImages: 'https://api.worldskills.org/images',
   worldskillsApiOrg: 'https://api.worldskills.org/org',
   worldskillsApiPeople: 'https://api.worldskills.org/people',
+  worldskillsApiLogs: 'https://api.worldskills.org/logs',
   worldskillsAccreditation: 'https://accreditation.worldskills.org',
   worldskillsPeople: 'https://people.worldskills.org',
   worldskillsClientId: 'a95703d1aa96',

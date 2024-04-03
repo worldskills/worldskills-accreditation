@@ -47,6 +47,7 @@ import {AdhocPrintingComponent} from './adhoc-printing/adhoc-printing.component'
 import {WebcamModule} from "ngx-webcam";
 import {WebcamCaptureComponent} from './webcam-capture/webcam-capture.component';
 import {Fi2024Component} from './badges/fi2024/fi2024.component';
+import {BaseComponent} from './badges/base/base.component';
 import {ZoneRequestComponent} from './zone-request/zone-request.component';
 import {ZoneRequestAllocationComponent} from './zone-request-allocation/zone-request-allocation.component';
 import {ZoneRequestedComponent} from './zone-requested/zone-requested.component';
@@ -60,7 +61,7 @@ import {
 } from './zone-request-allocation-allocated/zone-request-allocation-allocated.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240123');
 }
 
 @NgModule({
@@ -102,7 +103,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ZoneRequestFormComponent,
     ZoneRequestFormFormComponent,
     ZoneRequestAllocationPendingComponent,
-    ZoneRequestAllocationAllocatedComponent
+    ZoneRequestAllocationAllocatedComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,
