@@ -86,7 +86,21 @@
     <h4>{{'manual_allocation' | translate}} to {{manualAllocationToZone?.name}}</h4>
   </ng-container>
   <ng-container body>
-    <app-people [functionalitiesDisplaySetting]="functionalitiesDisplaySetting"></app-people>
-<!--    <button class="btn btn-sm btn-primary mt-2 float-right" (click)="allocate(null, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>-->
+    <h3>Please select a person to allocate to this zone.</h3>
+
+    <app-people
+      *ngIf="manualAllocationToPerson === null"
+      [functionalitiesDisplaySetting]="functionalitiesDisplaySetting" (selectedPerson)="selectedPerson($event)"></app-people>
+
+    <div *ngIf="manualAllocationToPerson !== null">
+
+      <b>Selected person:</b> <p class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToPerson = null">Change</p>
+      <br>
+      {{manualAllocationToPerson?.first_name + ' ' + manualAllocationToPerson?.last_name}} from {{manualAllocationToPerson?.organization ?? '-'}}
+
+      <p>
+        <button class="btn btn-sm btn-primary mt-2" (click)="allocate(manualAllocationToPerson, manualAllocationToZone)">{{ 'allocate' | translate }}</button>
+      </p>
+    </div>
   </ng-container>
 </ws-modal>

@@ -6,8 +6,8 @@ import {ZoneRequestForm} from "../../types/zone-request/zone-request-form";
 import {ZoneRequestAllocation} from "../../types/zone-request/zone-request-allocation";
 import {ZoneRequestAllocationService} from "../../services/zone-request-allocation/zone-request-allocation.service";
 import {ToastService} from "angular-toastify";
-import {PersonAccreditation} from "../../types/person-accreditation";
 import {PeopleSearchFunctionalitiesDisplaySetting} from "../people/people.component";
+import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";
 
 @Component({
   selector: 'app-zone-request-allocation-allocated',
@@ -22,12 +22,15 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   @Input() allocatableZones: Zone[];
 
   allocations: ZoneRequestAllocation[];
-  manualAllocationToZone : Zone;
+
+  // for manual allocation to a zone
+  manualAllocationToZone : Zone = null;
   functionalitiesDisplaySetting: PeopleSearchFunctionalitiesDisplaySetting = {
     print: false,
     person_profile_visit: false,
-    select: false,
+    select_a_person: true,
   }
+  manualAllocationToPerson: PersonAccreditationSummary = null;
 
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
               private toastService: ToastService) {
@@ -72,7 +75,14 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     });
   }
 
-  allocate(pa: PersonAccreditation, zone: Zone) {
+  allocate(pas: PersonAccreditationSummary, zone: Zone) {
+    // this.zoneReqAllocService.allocate(this.selectedEvent.id, this.currentForm.id, pas.id, zone.id).subscribe(() => {
+    //   this.toastService.success('Person allocated to zone');
+    //   this.loadAllocations();
+    // });
+  }
 
+  selectedPerson(pas: PersonAccreditationSummary) {
+    this.manualAllocationToPerson = pas;
   }
 }
