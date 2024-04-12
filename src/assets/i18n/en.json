@@ -1,4 +1,5 @@
 {
+  "edit_selected": "Edit selected",
   "loading": "Loading",
   "print_selected": "Print selected",
   "host_info_status": "Approval status",
@@ -14,6 +15,7 @@
   "accreditation_deleted": "This person has been removed from Accreditation. Their badge is no longer valid.",
   "add_new_delegate_type": "Add new delegate type",
   "add_new_zone": "Add new zone",
+  "add_zones": "Add zones",
   "add_person": "Add person",
   "add_zone": "Add zone",
   "additional_zones": "Additional zones",
@@ -62,6 +64,8 @@
   "printed": "Printed",
   "preview_badge": "Preview Badge",
   "remove_zone": "Remove zone",
+  "remove_zones": "Remove zones",
+  "apply": "Apply",
   "required": "Required",
   "save": "Save",
   "saving": "Saving",

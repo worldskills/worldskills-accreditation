@@ -1,0 +1,72 @@
+<form class="form-horizontal" (ngSubmit)="save()" #form="ngForm" novalidate>
+    <div class="row mb-2">
+        <div class="col-sm-12">
+            <label class="small font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
+            <ng-select
+                name="delegateType"
+                [(ngModel)]="delegateType"
+                [items]="delegateTypes"
+                bindLabel="name"
+            >
+                <ng-template ng-label-tmp let-item="item">
+                    <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{ item.name }}</div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                    <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{ item.name }}</div>
+                </ng-template>
+            </ng-select>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-sm-12">
+            <label class="small font-weight-bold my-0 py-0">{{'add_zones' | translate}}</label>
+            <ng-select
+                name="addZones"
+                [(ngModel)]="addZones"
+                [items]="zones"
+                [multiple]="true"
+            >
+                <ng-template ng-label-tmp let-item="item">
+                    <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                    <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                </ng-template>
+            </ng-select>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-sm-12">
+            <label class="small font-weight-bold my-0 py-0">{{'remove_zones' | translate}}</label>
+            <ng-select
+                name="removeZones"
+                [(ngModel)]="removeZones"
+                [items]="zones"
+                [multiple]="true"
+            >
+                <ng-template ng-label-tmp let-item="item">
+                    <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                    <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                </ng-template>
+            </ng-select>
+        </div>
+    </div>
+
+    <div class="row mt-4 mb-2 text-right">
+        <div class="col-sm-12">
+        <button type="submit" class="btn btn-sm btn-primary">{{'apply' | translate}}</button>
+        <button type="button" class="btn btn-sm btn-outline-primary ml-2" (click)="cancel()">{{'cancel' | translate}}</button>
+        </div>
+    </div>
+
+</form>

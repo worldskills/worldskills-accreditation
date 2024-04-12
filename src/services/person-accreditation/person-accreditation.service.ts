@@ -13,6 +13,8 @@ import {Params} from "@angular/router";
 import {isEmpty} from "../../utils/StringUtil";
 import {Image} from "../../types/image";
 import { Event } from '../../types/event';
+import { DelegateType } from 'src/types/delegate-type';
+import { Zone } from 'src/types/zone';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,15 @@ export class PersonAccreditationService extends WsService<any> {
 
   updatePersonAccreditation(eventId: number, personAccreditationId: number, personAccreditation: PersonAccreditation): Observable<PersonAccreditation> {
     return this.http.put<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}`, personAccreditation).pipe(share());
+  }
+
+  batchUpdateAccreditations(eventId: number, personAccreditationIds: number[], delegateType: DelegateType, zonesAdd: Zone[], zonesRemove: Zone[]): Observable<any> {
+    return this.http.put(`${this.url(eventId)}/batch`, {
+      ids: personAccreditationIds,
+      delegate_type: delegateType,
+      zones_add: zonesAdd,
+      zones_remove: zonesRemove
+    }).pipe(share());
   }
 
   invalidateBadge(eventId: number, personAccreditationId: number): Observable<any> {
