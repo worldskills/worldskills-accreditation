@@ -7,6 +7,7 @@
                 [(ngModel)]="delegateType"
                 [items]="delegateTypes"
                 bindLabel="name"
+                [disabled]="loading"
             >
                 <ng-template ng-label-tmp let-item="item">
                     <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
@@ -28,6 +29,7 @@
                 [(ngModel)]="addZones"
                 [items]="zones"
                 [multiple]="true"
+                [disabled]="loading"
             >
                 <ng-template ng-label-tmp let-item="item">
                     <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
@@ -49,6 +51,7 @@
                 [(ngModel)]="removeZones"
                 [items]="zones"
                 [multiple]="true"
+                [disabled]="loading"
             >
                 <ng-template ng-label-tmp let-item="item">
                     <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
@@ -64,9 +67,11 @@
 
     <div class="row mt-4 mb-2 text-right">
         <div class="col-sm-12">
-        <button type="submit" class="btn btn-sm btn-primary">{{'apply' | translate}}</button>
-        <button type="button" class="btn btn-sm btn-outline-primary ml-2" (click)="cancel()">{{'cancel' | translate}}</button>
+            <button type="submit" class="btn btn-sm btn-primary">{{'apply' | translate}}</button>
+            <button type="button" class="btn btn-sm btn-outline-primary ml-2" (click)="cancel()" [disabled]="loading">{{'cancel' | translate}}</button>
         </div>
     </div>
+
+    <ws-spinner *ngIf="loading"></ws-spinner>
 
 </form>

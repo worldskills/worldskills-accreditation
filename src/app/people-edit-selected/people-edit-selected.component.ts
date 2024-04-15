@@ -29,6 +29,8 @@ export class PeopleEditSelectedComponent {
   addZones: Zone[] = [];
   removeZones: Zone[] = [];
 
+  loading = false;
+
   constructor(
     private toastService: ToastService,
     private delegateTypeService: DelegateTypeService,
@@ -47,12 +49,15 @@ export class PeopleEditSelectedComponent {
   }
 
   save() {
+    this.loading = true;
     this.personAccreditationService.batchUpdateAccreditations(this.selectedEvent.id, this.selectedPeople.map(a => a.id), this.form.value['delegateType'], this.form.value['addZones'], this.form.value['removeZones']).subscribe(res => {
       this.toastService.success('Accreditations updated');
       this.form.resetForm();
       this.saved.emit();
+      this.loading = false;
     }, err => {
       this.toastService.error('Error updating accreditations: ' + (err.error.user_msg || 'Unknown error'));
+      this.loading = false;
     });
   }
 
