@@ -51,7 +51,7 @@ import {Fi2024Component} from './badges/fi2024/fi2024.component';
 import {BaseComponent} from './badges/base/base.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240123');
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240415180851');
 }
 
 @NgModule({
