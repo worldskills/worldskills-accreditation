@@ -67,7 +67,7 @@
 
     <div class="row mt-4 mb-2 text-right">
         <div class="col-sm-12">
-            <button type="submit" class="btn btn-sm btn-primary">{{'apply' | translate}}</button>
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="loading">{{'apply' | translate}}</button>
             <button type="button" class="btn btn-sm btn-outline-primary ml-2" (click)="cancel()" [disabled]="loading">{{'cancel' | translate}}</button>
         </div>
     </div>
