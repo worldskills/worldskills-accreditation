@@ -105,7 +105,7 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
       // refresh the allocated requests list
       this.zoneReqAllocService.refresh.next(true);
     }, err => {
-      this.toastService.error('Failed to allocate request to a Zone!');
+      this.toastService.error(err.error.user_msg ?? 'Failed to allocate request to a Zone!');
     });
   }
 }

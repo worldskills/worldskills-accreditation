@@ -57,9 +57,9 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     if (allocations) {
       return allocations.sort((a, b) => {
         if (a.zone_request != null && b.zone_request != null) {
-          return a.zone_request.person_accreditation.organization_name.localeCompare(b.zone_request.person_accreditation.organization_name)
+          return a.zone_request.person_accreditation.organization_name.localeCompare(b.zone_request.person_accreditation.organization_name);
         } else if (a.manual_allocation_to_person_accreditation != null && b.manual_allocation_to_person_accreditation != null) {
-          return a.manual_allocation_to_person_accreditation.organization.localeCompare(b.manual_allocation_to_person_accreditation.organization)
+          return (a.manual_allocation_to_person_accreditation?.organization ?? '').localeCompare(b.manual_allocation_to_person_accreditation?.organization ?? '');
         } else {
           return 0;
         }
@@ -88,19 +88,33 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     });
   }
 
+  /**
+   * Manual allocation of PersonAccreditation to a zone (without a request)
+   */
   allocate(pas: PersonAccreditationSummary, zone: Zone) {
+    const cleaningUp = (): void => {
+      this.manualAllocationToZone = null;
+      this.manualAllocationToPerson = null;
+    }
+
     this.zoneReqAllocService.allocatePersonACRToZone(this.selectedEvent.id, this.currentForm.id, zone.id, pas).subscribe({
       next: () => {
         this.toastService.success('Person allocated to zone');
         this.loadAllocations();
+        cleaningUp();
       },
       error: (err) => {
         this.toastService.error(err?.error?.user_msg ?? 'Error allocating person to zone');
+        cleaningUp();
       }
     });
   }
 
   selectedPerson(pas: PersonAccreditationSummary) {
     this.manualAllocationToPerson = pas;
+  }
+
+  trackByAllocId(idx: number, zra: ZoneRequestAllocation) {
+    return zra.id;
   }
 }
