@@ -77,9 +77,14 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   }
 
   updateWristband(isDistributed: boolean, zoneReqAllocId: number) {
-    this.zoneReqAllocService.updateWristbandDistribution(this.selectedEvent.id, zoneReqAllocId, !isDistributed).subscribe(() => {
-      this.toastService.success(!isDistributed ? 'Wristband marked as distributed!' : 'Wristband distribution removed');
-      this.loadAllocations();
+    this.zoneReqAllocService.updateWristbandDistribution(this.selectedEvent.id, zoneReqAllocId, !isDistributed).subscribe({
+      next: () => {
+        this.toastService.success(!isDistributed ? 'Wristband marked as distributed!' : 'Wristband distribution removed');
+        this.loadAllocations();
+      },
+      error: (err) => {
+        this.toastService.error(err?.error?.user_msg ?? 'Error updating wristband distribution');
+      }
     });
   }
 
@@ -90,7 +95,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
         this.loadAllocations();
       },
       error: (err) => {
-        this.toastService.error(err.error.user_msg);
+        this.toastService.error(err?.error?.user_msg ?? 'Error allocating person to zone');
       }
     });
   }
