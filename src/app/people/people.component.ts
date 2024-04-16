@@ -37,6 +37,7 @@ export class PeopleComponent extends WsComponent implements OnInit {
   fetchParams: PersonAccreditationSummaryReqParams;
   result: PersonAccreditationSummaryContainer;
   loading = false;
+  showEditSelectedForm = false;
 
   hasPrintPermission = false;
 
@@ -69,7 +70,7 @@ export class PeopleComponent extends WsComponent implements OnInit {
       });
   }
 
-  private loadPeople() {
+  loadPeople() {
     this.loading = true;
     this.personAcrService.getAccreditations(this.selectedEvent.id, this.fetchParams).subscribe(res => {
       this.result = res;
@@ -119,9 +120,18 @@ export class PeopleComponent extends WsComponent implements OnInit {
     this.result.people.forEach(p => p.checked = this.allChecked);
   }
 
+  editSelected() {
+    this.showEditSelectedForm = true;
+    return false;
+  }
+
+  get selectedPeople() {
+    return this.result?.people.filter(p => p.checked);
+  }
+
   printSelected() {
 
-    const ids = this.result.people.filter(p => p.checked).map(p => p.id);
+    const ids = this.selectedPeople.map(p => p.id);
 
     const queryParams: Params = {};
     queryParams['id'] = ids;
@@ -134,7 +144,7 @@ export class PeopleComponent extends WsComponent implements OnInit {
   }
 
   hasSelected(): boolean {
-    return this.result.people.filter(p => p.checked).length > 0;
+    return this.selectedPeople.length > 0;
   }
 
   doesResultHasMember(): boolean {

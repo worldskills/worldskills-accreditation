@@ -18,6 +18,7 @@ import {EventComponent} from './event/event.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from "@angular/material/tabs";
 import {PeopleComponent} from './people/people.component';
+import {PeopleEditSelectedComponent} from './people-edit-selected/people-edit-selected.component';
 import {ScansComponent} from './scans/scans.component';
 import {PeopleFilterComponent} from './people-filter/people-filter.component';
 import {FormsModule} from "@angular/forms";
@@ -61,7 +62,7 @@ import {
 } from './zone-request-allocation-allocated/zone-request-allocation-allocated.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240123');
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240415180851');
 }
 
 @NgModule({
@@ -72,6 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     EventsComponent,
     EventComponent,
     PeopleComponent,
+    PeopleEditSelectedComponent,
     ScansComponent,
     PeopleFilterComponent,
     DelegateTypesComponent,
