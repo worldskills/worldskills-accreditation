@@ -66,9 +66,15 @@
                         (click)="updateWristband(allocation.wristband_distributed_at !== null, allocation.id)"
                   ></span>
                   <span class="badge badge-pill badge-light small">
-                    <b>{{ allocation.zone_request.person_accreditation.organization_name }}</b>,
-                    {{ allocation.zone_request.person_accreditation.person.first_name + ' ' + allocation.zone_request.person_accreditation.person.last_name }}
-                </span>
+                    <ng-container *ngIf="allocation.zone_request != null">
+                      <b>{{ allocation.zone_request.person_accreditation.organization_name }}</b>,
+                      {{ allocation.zone_request.person_accreditation.person.first_name + ' ' + allocation.zone_request.person_accreditation.person.last_name }}
+                    </ng-container>
+                    <ng-container *ngIf="allocation.manual_allocation_to_person_accreditation != null">
+                      <b>{{ allocation.manual_allocation_to_person_accreditation.organization }}</b>,
+                      {{ allocation.manual_allocation_to_person_accreditation.first_name + ' ' + allocation.manual_allocation_to_person_accreditation.last_name }}
+                    </ng-container>
+                  </span>
                 </div>
               </li>
             </ul>
@@ -86,7 +92,7 @@
     <h4>{{'manual_allocation' | translate}} to {{manualAllocationToZone?.name}}</h4>
   </ng-container>
   <ng-container body>
-    <h3>Please select a person to allocate to this zone.</h3>
+    <h4 class="alert alert-info">Please select a person to allocate to this zone.</h4>
 
     <app-people
       *ngIf="manualAllocationToPerson === null"

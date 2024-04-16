@@ -5,6 +5,7 @@ import {WsService} from "@worldskills/worldskills-angular-lib";
 import {Observable, Subject} from "rxjs";
 import {ZoneRequestAllocationContainer} from "../../types/zone-request/zone-request-allocation";
 import {ZoneRequest} from "../../types/zone-request/zone-request";
+import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,12 @@ export class ZoneRequestAllocationService extends WsService<any> {
     return this.http.get<ZoneRequestAllocationContainer>(this.url(eventId) + `/form/${zoneReqFormId}`);
   }
 
-  allocateRequestToZone(eventId: number, zoneRequest: ZoneRequest, zoneId: number): Observable<any> {
-    return this.http.post(this.url(eventId) + `/zone/${zoneId}`, zoneRequest);
+  allocateRequestToZone(eventId: number, zoneReqFormId: number, zoneId: number, zoneRequest: ZoneRequest): Observable<any> {
+    return this.http.post(this.url(eventId) + `/form/${zoneReqFormId}/zone/${zoneId}`, zoneRequest);
+  }
+
+  allocatePersonACRToZone(eventId: number, zoneReqFormId: number, zoneId: number, pa: PersonAccreditationSummary): Observable<any> {
+    return this.http.post(this.url(eventId) + `/form/${zoneReqFormId}/person-accreditation/${pa.id}/zone/${zoneId}`, {});
   }
 
   updateWristbandDistribution(eventId: number, zoneRequestAllocationId: number, isDistributed: boolean): Observable<any> {

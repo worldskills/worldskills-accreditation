@@ -24,7 +24,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   allocations: ZoneRequestAllocation[];
 
   // for manual allocation to a zone
-  manualAllocationToZone : Zone = null;
+  manualAllocationToZone: Zone = null;
   functionalitiesDisplaySetting: PeopleSearchFunctionalitiesDisplaySetting = {
     print: false,
     person_profile_visit: false,
@@ -55,7 +55,15 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   getAllocationsForZone(zone: Zone): ZoneRequestAllocation[] {
     const allocations = this.allocations?.filter(allocation => allocation.allocated_zone.id === zone.id);
     if (allocations) {
-      return allocations.sort((a, b) => a.zone_request.person_accreditation.organization_name.localeCompare(b.zone_request.person_accreditation.organization_name));
+      return allocations.sort((a, b) => {
+        if (a.zone_request != null && b.zone_request != null) {
+          return a.zone_request.person_accreditation.organization_name.localeCompare(b.zone_request.person_accreditation.organization_name)
+        } else if (a.manual_allocation_to_person_accreditation != null && b.manual_allocation_to_person_accreditation != null) {
+          return a.manual_allocation_to_person_accreditation.organization.localeCompare(b.manual_allocation_to_person_accreditation.organization)
+        } else {
+          return 0;
+        }
+      });
     }
     return [];
   }
@@ -76,10 +84,15 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   }
 
   allocate(pas: PersonAccreditationSummary, zone: Zone) {
-    // this.zoneReqAllocService.allocate(this.selectedEvent.id, this.currentForm.id, pas.id, zone.id).subscribe(() => {
-    //   this.toastService.success('Person allocated to zone');
-    //   this.loadAllocations();
-    // });
+    this.zoneReqAllocService.allocatePersonACRToZone(this.selectedEvent.id, this.currentForm.id, zone.id, pas).subscribe({
+      next: () => {
+        this.toastService.success('Person allocated to zone');
+        this.loadAllocations();
+      },
+      error: (err) => {
+        this.toastService.error(err.error.user_msg);
+      }
+    });
   }
 
   selectedPerson(pas: PersonAccreditationSummary) {

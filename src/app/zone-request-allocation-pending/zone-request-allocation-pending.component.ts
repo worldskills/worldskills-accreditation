@@ -98,7 +98,7 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
   }
 
   allocate(zoneRequest: ZoneRequest, zone: Zone) {
-    this.zoneReqAllocService.allocateRequestToZone(this.selectedEvent.id, zoneRequest, zone.id).subscribe(res => {
+    this.zoneReqAllocService.allocateRequestToZone(this.selectedEvent.id, zoneRequest.zone_request_form.id, zone.id, zoneRequest).subscribe(res => {
       this.toastService.success('Request allocated to a Zone successfully!');
       // refresh the pending requests list
       this.loadRequests();
