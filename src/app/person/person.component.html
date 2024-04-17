@@ -24,6 +24,27 @@
             </div>
 
             <div class="row mb-2">
+              <div class="col-sm-6">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'first_name' | translate }}</label>
+                <input type="text" class="form-control"
+                      [ngModel]="personAcr.first_name"
+                      (ngModelChange)="onFirstNameChange($event)"
+                      [disabled]="!hasEditPermission"
+                      [placeholder]="personAcr.person.first_name"
+                      data-1p-ignore>
+              </div>
+              <div class="col-sm-6">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'last_name' | translate }}</label>
+                <input type="text" class="form-control"
+                      [ngModel]="personAcr.last_name"
+                      (ngModelChange)="onLastNameChange($event)"
+                      [disabled]="!hasEditPermission"
+                      [placeholder]="personAcr.person.last_name"
+                      data-1p-ignore>
+              </div>
+            </div>
+
+            <div class="row mb-2">
               <div class="col-sm-12">
                 <label class="small text-muted font-weight-bold my-0 py-0">{{ 'delegate_type' | translate }}</label>
                 <ng-select

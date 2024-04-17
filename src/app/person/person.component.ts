@@ -43,6 +43,8 @@ export class PersonComponent extends WsComponent implements OnInit {
   // override person acr
   personAcr: PersonAccreditation;
   savingPersonAcr = false;
+  firstNameChange: Subject<string> = new Subject<string>();
+  lastNameChange: Subject<string> = new Subject<string>();
   badgeLinesChange: Subject<string> = new Subject<string>();
 
   // permissions
@@ -135,7 +137,15 @@ export class PersonComponent extends WsComponent implements OnInit {
         }
       });
 
-    // saving badge lines only when user stops typing for 400ms and when the lines have changed
+    // saving only when user stops typing for 400ms and when the lines have changed
+    this.firstNameChange.pipe(debounceTime(400), distinctUntilChanged()).subscribe(firstName => {
+      this.personAcr.first_name = firstName;
+      this.updatePersonAccreditation();
+    });
+    this.lastNameChange.pipe(debounceTime(400), distinctUntilChanged()).subscribe(lastName => {
+      this.personAcr.last_name = lastName;
+      this.updatePersonAccreditation();
+    });
     this.badgeLinesChange.pipe(debounceTime(400), distinctUntilChanged()).subscribe(lines => {
       this.personAcr.lines = lines;
       this.updatePersonAccreditation();
@@ -156,6 +166,14 @@ export class PersonComponent extends WsComponent implements OnInit {
         this.savingPersonAcr = false;
       })
     );
+  }
+
+  onFirstNameChange(firstName: string) {
+    this.firstNameChange.next(firstName);
+  }
+
+  onLastNameChange(lastName: string) {
+    this.lastNameChange.next(lastName);
   }
 
   onDelTypeChange(dt: DelegateType) {
