@@ -29,4 +29,8 @@ export class ZoneRequestFormService extends WsService<any> {
   createZoneReqForm(eventId: number, zoneReqForm: ZoneRequestForm): Observable<ZoneRequestForm> {
     return this.http.post<ZoneRequestForm>(this.url(eventId), zoneReqForm).pipe(share());
   }
+
+  updateZoneReqForm(eventId: number, formId: number, zoneReqForm: ZoneRequestForm): Observable<ZoneRequestForm> {
+    return this.http.put<ZoneRequestForm>(this.url(eventId) + `/${formId}`, zoneReqForm).pipe(share());
+  }
 }

@@ -44,7 +44,7 @@
           </tbody>
         </table>
       </div>
-      <span class="text-muted">{{ 'total_results' | translate }}: {{ forms?.length }}</span>
+      <span class="text-muted">{{ 'total_results' | translate }}: {{ forms?.length ?? 0 }}</span>
     </div>
   </div>
 </ng-container>
@@ -59,7 +59,7 @@
 <ws-modal [open]="manageForm !== null" (onClose)="manageForm = null" [options]="{size: 'lg'}">
   <ng-container header>
     <h4 *ngIf="manageForm?.id === 0">{{ 'add_new_zone_request_form' | translate }}</h4>
-    <h4 *ngIf="manageForm?.id > 0">{{ 'editing' | translate }}: {{ manageForm.name }}</h4>
+    <h4 *ngIf="manageForm?.id > 0">{{ 'editing' | translate }}: {{ manageForm.name.text }}</h4>
   </ng-container>
   <ng-container body>
     <app-zone-request-form-form *ngIf="manageForm !== null"

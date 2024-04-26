@@ -86,11 +86,12 @@ export class ZoneRequestFormComponent extends WsComponent implements OnInit {
   }
 
   save(form: ZoneRequestForm): void {
-    this.zoneReqFormService.createZoneReqForm(this.selectedEvent.id, form).subscribe(res => {
-      this.loadForms();
-      this.manageForm = null;
-      this.toastService.success('Form saved');
-    });
+    (form.id > 0 ? this.zoneReqFormService.updateZoneReqForm(this.selectedEvent.id, form.id, form) : this.zoneReqFormService.createZoneReqForm(this.selectedEvent.id, form))
+      .subscribe(res => {
+        this.loadForms();
+        this.manageForm = null;
+        this.toastService.success('Form is saved!');
+      });
   }
 
   updateForm(form: ZoneRequestForm): void {
