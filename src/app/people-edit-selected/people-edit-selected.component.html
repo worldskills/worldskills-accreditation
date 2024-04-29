@@ -65,6 +65,15 @@
         </div>
     </div>
 
+    <div class="row my-3">
+        <div class="col-sm-12">
+            <div class="form-check pl-4">
+                <input class="form-check-input" type="checkbox" id="distributed" name="distributed" [(ngModel)]="distributed">
+                <label class="form-check-label small" for="distributed">{{'mark_as_distributed' | translate}}</label>
+            </div>
+        </div>
+    </div>
+
     <div class="row mt-4 mb-2 text-right">
         <div class="col-sm-12">
             <button type="submit" class="btn btn-sm btn-primary" [disabled]="loading">{{'apply' | translate}}</button>
