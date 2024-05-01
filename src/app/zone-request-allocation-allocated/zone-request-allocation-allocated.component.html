@@ -68,12 +68,13 @@
                         [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet. Click to mark as distributed.'"
                         (click)="updateWristband(allocation.wristband_distributed_at !== null, allocation.id)"
                   ></span>
-                  <span class="badge badge-pill badge-light text-wrap w-75">
+                  <span class="badge badge-pill badge-light text-wrap w-75 font-weight-lighter text-left">
                     <ng-container *ngIf="allocation.zone_request != null">
                       <b>{{ allocation.zone_request.person_accreditation.person_position.organization.name.text }}</b>,
                       {{ allocation.zone_request.person_accreditation.person.first_name + ' ' + allocation.zone_request.person_accreditation.person.last_name }}
                     </ng-container>
                     <ng-container *ngIf="allocation.manual_allocation_to_person_accreditation != null">
+<!--                      TODO: is getting the Org like this correct?-->
                       <b>{{ allocation.manual_allocation_to_person_accreditation.organization }}</b>,
                       {{ allocation.manual_allocation_to_person_accreditation.first_name + ' ' + allocation.manual_allocation_to_person_accreditation.last_name }}
                     </ng-container>
