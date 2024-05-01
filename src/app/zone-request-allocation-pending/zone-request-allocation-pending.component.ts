@@ -45,7 +45,7 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
 
         // filter pending requests by Zone and/or Org name
         if (!GenericUtil.isNullOrUndefined(this.pendingReqOrgName)) {
-          this.pendingRequests = this.pendingRequests.filter(req => req.person_accreditation?.organization_name === this.pendingReqOrgName);
+          this.pendingRequests = this.pendingRequests.filter(req => req.person_accreditation?.person_position.organization.name.text === this.pendingReqOrgName);
         }
         if (!GenericUtil.isNullOrUndefined(this.pendingReqZone)) {
           this.pendingRequests = this.pendingRequests.filter(req => req.first_choice_zone.id === this.pendingReqZone.id || req.second_choice_zone?.id === this.pendingReqZone.id);
@@ -55,7 +55,7 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
         this.sortPendingRequests('org-asc');
 
         // get unique org names from pending requests for filters
-        this.pendingReqOrgNames = [...(new Set(res.zone_requests.map(req => req.person_accreditation.organization_name)))];
+        this.pendingReqOrgNames = [...(new Set(res.zone_requests.map(req => req.person_accreditation.person_position.organization.name.text)))];
 
         // get unique zones from pending requests for filters
         this.pendingReqZones = [];
@@ -73,9 +73,9 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
       try {
         switch (sorting) {
           case "org-asc":
-            return a.person_accreditation.organization_name.localeCompare(b.person_accreditation.organization_name);
+            return a.person_accreditation.person_position.organization.name.text.localeCompare(b.person_accreditation.person_position.organization.name.text);
           case "org-desc":
-            return b.person_accreditation.organization_name.localeCompare(a.person_accreditation.organization_name);
+            return b.person_accreditation.person_position.organization.name.text.localeCompare(a.person_accreditation.person_position.organization.name.text);
           case "name-asc":
             return a.person_accreditation.person.first_name.localeCompare(b.person_accreditation.person.first_name);
           case "name-desc":

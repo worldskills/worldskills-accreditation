@@ -19,7 +19,8 @@
     </div>
 
     <div *ngIf="allocations?.length - getEmailNotificationSentCount() !== 0" class="small alert alert-warning">
-      {{ allocations?.length - getEmailNotificationSentCount() }} allocations are awaiting notification emails. <span class="btn btn-sm btn-link p-0 m-0">Click here</span> to send them now.
+      {{ allocations?.length - getEmailNotificationSentCount() }} allocations are awaiting notification emails. <span
+      class="btn btn-sm btn-link p-0 m-0">Click here</span> to send them now.
     </div>
 
     <div class="table-responsive-md">
@@ -38,7 +39,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let zoneReq of currentForm.zones">
-          <td>
+          <td class="small">
                 <span class="badge mr-1" [style.background-color]="zoneReq.zone.color"
                       [ngbTooltip]="zoneReq.zone.name"
                       [style.color]="zoneReq.zone.text_color">{{ zoneReq.zone.code }}</span>
@@ -49,25 +50,26 @@
             <div class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToZone = zoneReq.zone">Allocate</div>
           </td>
           <td>
-            <span class="badge badge-light">{{ getAllocationsForZone(zoneReq.zone)?.length }} / {{ zoneReq.quota }}</span>
+            <span class="badge badge-light">{{ getAllocationsForZone(zoneReq.zone)?.length }}
+              / {{ zoneReq.quota }}</span>
           </td>
           <td>
             <ul class="list-unstyled">
               <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone); trackBy: trackByAllocId">
                 <div>
-                  <span class="fa fa-inbox mr-1"
-                        style="cursor: pointer; font-size: 1.5em"
-                        [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"
-                        [ngbTooltip]="allocation.notification_sent_at !== null ? ('Email notification was sent at : ' + allocation.notification_sent_at) : 'Email notification is not sent yet' "></span>
-                  <span class="fa fa-hand-grab-o mr-1"
+                    <span class="fa fa-inbox mr-1 align-top"
+                          style="cursor: pointer; font-size: 1.5em"
+                          [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"
+                          [ngbTooltip]="allocation.notification_sent_at !== null ? ('Email notification was sent at : ' + allocation.notification_sent_at) : 'Email notification is not sent yet' "></span>
+                  <span class="fa fa-hand-grab-o mr-1 align-top"
                         style="cursor: pointer; font-size: 1.5em"
                         [ngClass]="allocation.wristband_distributed_at !== null ? 'text-success' : ''"
                         [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet. Click to mark as distributed.'"
                         (click)="updateWristband(allocation.wristband_distributed_at !== null, allocation.id)"
                   ></span>
-                  <span class="badge badge-pill badge-light">
+                  <span class="badge badge-pill badge-light text-wrap w-75">
                     <ng-container *ngIf="allocation.zone_request != null">
-                      <b>{{ allocation.zone_request.person_accreditation.organization_name }}</b>,
+                      <b>{{ allocation.zone_request.person_accreditation.person_position.organization.name.text }}</b>,
                       {{ allocation.zone_request.person_accreditation.person.first_name + ' ' + allocation.zone_request.person_accreditation.person.last_name }}
                     </ng-container>
                     <ng-container *ngIf="allocation.manual_allocation_to_person_accreditation != null">
@@ -87,25 +89,32 @@
 </div>
 
 
-<ws-modal [open]="manualAllocationToZone !== null" (onClose)="manualAllocationToZone = null" [options]="{size: 'xl', centered: true}">
+<ws-modal [open]="manualAllocationToZone !== null" (onClose)="manualAllocationToZone = null"
+          [options]="{size: 'xl', centered: true}">
   <ng-container header>
-    <h4>{{'manual_allocation' | translate}} to {{manualAllocationToZone?.name}}</h4>
+    <h4>{{ 'manual_allocation' | translate }} to {{ manualAllocationToZone?.name }}</h4>
   </ng-container>
   <ng-container body>
     <h4 class="alert alert-info">Please select a person to allocate to this zone.</h4>
 
     <app-people
       *ngIf="manualAllocationToPerson === null"
-      [functionalitiesDisplaySetting]="functionalitiesDisplaySetting" (selectedPerson)="selectedPerson($event)"></app-people>
+      [functionalitiesDisplaySetting]="functionalitiesDisplaySetting"
+      [showMenuTabs]="false"
+      (selectedPerson)="selectedPerson($event)"></app-people>
 
     <div *ngIf="manualAllocationToPerson !== null">
 
-      <b>Selected person:</b> <p class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToPerson = null">Change</p>
+      <b>Selected person:</b>
+      <p class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToPerson = null">Change</p>
       <br>
-      {{manualAllocationToPerson?.first_name + ' ' + manualAllocationToPerson?.last_name}} from {{manualAllocationToPerson?.organization ?? '-'}}
+      {{ manualAllocationToPerson?.first_name + ' ' + manualAllocationToPerson?.last_name }}
+      from {{ manualAllocationToPerson?.organization ?? '-' }}
 
       <p>
-        <button class="btn btn-sm btn-primary mt-2" (click)="allocate(manualAllocationToPerson, manualAllocationToZone)">{{ 'allocate' | translate }}</button>
+        <button class="btn btn-sm btn-primary mt-2"
+                (click)="allocate(manualAllocationToPerson, manualAllocationToZone)">{{ 'allocate' | translate }}
+        </button>
       </p>
     </div>
   </ng-container>

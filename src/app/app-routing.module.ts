@@ -65,6 +65,7 @@ const routes: Routes = [
               breadcrumb: 'Zone Request Form',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.ALLOCATE_ZONE_REQUEST])
             },
+            canActivate: [GuardService],
             component: ZoneRequestFormComponent
           },
           {
@@ -73,6 +74,7 @@ const routes: Routes = [
               breadcrumb: 'Zone Request Form',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.REQUEST_ZONE, ACR_ROLES.ALLOCATE_ZONE_REQUEST])
             },
+            canActivate: [GuardService],
             component: ZoneRequestComponent
           },
           {
@@ -81,6 +83,7 @@ const routes: Routes = [
               breadcrumb: 'Zone Request',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.REQUEST_ZONE, ACR_ROLES.ALLOCATE_ZONE_REQUEST])
             },
+            canActivate: [GuardService],
             component: ZoneRequestedComponent
           },
           {
@@ -89,6 +92,7 @@ const routes: Routes = [
               breadcrumb: 'Zone Request Allocation',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.ALLOCATE_ZONE_REQUEST])
             },
+            canActivate: [GuardService],
             component: ZoneRequestAllocationComponent
           },
           {

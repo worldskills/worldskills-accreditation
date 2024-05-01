@@ -30,6 +30,7 @@ export class PeopleComponent extends WsComponent implements OnInit {
     person_profile_visit: true,
     select_a_person: false,
   }
+  @Input() showMenuTabs = true;
   @Output() selectedPerson: EventEmitter<PersonAccreditationSummary> = new EventEmitter<PersonAccreditationSummary>();
 
   allChecked = false;
@@ -50,7 +51,7 @@ export class PeopleComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appService.showMenuTabs.next(true);
+    this.appService.showMenuTabs.next(this.showMenuTabs);
     this.fetchParams = this.personAcrService.initialiseFetchParams();
 
     // load current user and check permissions
