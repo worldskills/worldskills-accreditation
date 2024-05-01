@@ -57,10 +57,11 @@
             <ul class="list-unstyled">
               <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone); trackBy: trackByAllocId">
                 <div>
-                    <span class="fa fa-inbox mr-1 align-top"
-                          style="cursor: pointer; font-size: 1.5em"
-                          [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"
-                          [ngbTooltip]="allocation.notification_sent_at !== null ? ('Email notification was sent at : ' + allocation.notification_sent_at) : 'Email notification is not sent yet' "></span>
+                  <span class="badge badge-dark mr-1 mt-1 align-top" style="font-size: 0.8em" ngbTooltip="Individual Spot Label">{{ allocation.allocated_zone_spot_label }} </span>
+                  <span class="fa fa-inbox mr-1 align-top"
+                        style="cursor: pointer; font-size: 1.5em"
+                        [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"
+                        [ngbTooltip]="allocation.notification_sent_at !== null ? ('Email notification was sent at : ' + allocation.notification_sent_at) : 'Email notification is not sent yet' "></span>
                   <span class="fa fa-hand-grab-o mr-1 align-top"
                         style="cursor: pointer; font-size: 1.5em"
                         [ngClass]="allocation.wristband_distributed_at !== null ? 'text-success' : ''"
