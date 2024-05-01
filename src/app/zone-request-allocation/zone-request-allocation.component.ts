@@ -8,6 +8,7 @@ import {ZoneRequestForm} from "../../types/zone-request/zone-request-form";
 import {combineLatest} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {ZoneRequestFormService} from "../../services/zone-request-form/zone-request-form.service";
+import {ZoneRequestFormZone} from "../../types/zone-request/zone-request-form-zone";
 
 @Component({
   selector: 'app-zone-request-allocation',
@@ -21,6 +22,7 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
   loading = false;
   zones: Zone[];
   allocatableZones: Zone[];
+  allocatableFormZones: ZoneRequestFormZone[];
 
   constructor(private appService: AppService,
               private zoneService: ZoneService,
@@ -45,7 +47,8 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
           // load ZoneRequestForm
           this.zoneReqFormService.getZoneReqForm(this.selectedEvent.id, zoneRequestFormHash).subscribe(zoneReqForm => {
             this.currentForm = zoneReqForm;
-            this.allocatableZones = this.currentForm.zones.filter(zone => zone.available_for_allocation).map(z => z.zone);
+            this.allocatableFormZones = this.currentForm.zones.filter(zone => zone.available_for_allocation);
+            this.allocatableZones = this.allocatableFormZones.map(z => z.zone);
           }),
         )
       });

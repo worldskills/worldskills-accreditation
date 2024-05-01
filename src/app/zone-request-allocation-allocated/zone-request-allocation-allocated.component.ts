@@ -8,6 +8,7 @@ import {ZoneRequestAllocationService} from "../../services/zone-request-allocati
 import {ToastService} from "angular-toastify";
 import {PeopleSearchFunctionalitiesDisplaySetting} from "../people/people.component";
 import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";
+import {ZoneRequestFormZone} from "../../types/zone-request/zone-request-form-zone";
 
 @Component({
   selector: 'app-zone-request-allocation-allocated',
@@ -19,7 +20,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   @Input() selectedEvent: Event;
   @Input() zones: Zone[];
   @Input() currentForm: ZoneRequestForm;
-  @Input() allocatableZones: Zone[];
+  @Input() allocatableFormZones: ZoneRequestFormZone[];
 
   allocations: ZoneRequestAllocation[];
 

@@ -6,7 +6,7 @@
     <div class="text-muted small">
       <div class="row">
         <div class="col-md-6">
-          <p class="mb-2">{{ 'total_zones' | translate }}: {{ allocatableZones?.length ?? 0 }}</p>
+          <p class="mb-2">{{ 'total_zones' | translate }}: {{ allocatableFormZones?.length ?? 0 }}</p>
           <p class="mb-2">{{ 'total_allocated' | translate }}: {{ allocations?.length ?? 0 }}</p>
         </div>
         <div class="col-md-6">
@@ -38,7 +38,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let zoneReq of currentForm.zones">
+        <tr *ngFor="let zoneReq of allocatableFormZones">
           <td class="small">
                 <span class="badge mr-1" [style.background-color]="zoneReq.zone.color"
                       [ngbTooltip]="zoneReq.zone.name"
