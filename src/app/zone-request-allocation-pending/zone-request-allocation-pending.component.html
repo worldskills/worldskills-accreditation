@@ -42,11 +42,10 @@
     <div>
       <table class="table table-sm">
         <colgroup>
+          <col style="width: 40%">
           <col style="width: 20%">
-          <col style="width: 15%">
           <col style="width: 20%">
           <col style="width: 20%">
-          <col style="width: 25%">
         </colgroup>
         <thead>
         <tr>
@@ -78,13 +77,12 @@
               <ng-container *ngIf="pendingReqsSorting !== 'second-choice-desc'">&uarr;</ng-container>
             </a>
           </th>
-          <th class="small font-weight-bold">{{ 'action' | translate | titlecase }}</th>
         </tr>
         </thead>
         <tbody>
         <ng-container *ngFor="let req of pendingRequests">
           <tr>
-            <td class="border-bottom-0">{{ req.person_accreditation.person_position?.organization?.name?.text ?? '-' }}</td>
+            <td class="border-bottom-0" rowspan="2">{{ req.person_accreditation.person_position?.organization?.name?.text ?? '-' }}</td>
             <td
               class="border-bottom-0">{{ req.person_accreditation.person.first_name }} {{ req.person_accreditation.person.last_name }}
             </td>
@@ -94,34 +92,32 @@
             <td class="border-bottom-0">
               <span [class.alert-warning]="req.second_choice_zone !== null && req.second_choice_zone?.id === pendingReqZone?.id">{{ req.second_choice_zone?.name ?? '-' }}</span>
             </td>
-            <td rowspan="2">
-              <ng-select
-                name="zone"
-                [items]="allocatableZones"
-                bindLabel="name"
-                placeholder="Allocate to zone"
-                #allocateZoneDropdown
-              >
-                <ng-template ng-label-tmp let-item="item">
-                  <div class="d-inline-block" style="width: 15px; height: 15px; "
-                       [style.background-color]="item.color"></div>
-                  <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
-                </ng-template>
-                <ng-template ng-option-tmp let-item="item" let-index="index">
-                  <div class="d-inline-block" style="width: 15px; height: 15px; "
-                       [style.background-color]="item.color"></div>
-                  <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
-                </ng-template>
-              </ng-select>
-              <button class="btn btn-sm btn-primary mt-2 float-right" (click)="allocate(req, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>
-            </td>
           </tr>
           <tr>
-            <td class="border-top-0"></td>
             <td colspan="3" class="border-top-0 small">
               <p class="text-muted">
-                <b>Objective</b>:
+                <b>{{ 'objective' | translate | titlecase }}</b>:
                 {{ req.objective }}
+                <br>
+                <ng-select
+                  name="zone"
+                  [items]="allocatableZones"
+                  bindLabel="name"
+                  placeholder="Allocate to zone"
+                  #allocateZoneDropdown
+                >
+                  <ng-template ng-label-tmp let-item="item">
+                    <div class="d-inline-block" style="width: 15px; height: 15px; "
+                         [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                  </ng-template>
+                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                    <div class="d-inline-block" style="width: 15px; height: 15px; "
+                         [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                  </ng-template>
+                </ng-select>
+                <button class="btn btn-sm btn-primary mt-2 float-right" (click)="allocate(req, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>
               </p>
             </td>
           </tr>
