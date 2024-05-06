@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
     <div class="row mb-3">
-      <div class="col-md-5">
+      <div class="col-md-6">
         <label class="small mb-0 font-weight-bold">{{ 'choose_zone' | translate }}</label>
         <ng-select
           name="zone"
@@ -26,7 +26,7 @@
           </ng-template>
         </ng-select>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-6">
         <label class="small mb-0 font-weight-bold">{{ 'choose_organization' | translate }}</label>
         <ng-select
           name="organization"
@@ -94,7 +94,7 @@
             </td>
           </tr>
           <tr>
-            <td colspan="3" class="border-top-0 small">
+            <td colspan="3" class="border-top-0 border-bottom-0 small">
               <p class="text-muted">
                 <b>{{ 'objective' | translate | titlecase }}</b>:
                 {{ req.objective }}
