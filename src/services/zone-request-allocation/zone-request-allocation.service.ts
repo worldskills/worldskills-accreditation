@@ -37,4 +37,8 @@ export class ZoneRequestAllocationService extends WsService<any> {
   updateWristbandDistribution(eventId: number, zoneRequestAllocationId: number, isDistributed: boolean): Observable<any> {
     return this.http.put(this.url(eventId) + `/${zoneRequestAllocationId}/wristband`, isDistributed);
   }
+
+  sendZoneAllocatedPendingNotificationEmails(eventId: number, zoneRequestFormId: number): Observable<any> {
+    return this.http.put(this.url(eventId) + `/form/${zoneRequestFormId}`, null);
+  }
 }

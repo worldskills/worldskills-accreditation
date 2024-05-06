@@ -20,7 +20,7 @@
 
     <div *ngIf="allocations?.length - getEmailNotificationSentCount() !== 0" class="small alert alert-warning">
       {{ allocations?.length - getEmailNotificationSentCount() }} allocations are awaiting notification emails. <span
-      class="btn btn-sm btn-link p-0 m-0">Click here</span> to send them now.
+      class="btn btn-sm btn-link p-0 m-0" (click)="sendOutstandingNotifEmails()">Click here</span> to send them now.
     </div>
 
     <div class="table-responsive-md">
@@ -57,7 +57,7 @@
             <ul class="list-unstyled">
               <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone); trackBy: trackByAllocId">
                 <div>
-                  <span class="badge badge-dark mr-1 mt-1 align-top" style="font-size: 0.8em" ngbTooltip="Individual Spot Label">{{ allocation.allocated_zone_spot_label }} </span>
+                  <span class="badge badge-dark mr-1 mt-1 align-top" style="font-size: 0.8em; background-color: #003764" ngbTooltip="Individual Spot Label">{{ allocation.allocated_zone_spot_label }} </span>
                   <span class="fa fa-inbox mr-1 align-top"
                         style="cursor: pointer; font-size: 1.5em"
                         [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"

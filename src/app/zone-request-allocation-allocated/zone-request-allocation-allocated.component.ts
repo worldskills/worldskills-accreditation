@@ -118,4 +118,18 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   trackByAllocId(idx: number, zra: ZoneRequestAllocation) {
     return zra.id;
   }
+
+  sendOutstandingNotifEmails(): void {
+    if (confirm('Are you sure you want to send the emails to them now?')) {
+      this.zoneReqAllocService.sendZoneAllocatedPendingNotificationEmails(this.selectedEvent.id, this.currentForm.id).subscribe({
+        next: () => {
+          this.toastService.success('Sending emails...');
+          this.loadAllocations();
+        },
+        error: (err) => {
+          this.toastService.error(err?.error?.user_msg ?? 'Error sending emails');
+        }
+      });
+    }
+  }
 }

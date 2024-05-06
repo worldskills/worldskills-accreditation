@@ -9,7 +9,7 @@
     <div class="row mb-3">
       <div class="col-sm-12">
         <label class="small font-weight-bold">{{ 'first_choice' | translate }}
-          <span class="text-muted small font-weight-bold">({{ 'required' | translate | titlecase }})</span>
+          <span class="text-danger small font-weight-bold" style="font-size: 7.5pt">({{ 'required' | translate | titlecase }})</span>
         </label>
         <ng-select
           name="first_choice_zone"
@@ -61,7 +61,7 @@
     <div class="row mb-3">
       <div class="col-sm-12">
         <label class="font-weight-bold mb-0">{{ 'objective' | translate }}
-          <span class="text-muted small font-weight-bold">({{ 'required' | translate | titlecase }})</span>
+          <span class="text-danger small font-weight-bold" style="font-size: 7.5pt">({{ 'required' | translate | titlecase }})</span>
         </label>
         <p class="text-muted small">{{ 'zone_request_objective_subtitle' | translate }}</p>
         <textarea
