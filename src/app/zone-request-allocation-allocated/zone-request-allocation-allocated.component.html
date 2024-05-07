@@ -57,7 +57,8 @@
             <ul class="list-unstyled">
               <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone); trackBy: trackByAllocId">
                 <div>
-                  <span class="badge badge-dark mr-1 mt-1 align-top" style="font-size: 0.8em; background-color: #003764" ngbTooltip="Individual Spot Label">{{ allocation.allocated_zone_spot_label }} </span>
+                  <span class="badge badge-dark mr-1 mt-1 align-top" style="font-size: 0.8em; background-color: #003764"
+                        ngbTooltip="Individual Spot Label">{{ allocation.allocated_zone_spot_label }} </span>
                   <span class="fa fa-inbox mr-1 align-top"
                         style="font-size: 1.5em"
                         [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"
@@ -68,14 +69,16 @@
                         [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet. Click to mark as distributed.'"
                         (click)="updateWristband(allocation.wristband_distributed_at !== null, allocation.id)"
                   ></span>
-                  <span class="badge badge-pill badge-light text-wrap w-75 font-weight-lighter text-left">
+                  <span class="badge badge-pill badge-light text-wrap w-75 font-weight-lighter text-left"
+                        style="cursor: pointer"
+                        (click)="previewSelectedPersonACR = (allocation.zone_request != null ? allocation.zone_request.person_accreditation.summary : allocation.manual_allocation_to_person_accreditation)">
                     <ng-container *ngIf="allocation.zone_request != null">
-                      <b>{{ allocation.zone_request.person_accreditation.person_position.organization.name.text }}</b>,
+                        <b>{{ allocation.zone_request.person_accreditation.person_position.organization.name.text }}</b>,
                       {{ allocation.zone_request.person_accreditation.person.first_name + ' ' + allocation.zone_request.person_accreditation.person.last_name }}
                     </ng-container>
                     <ng-container *ngIf="allocation.manual_allocation_to_person_accreditation != null">
 <!--                      TODO: is getting the Org like this correct?-->
-                      <b>{{ allocation.manual_allocation_to_person_accreditation.organization }}</b>,
+                        <b>{{ allocation.manual_allocation_to_person_accreditation.organization }}</b>,
                       {{ allocation.manual_allocation_to_person_accreditation.first_name + ' ' + allocation.manual_allocation_to_person_accreditation.last_name }}
                     </ng-container>
                   </span>
@@ -119,5 +122,16 @@
         </button>
       </p>
     </div>
+  </ng-container>
+</ws-modal>
+
+<ws-modal [open]="previewSelectedPersonACR !== null" (onClose)="previewSelectedPersonACR = null"
+          [options]="{size: 'lg', centered: true}">
+  <ng-container header>
+    <h4>{{ 'badge_preview' | translate }}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-person-badge-preview style="zoom: 0.8" [selectedEvent]="selectedEvent"
+                              [person]="previewSelectedPersonACR"></app-person-badge-preview>
   </ng-container>
 </ws-modal>

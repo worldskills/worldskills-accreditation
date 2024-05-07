@@ -32,6 +32,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     select_a_person: true,
   }
   manualAllocationToPerson: PersonAccreditationSummary = null;
+  previewSelectedPersonACR: PersonAccreditationSummary = null;
 
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
               private toastService: ToastService) {
