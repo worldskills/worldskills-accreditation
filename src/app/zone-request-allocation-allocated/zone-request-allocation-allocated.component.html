@@ -73,13 +73,15 @@
                         style="cursor: pointer"
                         (click)="previewSelectedPersonACR = (allocation.zone_request != null ? allocation.zone_request.person_accreditation.summary : allocation.manual_allocation_to_person_accreditation)">
                     <ng-container *ngIf="allocation.zone_request != null">
-                        <b>{{ allocation.zone_request.person_accreditation.person_position.organization.name.text }}</b>,
-                      {{ allocation.zone_request.person_accreditation.person.first_name + ' ' + allocation.zone_request.person_accreditation.person.last_name }}
+                      <b>{{ allocation.zone_request.person_accreditation.person_position.organization.name.text }}</b>, {{ allocation.zone_request.person_accreditation.person.first_name + ' ' + allocation.zone_request.person_accreditation.person.last_name }}
+                      <span *ngIf="allocation.zone_request.person_accreditation.person_position.member != null"
+                            [ngbTooltip]="allocation.zone_request.person_accreditation.person_position.member.name.text">- {{ allocation.zone_request.person_accreditation.person_position.member.code }}</span>
                     </ng-container>
                     <ng-container *ngIf="allocation.manual_allocation_to_person_accreditation != null">
 <!--                      TODO: is getting the Org like this correct?-->
-                        <b>{{ allocation.manual_allocation_to_person_accreditation.organization }}</b>,
-                      {{ allocation.manual_allocation_to_person_accreditation.first_name + ' ' + allocation.manual_allocation_to_person_accreditation.last_name }}
+                        <b>{{ allocation.manual_allocation_to_person_accreditation.organization }}</b>, {{ allocation.manual_allocation_to_person_accreditation.first_name + ' ' + allocation.manual_allocation_to_person_accreditation.last_name }}
+                      <span *ngIf="allocation.manual_allocation_to_person_accreditation.member != null"
+                            [ngbTooltip]="allocation.manual_allocation_to_person_accreditation?.member?.name.text">- {{ allocation.manual_allocation_to_person_accreditation?.member?.code }}</span>
                     </ng-container>
                   </span>
                 </div>
