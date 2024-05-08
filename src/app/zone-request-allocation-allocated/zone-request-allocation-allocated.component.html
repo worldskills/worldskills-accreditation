@@ -24,14 +24,16 @@
     </div>
 
     <div class="row mb-3 small">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <label class="small mb-0 font-weight-bold">{{ 'choose_zone' | translate }}</label>
         <ng-select
           name="zone"
           [items]="allocatableZones"
           bindLabel="name"
+          bindValue="id"
           placeholder="All Zones"
-          [(ngModel)]="filterZone"
+          [multiple]="true"
+          [(ngModel)]="filterZones"
         >
           <ng-template ng-label-tmp let-item="item">
             <div class="d-inline-block" style="width: 15px; height: 15px; "

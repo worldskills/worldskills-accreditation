@@ -36,7 +36,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   manualAllocationToPerson: PersonAccreditationSummary = null;
 
   // for filtering allocations
-  filterZone: Zone;
+  filterZones: number[];
 
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
               private toastService: ToastService) {
@@ -62,8 +62,8 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
    * Filter the allocatable zones by the selected zone
    */
   filterAllocatableZones(formZones: ZoneRequestFormZone[]): ZoneRequestFormZone[] {
-    if (this.filterZone) {
-      return formZones.filter(zrfz => zrfz.zone.id === this.filterZone.id);
+    if (this.filterZones && this.filterZones.length > 0) {
+      return formZones.filter(zrfz => this.filterZones.includes(zrfz.zone.id));
     }
     return formZones;
   }
