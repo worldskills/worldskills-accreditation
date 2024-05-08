@@ -75,7 +75,9 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     const allocations = this.allocations?.filter(allocation => allocation.allocated_zone.id === zone.id);
     if (allocations) {
       return allocations.sort((a, b) => {
-        if (a.zone_request != null && b.zone_request != null) {
+        if (a.allocated_zone_spot_label != null && b.allocated_zone_spot_label != null) {
+          return a.allocated_zone_spot_label.localeCompare(b.allocated_zone_spot_label);
+        } else if (a.zone_request != null && b.zone_request != null) {
           return a.zone_request.person_accreditation.person_position.organization.name.text.localeCompare(b.zone_request.person_accreditation.person_position.organization.name.text);
         } else if (a.manual_allocation_to_person_accreditation != null && b.manual_allocation_to_person_accreditation != null) {
           return (a.manual_allocation_to_person_accreditation?.organization ?? '').localeCompare(b.manual_allocation_to_person_accreditation?.organization ?? '');
