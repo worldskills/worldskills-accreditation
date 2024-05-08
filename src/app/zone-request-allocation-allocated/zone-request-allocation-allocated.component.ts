@@ -20,9 +20,11 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   @Input() selectedEvent: Event;
   @Input() zones: Zone[];
   @Input() currentForm: ZoneRequestForm;
+  @Input() allocatableZones: Zone[];
   @Input() allocatableFormZones: ZoneRequestFormZone[];
 
   allocations: ZoneRequestAllocation[];
+  previewSelectedPersonACR: PersonAccreditationSummary = null;
 
   // for manual allocation to a zone
   manualAllocationToZone: Zone = null;
@@ -32,7 +34,9 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     select_a_person: true,
   }
   manualAllocationToPerson: PersonAccreditationSummary = null;
-  previewSelectedPersonACR: PersonAccreditationSummary = null;
+
+  // for filtering allocations
+  filterZone: Zone;
 
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
               private toastService: ToastService) {
@@ -54,6 +58,19 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     );
   }
 
+  /**
+   * Filter the allocatable zones by the selected zone
+   */
+  filterAllocatableZones(formZones: ZoneRequestFormZone[]): ZoneRequestFormZone[] {
+    if (this.filterZone) {
+      return formZones.filter(zrfz => zrfz.zone.id === this.filterZone.id);
+    }
+    return formZones;
+  }
+
+  /**
+   * Get the allocations for a zone
+   */
   getAllocationsForZone(zone: Zone): ZoneRequestAllocation[] {
     const allocations = this.allocations?.filter(allocation => allocation.allocated_zone.id === zone.id);
     if (allocations) {

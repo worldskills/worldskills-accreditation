@@ -22,6 +22,7 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
 
   pendingRequests: ZoneRequest[];
   pendingReqsSorting: 'org-asc' | 'org-desc' | 'name-asc' | 'name-desc' | 'first-choice-asc' | 'first-choice-desc' | 'second-choice-asc' | 'second-choice-desc';
+  // for filtering pending requests
   pendingReqOrgNames: string[] = [];
   pendingReqOrgName: string;
   pendingReqZones: Zone[] = [];
