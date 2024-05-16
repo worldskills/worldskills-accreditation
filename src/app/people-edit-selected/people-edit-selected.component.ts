@@ -28,6 +28,7 @@ export class PeopleEditSelectedComponent {
   delegateType: DelegateType;
   addZones: Zone[] = [];
   removeZones: Zone[] = [];
+  distributed = false;
 
   loading = false;
 
@@ -50,7 +51,7 @@ export class PeopleEditSelectedComponent {
 
   save() {
     this.loading = true;
-    this.personAccreditationService.batchUpdateAccreditations(this.selectedEvent.id, this.selectedPeople.map(a => a.id), this.form.value['delegateType'], this.form.value['addZones'], this.form.value['removeZones']).subscribe(res => {
+    this.personAccreditationService.batchUpdateAccreditations(this.selectedEvent.id, this.selectedPeople.map(a => a.id), this.form.value['delegateType'], this.form.value['addZones'], this.form.value['removeZones'], this.form.value['distributed']).subscribe(res => {
       this.toastService.success('Accreditations updated');
       this.form.resetForm();
       this.saved.emit();

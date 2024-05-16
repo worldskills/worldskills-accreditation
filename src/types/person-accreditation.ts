@@ -14,6 +14,8 @@ import {PersonAccreditationSummary} from "./person-accreditation-summary";
 export interface PersonAccreditation {
   id: number;
   person: Person;
+  first_name: string;
+  last_name: string;
   random_hash: string;
   event: Event;
   person_position: PersonPosition;

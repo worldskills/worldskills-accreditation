@@ -24,6 +24,27 @@
             </div>
 
             <div class="row mb-2">
+              <div class="col-sm-6">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'first_name' | translate }}</label>
+                <input type="text" class="form-control"
+                      [ngModel]="personAcr.first_name"
+                      (ngModelChange)="onFirstNameChange($event)"
+                      [disabled]="!hasEditPermission"
+                      [placeholder]="personAcr.person.first_name"
+                      data-1p-ignore>
+              </div>
+              <div class="col-sm-6">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'last_name' | translate }}</label>
+                <input type="text" class="form-control"
+                      [ngModel]="personAcr.last_name"
+                      (ngModelChange)="onLastNameChange($event)"
+                      [disabled]="!hasEditPermission"
+                      [placeholder]="personAcr.person.last_name"
+                      data-1p-ignore>
+              </div>
+            </div>
+
+            <div class="row mb-2">
               <div class="col-sm-12">
                 <label class="small text-muted font-weight-bold my-0 py-0">{{ 'delegate_type' | translate }}</label>
                 <ng-select
@@ -114,14 +135,17 @@
           </div>
           <div class="card-body" *ngIf="!personAcr">
             <ngx-skeleton-loader
+              count="2"
+              [theme]="{ 'border-radius': '0', width: '45%', height: '30px', 'margin-bottom': '15px', 'margin-right': '15px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
               count="1"
               [theme]="{ 'border-radius': '0', width: '60%', height: '30px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
             <ngx-skeleton-loader
               count="1"
               [theme]="{ 'border-radius': '0', width: '100%', height: '80px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
             <ngx-skeleton-loader
-              count="1"
-              [theme]="{ 'border-radius': '0', width: '15%', height: '30px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
+              count="2"
+              [theme]="{ 'border-radius': '0', width: '30%', height: '30px', 'margin-bottom': '15px', 'margin-right': '15px' }"></ngx-skeleton-loader>
           </div>
         </div>
       </div>

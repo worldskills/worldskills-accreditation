@@ -43,12 +43,13 @@ export class PersonAccreditationService extends WsService<any> {
     return this.http.put<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}`, personAccreditation).pipe(share());
   }
 
-  batchUpdateAccreditations(eventId: number, personAccreditationIds: number[], delegateType: DelegateType, zonesAdd: Zone[], zonesRemove: Zone[]): Observable<any> {
+  batchUpdateAccreditations(eventId: number, personAccreditationIds: number[], delegateType: DelegateType, zonesAdd: Zone[], zonesRemove: Zone[], distributed: boolean): Observable<any> {
     return this.http.put(`${this.url(eventId)}/batch`, {
       ids: personAccreditationIds,
       delegate_type: delegateType,
       zones_add: zonesAdd,
-      zones_remove: zonesRemove
+      zones_remove: zonesRemove,
+      distributed,
     }).pipe(share());
   }
 
