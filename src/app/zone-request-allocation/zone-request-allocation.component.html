@@ -1,6 +1,13 @@
 <h3>{{ 'allocation' | translate | titlecase }} <br><span
   class="text-muted small font-weight-light">{{ currentForm?.name.text }}</span></h3>
 
+<div class="row text-right mb-2">
+  <div class="col-md-12">
+    <button class="btn btn-sm btn-outline-primary" (click)="wristbandDistributionScanning = true">
+      <i class="fa fa-qrcode"></i> {{ 'distribute_wristband' | translate }}
+    </button>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-md-6">
@@ -21,3 +28,16 @@
     </app-zone-request-allocation-allocated>
   </div>
 </div>
+
+<ws-modal [open]="wristbandDistributionScanning" (onClose)="wristbandDistributionScanning = false"
+          [options]="{size: 'md'}">
+  <ng-container header>
+    <h4>{{ 'distribute_wristband' | translate }}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-qr-scanner *ngIf="wristbandDistributionScanning" (scanResult)="scanResult($event)"></app-qr-scanner>
+
+    <div *ngFor="let r of scannedResultList">{{r}}</div>
+
+  </ng-container>
+</ws-modal>

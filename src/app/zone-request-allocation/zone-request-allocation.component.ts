@@ -24,6 +24,10 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
   allocatableZones: Zone[];
   allocatableFormZones: ZoneRequestFormZone[];
 
+  wristbandDistributionScanning: boolean = false;
+
+  scannedResultList: string[] = [];
+
   constructor(private appService: AppService,
               private zoneService: ZoneService,
               private route: ActivatedRoute,
@@ -52,5 +56,9 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
           }),
         )
       });
+  }
+
+  scanResult(result: string) {
+    this.scannedResultList.push(result);
   }
 }
