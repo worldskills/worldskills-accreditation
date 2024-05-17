@@ -1,13 +1,13 @@
 import {Zone} from "../zone";
 import {ZoneRequest} from "./zone-request";
 import {ZoneRequestForm} from "./zone-request-form";
-import {PersonAccreditationSummary} from "../person-accreditation-summary";
+import {PersonAccreditation} from "../person-accreditation";
 
 export interface ZoneRequestAllocation {
   id: number;
   form: ZoneRequestForm;
   zone_request: ZoneRequest;
-  manual_allocation_to_person_accreditation: PersonAccreditationSummary;
+  manual_allocation_to_person_accreditation: PersonAccreditation;
   allocated_zone: Zone;
   allocated_zone_spot_label: string;
   allocated_at: string;

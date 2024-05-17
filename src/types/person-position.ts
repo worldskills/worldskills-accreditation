@@ -15,4 +15,5 @@ export interface PersonPosition {
   sector: Sector;
   member: Member;
   organization: Organization;
+  organizational_unit: string;
 }

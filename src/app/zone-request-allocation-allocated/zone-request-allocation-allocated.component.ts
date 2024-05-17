@@ -80,7 +80,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
         } else if (a.zone_request != null && b.zone_request != null) {
           return a.zone_request.person_accreditation.person_position.organization.name.text.localeCompare(b.zone_request.person_accreditation.person_position.organization.name.text);
         } else if (a.manual_allocation_to_person_accreditation != null && b.manual_allocation_to_person_accreditation != null) {
-          return (a.manual_allocation_to_person_accreditation?.organization ?? '').localeCompare(b.manual_allocation_to_person_accreditation?.organization ?? '');
+          return (a.manual_allocation_to_person_accreditation?.person_position.organizational_unit ?? '').localeCompare(b.manual_allocation_to_person_accreditation?.person_position.organizational_unit ?? '');
         } else {
           return 0;
         }
