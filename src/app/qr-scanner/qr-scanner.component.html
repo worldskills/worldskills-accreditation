@@ -1,0 +1,12 @@
+<ng-container *ngIf="!scanning">
+  <div class="row my-5">
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="scanBadge()" (touchend)="scanBadge()">Scan</button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container [style.visibility]="!scanning">
+  <video style="width: 350px; height: auto; object-fit: contain;" #videoElement></video>
+  <button class="btn btn-sm btn-danger" (click)="cancel()">X</button>
+</ng-container>
