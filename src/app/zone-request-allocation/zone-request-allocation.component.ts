@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WsComponent} from "@worldskills/worldskills-angular-lib";
+import {GenericUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Zone} from "../../types/zone";
 import {AppService} from "../../services/app/app.service";
@@ -9,6 +9,9 @@ import {combineLatest} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {ZoneRequestFormService} from "../../services/zone-request-form/zone-request-form.service";
 import {ZoneRequestFormZone} from "../../types/zone-request/zone-request-form-zone";
+import {ZoneRequestAllocationService} from "../../services/zone-request-allocation/zone-request-allocation.service";
+import {ToastService} from "angular-toastify";
+import {ZoneRequestAllocation} from "../../types/zone-request/zone-request-allocation";
 
 @Component({
   selector: 'app-zone-request-allocation',
@@ -25,14 +28,15 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
   allocatableFormZones: ZoneRequestFormZone[];
 
   wristbandDistributionScanning: boolean = false;
-
-  scannedResultList: string[] = [];
+  wristbandScanDistributed: ZoneRequestAllocation[] = [];
 
   constructor(private appService: AppService,
               private zoneService: ZoneService,
               private route: ActivatedRoute,
               private zoneReqFormService: ZoneRequestFormService,
-              ) {
+              private zoneReqAllocationService: ZoneRequestAllocationService,
+              private toastService: ToastService,
+  ) {
     super();
   }
 
@@ -58,7 +62,35 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
       });
   }
 
-  scanResult(result: string) {
-    this.scannedResultList.push(result);
+  scanResult(paID: number): void {
+    const updateWristband = (zoneReqAllocId: number) => this.zoneReqAllocationService.updateWristbandDistribution(this.selectedEvent.id, zoneReqAllocId, true).subscribe({
+      next: () => {
+        this.toastService.success('Wristband distributed successfully');
+        this.zoneReqAllocationService.refresh.next(true);
+      },
+      error: (err) => {
+        this.toastService.error(err?.error?.user_msg ?? 'Failed to distribute wristband');
+      }
+    });
+
+    this.zoneReqAllocationService.getAllocationsForPersonAccreditation(this.selectedEvent.id, this.currentForm.id, paID).subscribe({
+      next: res => {
+        // update the wristband distribution for each allocation
+        res.allocations.forEach(allocation => {
+          // check if the wristband is already distributed
+          if (!GenericUtil.isNullOrUndefined(allocation.wristband_distributed_at)) {
+            this.toastService.warn('Wristband was already distributed for this person');
+          } else {
+            updateWristband(allocation.id);
+            this.wristbandScanDistributed = [allocation, ...this.wristbandScanDistributed];
+          }
+        });
+      },
+      error: (err) => {
+        this.toastService.error(err?.error?.user_msg ?? 'Failed to find the person accreditation for the scanned QR code');
+      }
+    });
+
+
   }
 }

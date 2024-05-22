@@ -1,7 +1,6 @@
-import {Component, ElementRef, EventEmitter, NgZone, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import QrScanner from "qr-scanner";
 import {WsComponent} from "@worldskills/worldskills-angular-lib";
-import {AppService} from "../../services/app/app.service";
 
 @Component({
   selector: 'app-qr-scanner',
@@ -10,10 +9,16 @@ import {AppService} from "../../services/app/app.service";
 })
 export class QrScannerComponent extends WsComponent implements OnInit, OnDestroy {
 
-  @Output() scanResult: EventEmitter<string> = new EventEmitter<string>();
+  @Input() highlightScanRegion = true;
+  @Input() maxScansPerSecond = 5;
+  @Input() nSecondsDelayAfterSameScanOutput = 2500;
+  @Output() scanResult: EventEmitter<number> = new EventEmitter<number>();
   @ViewChild('videoElement') videoElement: ElementRef;
 
-  scanning = false;
+  lastEmittedScanOutput: string = '';
+  scanDuration: number = 0;
+  scanning: boolean = false;
+
   qrScanner: QrScanner;
 
   constructor(private ngZone: NgZone) {
@@ -21,6 +26,13 @@ export class QrScannerComponent extends WsComponent implements OnInit, OnDestroy
   }
 
   ngOnInit(): void {
+    // check scan duration so that we can emit the same scan output only after n seconds
+    setInterval(() => {
+      if (this.scanning) {
+        this.scanDuration += 500;
+        console.log('scanDuration', this.scanDuration);
+      }
+    }, 500);
   }
 
   ngAfterViewInit(): void {
@@ -28,27 +40,35 @@ export class QrScannerComponent extends WsComponent implements OnInit, OnDestroy
       this.videoElement.nativeElement,
       result => {
         // this.qrScanner.stop();
-        // this.scanning = false;
+        this.scanning = false;
         this.ngZone.run(() => {
-          console.log(result.data);
-          this.scanResult.emit(result.data);
+          this.scanning = true;
+          // get the data from the qr code
+          const data = result.data;
+
+          // check if the same scan output is emitted within n seconds
+          if (this.lastEmittedScanOutput === data && this.scanDuration < this.nSecondsDelayAfterSameScanOutput) {
+            return;
+          }
+
+          // get the PersonACRID from the data
+          if (data.split('-').length > 0) {
+            this.scanResult.emit(parseInt(data.split('-')[0]));
+            this.lastEmittedScanOutput = data;
+            this.scanDuration = 0;
+          }
         });
       },
       {
-        highlightScanRegion: true,
+        highlightScanRegion: this.highlightScanRegion,
+        maxScansPerSecond: this.maxScansPerSecond,
       },
     );
     this.scanBadge();
   }
 
   scanBadge() {
-    this.scanning = true;
     this.qrScanner.start();
-  }
-
-  cancel() {
-    this.qrScanner.stop();
-    this.scanning = false;
   }
 
   override ngOnDestroy() {

@@ -29,15 +29,39 @@
   </div>
 </div>
 
-<ws-modal [open]="wristbandDistributionScanning" (onClose)="wristbandDistributionScanning = false"
-          [options]="{size: 'md'}">
+<ws-modal [open]="wristbandDistributionScanning"
+          (onClose)="wristbandDistributionScanning = false; wristbandScanDistributed = []"
+          [options]="{size: 'lg'}">
   <ng-container header>
     <h4>{{ 'distribute_wristband' | translate }}</h4>
   </ng-container>
-  <ng-container body>
-    <app-qr-scanner *ngIf="wristbandDistributionScanning" (scanResult)="scanResult($event)"></app-qr-scanner>
+  <ng-container body *ngIf="wristbandDistributionScanning">
 
-    <div *ngFor="let r of scannedResultList">{{r}}</div>
+    <div class="row">
+      <div class="col-md-12">
+        <app-qr-scanner (scanResult)="scanResult($event)"></app-qr-scanner>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="wristbandScanDistributed.length > 0">
+      <div class="col-md-12">
+        <div class="d-flex flex-row flex-nowrap overflow-y-scroll">
+          <div class="card card-block mx-2 border-success" style="min-width: 200px;"
+               *ngFor="let alloc of wristbandScanDistributed">
+            <div class="card-header">
+              <span class="badge badge-success">{{ 'wristband_distributed' | translate | titlecase }}</span>
+              <h4>{{ alloc.allocated_zone.name }}<span class="text-muted"> - {{ alloc.allocated_zone.code }}</span></h4>
+              <h5 class="mt-0">{{ 'individual_spot_label' | translate }}: <b>{{ alloc.allocated_zone_spot_label }}</b>
+              </h5>
+            </div>
+            <div class="card-body">
+              <app-person-preview
+                [personAccreditation]="alloc.zone_request ? alloc.zone_request.person_accreditation : alloc.manual_allocation_to_person_accreditation"></app-person-preview>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </ng-container>
 </ws-modal>

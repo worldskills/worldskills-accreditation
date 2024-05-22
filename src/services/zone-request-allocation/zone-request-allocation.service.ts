@@ -26,6 +26,10 @@ export class ZoneRequestAllocationService extends WsService<any> {
     return this.http.get<ZoneRequestAllocationContainer>(this.url(eventId) + `/form/${zoneReqFormId}`);
   }
 
+  getAllocationsForPersonAccreditation(eventId: number, zoneReqFormId: number, paId: number): Observable<ZoneRequestAllocationContainer> {
+    return this.http.get<ZoneRequestAllocationContainer>(this.url(eventId) + `/form/${zoneReqFormId}/person-accreditation/${paId}`);
+  }
+
   allocateRequestToZone(eventId: number, zoneReqFormId: number, zoneId: number, zoneRequest: ZoneRequest): Observable<any> {
     return this.http.post(this.url(eventId) + `/form/${zoneReqFormId}/zone/${zoneId}`, zoneRequest);
   }

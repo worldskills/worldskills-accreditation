@@ -61,6 +61,7 @@ import {
   ZoneRequestAllocationAllocatedComponent
 } from './zone-request-allocation-allocated/zone-request-allocation-allocated.component';
 import {QrScannerComponent} from "./qr-scanner/qr-scanner.component";
+import {PersonPreviewComponent} from './person-preview/person-preview.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240415180851');
@@ -108,7 +109,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ZoneRequestAllocationPendingComponent,
     ZoneRequestAllocationAllocatedComponent,
     BaseComponent,
-    QrScannerComponent
+    QrScannerComponent,
+    PersonPreviewComponent
   ],
   imports: [
     BrowserModule,
