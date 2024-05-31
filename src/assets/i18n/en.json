@@ -1,4 +1,8 @@
 {
+  "move_to_top": "Move to top",
+  "move_to_bottom": "Move to bottom",
+  "move_up": "Move up",
+  "move_down": "Move down",
   "edit_selected": "Edit selected",
   "loading": "Loading",
   "print_selected": "Print selected",
