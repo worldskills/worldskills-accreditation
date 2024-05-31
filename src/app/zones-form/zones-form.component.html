@@ -28,11 +28,22 @@
       <label class="small font-weight-bold my-0 py-0">{{'color' | translate}}
         <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span>
       </label>
-      <input
-        type="color"
-        class="form-control"
-        name="color"
-        [ngModel]="zone.color">
+      <div class="form-row">
+        <div class="col-4">
+          <input
+            type="color"
+            class="form-control px-2"
+            name="colorPicker"
+            [(ngModel)]="color">
+        </div>
+        <div class="col-8">
+          <input
+            type="text"
+            class="form-control"
+            name="color"
+            [(ngModel)]="color">
+        </div>
+      </div>
     </div>
   </div>
 

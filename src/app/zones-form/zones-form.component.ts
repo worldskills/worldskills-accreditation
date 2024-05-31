@@ -16,12 +16,16 @@ export class ZonesFormComponent extends WsComponent implements OnInit {
   @Input() zone: Zone;
   @Input() selectedEvent: Event;
   @ViewChild('form') form: NgForm;
+  color = '#0084ad';
 
   constructor() {
     super();
   }
 
   ngOnInit(): void {
+    if (this.zone.color) {
+      this.color = this.zone.color;
+    }
   }
 
   save(): void {
