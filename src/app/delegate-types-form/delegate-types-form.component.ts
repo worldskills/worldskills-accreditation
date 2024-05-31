@@ -18,6 +18,7 @@ export class DelegateTypesFormComponent extends WsComponent implements OnInit {
   @Input() delType: DelegateType;
   @Input() selectedEvent: Event;
   @ViewChild('form') form: NgForm;
+  color = '#4A0D66';
   zones: Zone[];
 
   constructor(private zoneService: ZoneService) {
@@ -25,6 +26,9 @@ export class DelegateTypesFormComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.delType.color) {
+      this.color = this.delType.color;
+    }
     this.subscribe(
       this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
         this.zones = res.zones;
