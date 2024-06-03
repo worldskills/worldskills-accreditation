@@ -60,7 +60,11 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
             this.delegateTypes = res.delegate_types;
           }),
           this.skillService.getSkills(this.selectedEvent.id).subscribe(res => {
-            this.skills = res.skills.sort((a, b) => a.name.text.localeCompare(b.name.text));
+            this.skills = res.skills;
+            // combined label
+            this.skills.forEach(skill => {
+              skill.label = `${skill.skill_number} ${skill.name.text}`;
+            });
           }),
           this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
             this.zones = res.zones;

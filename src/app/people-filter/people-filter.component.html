@@ -55,11 +55,12 @@
         <div class="col-sm-12">
           <label class="small text-muted font-weight-bold my-0 py-0">{{'skill' | translate}}</label>
           <ng-select
-            [wsSelect]="['id', 'name.text']"
+            [wsSelect]="['id', 'label']"
             name="skill"
             [ngModel]="fetchParams.skill"
             [items]="skills"
-          ></ng-select>
+          >
+          </ng-select>
         </div>
       </div>
 
