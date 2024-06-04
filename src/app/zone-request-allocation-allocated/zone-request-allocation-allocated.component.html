@@ -137,11 +137,16 @@
 
     <div *ngIf="manualAllocationToPerson !== null">
 
-      <b>Selected person:</b>
-      <p class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToPerson = null">Change</p>
-      <br>
-      {{ manualAllocationToPerson?.first_name + ' ' + manualAllocationToPerson?.last_name }}
-      from {{ manualAllocationToPerson?.organization ?? '-' }}
+      <b>Selected person: </b><p class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToPerson = null">Change</p>
+      <div class="row">
+        <div class="col-md-3">
+          <p class="p-m m-0">{{ manualAllocationToPerson?.first_name + ' ' + manualAllocationToPerson?.last_name }}</p>
+        </div>
+        <div class="col-md-6">
+          <app-person-badge-preview style="zoom: 0.5" *ngIf="manualAllocationToPerson" [selectedEvent]="selectedEvent" [person]="manualAllocationToPerson"></app-person-badge-preview>
+        </div>
+      </div>
+
 
       <p>
         <button class="btn btn-sm btn-primary mt-2"
