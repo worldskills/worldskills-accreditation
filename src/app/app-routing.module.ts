@@ -78,7 +78,7 @@ const routes: Routes = [
             component: ZoneRequestComponent
           },
           {
-            path: 'zone-requests/:zoneReqId',
+            path: 'zone-request-form/:zoneRequestFormHash/zone-requests/:zoneReqId',
             data: {
               breadcrumb: 'Zone Request',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.REQUEST_ZONE, ACR_ROLES.ALLOCATE_ZONE_REQUEST])

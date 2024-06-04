@@ -7,7 +7,7 @@ import {Event} from "../../types/event";
 import {ZoneRequestForm} from "../../types/zone-request/zone-request-form";
 import {ZoneRequestService} from "../../services/zone-request/zone-request.service";
 import {combineLatest} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ZoneRequestFormService} from "../../services/zone-request-form/zone-request-form.service";
 import {ToastService} from "angular-toastify";
 import {ZoneRequest} from "../../types/zone-request/zone-request";
@@ -33,7 +33,8 @@ export class ZoneRequestComponent extends WsComponent implements OnInit {
               private route: ActivatedRoute,
               private zoneReqService: ZoneRequestService,
               private zoneReqFormService: ZoneRequestFormService,
-              private toastService: ToastService
+              private toastService: ToastService,
+              private router: Router
   ) {
     super();
   }
@@ -70,9 +71,10 @@ export class ZoneRequestComponent extends WsComponent implements OnInit {
 
       this.subscribe(
         this.zoneReqService.requestZone(this.selectedEvent.id, this.zoneReqForm.id, zReq).subscribe({
-          next: () => {
+          next: (zr) => {
             this.loading = false;
             this.toastService.success('Zone request submitted successfully!');
+            this.router.navigate(['zone-requests/' + zr.id], {relativeTo: this.route});
           },
           error: (err) => {
             this.loading = false;
