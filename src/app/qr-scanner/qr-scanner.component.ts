@@ -10,7 +10,7 @@ import {WsComponent} from "@worldskills/worldskills-angular-lib";
 export class QrScannerComponent extends WsComponent implements OnInit, OnDestroy {
 
   @Input() highlightScanRegion = true;
-  @Input() maxScansPerSecond = 5;
+  @Input() maxScansPerSecond = 25;
   @Input() nSecondsDelayAfterSameScanOutput = 2500;
   @Output() scanResult: EventEmitter<number> = new EventEmitter<number>();
   @ViewChild('videoElement') videoElement: ElementRef;
