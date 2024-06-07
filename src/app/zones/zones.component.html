@@ -45,6 +45,9 @@
               </button>
             </td>
           </tr>
+          <tr *ngIf="zones.length === 0">
+            <td colspan="4">{{'no_zones_found' | translate}}</td>
+          </tr>
           </tbody>
         </table>
       </div>
