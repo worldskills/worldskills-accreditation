@@ -38,11 +38,17 @@
           </td>
           <td>
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveUp(idx, pos)">
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveToTop(idx, pos)" title="{{'move_to_top' | translate}}">
+                <i class="fa fa-long-arrow-up"></i>
+              </button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveUp(idx, pos)" title="{{'move_up' | translate}}">
                 <i class="fa fa-arrow-up"></i>
               </button>
-              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveDown(idx, pos)">
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveDown(idx, pos)" title="{{'move_down' | translate}}">
                 <i class="fa fa-arrow-down"></i>
+              </button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" (click)="moveToBottom(idx, pos)" title="{{'move_to_bottom' | translate}}">
+                <i class="fa fa-long-arrow-down"></i>
               </button>
             </div>
           </td>

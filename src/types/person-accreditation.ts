@@ -19,14 +19,8 @@ export interface PersonAccreditation {
   random_hash: string;
   event: Event;
   person_position: PersonPosition;
-  position: string;
-  member: Member;
-  skill: Skill;
-  organization: Organization;
-  organization_name: string;
   position_delegate_type: PositionDelegateType;
   delegate_type: DelegateType;
-  group_name: string;
   lines: string;
   printed: Date;
   image: Image;
