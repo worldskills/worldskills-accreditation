@@ -48,7 +48,7 @@
             </td>
             <td class="text-truncate"><span *ngIf="personAcr.member && doesResultHasMember()">{{personAcr.member.name.text}}</span></td>
           </tr>
-          <tr *ngIf="result.total_count === 0">
+          <tr *ngIf="result?.total_count === 0">
             <td colspan="5">{{'no_people_found' | translate}}</td>
           </tr>
           </tbody>
@@ -93,7 +93,7 @@
 
     <ngb-pagination
     class="component-pager"
-    [collectionSize]="result.total_count"
+    [collectionSize]="result?.total_count"
     [page]="(fetchParams.offset / fetchParams.limit) + 1"
     [pageSize]="fetchParams.limit"
     [maxSize]="10"
@@ -101,7 +101,7 @@
     (pageChange)="fetch($event)">
   </ngb-pagination>
 
-  <p><span class="text-muted">{{'total_results' | translate}}: {{result.total_count}} {{'people' | translate}}</span></p>
+  <p><span class="text-muted">{{'total_results' | translate}}: {{result?.total_count}} {{'people' | translate}}</span></p>
 
   </div>
   <div class="col-md-3">
