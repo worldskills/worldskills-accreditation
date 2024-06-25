@@ -109,4 +109,18 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
       this.toastService.error(err.error.user_msg ?? 'Failed to allocate request to a Zone!');
     });
   }
+
+  deny(zoneRequest: ZoneRequest): void {
+    if (confirm('Are you sure to deny this request?')) {
+      this.zoneReqAllocService.denyRequest(this.selectedEvent.id, zoneRequest).subscribe({
+        next: () => {
+          this.toastService.success('Request is denied!');
+          // refresh the pending requests list
+          this.loadRequests();
+        }, error: (err) => {
+          this.toastService.error(err?.error?.user_msg ?? 'Error denying the request');
+        }
+      })
+    }
+  }
 }

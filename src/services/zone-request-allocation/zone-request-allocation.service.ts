@@ -34,6 +34,10 @@ export class ZoneRequestAllocationService extends WsService<any> {
     return this.http.post(this.url(eventId) + `/form/${zoneReqFormId}/zone/${zoneId}`, zoneRequest);
   }
 
+  denyRequest(eventId: number, zoneRequest: ZoneRequest): Observable<any> {
+    return this.http.post(this.url(eventId) + `/zone-request/${zoneRequest.id}/deny`, {});
+  }
+
   allocatePersonACRToZone(eventId: number, zoneReqFormId: number, zoneId: number, pa: PersonAccreditationSummary): Observable<any> {
     return this.http.post(this.url(eventId) + `/form/${zoneReqFormId}/person-accreditation/${pa.id}/zone/${zoneId}`, {});
   }

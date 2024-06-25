@@ -95,7 +95,7 @@
           </tr>
           <tr>
             <td colspan="3" class="border-top-0 border-bottom-0 small">
-              <p class="text-muted">
+              <div class="text-muted">
                 <b>{{ 'objective' | translate | titlecase }}</b>:
                 {{ req.objective }}
                 <br>
@@ -117,8 +117,11 @@
                     <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
                   </ng-template>
                 </ng-select>
-                <button class="btn btn-sm btn-primary mt-2 float-right" (click)="allocate(req, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>
-              </p>
+                <div class="text-right">
+                  <button class="btn btn-sm btn-warning mt-2 mr-2" (click)="deny(req)">{{ 'deny' | translate }}</button>
+                  <button class="btn btn-sm btn-primary mt-2" (click)="allocate(req, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>
+                </div>
+              </div>
             </td>
           </tr>
         </ng-container>
