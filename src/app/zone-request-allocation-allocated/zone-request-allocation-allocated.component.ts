@@ -152,4 +152,19 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
       });
     }
   }
+
+  undoAllocation(allocation: ZoneRequestAllocation): void {
+    if (confirm('Are you sure to undo the allocation for this person?')) {
+      const notify = confirm('Do you want to send email notification to the person?');
+      this.zoneReqAllocService.undoAllocation(this.selectedEvent.id, allocation.id, notify).subscribe({
+        next: () => {
+          this.toastService.success('Allocation is successfully undo');
+          this.loadAllocations();
+        },
+        error: (err) => {
+          this.toastService.error(err?.error?.user_msg ?? 'Error undo allocation');
+        }
+      });
+    }
+  }
 }

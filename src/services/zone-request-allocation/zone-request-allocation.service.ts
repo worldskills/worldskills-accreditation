@@ -42,6 +42,10 @@ export class ZoneRequestAllocationService extends WsService<any> {
     return this.http.post(this.url(eventId) + `/form/${zoneReqFormId}/person-accreditation/${pa.id}/zone/${zoneId}`, {});
   }
 
+  undoAllocation(eventId: number, zoneRequestAllocationId: number, notify: boolean): Observable<any> {
+    return this.http.delete(this.url(eventId) + `/${zoneRequestAllocationId}/undo`, {params: {notify: notify}});
+  }
+
   updateWristbandDistribution(eventId: number, zoneRequestAllocationId: number, isDistributed: boolean): Observable<any> {
     return this.http.put(this.url(eventId) + `/${zoneRequestAllocationId}/wristband`, isDistributed);
   }

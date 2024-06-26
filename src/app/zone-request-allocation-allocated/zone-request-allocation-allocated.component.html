@@ -96,7 +96,11 @@
                         [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet. Click to mark as distributed.'"
                         (click)="updateWristband(allocation.wristband_distributed_at !== null, allocation.id)"
                   ></span>
-                  <span class="badge badge-pill badge-light text-wrap w-75 font-weight-lighter text-left"
+                  <span class="fa fa-trash-o mr-1 align-top"
+                        style="cursor: pointer; font-size: 1.5em"
+                        (click)="undoAllocation(allocation)"
+                  ></span>
+                  <span class="badge badge-pill badge-light text-wrap font-weight-lighter text-left"
                         style="cursor: pointer"
                         (click)="previewSelectedPersonACR = (allocation.zone_request != null ? allocation.zone_request.person_accreditation.summary : allocation.manual_allocation_to_person_accreditation.summary)">
                     <ng-container *ngIf="allocation.zone_request != null">
