@@ -1,5 +1,5 @@
 <div class="row mb-2">
-  <div class="col-md-4" *ngFor="let pi of personAccreditation.person.images">
+  <div class="col-4" *ngFor="let pi of personAccreditation.person.images">
     <img src="{{pi.thumbnail}}"
          ngbTooltip="{{pi.type}} photo of {{personAccreditation.person.first_name}} {{personAccreditation.person.last_name}}"
          width="100"
