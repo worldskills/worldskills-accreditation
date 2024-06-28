@@ -24,7 +24,7 @@
     </div>
 
     <div class="row mb-3 small">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <label class="small mb-0 font-weight-bold">{{ 'choose_zone' | translate }}</label>
         <ng-select
           name="zone"
@@ -47,6 +47,10 @@
             <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
           </ng-template>
         </ng-select>
+      </div>
+      <div class="col-md-6">
+        <label class="small mb-0 font-weight-bold">{{ 'name' | translate }}</label>
+        <input type="text" class="form-control" [(ngModel)]="filterPersonName">
       </div>
     </div>
 

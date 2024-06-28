@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WsComponent} from "@worldskills/worldskills-angular-lib";
+import {GenericUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Zone} from "../../types/zone";
 import {ZoneRequestForm} from "../../types/zone-request/zone-request-form";
@@ -37,6 +37,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
 
   // for filtering allocations
   filterZones: number[];
+  filterPersonName: string;
 
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
               private toastService: ToastService) {
@@ -72,8 +73,17 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
    * Get the allocations for a zone
    */
   getAllocationsForZone(zone: Zone): ZoneRequestAllocation[] {
-    const allocations = this.allocations?.filter(allocation => allocation.allocated_zone.id === zone.id);
+    let allocations = this.allocations?.filter(allocation => allocation.allocated_zone.id === zone.id);
     if (allocations) {
+      // filter by person name
+      if (!GenericUtil.isNullOrUndefined(this.filterPersonName)) {
+        allocations = allocations.filter(allocation => {
+          const person = !GenericUtil.isNullOrUndefined(allocation.zone_request) ? allocation.zone_request.person_accreditation.person : allocation.manual_allocation_to_person_accreditation.person;
+          return (person.first_name + ' ' + person.last_name).toLowerCase().includes(this.filterPersonName.toLowerCase());
+        });
+      }
+
+      // sort by zone spot label, then by organization name, then by organizational unit
       return allocations.sort((a, b) => {
         if (a.allocated_zone_spot_label != null && b.allocated_zone_spot_label != null) {
           return a.allocated_zone_spot_label.localeCompare(b.allocated_zone_spot_label);
