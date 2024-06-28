@@ -20,6 +20,10 @@ export class QrScannerComponent extends WsComponent implements OnInit, OnDestroy
   scanning: boolean = false;
 
   qrScanner: QrScanner;
+  cameras: QrScanner.Camera[];
+  cameraIndex: number = 0;
+
+  isSleeping: boolean = false;
 
   constructor(private ngZone: NgZone) {
     super();
@@ -64,6 +68,9 @@ export class QrScannerComponent extends WsComponent implements OnInit, OnDestroy
         maxScansPerSecond: this.maxScansPerSecond,
       },
     );
+    QrScanner.listCameras(true).then((cameras) => {
+      this.cameras = cameras;
+    });
     this.scanBadge();
   }
 
@@ -74,5 +81,28 @@ export class QrScannerComponent extends WsComponent implements OnInit, OnDestroy
   override ngOnDestroy() {
     super.ngOnDestroy();
     this.qrScanner.destroy();
+  }
+
+  switchCam(): void {
+    this.cameraIndex++;
+    if (this.cameraIndex >= this.cameras.length) {
+      this.cameraIndex = 0;
+    }
+
+    this.qrScanner.setCamera(this.cameras[this.cameraIndex].id);
+  }
+
+  switchFlash(): void {
+    this.qrScanner.toggleFlash();
+  }
+
+  switchSleep(): void {
+    if (this.isSleeping) {
+      this.qrScanner.start();
+      this.isSleeping = false;
+    } else {
+      this.qrScanner.stop();
+      this.isSleeping = true;
+    }
   }
 }

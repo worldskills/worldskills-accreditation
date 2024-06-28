@@ -1,1 +1,11 @@
-<video style="width: 350px; height: auto; object-fit: contain;" #videoElement></video>
+<div class="row">
+  <video class="col-sm-12 col-md-12 col-lg-6 col-xl-4" style=" height: auto; object-fit: contain;" #videoElement></video>
+</div>
+
+<div class="row mt-2">
+  <div class="col-md-12">
+    <button class="btn btn-sm btn-outline-primary mr-2" (click)="switchSleep()">{{isSleeping ? 'Wake up' : 'Sleep'}}</button>
+    <button class="btn btn-sm btn-outline-primary mr-2" (click)="switchCam()">Switch Camera</button>
+    <button class="btn btn-sm btn-outline-primary mr-2" (click)="switchFlash()">Flash</button>
+  </div>
+</div>
