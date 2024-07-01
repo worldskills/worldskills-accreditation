@@ -49,6 +49,7 @@ import {WebcamModule} from "ngx-webcam";
 import {WebcamCaptureComponent} from './webcam-capture/webcam-capture.component';
 import {Fi2024Component} from './badges/fi2024/fi2024.component';
 import {BaseComponent} from './badges/base/base.component';
+import { Wsi2024WscComponent } from './badges/wsi2024-wsc/wsi2024-wsc.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240415180851');
@@ -84,6 +85,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DefaultComponent,
     Wsi2023GaComponent,
     Wsi2024CpwComponent,
+    Wsi2024WscComponent,
     SetupScanAppComponent,
     AdhocPrintingComponent,
     WebcamCaptureComponent,

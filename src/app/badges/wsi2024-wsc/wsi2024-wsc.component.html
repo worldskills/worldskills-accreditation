@@ -1,0 +1,62 @@
+<div class="ws-badge" *ngIf="showComponent">
+
+  <div style="position: relative; width: 120mm; height: 160mm;">
+
+    <div style="position: absolute; top: 29mm; left: 4mm;">
+      <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" style="width: 30mm; height: 40mm;"/>
+    </div>
+
+    <div style="position: absolute; left: 39mm; top: 32mm; width: 76mm; height: 18mm; font-weight: 700; font-size: 7mm; line-height: 1.2; text-transform: uppercase;" class="ws-text-fit">
+      <div style="-webkit-print-color-adjust: exact; color: #302050 !important;">
+        {{pa.first_name}}
+      </div>
+      <div style="-webkit-print-color-adjust: exact; color: #302050 !important;">
+        {{pa.last_name}}
+      </div>
+    </div>
+
+    <div style="position: absolute; left: 39mm; top: 52mm; width: 76mm; height: 9mm; font-weight: 400; font-size: 6mm; line-height: 1.4;" class="ws-text-fit">
+      <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[0]}}</div>
+    </div>
+
+    <div style="position: absolute; left: 39mm; top: 60mm; width: 76mm; height: 9mm; font-weight: 400; font-size: 5.5mm; line-height: 1.4;" class="ws-text-fit">
+      <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[1]}}</div>
+    </div>
+
+    <div style="position: absolute; left: 39mm; top: 67mm; width: 76mm; height: 9mm; font-weight: 400; font-size: 5mm; line-height: 1.4;" class="ws-text-fit">
+      <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[2]}}</div>
+    </div>
+
+    <div style="position: absolute; left: 6mm; width: 50mm; bottom: 20mm; height: 44mm;">
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; font-size: 10mm; font-weight: 600;">
+        <div>
+          <div *ngIf="hasZone('0')">0</div>
+          <div *ngIf="hasZone('0C')">0C</div>
+          <div *ngIf="hasZone('0E')">0E</div>
+        </div>
+        <div *ngIf="hasZone('1')">1</div>
+        <div *ngIf="hasZone('2')">2</div>
+        <div *ngIf="hasZone('3')">3</div>
+        <div *ngIf="hasZone('4')">4</div>
+        <div *ngIf="hasZone('5')">5</div>
+        <div *ngIf="hasZone('6')">6</div>
+        <div *ngIf="hasZone('7')">7</div>
+        <div *ngIf="hasZone('8')">8</div>
+      </div>
+
+    </div>
+    
+    <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type?.color}} !important; height: 12mm; right: 3mm; position: absolute; left: 3mm; bottom: 3mm; display: flex; justify-content: center; align-items: center;">
+      <div style="flex-grow: 1; text-align: center;">
+        <div style="white-space: nowrap; font-weight: 700; font-size: 4mm; -webkit-print-color-adjust: exact; color: {{pa.delegate_type?.text_color}} !important;">{{pa.delegate_type?.code}}</div>
+      </div>
+    </div>
+
+    <div style="position: absolute; left: 77.6mm; bottom: 23mm;">
+      <img src="{{pa.qr_code}}" style="height: 22mm;">
+    </div>
+
+  </div>
+
+</div>
