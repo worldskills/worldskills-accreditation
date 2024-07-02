@@ -6,7 +6,7 @@
       <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" style="width: 30mm; height: 40mm;"/>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 32mm; width: 76mm; height: 18mm; font-weight: 700; font-size: 7mm; line-height: 1.2; text-transform: uppercase;" class="ws-text-fit">
+    <div style="position: absolute; left: 39mm; top: 29mm; width: 76mm; height: 18mm; font-weight: 700; font-size: 7mm; line-height: 1.2; text-transform: uppercase;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #302050 !important;">
         {{pa.first_name}}
       </div>
@@ -15,16 +15,23 @@
       </div>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 52mm; width: 76mm; height: 9mm; font-weight: 400; font-size: 6mm; line-height: 1.4;" class="ws-text-fit">
+    <div style="position: absolute; left: 39mm; top: 48mm; width: 76mm; height: 9mm; font-weight: 400; font-size: 6mm; line-height: 1.4;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[0]}}</div>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 60mm; width: 76mm; height: 9mm; font-weight: 400; font-size: 5.5mm; line-height: 1.4;" class="ws-text-fit">
+    <div style="position: absolute; left: 39mm; top: 56mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 5.5mm; line-height: 1.4;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[1]}}</div>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 67mm; width: 76mm; height: 9mm; font-weight: 400; font-size: 5mm; line-height: 1.4;" class="ws-text-fit">
+    <div style="position: absolute; left: 39mm; top: 63mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 5mm; line-height: 1.4;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[2]}}</div>
+    </div>
+
+    <div style="position: absolute; left: 6mm; right: 6mm; top: 73mm; display: flex; justify-content: space-around;">
+      <div style="width: 20mm;"><div *ngIf="hasZone('EXP')" class="icon icon-pink">EXP</div></div>
+      <div style="width: 20mm;"><div *ngIf="hasZone('OC')" class="icon icon-pink">OC</div></div>
+      <div style="width: 20mm;"><div *ngIf="hasZone('CC')" class="icon icon-pink">CC</div></div>
+      <div style="width: 20mm;"><div *ngIf="hasZone('FPT')" class="icon icon-pink">FPT</div></div>
     </div>
 
     <div style="position: absolute; left: 6mm; width: 50mm; bottom: 20mm; height: 44mm;">
@@ -35,14 +42,14 @@
           <div *ngIf="hasZone('0C')">0C</div>
           <div *ngIf="hasZone('0E')">0E</div>
         </div>
-        <div *ngIf="hasZone('1')">1</div>
-        <div *ngIf="hasZone('2')">2</div>
-        <div *ngIf="hasZone('3')">3</div>
-        <div *ngIf="hasZone('4')">4</div>
-        <div *ngIf="hasZone('5')">5</div>
-        <div *ngIf="hasZone('6')">6</div>
-        <div *ngIf="hasZone('7')">7</div>
-        <div *ngIf="hasZone('8')">8</div>
+        <div><div *ngIf="hasZone('1')">1</div></div>
+        <div><div *ngIf="hasZone('2')">2</div></div>
+        <div><div *ngIf="hasZone('3')">3</div></div>
+        <div><div *ngIf="hasZone('4')">4</div></div>
+        <div><div *ngIf="hasZone('5')">5</div></div>
+        <div><div *ngIf="hasZone('6')">6</div></div>
+        <div><div *ngIf="hasZone('7')">7</div></div>
+        <div><div *ngIf="hasZone('8')">8</div></div>
       </div>
 
     </div>

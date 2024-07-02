@@ -20,17 +20,21 @@
 }
 
 .icon {
-  width: 10mm;
-  height: 12mm;
-  color: #fff;
-  font-size: 2.3mm;
+  width: 16mm;
+  height: 18mm;
+  color: #D51067;
+  font-size: 5mm;
   font-weight: 500;
   line-height: 1.14;
   text-align: center;
-  padding-top: 1.4mm;
+  padding-top: 6mm;
   -webkit-print-color-adjust: exact;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.icon-pink {
+  background-image: url('../../../assets/badges/wsi2024-wsc/icon-pink.png');
 }
 
 @media print {
