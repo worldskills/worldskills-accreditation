@@ -107,7 +107,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     return this.allocations?.filter(allocation => allocation.notification_sent_at !== null)?.length ?? 0;
   }
 
-  updateWristband(isDistributed: boolean, zoneReqAllocId: number) {
+  updateWristband(isDistributed: boolean, zoneReqAllocId: number): void {
     this.zoneReqAllocService.updateWristbandDistribution(this.selectedEvent.id, zoneReqAllocId, !isDistributed).subscribe({
       next: () => {
         this.toastService.success(!isDistributed ? 'Wristband marked as distributed!' : 'Wristband distribution removed');

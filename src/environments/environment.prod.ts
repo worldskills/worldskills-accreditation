@@ -30,5 +30,6 @@ export const environment = {
     SET_UP_SCAN_APP: 'SetUpScanApp',
     REQUEST_ZONE: 'RequestZone',
     ALLOCATE_ZONE_REQUEST: 'AllocateZoneRequest',
+    VERIFY_ALLOCATION: 'VerifyAllocation',
   }
 };
