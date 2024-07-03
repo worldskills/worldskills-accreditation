@@ -7,10 +7,10 @@
     </div>
 
     <div style="position: absolute; left: 39mm; top: 4mm; width: 76mm; height: 18mm; font-weight: 700; font-size: 7mm; line-height: 1.2; text-transform: uppercase;" class="ws-text-fit">
-      <div style="-webkit-print-color-adjust: exact; color: #302050 !important;">
+      <div style="-webkit-print-color-adjust: exact; color: #2b1c53 !important;">
         {{pa.first_name}}
       </div>
-      <div style="-webkit-print-color-adjust: exact; color: #302050 !important;">
+      <div style="-webkit-print-color-adjust: exact; color: #2b1c53 !important;">
         {{pa.last_name}}
       </div>
     </div>
@@ -20,43 +20,51 @@
     </div>
 
     <div style="position: absolute; left: 39mm; top: 31mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 5.5mm; line-height: 1.4;" class="ws-text-fit">
-      <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[1]}}</div>
+      <div style="-webkit-print-color-adjust: exact; color: #2b1c53 !important;">{{pa.lines[1]}}</div>
     </div>
 
     <div style="position: absolute; left: 39mm; top: 38mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 5mm; line-height: 1.4;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[2]}}</div>
     </div>
 
-    <div style="position: absolute; left: 6mm; right: 6mm; top: 48mm; display: flex; justify-content: space-around;">
+    <div style="position: absolute; left: 6mm; right: 6mm; top: 47mm; display: flex; justify-content: space-around;">
       <div style="width: 20mm;"><div *ngIf="hasZone('EXP')" class="icon icon-pink">EXP</div></div>
       <div style="width: 20mm;"><div *ngIf="hasZone('OC')" class="icon icon-pink">OC</div></div>
       <div style="width: 20mm;"><div *ngIf="hasZone('CC')" class="icon icon-pink">CC</div></div>
       <div style="width: 20mm;"><div *ngIf="hasZone('FPT')" class="icon icon-pink">FPT</div></div>
     </div>
 
-    <div style="position: absolute; border: 0.3mm solid #090172; left: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
+    <div style="position: absolute; border: 0.3mm solid #2b1c53; left: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; font-size: 10mm; font-weight: 600;">
-        <div>
-          <div *ngIf="hasZone('0')">0</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; font-size: 10mm; font-weight: 600; -webkit-print-color-adjust: exact;">
+        <div [ngStyle]="{'color': hasAnyZone(['0', '0C', '0E']) ? '#2b1c53' : '#f0eef6'}">
+          <div *ngIf="hasZone('0') || !hasAnyZone(['0', '0C', '0E'])">0</div>
           <div *ngIf="hasZone('0C')">0C</div>
           <div *ngIf="hasZone('0E')">0E</div>
         </div>
-        <div><div *ngIf="hasZone('1')">1</div></div>
-        <div><div *ngIf="hasZone('2')">2</div></div>
-        <div><div *ngIf="hasZone('3')">3</div></div>
-        <div><div *ngIf="hasZone('4')">4</div></div>
-        <div><div *ngIf="hasZone('5')">5</div></div>
-        <div><div *ngIf="hasZone('6')">6</div></div>
-        <div><div *ngIf="hasZone('7')">7</div></div>
-        <div><div *ngIf="hasZone('8')">8</div></div>
+        <div><div [ngStyle]="{'color': hasZone('1') ? '#2b1c53' : '#f0eef6'}">1</div></div>
+        <div><div [ngStyle]="{'color': hasZone('2') ? '#2b1c53' : '#f0eef6'}">2</div></div>
+        <div><div [ngStyle]="{'color': hasZone('3') ? '#2b1c53' : '#f0eef6'}">3</div></div>
+        <div><div [ngStyle]="{'color': hasZone('4') ? '#2b1c53' : '#f0eef6'}">4</div></div>
+        <div><div [ngStyle]="{'color': hasZone('5') ? '#2b1c53' : '#f0eef6'}">5</div></div>
+        <div><div [ngStyle]="{'color': hasZone('6') ? '#2b1c53' : '#f0eef6'}">6</div></div>
+        <div><div [ngStyle]="{'color': hasZone('7') ? '#2b1c53' : '#f0eef6'}">7</div></div>
+        <div><div [ngStyle]="{'color': hasZone('8') ? '#2b1c53' : '#f0eef6'}">8</div></div>
       </div>
 
     </div>
 
-    <div style="position: absolute; border: 0.3mm solid #090172; right: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
+    <div style="position: absolute; border: 0.3mm solid #2b1c53; right: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
 
-      <div style="position: absolute; left: 16mm; bottom: 6mm;">
+      <div style="position: absolute; left: 2mm; right: 2mm; top: 3mm; display: flex; justify-content: space-around;">
+        <div style="width: 10mm;"><div *ngIf="hasZone('T')" class="symbol symbol-transport"></div></div>
+        <div style="width: 10mm;"><div *ngIf="hasZone('SKO')" class="symbol symbol-skillout"></div></div>
+        <div style="width: 10mm;"><div *ngIf="hasZone('OSOC')" class="symbol symbol-osoc"></div></div>
+        <div style="width: 10mm;"><div *ngIf="hasZone('E')" class="symbol symbol-excursions"></div></div>
+      </div>
+
+
+      <div style="position: absolute; left: 16mm; bottom: 5mm;">
         <img src="{{pa.qr_code}}" style="height: 22mm;">
       </div>
   
@@ -64,7 +72,7 @@
 
     <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type?.color}} !important; height: 12mm; right: 2mm; position: absolute; left: 2mm; bottom: 2mm; display: flex; justify-content: center; align-items: center;">
       <div style="flex-grow: 1; text-align: center;">
-        <div style="white-space: nowrap; font-weight: 700; font-size: 4mm; -webkit-print-color-adjust: exact; color: {{pa.delegate_type?.text_color}} !important;">{{pa.delegate_type?.code}}</div>
+        <div style="white-space: nowrap; font-weight: 700; font-size: 6mm; -webkit-print-color-adjust: exact; color: {{pa.delegate_type?.text_color}} !important;">{{pa.delegate_type?.code}}</div>
       </div>
     </div>
 

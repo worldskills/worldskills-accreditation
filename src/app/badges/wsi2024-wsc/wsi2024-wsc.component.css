@@ -20,21 +20,46 @@
 }
 
 .icon {
-  width: 16mm;
-  height: 18mm;
+  height: 20mm;
   color: #D51067;
-  font-size: 5mm;
+  font-size: 6mm;
   font-weight: 500;
-  line-height: 1.14;
+  line-height: 1.3;
   text-align: center;
   padding-top: 6mm;
   -webkit-print-color-adjust: exact;
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .icon-pink {
   background-image: url('../../../assets/badges/wsi2024-wsc/icon-pink.png');
+}
+
+.symbol {
+  width: 10mm;
+  height: 12mm;
+  -webkit-print-color-adjust: exact;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.symbol-transport {
+  background-image: url('../../../assets/badges/wsi2024-wsc/symbol-transport.png');
+}
+
+.symbol-skillout {
+  background-image: url('../../../assets/badges/wsi2024-wsc/symbol-skillout.png');
+}
+
+.symbol-osoc {
+  background-image: url('../../../assets/badges/wsi2024-wsc/symbol-osoc.png');
+}
+
+.symbol-excursions {
+  background-image: url('../../../assets/badges/wsi2024-wsc/symbol-excursions.png');
 }
 
 @media print {

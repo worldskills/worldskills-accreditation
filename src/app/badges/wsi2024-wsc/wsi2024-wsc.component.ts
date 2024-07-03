@@ -37,4 +37,13 @@ export class Wsi2024WscComponent {
   hasZone(zone: string) {
     return this.pa.zones.map(z => z.code).includes(zone);
   }
+
+  hasAnyZone(zones: string[]) {
+    for (const zone of zones) {
+      if (this.hasZone(zone)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
