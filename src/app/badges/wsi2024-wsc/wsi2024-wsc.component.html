@@ -1,12 +1,12 @@
 <div class="ws-badge" *ngIf="showComponent">
 
-  <div style="position: relative; width: 120mm; height: 160mm;">
+    <div style="position: relative; width: 118mm; height: 134mm; margin: 1mm; margin-top: 25mm; border: 0.3mm solid #D51067;">
 
-    <div style="position: absolute; top: 29mm; left: 4mm;">
+    <div style="position: absolute; top: 4mm; left: 4mm;">
       <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" style="width: 30mm; height: 40mm;"/>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 29mm; width: 76mm; height: 18mm; font-weight: 700; font-size: 7mm; line-height: 1.2; text-transform: uppercase;" class="ws-text-fit">
+    <div style="position: absolute; left: 39mm; top: 4mm; width: 76mm; height: 18mm; font-weight: 700; font-size: 7mm; line-height: 1.2; text-transform: uppercase;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #302050 !important;">
         {{pa.first_name}}
       </div>
@@ -15,26 +15,26 @@
       </div>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 48mm; width: 76mm; height: 9mm; font-weight: 400; font-size: 6mm; line-height: 1.4;" class="ws-text-fit">
+    <div style="position: absolute; left: 39mm; top: 23mm; width: 76mm; height: 9mm; font-weight: 400; font-size: 6mm; line-height: 1.4;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[0]}}</div>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 56mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 5.5mm; line-height: 1.4;" class="ws-text-fit">
+    <div style="position: absolute; left: 39mm; top: 31mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 5.5mm; line-height: 1.4;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[1]}}</div>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 63mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 5mm; line-height: 1.4;" class="ws-text-fit">
+    <div style="position: absolute; left: 39mm; top: 38mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 5mm; line-height: 1.4;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[2]}}</div>
     </div>
 
-    <div style="position: absolute; left: 6mm; right: 6mm; top: 73mm; display: flex; justify-content: space-around;">
+    <div style="position: absolute; left: 6mm; right: 6mm; top: 48mm; display: flex; justify-content: space-around;">
       <div style="width: 20mm;"><div *ngIf="hasZone('EXP')" class="icon icon-pink">EXP</div></div>
       <div style="width: 20mm;"><div *ngIf="hasZone('OC')" class="icon icon-pink">OC</div></div>
       <div style="width: 20mm;"><div *ngIf="hasZone('CC')" class="icon icon-pink">CC</div></div>
       <div style="width: 20mm;"><div *ngIf="hasZone('FPT')" class="icon icon-pink">FPT</div></div>
     </div>
 
-    <div style="position: absolute; left: 6mm; width: 50mm; bottom: 20mm; height: 44mm;">
+    <div style="position: absolute; border: 0.3mm solid #090172; left: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
 
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; font-size: 10mm; font-weight: 600;">
         <div>
@@ -53,15 +53,19 @@
       </div>
 
     </div>
-    
-    <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type?.color}} !important; height: 12mm; right: 3mm; position: absolute; left: 3mm; bottom: 3mm; display: flex; justify-content: center; align-items: center;">
+
+    <div style="position: absolute; border: 0.3mm solid #090172; right: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
+
+      <div style="position: absolute; left: 16mm; bottom: 6mm;">
+        <img src="{{pa.qr_code}}" style="height: 22mm;">
+      </div>
+  
+    </div>
+
+    <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type?.color}} !important; height: 12mm; right: 2mm; position: absolute; left: 2mm; bottom: 2mm; display: flex; justify-content: center; align-items: center;">
       <div style="flex-grow: 1; text-align: center;">
         <div style="white-space: nowrap; font-weight: 700; font-size: 4mm; -webkit-print-color-adjust: exact; color: {{pa.delegate_type?.text_color}} !important;">{{pa.delegate_type?.code}}</div>
       </div>
-    </div>
-
-    <div style="position: absolute; left: 77.6mm; bottom: 23mm;">
-      <img src="{{pa.qr_code}}" style="height: 22mm;">
     </div>
 
   </div>
