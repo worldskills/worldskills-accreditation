@@ -11,7 +11,7 @@ export const environment = {
   worldskillsPeople: 'https://people.worldskills.org',
   worldskillsClientId: 'a95703d1aa96',
   worldskillsAuthorizeUrl: 'http://localhost:50300/oauth/authorize',
-  worldskillsAuthorizeRedirect: 'http://localhost:4200/',
+  worldskillsAuthorizeRedirect: 'http://localhost:12100/',
   worldskillsAuthorizeUserinfoEndpoint: 'http://localhost:50300/auth/users/loggedIn',
   worldskillsPuppeteer: 'https://api.worldskills.show/auth/sessions/operate_puppet',
   worldskillsAuthUriPatterns: ['localhost:8080'],
