@@ -37,19 +37,20 @@
     <div style="position: absolute; border: 0.3mm solid #2b1c53; left: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
 
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; font-size: 10mm; font-weight: 600; -webkit-print-color-adjust: exact;">
-        <div [ngStyle]="{'color': hasAnyZone(['0', '0C', '0E']) ? '#2b1c53' : '#f0eef6'}">
-          <div *ngIf="hasZone('0') || !hasAnyZone(['0', '0C', '0E'])">0</div>
-          <div *ngIf="hasZone('0C')">0C</div>
-          <div *ngIf="hasZone('0E')">0E</div>
+        <div>
+          <div *ngIf="hasZone('0') && !hasAnyZone(['0C', '0E'])" style="color: #2b1c53">0</div>
+          <div *ngIf="hasZone('0C') && !hasAnyZone(['0E'])" style="color: #2b1c53">0C</div>
+          <div *ngIf="hasZone('0E')" style="color: #2b1c53">0E</div>
+          <div *ngIf="!hasAnyZone(['0', '0C', '0E'])" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div>
         </div>
-        <div><div [ngStyle]="{'color': hasZone('1') ? '#2b1c53' : '#f0eef6'}">1</div></div>
-        <div><div [ngStyle]="{'color': hasZone('2') ? '#2b1c53' : '#f0eef6'}">2</div></div>
-        <div><div [ngStyle]="{'color': hasZone('3') ? '#2b1c53' : '#f0eef6'}">3</div></div>
-        <div><div [ngStyle]="{'color': hasZone('4') ? '#2b1c53' : '#f0eef6'}">4</div></div>
-        <div><div [ngStyle]="{'color': hasZone('5') ? '#2b1c53' : '#f0eef6'}">5</div></div>
-        <div><div [ngStyle]="{'color': hasZone('6') ? '#2b1c53' : '#f0eef6'}">6</div></div>
-        <div><div [ngStyle]="{'color': hasZone('7') ? '#2b1c53' : '#f0eef6'}">7</div></div>
-        <div><div [ngStyle]="{'color': hasZone('8') ? '#2b1c53' : '#f0eef6'}">8</div></div>
+        <div><div *ngIf="hasZone('1')" style="color: #2b1c53">1</div><div *ngIf="!hasZone('1')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('2')" style="color: #2b1c53">2</div><div *ngIf="!hasZone('2')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('3')" style="color: #2b1c53">3</div><div *ngIf="!hasZone('3')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('4')" style="color: #2b1c53">4</div><div *ngIf="!hasZone('4')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('5')" style="color: #2b1c53">5</div><div *ngIf="!hasZone('5')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('6')" style="color: #2b1c53">6</div><div *ngIf="!hasZone('6')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('7')" style="color: #2b1c53">7</div><div *ngIf="!hasZone('7')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('8')" style="color: #2b1c53">8</div><div *ngIf="!hasZone('8')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
       </div>
 
     </div>
