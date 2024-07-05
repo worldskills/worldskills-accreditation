@@ -14,6 +14,9 @@ import {PositionsComponent} from "./positions/positions.component";
 import {PackageOptionsComponent} from "./package-options/package-options.component";
 import {PersonComponent} from "./person/person.component";
 import {PrintComponent} from "./print/print.component";
+import { VehiclesComponent } from './vehicles/vehicles.component';
+import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
+import { VehicleComponent } from './vehicle/vehicle.component';
 
 const ACR_ROLES = environment.appRoles;
 
@@ -68,6 +71,33 @@ const routes: Routes = [
             },
             canActivate: [GuardService],
             component: PersonComponent
+          },
+          {
+            path: 'vehicles',
+            data: {
+              breadcrumb: 'Vehicles',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_VEHICLES])
+            },
+            canActivate: [GuardService],
+            component: VehiclesComponent
+          },
+          {
+            path: 'vehicles/add',
+            data: {
+              breadcrumb: 'Add Vehicle',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_VEHICLES])
+            },
+            canActivate: [GuardService],
+            component: VehicleAddComponent
+          },
+          {
+            path: 'vehicles/:vehicleAcrId',
+            data: {
+              breadcrumb: 'Vehicle',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_VEHICLES])
+            },
+            canActivate: [GuardService],
+            component: VehicleComponent
           },
           {
             path: 'scans',

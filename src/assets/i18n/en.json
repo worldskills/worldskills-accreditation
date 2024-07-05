@@ -1,4 +1,9 @@
 {
+  "add_vehicle_pass": "Add Vehicle Pass",
+  "vehicle_group": "Vehicle Group",
+  "zone_quotas": "Zone Quotas",
+  "category": "Category",
+  "quantity_passes": "Number of Passes",
   "id": "ID",
   "no_zones_found": "No zones found",
   "move_to_top": "Move to top",

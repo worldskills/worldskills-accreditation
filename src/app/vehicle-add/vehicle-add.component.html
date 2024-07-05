@@ -1,0 +1,61 @@
+
+
+<form class="mt-4 mb-5" (ngSubmit)="createVehicles()" #form="ngForm">
+<div class="row justify-content-md-center">
+    <div class="col-md-6">
+        <div class="card mb-4">
+        <h2 class="card-header h5 mt-0 mb-0">{{'add_vehicle_pass'|translate}}</h2>
+        <div class="card-body">
+            <fieldset>
+                <div class="form-group">
+                    <label for="vehicle_group_id">{{'vehicle_group'|translate}} <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+                    <ng-select
+                      name="vehicle_group_id"
+                      [items]="vehicleGroups"
+                      [ngModel]="model.vehicle_group_id"
+                      bindValue="id"
+                      bindLabel="name"
+                      [loading]="loading"
+                      [addTag]="addVehicleGroup.bind(this)"
+                      addTagText="Add new Vehicle Group"
+                      required
+                    >
+                    </ng-select>
+                </div>
+                <div class="form-group">
+                    <label for="delegate_type_id">{{'category'|translate}} <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+                    <ng-select
+                      name="delegate_type_id"
+                      [items]="delegateTypes"
+                      [ngModel]="model.delegate_type_id"
+                      bindValue="id"
+                      bindLabel="name"
+                      required
+                    >
+                      <ng-template ng-label-tmp let-item="item">
+                        <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
+                        <div class="d-inline-block ml-2">{{item.code}} {{item.name}}</div>
+                      </ng-template>
+                      <ng-template ng-option-tmp let-item="item" let-index="index">
+                        <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
+                        <div class="d-inline-block ml-2">{{item.code}} {{item.name}}</div>
+                      </ng-template>
+                    </ng-select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity" translate>quantity_passes</label>
+                    <input type="number" class="form-control" [ngModel]="model.quantity" id="quantity" name="quantity" required>
+                </div>
+            </fieldset>
+        </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <div class="btn-toolbar">
+                <button type="submit" class="btn btn-success mr-2">Save</button>
+                <a routerLink="../" class="btn btn-secondary">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+</form>

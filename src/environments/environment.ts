@@ -20,6 +20,7 @@ export const environment = {
     ADMIN: 'Admin',
     EDIT: 'Edit',
     UPLOAD_PHOTO: 'UploadPhoto',
+    EDIT_VEHICLES: 'EditVehicles',
     EDIT_DELEGATE_TYPES: 'EditDelegateTypes',
     EDIT_POSITIONS: 'EditPositions',
     EDIT_ZONES: 'EditZones',
