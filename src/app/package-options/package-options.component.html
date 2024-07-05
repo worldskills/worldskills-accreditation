@@ -3,19 +3,28 @@
     <div class="table-responsive-md">
       <table class="table table-striped">
         <colgroup>
-          <col style="width: 50%">
-          <col style="width: 50%">
+          <col style="width: 30%">
+          <col style="width: 30%">
+          <col style="width: 40%">
         </colgroup>
         <thead>
         <tr>
           <th class="border-top-0">{{'name' | translate}}</th>
           <th class="border-top-0">{{'type' | translate}}</th>
+          <th class="border-top-0">{{'zones' | translate}}</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let option of options">
           <td><a class="btn btn-link m-0 p-0" (click)="updatePackageOption(option)">{{option.name.text}}</a></td>
           <td>{{option.type}}</td>
+          <td>
+            <ng-container *ngFor="let zone of option.zones">
+              <div class="badge mr-1 small" [style.background-color]="zone.color"
+                   [ngbTooltip]="zone.name"
+                   [style.color]="zone.text_color">{{zone.code}}</div>
+            </ng-container>
+          </td>
         </tr>
         </tbody>
       </table>
