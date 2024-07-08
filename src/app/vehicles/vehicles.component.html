@@ -102,7 +102,119 @@
   </div>
   <div class="col-md-3">
     
-    <a class="btn btn-primary" routerLink="add" translate>add_vehicle_pass</a>
+    <a class="btn btn-primary mb-4" routerLink="add" translate>add_vehicle_pass</a>
+
+    <div class="card">
+      <h5 class="card-header m-0">{{'filter' | translate}}</h5>
+      <div class="card-body">
+        <form class="form-horizontal" (ngSubmit)="submit()" #form="ngForm" novalidate>
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'vehicle_group' | translate}}</label>
+              <ng-select
+                      name="group"
+                      [items]="vehicleGroups"
+                      [ngModel]="fetchParams.group"
+                      bindValue="id"
+                      bindLabel="name"
+                      [loading]="loading"
+                      required
+                    >
+                    </ng-select>
+            </div>
+          </div>
+    
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
+              <ng-select
+                name="del_types"
+                [ngModel]="fetchParams.del_types"
+                [multiple]="true"
+                [items]="delegateTypes"
+                bindValue="id"
+                bindLabel="name"
+              >
+                <ng-template ng-label-tmp let-item="item">
+                  <div class="d-inline-block" style="width: 15px; height: 15px; "
+                       [style.background-color]="item.color"></div>
+                  <div class="d-inline-block ml-2">{{item.name}}</div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <div class="d-inline-block" style="width: 15px; height: 15px; "
+                       [style.background-color]="item.color"></div>
+                  <div class="d-inline-block ml-2">{{item.name}}</div>
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+    
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'zone' | translate}}</label>
+              <ng-select
+                name="zone"
+                [ngModel]="fetchParams.zone"
+                [multiple]="true"
+                [items]="zones"
+                bindValue="id"
+                bindLabel="name"
+              >
+                <ng-template ng-label-tmp let-item="item">
+                  <div class="d-inline-block" style="width: 15px; height: 15px; "
+                       [style.background-color]="item.color"></div>
+                  <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <div class="d-inline-block" style="width: 15px; height: 15px; "
+                       [style.background-color]="item.color"></div>
+                  <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'printed' | translate}}?</label>
+              <ng-select
+                [wsSelect]="['value', 'label']"
+                name="printed"
+                [ngModel]="fetchParams.printed"
+                [items]="yesNoSelections"
+              ></ng-select>
+            </div>
+          </div>
+    
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'distributed' | translate}}?</label>
+              <ng-select
+                [wsSelect]="['value', 'label']"
+                name="distributed"
+                [ngModel]="fetchParams.distributed"
+                [items]="yesNoSelections"
+              ></ng-select>
+            </div>
+          </div>
+    
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-sm btn-primary ml-2 float-right">{{'set_filter' | translate}}</button>
+              <div class="btn-group dropdown float-right">
+                <button type="button" class="btn btn-sm btn-outline-primary"
+                        [disabled]="!hasPrintPermission"
+                        (click)="printPreview()">
+                  {{'print_preview' | translate | titlecase}}
+                </button>
+              </div>
+            </div>
+          </div>
+    
+        </form>
+      </div>
+    </div>
+    
 
   </div>
 </div>

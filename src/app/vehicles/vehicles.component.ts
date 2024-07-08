@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgAuthService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {AppService} from "../../services/app/app.service";
 import {Event} from "../../types/event";
@@ -7,6 +7,13 @@ import {combineLatest} from "rxjs";
 import {environment} from "../../environments/environment";
 import { VehicleService } from '../../services/vehicle/vehicle.service';
 import { VehicleAccreditationFetchParams, VehicleAccreditationList } from '../../types/vehicle-accreditation';
+import { DelegateType } from '../../types/delegate-type';
+import { Zone } from '../../types/zone';
+import { DelegateTypeService } from '../../services/delegate-type/delegate-type.service';
+import { ZoneService } from '../../services/zone/zone.service';
+import { VehicleGroup } from '../../types/vehicle-group';
+import { VehicleGroupService } from '../../services/vehicle-group/vehicle-group.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-vehicles',
@@ -14,6 +21,8 @@ import { VehicleAccreditationFetchParams, VehicleAccreditationList } from '../..
   styleUrls: ['./vehicles.component.css']
 })
 export class VehiclesComponent extends WsComponent implements OnInit {
+
+  @ViewChild('form') form: NgForm;
 
   allChecked = false;
   selectedEvent: Event;
@@ -24,8 +33,19 @@ export class VehiclesComponent extends WsComponent implements OnInit {
 
   hasPrintPermission = false;
 
+  vehicleGroups: VehicleGroup[];
+  delegateTypes: DelegateType[];
+  zones: Zone[];
+  yesNoSelections = [
+    {value: true, label: 'Yes'},
+    {value: false, label: 'No'},
+  ];
+
   constructor(private appService: AppService,
               private vehicleService: VehicleService,
+              private vehicleGroupService: VehicleGroupService,
+              private delegateTypeService: DelegateTypeService,
+              private zoneService: ZoneService,
               private router: Router,
               private route: ActivatedRoute,
               private authService: NgAuthService) {
@@ -49,6 +69,19 @@ export class VehiclesComponent extends WsComponent implements OnInit {
         this.selectedEvent = event;
 
         this.loadVehicles();
+
+        // load all filter options based on selected event
+        this.subscribe(
+          this.vehicleGroupService.getVehicleGroups(this.selectedEvent.id).subscribe(res => {
+            this.vehicleGroups = res.groups;
+          }),
+          this.delegateTypeService.getList(this.selectedEvent.id).subscribe(res => {
+            this.delegateTypes = res.delegate_types;
+          }),
+          this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
+            this.zones = res.zones;
+          })
+        );
       });
   }
 
@@ -134,8 +167,25 @@ export class VehiclesComponent extends WsComponent implements OnInit {
     this.updateSearchQueryParams();
   }
 
+  submit(): void {
+    this.filter({...this.fetchParams, ...this.form.value});
+  }
+
+  printPreview(): void {
+    this.submit();
+    this.fetchParams = {...this.fetchParams, ...this.form.value};
+
+    const queryParams: Params = this.vehicleService.buildQueryParams(this.fetchParams);
+    queryParams['offset'] = 0;
+    queryParams['limit'] = 9999;
+
+    const urlTree = this.router.createUrlTree(['print'], {relativeTo: this.route, queryParams});
+    const url = this.router.serializeUrl(urlTree);
+    window.open(url, '_blank');
+  }
+
   private updateSearchQueryParams(): void {
-    const queryParams = {};
+    const queryParams: Params = this.vehicleService.buildQueryParams(this.fetchParams);
 
     this.router.navigate(
       [],

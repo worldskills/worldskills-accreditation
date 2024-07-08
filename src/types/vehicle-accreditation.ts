@@ -32,6 +32,7 @@ export interface VehicleAccreditationRequest {
 
 export interface VehicleAccreditationFetchParams extends FetchParams {
   query?: string;
+  group?: number;
   zone?: number[];
   printed?: boolean;
   distributed?: boolean;

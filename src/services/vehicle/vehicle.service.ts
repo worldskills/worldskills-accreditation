@@ -5,6 +5,7 @@ import { GenericUtil, HttpUtil, ObjectUtil, WsService } from '@worldskills/world
 import { Observable, share } from 'rxjs';
 import { DelegateType } from "../../types/delegate-type";
 import { Image } from "../../types/image";
+import {isEmpty} from "../../utils/StringUtil";
 import { VehicleAccreditation, VehicleAccreditationFetchParams, VehicleAccreditationList, VehicleAccreditationRequest } from '../../types/vehicle-accreditation';
 import { Zone } from "../../types/zone";
 import { Params } from "@angular/router";
@@ -62,10 +63,6 @@ export class VehicleService extends WsService<any> {
     return this.http.put(`${this.url(eventId)}/${vehicleAccreditationId}/printed`, null).pipe(share());
   }
 
-  uploadAccreditationPhoto(eventId: number, vehicleAccreditationId: number, image: Image): Observable<VehicleAccreditation> {
-    return this.http.post<VehicleAccreditation>(`${this.url(eventId)}/${vehicleAccreditationId}/photo`, image).pipe(share());
-  }
-
   initialiseFetchParams(): VehicleAccreditationFetchParams {
     return {
       l: 'en',
@@ -77,6 +74,54 @@ export class VehicleService extends WsService<any> {
       offset: 0,
       limit: 10
     }
+  }
+
+  buildQueryParams(fetchParams: VehicleAccreditationFetchParams): Params {
+    const queryParams: Params = {};
+
+    if (!GenericUtil.isNullOrUndefined(fetchParams.group)) {
+      queryParams['group'] = fetchParams.group;
+    } else {
+      queryParams['group'] = null;
+    }
+
+    if (!GenericUtil.isNullOrUndefined(fetchParams.zone)) {
+      queryParams['zone'] = fetchParams.zone;
+    } else {
+      queryParams['zone'] = null;
+    }
+
+    if (!GenericUtil.isNullOrUndefined(fetchParams.printed)) {
+      queryParams['printed'] = fetchParams.printed;
+    } else {
+      queryParams['printed'] = null;
+    }
+
+    if (!GenericUtil.isNullOrUndefined(fetchParams.distributed)) {
+      queryParams['distributed'] = fetchParams.distributed;
+    } else {
+      queryParams['distributed'] = null;
+    }
+
+    if (!GenericUtil.isNullOrUndefined(fetchParams.del_types)) {
+      queryParams['del_types'] = fetchParams.del_types;
+    } else {
+      queryParams['del_types'] = null;
+    }
+
+    if (!GenericUtil.isNullOrUndefined(fetchParams.offset)) {
+      queryParams['offset'] = fetchParams.offset;
+    } else {
+      queryParams['offset'] = null;
+    }
+
+    if (!GenericUtil.isNullOrUndefined(fetchParams.limit)) {
+      queryParams['limit'] = fetchParams.limit;
+    } else {
+      queryParams['limit'] = null;
+    }
+
+    return queryParams;
   }
 
   loadFilterFromQueryParams(params: Params, fetchParams: VehicleAccreditationFetchParams): void {
