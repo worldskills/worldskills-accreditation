@@ -14,7 +14,7 @@ import { VehicleAccreditation, VehicleAccreditationFetchParams } from 'src/types
 @Component({
   selector: 'app-vehicle-print',
   templateUrl: './vehicle-print.component.html',
-  styleUrls: ['../../styles/badge.css', './print.component.css'],
+  styleUrls: ['../../styles/badge.css', './vehicle-print.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class VehiclePrintComponent extends WsComponent implements OnInit {
