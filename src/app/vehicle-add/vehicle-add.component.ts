@@ -11,6 +11,8 @@ import { VehicleAccreditationRequest } from '../../types/vehicle-accreditation';
 import { VehicleService } from '../../services/vehicle/vehicle.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
+import { Zone } from 'src/types/zone';
+import { ZoneService } from 'src/services/zone/zone.service';
 
 @Component({
   selector: 'app-vehicle-add',
@@ -25,6 +27,8 @@ export class VehicleAddComponent extends WsComponent implements OnInit {
   delegateTypes: DelegateType[];
   vehicleGroups: VehicleGroup[];
 
+  zones: Zone[] = [];
+
   @ViewChild('form') form: NgForm;
 
   model: VehicleAccreditationRequest = {};
@@ -35,6 +39,7 @@ export class VehicleAddComponent extends WsComponent implements OnInit {
     private delegateTypeService: DelegateTypeService,
     private vehicleGroupService: VehicleGroupService,
     private vehicleService: VehicleService,
+    private zoneService: ZoneService,
     private router: Router,
     private route: ActivatedRoute,
   ) {
@@ -53,6 +58,9 @@ export class VehicleAddComponent extends WsComponent implements OnInit {
           }),
           this.vehicleGroupService.getVehicleGroups(this.selectedEvent.id).subscribe(res => {
             this.vehicleGroups = res.groups;
+          }),
+          this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
+            this.zones = res.zones.filter(z => z.quota !== null);
           }),
         );
       })

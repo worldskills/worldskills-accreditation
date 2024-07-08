@@ -4,6 +4,8 @@ export interface Zone {
   name: string;
   color: string;
   text_color: string;
+  quota?: number;
+  usage?: number;
   sort: number;
 }
 
