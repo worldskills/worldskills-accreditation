@@ -7,10 +7,10 @@
     </div>
 
     <div style="position: absolute; left: 39mm; top: 4mm; width: 76mm; height: 18mm; font-weight: 700; font-size: 7mm; line-height: 1.2; text-transform: uppercase;" class="ws-text-fit">
-      <div style="-webkit-print-color-adjust: exact; color: #2b1c53 !important;">
+      <div style="-webkit-print-color-adjust: exact; color: #2E1651 !important;">
         {{pa.first_name}}
       </div>
-      <div style="-webkit-print-color-adjust: exact; color: #2b1c53 !important;">
+      <div style="-webkit-print-color-adjust: exact; color: #2E1651 !important;">
         {{pa.last_name}}
       </div>
     </div>
@@ -20,7 +20,7 @@
     </div>
 
     <div style="position: absolute; left: 39mm; top: 31mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 5.5mm; line-height: 1.4;" class="ws-text-fit">
-      <div style="-webkit-print-color-adjust: exact; color: #2b1c53 !important;">{{pa.lines[1]}}</div>
+      <div style="-webkit-print-color-adjust: exact; color: #2E1651 !important;">{{pa.lines[1]}}</div>
     </div>
 
     <div style="position: absolute; left: 39mm; top: 38mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 5mm; line-height: 1.4;" class="ws-text-fit">
@@ -34,28 +34,28 @@
       <div style="width: 20mm;"><div *ngIf="hasZone('FPT')" class="icon icon-pink">FPT</div></div>
     </div>
 
-    <div style="position: absolute; border: 0.3mm solid #2b1c53; left: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
+    <div style="position: absolute; border: 0.3mm solid #2E1651; left: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
 
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; font-size: 10mm; font-weight: 600; -webkit-print-color-adjust: exact;">
         <div>
-          <div *ngIf="hasZone('0') && !hasAnyZone(['0C', '0E'])" style="color: #2b1c53">0</div>
-          <div *ngIf="hasZone('0C') && !hasAnyZone(['0E'])" style="color: #2b1c53">0C</div>
-          <div *ngIf="hasZone('0E')" style="color: #2b1c53">0E</div>
+          <div *ngIf="hasZone('0') && !hasAnyZone(['0C', '0E'])" style="color: #2E1651">0</div>
+          <div *ngIf="hasZone('0C') && !hasAnyZone(['0E'])" style="color: #2E1651">0C</div>
+          <div *ngIf="hasZone('0E')" style="color: #2E1651">0E</div>
           <div *ngIf="!hasAnyZone(['0', '0C', '0E'])" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div>
         </div>
-        <div><div *ngIf="hasZone('1')" style="color: #2b1c53">1</div><div *ngIf="!hasZone('1')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
-        <div><div *ngIf="hasZone('2')" style="color: #2b1c53">2</div><div *ngIf="!hasZone('2')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
-        <div><div *ngIf="hasZone('3')" style="color: #2b1c53">3</div><div *ngIf="!hasZone('3')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
-        <div><div *ngIf="hasZone('4')" style="color: #2b1c53">4</div><div *ngIf="!hasZone('4')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
-        <div><div *ngIf="hasZone('5')" style="color: #2b1c53">5</div><div *ngIf="!hasZone('5')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
-        <div><div *ngIf="hasZone('6')" style="color: #2b1c53">6</div><div *ngIf="!hasZone('6')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
-        <div><div *ngIf="hasZone('7')" style="color: #2b1c53">7</div><div *ngIf="!hasZone('7')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
-        <div><div *ngIf="hasZone('8')" style="color: #2b1c53">8</div><div *ngIf="!hasZone('8')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('1')" style="color: #2E1651">1</div><div *ngIf="!hasZone('1')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('2')" style="color: #2E1651">2</div><div *ngIf="!hasZone('2')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('3')" style="color: #2E1651">3</div><div *ngIf="!hasZone('3')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('4')" style="color: #2E1651">4</div><div *ngIf="!hasZone('4')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('5')" style="color: #2E1651">5</div><div *ngIf="!hasZone('5')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('6')" style="color: #2E1651">6</div><div *ngIf="!hasZone('6')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('7')" style="color: #2E1651">7</div><div *ngIf="!hasZone('7')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
+        <div><div *ngIf="hasZone('8')" style="color: #2E1651">8</div><div *ngIf="!hasZone('8')" style="color: #f0eef6; font-size: 7mm; line-height: 15mm;">✕</div></div>
       </div>
 
     </div>
 
-    <div style="position: absolute; border: 0.3mm solid #2b1c53; right: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
+    <div style="position: absolute; border: 0.3mm solid #2E1651; right: 2mm; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 48mm;">
 
       <div style="position: absolute; left: 2mm; right: 2mm; top: 3mm; display: flex; justify-content: space-around;">
         <div style="width: 10mm;"><div *ngIf="hasZone('T')" class="symbol symbol-transport"></div></div>
