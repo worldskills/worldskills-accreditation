@@ -1,12 +1,13 @@
 import {environment} from "../../environments/environment";
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpUtil, ObjectUtil, WsService } from '@worldskills/worldskills-angular-lib';
+import { GenericUtil, HttpUtil, ObjectUtil, WsService } from '@worldskills/worldskills-angular-lib';
 import { Observable, share } from 'rxjs';
 import { DelegateType } from "../../types/delegate-type";
 import { Image } from "../../types/image";
 import { VehicleAccreditation, VehicleAccreditationFetchParams, VehicleAccreditationList, VehicleAccreditationRequest } from '../../types/vehicle-accreditation';
 import { Zone } from "../../types/zone";
+import { Params } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -77,4 +78,42 @@ export class VehicleService extends WsService<any> {
       limit: 10
     }
   }
+
+  loadFilterFromQueryParams(params: Params, fetchParams: VehicleAccreditationFetchParams): void {
+
+    if ('zone' in params && !GenericUtil.isNullOrUndefined(params['zone'])) {
+      const zone = params['zone'];
+      if (typeof zone === 'string') {
+        fetchParams.zone = [+zone];
+      } else {
+        fetchParams.zone = (zone as []).map(z => +z);
+      }
+    }
+
+    if ('printed' in params && !GenericUtil.isNullOrUndefined(params['printed'])) {
+      fetchParams.printed = params['printed'] === 'true';
+    }
+
+    if ('distributed' in params && !GenericUtil.isNullOrUndefined(params['distributed'])) {
+      fetchParams.distributed = params['distributed'] === 'true';
+    }
+
+    if ('del_types' in params && !GenericUtil.isNullOrUndefined(params['del_types'])) {
+      const delTypes = params['del_types'];
+      if (typeof delTypes === 'string') {
+        fetchParams.del_types = [+delTypes];
+      } else {
+        fetchParams.del_types = (delTypes as []).map(dt => +dt);
+      }
+    }
+
+    if ('offset' in params && !GenericUtil.isNullOrUndefined(params['offset'])) {
+      fetchParams.offset = +params['offset'];
+    }
+
+    if ('limit' in params && !GenericUtil.isNullOrUndefined(params['limit'])) {
+      fetchParams.limit = +params['limit'];
+    }
+  }
+
 }

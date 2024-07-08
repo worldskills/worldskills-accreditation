@@ -118,7 +118,7 @@ export class VehiclesComponent extends WsComponent implements OnInit {
     const queryParams: Params = {};
     queryParams['id'] = ids;
 
-    const urlTree = this.router.createUrlTree(['../print'], {relativeTo: this.route, queryParams});
+    const urlTree = this.router.createUrlTree(['./print'], {relativeTo: this.route, queryParams});
     const url = this.router.serializeUrl(urlTree);
     window.open(url, '_blank');
 

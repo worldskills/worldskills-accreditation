@@ -1,0 +1,11 @@
+@media screen {
+  body {
+    background-color: #ccc;
+  }
+}
+
+@media print {
+  .ws-button-overlay {
+    display: none !important;
+  }
+}

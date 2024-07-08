@@ -150,7 +150,7 @@ export class VehicleComponent extends WsComponent implements OnInit {
   }
 
   printPreview(): void {
-    const urlTree = this.router.createUrlTree(['../../print'], {relativeTo: this.route, queryParams: {id: this.vehicleAcr.id}});
+    const urlTree = this.router.createUrlTree(['../print'], {relativeTo: this.route, queryParams: {id: this.vehicleAcr.id}});
     const url = this.router.serializeUrl(urlTree);
     if (this.vehicleAcr.printed) {
       if (confirm('This accreditation badge has already been printed. If the badge has been lost, it should be marked as invalid before reprinting ("Invalidate badge"). Proceed with printing without invalidating the badge?')) {
