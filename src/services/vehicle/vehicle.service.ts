@@ -126,6 +126,10 @@ export class VehicleService extends WsService<any> {
 
   loadFilterFromQueryParams(params: Params, fetchParams: VehicleAccreditationFetchParams): void {
 
+    if ('group' in params && !GenericUtil.isNullOrUndefined(params['group'])) {
+      fetchParams.group = +params['group'];
+    }
+
     if ('zone' in params && !GenericUtil.isNullOrUndefined(params['zone'])) {
       const zone = params['zone'];
       if (typeof zone === 'string') {
