@@ -90,10 +90,10 @@ export class PersonComponent extends WsComponent implements OnInit {
         this.selectedEvent = event;
         this.subscribe(
           this.loadPersonAccreditation(personAcrId),
-          this.delegateTypeService.getList(this.selectedEvent.id).subscribe(res => {
+          this.delegateTypeService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
             this.delegateTypes = res.delegate_types;
           }),
-          this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
+          this.zoneService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
             this.zones = res.zones;
           })
         );

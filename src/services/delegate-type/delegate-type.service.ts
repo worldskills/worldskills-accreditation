@@ -18,8 +18,8 @@ export class DelegateTypeService extends WsService<any> {
     super();
   }
 
-  getList(eventId: number): Observable<DelegateTypeContainer> {
-    return this.http.get<DelegateTypeContainer>(this.url(eventId)).pipe(share());
+  getList(eventId: number, params?: {}): Observable<DelegateTypeContainer> {
+    return this.http.get<DelegateTypeContainer>(this.url(eventId), {params}).pipe(share());
   }
 
   get(delTypeId: number, eventId: number): Observable<DelegateType> {

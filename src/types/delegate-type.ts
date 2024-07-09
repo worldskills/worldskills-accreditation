@@ -9,6 +9,8 @@ export interface DelegateType {
   line3: string;
   color: string;
   text_color: string;
+  available_person_accreditation?: boolean;
+  available_vehicle_accreditation?: boolean;
   zones: Zone[];
 }
 

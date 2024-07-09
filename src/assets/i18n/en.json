@@ -1,4 +1,6 @@
 {
+  "available_person_accreditation": "Available for Person Accreditation",
+  "available_vehicle_accreditation": "Available for Vehicle Accreditation",
   "no_vehicles_found": "No Vehicle Passes found",
   "vehicle_list": "Vehicle list",
   "add_vehicle_pass": "Add Vehicle Pass",

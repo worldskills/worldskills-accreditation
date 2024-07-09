@@ -75,10 +75,10 @@ export class VehiclesComponent extends WsComponent implements OnInit {
           this.vehicleGroupService.getVehicleGroups(this.selectedEvent.id).subscribe(res => {
             this.vehicleGroups = res.groups;
           }),
-          this.delegateTypeService.getList(this.selectedEvent.id).subscribe(res => {
+          this.delegateTypeService.getList(this.selectedEvent.id, {available_vehicle_accreditation: true}).subscribe(res => {
             this.delegateTypes = res.delegate_types;
           }),
-          this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
+          this.zoneService.getList(this.selectedEvent.id, {available_vehicle_accreditation: true}).subscribe(res => {
             this.zones = res.zones;
           })
         );
