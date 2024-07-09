@@ -65,6 +65,9 @@ import {PersonPreviewComponent} from './person-preview/person-preview.component'
 import {
   ZoneRequestAllocationFinderComponent
 } from './zone-request-allocation-finder/zone-request-allocation-finder.component';
+import {
+  ZoneRequestFormEmailSetupComponent
+} from './zone-request-form-email-setup/zone-request-form-email-setup.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240415180851');
@@ -114,7 +117,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     BaseComponent,
     QrScannerComponent,
     PersonPreviewComponent,
-    ZoneRequestAllocationFinderComponent
+    ZoneRequestAllocationFinderComponent,
+    ZoneRequestFormEmailSetupComponent
   ],
   imports: [
     BrowserModule,

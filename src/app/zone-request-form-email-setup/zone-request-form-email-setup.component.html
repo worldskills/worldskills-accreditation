@@ -1,0 +1,42 @@
+<form class="form-horizontal" [ngClass]="{'was-validated': this.form.submitted}" (ngSubmit)="save()" #form="ngForm"
+      novalidate>
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{ 'from_email_address' | translate }}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+      <input
+        type="text"
+        class="form-control"
+        name="from"
+        required
+        [ngModel]="emailFrom"
+        autocomplete="off"
+        data-1p-ignore
+      >
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{ 'manager' | translate }}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+      <ng-select
+        name="manager"
+        [multiple]="true"
+        [addTag]="true"
+        [items]="emailManager"
+        [ngModel]="emailManager"
+        required
+      ></ng-select>
+    </div>
+  </div>
+
+  <div class="row mb-2 text-right">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-sm btn-primary">{{ 'save' | translate }}</button>
+      <button type="button" class="btn btn-sm btn-outline-primary ml-2"
+              (click)="cancel()">{{ 'cancel' | translate }}
+      </button>
+    </div>
+  </div>
+</form>

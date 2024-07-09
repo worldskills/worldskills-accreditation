@@ -11,9 +11,9 @@
       <div class="table-responsive-md">
         <table class="table table-striped">
           <colgroup>
-            <col style="width: 45%">
             <col style="width: 35%">
-            <col style="width: 20%">
+            <col style="width: 35%">
+            <col style="width: 30%">
           </colgroup>
           <thead>
           <tr>
@@ -32,13 +32,22 @@
             </td>
             <td>{{ form.header_text.text }}</td>
             <td>
-              <button type="button" class="btn btn-link btn-sm small w-100 p-0 m-0" #copyFormBtn
-                      (click)="copyURLToClipboard(form,copyFormBtn)">
-                <i class="fa fa-link"></i> {{'copy_form_link' | translate}}
-              </button>
-              <button type="button" class="btn btn-link btn-sm small w-100 p-0 m-0 mt-2" (click)="allocate(form)">
-                <i class="fa fa-eye"></i> {{'view_and_allocate_submissions' | translate}}
-              </button>
+              <p class="py-0 my-0">
+                <button type="button" class="btn btn-link btn-sm small" (click)="setupEmail(form)">
+                  <i class="fa fa-inbox"></i> {{ 'Set up email' | translate }}
+                </button>
+              </p>
+              <p class="py-0 my-0">
+                <button type="button" class="btn btn-link btn-sm small" #copyFormBtn
+                        (click)="copyURLToClipboard(form,copyFormBtn)">
+                  <i class="fa fa-link"></i> {{ 'copy_form_link' | translate }}
+                </button>
+              </p>
+              <p class="py-0 my-0">
+                <button type="button" class="btn btn-link btn-sm small" (click)="allocate(form)">
+                  <i class="fa fa-eye"></i> {{ 'view_and_allocate_submissions' | translate }}
+                </button>
+              </p>
             </td>
           </tr>
           </tbody>
@@ -69,5 +78,19 @@
                                 (saveZoneReqForm)="save($event)">
 
     </app-zone-request-form-form>
+  </ng-container>
+</ws-modal>
+
+<ws-modal [open]="setupEmailForm !== null" (onClose)="setupEmailForm = null" [options]="{size: 'lg'}">
+  <ng-container header>
+    <h4>{{ 'Setup email for' | translate }}: {{ setupEmailForm?.name?.text }}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-zone-request-form-email-setup *ngIf="setupEmailForm !== null"
+                                       [zoneReqForm]="setupEmailForm"
+                                       [selectedEvent]="selectedEvent"
+                                       (cancelForm)="setupEmailForm = null">
+
+    </app-zone-request-form-email-setup>
   </ng-container>
 </ws-modal>

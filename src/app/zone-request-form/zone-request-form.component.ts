@@ -21,6 +21,7 @@ export class ZoneRequestFormComponent extends WsComponent implements OnInit {
   forms: ZoneRequestForm[];
 
   manageForm: ZoneRequestForm = null;
+  setupEmailForm: ZoneRequestForm = null;
 
   constructor(private appService: AppService,
               private zoneReqFormService: ZoneRequestFormService,
@@ -96,5 +97,9 @@ export class ZoneRequestFormComponent extends WsComponent implements OnInit {
 
   updateForm(form: ZoneRequestForm): void {
     this.manageForm = form;
+  }
+
+  setupEmail(form: ZoneRequestForm): void {
+    this.setupEmailForm = form;
   }
 }
