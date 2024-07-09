@@ -30,7 +30,7 @@ export class DelegateTypesFormComponent extends WsComponent implements OnInit {
       this.color = this.delType.color;
     }
     this.subscribe(
-      this.zoneService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
+      this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
         this.zones = res.zones;
       })
     );
