@@ -1,0 +1,203 @@
+<div class="row mb-2">
+  <div class="col-md-12">
+    <button class="btn btn-sm btn-link" (click)="backToPeopleList()"><span
+      class="fa fa-arrow-left"></span> {{ 'vehicle_list' | translate }}
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              {{ 'manual_override' | translate | titlecase }}
+              <span class="fa fa-info-circle"
+                    ngbTooltip="This gives you the ability to override or customise vehicle's badge"></span>
+            </h5>
+          </div>
+          <div class="card-body" *ngIf="vehicleAcr">
+
+            <div class="alert alert-warning small"
+                 *ngIf="!hasEditPermission">{{ 'no_permission_to_edit_vehicle_msg' | translate }}
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'category' | translate }}</label>
+                <ng-select
+                  name="del_types"
+                  [items]="delegateTypes"
+                  bindLabel="name"
+                  [ngModel]="vehicleAcr.delegate_type"
+                  (change)="onDelTypeChange($event)"
+                  [disabled]="!hasEditPermission"
+                  [clearable]="false"
+                  required
+                >
+                  <ng-template ng-label-tmp let-item="item">
+                    <div class="d-inline-block" style="width: 15px; height: 15px; "
+                         [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{ item.name }}</div>
+                  </ng-template>
+                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                    <div class="d-inline-block" style="width: 15px; height: 15px; "
+                         [style.background-color]="item.color"></div>
+                    <div class="d-inline-block ml-2">{{ item.name }}</div>
+                  </ng-template>
+                </ng-select>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'badge_lines' | translate }}</label>
+                <textarea class="form-control" rows="3" [ngModel]="vehicleAcr.overwrite_lines"
+                          [disabled]="!hasEditPermission"
+                          (ngModelChange)="onBadgeLinesChange($event)"></textarea>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'additional_zones' | translate }}</label>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
+                              [disabled]="!hasEditPermission || getZonesToAdd().length === 0"
+                              id="addZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false">
+                        {{ 'add_zone' | translate }}
+                      </button>
+
+                      <div class="dropdown-menu" aria-labelledby="addZoneDropdownMenu">
+                        <a class="dropdown-item" (click)="addZone(zone)"
+                           *ngFor="let zone of getZonesToAdd()">{{ zone.code }} - {{ zone.name }}</a>
+                      </div>
+                    </div>
+                    <div class="btn-group ml-2">
+                      <button class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
+                              [disabled]="!hasEditPermission || getZonesToRemove().length === 0"
+                              id="removeZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false">
+                        {{ 'remove_zone' | translate }}
+                      </button>
+
+                      <div class="dropdown-menu" aria-labelledby="removeZoneDropdownMenu">
+                        <a class="dropdown-item" (click)="removeZone(zone)"
+                           *ngFor="let zone of getZonesToRemove()">{{ zone.code }} - {{ zone.name }}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <p class="py-0 my-0 small" *ngFor="let zone of vehicleAcr.zones_add">
+                    <a class="text-black" ngbTooltip="Click to remove zone" routerLink="." (click)="addZone(zone)">
+                      {{ zone.code }} - {{ zone.name }}
+                    </a>
+                  </p>
+
+                  <p class="py-0 my-0 small" *ngFor="let zone of vehicleAcr.zones_remove">
+                    <a class="text-black" ngbTooltip="Click to add zone back" routerLink="." (click)="removeZone(zone)">
+                      <s>{{ zone.code }} - {{ zone.name }}</s>
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-muted small text-right" *ngIf="savingVehicleAcr">{{ 'saving' | translate }}...</p>
+            <p class="text-muted small text-right"
+               *ngIf="!savingVehicleAcr">{{ 'changes_saved_automatically'| translate }}</p>
+          </div>
+          <div class="card-body" *ngIf="!vehicleAcr">
+            <ngx-skeleton-loader
+              count="2"
+              [theme]="{ 'border-radius': '0', width: '45%', height: '30px', 'margin-bottom': '15px', 'margin-right': '15px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{ 'border-radius': '0', width: '60%', height: '30px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{ 'border-radius': '0', width: '100%', height: '80px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+              count="2"
+              [theme]="{ 'border-radius': '0', width: '30%', height: '30px', 'margin-bottom': '15px', 'margin-right': '15px' }"></ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-8">
+    <div class="alert alert-info small" *ngIf="vehicleAcr?.printed">{{ 'badge_has_been_printed' | translate }}</div>
+    <div class="alert alert-warning small"
+         *ngIf="vehicleAcr?.distributed">{{ 'badge_has_been_distributed' | translate }}
+    </div>
+    <div class="card" *ngIf="vehicleAcr">
+      <div class="card-header">
+        <h5 class="card-title">{{ 'preview_badge' | translate | titlecase }}
+          <div class="btn-group dropdown float-right">
+            <button type="button" class="btn btn-sm btn-primary" (click)="printPreview()"
+                    [disabled]="!hasPrintPermission">
+              {{ 'print_preview' | translate | titlecase }}
+            </button>
+            <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu">
+              <button class="dropdown-item"
+                      [disabled]="(!hasEditPermission && !hasPrintPermission) || !!vehicleAcr.distributed"
+                      (click)="markAsDistributed()">{{ 'mark_as_distributed' | translate }} <span
+                class="badge badge-success" *ngIf="!!vehicleAcr.distributed">{{ 'distributed' | translate }}</span>
+              </button>
+              <button class="dropdown-item" [disabled]="!hasEditPermission"
+                      (click)="invalidateBadge()">{{ 'invalidate_badge' | translate }}
+              </button>
+            </div>
+          </div>
+        </h5>
+      </div>
+      <div class="card-body p-2 m-0">
+        <app-vehicle-badge
+          style="zoom: 0.6"
+          [selectedEvent]="selectedEvent"
+          [vehicle]="vehicleAcr"></app-vehicle-badge>
+      </div>
+      <div class="card-body" *ngIf="!vehicleAcr">
+        <ngx-skeleton-loader
+          count="1"
+          [theme]="{ 'border-radius': '0', width: '100%', height: '148.5mm' }"></ngx-skeleton-loader>
+      </div>
+    </div>
+    <div class="card mt-4" *ngIf="vehicleAcr">
+      <div class="card-header">
+        <h5 class="card-title">{{ 'all_zones' | translate | titlecase }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive-md">
+          <table class="table">
+            <tbody>
+            <tr *ngFor="let zone of vehicleAcr.zones">
+              <td>
+                  <span class="badge mr-1 small" [style.background-color]="zone.color"
+                        [ngbTooltip]="zone.name"
+                        [style.color]="zone.text_color">{{ zone.code }}</span>
+              </td>
+              <td>
+                {{ zone.name }}
+              </td>
+            </tr>
+            <tr *ngIf="vehicleAcr.zones.length === 0">
+              <td colspan="2">{{ 'no_zones' | translate }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

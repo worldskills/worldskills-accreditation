@@ -49,6 +49,50 @@
 
   <div class="row mb-2">
     <div class="col-sm-12">
+      <label class="small font-weight-bold my-0 py-0">{{'quota' | translate}}
+        <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
+      <input
+        type="number"
+        class="form-control"
+        name="quota"
+        [ngModel]="zone.quota">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <div class="form-check pl-4">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="available_person_accreditation"
+          name="available_person_accreditation"
+          [ngModel]="zone.available_person_accreditation">
+        <label class="form-check-label small font-weight-bold" for="available_person_accreditation">
+          {{'available_person_accreditation' | translate}}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
+      <div class="form-check pl-4">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="available_vehicle_accreditation"
+          name="available_vehicle_accreditation"
+          [ngModel]="zone.available_vehicle_accreditation">
+        <label class="form-check-label small font-weight-bold" for="available_vehicle_accreditation">
+          {{'available_vehicle_accreditation' | translate}}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-sm-12">
       <label class="small font-weight-bold my-0 py-0">{{'sort' | translate}}
         <span class="text-danger" ngbTooltip="{{'required' | translate}}">*</span></label>
       <input

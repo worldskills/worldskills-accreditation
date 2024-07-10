@@ -49,7 +49,12 @@ import {WebcamModule} from "ngx-webcam";
 import {WebcamCaptureComponent} from './webcam-capture/webcam-capture.component';
 import {Fi2024Component} from './badges/fi2024/fi2024.component';
 import {BaseComponent} from './badges/base/base.component';
+import { VehiclesComponent } from './vehicles/vehicles.component';
+import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { Wsi2024WscComponent } from './badges/wsi2024-wsc/wsi2024-wsc.component';
+import { VehicleComponent } from './vehicle/vehicle.component';
+import { VehicleBadgeComponent } from './vehicle-badge/vehicle-badge.component';
+import { VehiclePrintComponent } from './vehicle-print/vehicle-print.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240415180851');
@@ -87,6 +92,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     Wsi2024CpwComponent,
     Wsi2024WscComponent,
     SetupScanAppComponent,
+    VehicleComponent,
+    VehicleAddComponent,
+    VehicleBadgeComponent,
+    VehiclePrintComponent,
+    VehiclesComponent,
     AdhocPrintingComponent,
     WebcamCaptureComponent,
     Fi2024Component,

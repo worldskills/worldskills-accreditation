@@ -1,0 +1,43 @@
+<div class="ws-badge" *ngIf="showComponent; else loadingAnimation">
+
+  <div style="position: relative; width: 297mm; height: 210mm; -webkit-print-color-adjust: exact; background-color: {{vehicle.delegate_type?.color}} !important; color: {{vehicle.delegate_type?.text_color}} !important;">
+
+    <div style="position: absolute; left: 10mm; top: 8mm; padding: 5mm; -webkit-print-color-adjust: exact; background-color: #fff;">
+      <img src="{{vehicle.qr_code}}" style="height: 40mm;">
+    </div>
+
+    <div style="position: absolute; left: 10mm; top: 70mm; right: 10mm; height: 90mm; line-height: 1;">
+
+      <div style="display: flex; justify-content: space-around; text-align: center;">
+        <div *ngIf="hasZone('P7')" style="font-size: 60mm; font-weight: 700;">P7</div>
+      </div>
+
+      <div style="display: flex; justify-content: space-around; text-align: center;">
+        <div *ngIf="hasZone('AO')" style="font-size: 40mm; font-weight: 700;">ACCESS<br>ONLY</div>
+      </div>
+
+    </div>
+
+    <div style="position: absolute; right: 10mm; top: 8mm; width: 140mm; height: 40mm; font-weight: 400; font-size: 20mm; text-align: right" class="ws-text-fit">
+      {{vehicle.lines[0]}}
+    </div>
+
+    <div style="position: absolute; right: 10mm; bottom: 8mm; width: 140mm; height: 36mm; font-weight: 400; font-size: 20mm; text-align: right;" class="ws-text-fit">
+      {{vehicle.lines[1]}}
+    </div>
+
+    <div style="position: absolute; left: 10mm; bottom: 8mm; text-align: center; font-weight: 700; font-size: 24mm;">
+      {{vehicle.delegate_type?.code}}
+    </div>
+
+  </div>
+
+</div>
+
+<ng-template #loadingAnimation>
+  <div class="ws-badge">
+    <ngx-skeleton-loader
+        count="1"
+        [theme]="{ 'border-radius': '0', width: '297mm', height: '210mm' }"></ngx-skeleton-loader>
+  </div>
+</ng-template>

@@ -26,7 +26,13 @@
           <tbody>
           <tr *ngFor="let dt of delegateTypes">
             <td [style.background-color]="dt.color" [style.color]="dt.text_color">{{dt.code}}</td>
-            <td><a class="btn btn-link m-0 p-0" (click)="updateDelType(dt)">{{dt.name}}</a></td>
+            <td>
+              <a class="btn btn-link m-0 p-0" (click)="updateDelType(dt)">{{dt.name}}</a>
+              &nbsp;
+              <span *ngIf="dt.available_person_accreditation" class="badge badge-secondary">Person</span>
+              &nbsp;
+              <span *ngIf="dt.available_vehicle_accreditation" class="badge badge-secondary">Vehicle</span>
+            </td>
             <td>
               <ng-container *ngFor="let zone of dt.zones">
                 <div class="badge mr-1 small" [style.background-color]="zone.color"

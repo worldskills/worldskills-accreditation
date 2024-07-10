@@ -56,13 +56,13 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
 
         // load all filter options based on selected event
         this.subscribe(
-          this.delegateTypeService.getList(this.selectedEvent.id).subscribe(res => {
+          this.delegateTypeService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
             this.delegateTypes = res.delegate_types;
           }),
           this.skillService.getSkills(this.selectedEvent.id).subscribe(res => {
             this.skills = res.skills.sort((a, b) => a.name.text.localeCompare(b.name.text));
           }),
-          this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
+          this.zoneService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
             this.zones = res.zones;
           })
         );
