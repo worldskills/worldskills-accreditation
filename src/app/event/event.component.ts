@@ -51,13 +51,6 @@ export class EventComponent extends WsComponent implements OnInit {
       );
     });
 
-    // set selected tab based on current route
-    const urlSegments = this.router.url.split('/');
-    const selectedTabIndex = this.tabs.findIndex(tab => tab.path === urlSegments[3]);
-    if (selectedTabIndex !== -1) {
-      this.selectedTabIndex = selectedTabIndex;
-    }
-
     // load current user and check permissions
     this.subscribe(
       this.authService.currentUser.subscribe(currentUser => {
@@ -68,6 +61,13 @@ export class EventComponent extends WsComponent implements OnInit {
         this.tabs = this.tabs.filter(tab => {
           return tab.requiredRoles.some(role => UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, role));
         });
+
+        // set selected tab based on current route
+        const urlSegments = this.router.url.split('/');
+        const selectedTabIndex = this.tabs.findIndex(tab => tab.path === urlSegments[3]);
+        if (selectedTabIndex !== -1) {
+          this.selectedTabIndex = selectedTabIndex;
+        }
       })
     )
   }
