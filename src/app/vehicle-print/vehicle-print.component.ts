@@ -66,6 +66,8 @@ export class VehiclePrintComponent extends WsComponent implements OnInit {
   private loadVehicles() {
     this.loading = true;
     this.vehicleService.getVehicles(this.selectedEvent.id, this.fetchParams).subscribe(res => {
+      const ids = res.vehicles.map(p => p.id);
+      document.title = 'VAPP_' + ids.join('-');
       this.vehicles = res.vehicles;
       this.loading = false;
     })
@@ -74,6 +76,7 @@ export class VehiclePrintComponent extends WsComponent implements OnInit {
   private loadVehiclesByIds(ids: number[]) {
     this.loading = true;
     const observables = ids.map(id => this.vehicleService.getVehicleAccreditation(this.selectedEvent.id, id));
+    document.title = 'VAPP_' + ids.join('-');
     combineLatest(observables).subscribe(vehicles => {
       this.vehicles = vehicles;
       this.loading = false;
