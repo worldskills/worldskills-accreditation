@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgAuthService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {Event} from "../../types/event";
 import {AppService} from "../../services/app/app.service";
 import {environment} from "../../environments/environment";
@@ -62,12 +62,17 @@ export class EventComponent extends WsComponent implements OnInit {
           return tab.requiredRoles.some(role => UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, role));
         });
 
-        // set selected tab based on current route
-        const urlSegments = this.router.url.split('/');
-        const selectedTabIndex = this.tabs.findIndex(tab => tab.path === urlSegments[3]);
-        if (selectedTabIndex !== -1) {
-          this.selectedTabIndex = selectedTabIndex;
-        }
+        this.router.events.subscribe((event) => {
+          // set selected tab based on current route
+          if (event instanceof NavigationEnd) {
+            const urlSegments = event.url.split('/');
+            const selectedTabIndex = this.tabs.findIndex(tab => tab.path === urlSegments[3]);
+            if (selectedTabIndex !== -1) {
+              this.selectedTabIndex = selectedTabIndex;
+            }
+          }
+        });
+
       })
     )
   }
