@@ -55,6 +55,7 @@ import { Wsi2024WscComponent } from './badges/wsi2024-wsc/wsi2024-wsc.component'
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { VehicleBadgeComponent } from './vehicle-badge/vehicle-badge.component';
 import { VehiclePrintComponent } from './vehicle-print/vehicle-print.component';
+import { EventIndexComponent } from './event-index/event-index.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240415180851');
@@ -67,6 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ErrorComponent,
     EventsComponent,
     EventComponent,
+    EventIndexComponent,
     PeopleComponent,
     PeopleEditSelectedComponent,
     ScansComponent,

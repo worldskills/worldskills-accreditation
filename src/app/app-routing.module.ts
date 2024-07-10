@@ -18,6 +18,7 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { VehiclePrintComponent } from './vehicle-print/vehicle-print.component';
+import { EventIndexComponent } from './event-index/event-index.component';
 
 const ACR_ROLES = environment.appRoles;
 
@@ -65,7 +66,7 @@ const routes: Routes = [
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'people'
+            component: EventIndexComponent
           },
           {
             path: 'people',
