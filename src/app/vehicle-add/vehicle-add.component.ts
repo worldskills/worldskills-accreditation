@@ -60,7 +60,17 @@ export class VehicleAddComponent extends WsComponent implements OnInit {
             this.vehicleGroups = res.groups;
           }),
           this.zoneService.getList(this.selectedEvent.id, {available_vehicle_accreditation: true}).subscribe(res => {
+
             this.zones = res.zones.filter(z => z.quota !== null);
+
+            // loop zones and load usage
+            this.zones.forEach(zone => {
+              this.subscribe(
+                this.zoneService.get(this.selectedEvent.id, zone.id).subscribe(res => {
+                  zone.usage = res.usage;
+                })
+              )
+            });
           }),
         );
       })
