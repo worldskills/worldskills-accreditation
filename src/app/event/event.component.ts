@@ -18,7 +18,7 @@ export class EventComponent extends WsComponent implements OnInit {
   appId = environment.worldskillsAppId;
   currentEvent: Event;
   tabs = [
-    {label: 'People', path: 'people', requiredRoles: Object.values(this.appRoles)},
+    {label: 'People', path: 'people', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT, this.appRoles.PRINT]},
     {label: 'Vehicles', path: 'vehicles', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_VEHICLES]},
     {label: 'Scans', path: 'scans', requiredRoles: [this.appRoles.ADMIN]},
     {label: 'Delegate Types', path: 'delegate-types', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_DELEGATE_TYPES]},
