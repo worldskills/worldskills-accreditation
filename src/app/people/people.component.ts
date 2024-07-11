@@ -145,7 +145,7 @@ export class PeopleComponent extends WsComponent implements OnInit {
   }
 
   hasSelected(): boolean {
-    return this.selectedPeople.length > 0;
+    return this.selectedPeople?.length > 0;
   }
 
   doesResultHasMember(): boolean {

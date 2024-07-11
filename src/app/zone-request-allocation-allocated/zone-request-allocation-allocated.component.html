@@ -86,8 +86,21 @@
           </td>
           <td>
             <ul class="list-unstyled">
-              <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone); trackBy: trackByAllocId">
+              <li *ngFor="let allocation of getAllocationsForZone(zoneReq.zone); first as isFirst; last as isLast; trackBy: trackByAllocId">
                 <div>
+                  <div class="btn-group" role="group">
+                    <button [disabled]="isFirst"
+                            type="button" class="btn btn-outline-secondary btn-sm p-1 m-0 border-0"
+                            ngbTooltip="{{'move_up' | translate}}" (click)="move(allocation, 'UP')">
+                      <i class="fa fa-arrow-up"></i>
+                    </button>
+                    <button [disabled]="isLast"
+                      type="button" class="btn btn-outline-secondary btn-sm p-1 m-0 border-0"
+                            ngbTooltip="{{'move_down' | translate}}" (click)="move(allocation, 'DOWN')">
+                      <i class="fa fa-arrow-down"></i>
+                    </button>
+                  </div>
+
                   <span class="badge badge-dark mr-1 mt-1 align-top" style="font-size: 0.8em; background-color: #003764"
                         ngbTooltip="{{'individual_spot_label' | translate}}">{{ allocation.allocated_zone_spot_label }} </span>
                   <span class="fa fa-inbox mr-1 align-top"
@@ -146,13 +159,15 @@
 
     <div *ngIf="manualAllocationToPerson !== null">
 
-      <b>Selected person: </b><p class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToPerson = null">Change</p>
+      <b>Selected person: </b>
+      <p class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToPerson = null">Change</p>
       <div class="row">
         <div class="col-md-3">
           <p class="p-m m-0">{{ manualAllocationToPerson?.first_name + ' ' + manualAllocationToPerson?.last_name }}</p>
         </div>
         <div class="col-md-6">
-          <app-person-badge-preview style="zoom: 0.5" *ngIf="manualAllocationToPerson" [selectedEvent]="selectedEvent" [person]="manualAllocationToPerson"></app-person-badge-preview>
+          <app-person-badge-preview style="zoom: 0.5" *ngIf="manualAllocationToPerson" [selectedEvent]="selectedEvent"
+                                    [person]="manualAllocationToPerson"></app-person-badge-preview>
         </div>
       </div>
 

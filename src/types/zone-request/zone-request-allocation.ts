@@ -9,7 +9,7 @@ export interface ZoneRequestAllocation {
   zone_request: ZoneRequest;
   manual_allocation_to_person_accreditation: PersonAccreditation;
   allocated_zone: Zone;
-  allocated_zone_spot_label: string;
+  allocated_zone_spot_label: number;
   allocated_at: string;
   allocated_by_person_id: number;
   notification_sent_at: string;

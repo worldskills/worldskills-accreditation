@@ -86,7 +86,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
       // sort by zone spot label, then by organization name, then by organizational unit
       return allocations.sort((a, b) => {
         if (a.allocated_zone_spot_label != null && b.allocated_zone_spot_label != null) {
-          return a.allocated_zone_spot_label.localeCompare(b.allocated_zone_spot_label);
+          return a.allocated_zone_spot_label > b.allocated_zone_spot_label ? 1 : -1;
         } else if (a.zone_request != null && b.zone_request != null) {
           return a.zone_request.person_accreditation.person_position.organization.name.text.localeCompare(b.zone_request.person_accreditation.person_position.organization.name.text);
         } else if (a.manual_allocation_to_person_accreditation != null && b.manual_allocation_to_person_accreditation != null) {
@@ -176,5 +176,17 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
         }
       });
     }
+  }
+
+  move(allocation: ZoneRequestAllocation, direction: 'UP' | 'DOWN'): void {
+    this.zoneReqAllocService.updateOrder(this.selectedEvent.id, allocation.id, direction).subscribe({
+      next: () => {
+        this.toastService.success('Allocation order is updated');
+        this.loadAllocations();
+      },
+      error: (err) => {
+        this.toastService.error(err?.error?.user_msg ?? 'Error moving allocation');
+      }
+    });
   }
 }
