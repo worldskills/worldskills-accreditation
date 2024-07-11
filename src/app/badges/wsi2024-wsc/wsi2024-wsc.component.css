@@ -62,6 +62,10 @@
   background-image: url('../../../assets/badges/wsi2024-wsc/symbol-excursions.png');
 }
 
+.symbol-empty {
+  background-image: url('../../../assets/badges/wsi2024-wsc/symbol-empty.png');
+}
+
 @media print {
   body {
     min-width: 100% !important; /* important to override https://github.com/worldskills/bootstrap/blob/main/dist/css/bootstrap.css#L10512*/
