@@ -38,8 +38,8 @@
 }
 
 .symbol {
-  width: 10mm;
-  height: 12mm;
+  width: 9mm;
+  height: 10mm;
   -webkit-print-color-adjust: exact;
   background-size: contain;
   background-repeat: no-repeat;
@@ -56,6 +56,10 @@
 
 .symbol-osoc {
   background-image: url('../../../assets/badges/wsi2024-wsc/symbol-osoc.png');
+}
+
+.symbol-catering {
+  background-image: url('../../../assets/badges/wsi2024-wsc/symbol-catering.png');
 }
 
 .symbol-excursions {
