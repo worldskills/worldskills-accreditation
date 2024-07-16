@@ -6,6 +6,7 @@ import {Observable, Subject} from "rxjs";
 import {ZoneRequestAllocationContainer} from "../../types/zone-request/zone-request-allocation";
 import {ZoneRequest} from "../../types/zone-request/zone-request";
 import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";
+import {Person} from "../../types/person";
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,10 @@ export class ZoneRequestAllocationService extends WsService<any> {
 
   allocatePersonACRToZone(eventId: number, zoneReqFormId: number, zoneId: number, pa: PersonAccreditationSummary): Observable<any> {
     return this.http.post(this.url(eventId) + `/form/${zoneReqFormId}/person-accreditation/${pa.id}/zone/${zoneId}`, {});
+  }
+
+  allocateNewPersonToZone(eventId: number, zoneReqFormId: number, zoneId: number, person: Person): Observable<any> {
+    return this.http.post(this.url(eventId) + `/form/${zoneReqFormId}/new-person/zone/${zoneId}`, person);
   }
 
   undoAllocation(eventId: number, zoneRequestAllocationId: number, notify: boolean): Observable<any> {

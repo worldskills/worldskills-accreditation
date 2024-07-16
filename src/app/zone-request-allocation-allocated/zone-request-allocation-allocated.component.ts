@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {GenericUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {Event} from "../../types/event";
 import {Zone} from "../../types/zone";
@@ -9,6 +9,8 @@ import {ToastService} from "angular-toastify";
 import {PeopleSearchFunctionalitiesDisplaySetting} from "../people/people.component";
 import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";
 import {ZoneRequestFormZone} from "../../types/zone-request/zone-request-form-zone";
+import {Person} from "../../types/person";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-zone-request-allocation-allocated',
@@ -22,11 +24,13 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   @Input() currentForm: ZoneRequestForm;
   @Input() allocatableZones: Zone[];
   @Input() allocatableFormZones: ZoneRequestFormZone[];
+  @ViewChild('newPersonForm') newPersonForm: NgForm;
 
   allocations: ZoneRequestAllocation[];
   previewSelectedPersonACR: PersonAccreditationSummary = null;
 
   // for manual allocation to a zone
+  manualAllocationMode: 'SELECT_EXISTING_PERSON' | 'CREATE_NEW_PERSON' = null;
   manualAllocationToZone: Zone = null;
   functionalitiesDisplaySetting: PeopleSearchFunctionalitiesDisplaySetting = {
     print: false,
@@ -119,24 +123,25 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     });
   }
 
+  private cleaningUpManualAllocation(): void {
+    this.manualAllocationToZone = null;
+    this.manualAllocationToPerson = null;
+    this.manualAllocationMode = null;
+  }
+
   /**
    * Manual allocation of PersonAccreditation to a zone (without a request)
    */
   allocate(pas: PersonAccreditationSummary, zone: Zone) {
-    const cleaningUp = (): void => {
-      this.manualAllocationToZone = null;
-      this.manualAllocationToPerson = null;
-    }
-
     this.zoneReqAllocService.allocatePersonACRToZone(this.selectedEvent.id, this.currentForm.id, zone.id, pas).subscribe({
       next: () => {
         this.toastService.success('Person allocated to zone');
         this.loadAllocations();
-        cleaningUp();
+        this.cleaningUpManualAllocation();
       },
       error: (err) => {
         this.toastService.error(err?.error?.user_msg ?? 'Error allocating person to zone');
-        cleaningUp();
+        this.cleaningUpManualAllocation();
       }
     });
   }
@@ -188,5 +193,53 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
         this.toastService.error(err?.error?.user_msg ?? 'Error moving allocation');
       }
     });
+  }
+
+  saveNewPerson(): void {
+    if (this.newPersonForm.valid) {
+      const person: Person = {
+        first_name: this.newPersonForm.value.first_name,
+        last_name: this.newPersonForm.value.last_name,
+        email_address: this.newPersonForm.value.email_address,
+        positions: [
+          {
+            organizational_unit: this.newPersonForm.value.organizational_unit,
+            // position: this.newPersonForm.value.position_id,
+            // TODO: update
+            position: {
+              id: 685,
+              name: null,
+              wsEntity: null
+            },
+            id: null,
+            start: null,
+            end: null,
+            invalid: null,
+            open_field: null,
+            skill: null,
+            sector: null,
+            member: null,
+            organization: null,
+          }
+        ],
+        id: null,
+        country: null,
+        images: null,
+      };
+
+      this.zoneReqAllocService.allocateNewPersonToZone(this.selectedEvent.id, this.currentForm.id, this.manualAllocationToZone.id,
+        person).subscribe({
+        next: () => {
+          this.toastService.success('New person allocated to zone');
+          this.loadAllocations();
+          this.cleaningUpManualAllocation();
+        },
+        error: (err) => {
+          this.toastService.error(err?.error?.user_msg ?? 'Error allocating new person to zone');
+        }
+      });
+    } else {
+      this.toastService.error('Please fill all required fields');
+    }
   }
 }
