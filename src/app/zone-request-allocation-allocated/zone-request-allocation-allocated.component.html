@@ -233,10 +233,11 @@
             <div class="col-sm-12">
               <label class="small text-muted font-weight-bold my-0 py-0">{{ 'position' | translate }}</label>
               <ng-select
-                name="position"
-                bindValue="id"
-                bindLabel="name"
-
+                name="zoneReqFormPosition"
+                bindLabel="position.name.text"
+                [items]="manualAllocationAssignablePositions"
+                [ngModel]="manualAllocationAssignablePositions?.length === 1 ? manualAllocationAssignablePositions[0] : null"
+                required
               ></ng-select>
             </div>
           </div>

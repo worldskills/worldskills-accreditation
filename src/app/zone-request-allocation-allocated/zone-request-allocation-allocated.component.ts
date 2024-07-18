@@ -11,6 +11,13 @@ import {PersonAccreditationSummary} from "../../types/person-accreditation-summa
 import {ZoneRequestFormZone} from "../../types/zone-request/zone-request-form-zone";
 import {Person} from "../../types/person";
 import {NgForm} from "@angular/forms";
+import {
+  ZoneRequestFormPositionService
+} from "../../services/zone-request-form-position/zone-request-form-position.service";
+import {
+  ZoneRequestFormPosition,
+  ZoneRequestFormPositionType
+} from "../../types/zone-request/zone-request-form-position";
 
 @Component({
   selector: 'app-zone-request-allocation-allocated',
@@ -38,12 +45,14 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     select_a_person: true,
   }
   manualAllocationToPerson: PersonAccreditationSummary = null;
+  manualAllocationAssignablePositions: ZoneRequestFormPosition[] = [];
 
   // for filtering allocations
   filterZones: number[];
   filterPersonName: string;
 
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
+              private zoneReqFormPositionService: ZoneRequestFormPositionService,
               private toastService: ToastService) {
     super();
   }
@@ -59,6 +68,9 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     this.subscribe(
       this.zoneReqAllocService.getAllocationsForForm(this.selectedEvent.id, this.currentForm.id).subscribe(res => {
         this.allocations = res.allocations;
+      }),
+      this.zoneReqFormPositionService.getPositions(this.selectedEvent.id, this.currentForm.id, ZoneRequestFormPositionType.NEW_PERSON_MANUAL_ALLOCATION).subscribe(res => {
+        this.manualAllocationAssignablePositions = res.positions;
       })
     );
   }
@@ -204,13 +216,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
         positions: [
           {
             organizational_unit: this.newPersonForm.value.organizational_unit,
-            // position: this.newPersonForm.value.position_id,
-            // TODO: update
-            position: {
-              id: 685,
-              name: null,
-              wsEntity: null
-            },
+            position: this.newPersonForm.value.zoneReqFormPosition.position,
             id: null,
             start: null,
             end: null,
