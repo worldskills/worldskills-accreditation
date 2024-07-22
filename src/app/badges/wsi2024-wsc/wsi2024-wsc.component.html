@@ -27,49 +27,81 @@
       <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[2]}}</div>
     </div>
 
-    <div style="position: absolute; left: 6mm; right: 6mm; top: 47mm; display: flex; justify-content: space-around;">
-      <div style="width: 20mm;"><div *ngIf="hasZone('EXP')" class="icon icon-pink">EXP</div></div>
-      <div style="width: 20mm;"><div *ngIf="hasZone('OC')" class="icon icon-pink">OC</div></div>
-      <div style="width: 20mm;"><div *ngIf="hasZone('CC')" class="icon icon-pink">CC</div></div>
-      <div style="width: 20mm;"><div *ngIf="hasZone('FPT')" class="icon icon-pink">FPT</div></div>
-    </div>
+    <div *ngIf="!hasAnyZone(['DP1', 'DP2', 'DP3', 'DP4'])">
 
-    <div style="position: absolute; display: flex; border: 0.3mm solid #2E1651; left: 1mm; padding: 1mm 2mm; width: 57mm; bottom: 16mm; height: 48mm;">
+      <div style="position: absolute; left: 6mm; right: 6mm; top: 47mm; display: flex; justify-content: space-around;">
+        <div style="width: 20mm;"><div *ngIf="hasZone('EXP')" class="icon icon-pink">EXP</div></div>
+        <div style="width: 20mm;"><div *ngIf="hasZone('OC')" class="icon icon-pink">OC</div></div>
+        <div style="width: 20mm;"><div *ngIf="hasZone('CC')" class="icon icon-pink">CC</div></div>
+        <div style="width: 20mm;"><div *ngIf="hasZone('FPT')" class="icon icon-pink">FPT</div></div>
+      </div>
 
-      <div style="flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); text-align: center; font-size: 10mm; font-weight: 600; -webkit-print-color-adjust: exact;">
-        <div style="align-self: center; justify-self: center;">
-          <div *ngIf="hasZone('0') && !hasAnyZone(['0C', '0E'])" style="color: #2E1651">0</div>
-          <div *ngIf="hasZone('0C') && !hasAnyZone(['0E'])" style="color: #2E1651">0C</div>
-          <div *ngIf="hasZone('0E')" style="color: #2E1651">0E</div>
-          <div *ngIf="!hasAnyZone(['0', '0C', '0E'])" class="symbol symbol-empty"></div>
+      <div style="position: absolute; display: flex; border: 0.3mm solid #2E1651; left: 1mm; padding: 1mm 2mm; width: 57mm; bottom: 16mm; height: 48mm;">
+
+        <div style="flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); text-align: center; font-size: 10mm; font-weight: 600; -webkit-print-color-adjust: exact;">
+          <div style="align-self: center; justify-self: center;">
+            <div *ngIf="hasZone('0') && !hasAnyZone(['0C', '0E'])" style="color: #2E1651">0</div>
+            <div *ngIf="hasZone('0C') && !hasAnyZone(['0E'])" style="color: #2E1651">0C</div>
+            <div *ngIf="hasZone('0E')" style="color: #2E1651">0E</div>
+            <div *ngIf="!hasAnyZone(['0', '0C', '0E'])" class="symbol symbol-empty"></div>
+          </div>
+          <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('1')" style="color: #2E1651">1</div><div *ngIf="!hasZone('1')" class="symbol symbol-empty"></div></div>
+          <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('2')" style="color: #2E1651">2</div><div *ngIf="!hasZone('2')" class="symbol symbol-empty"></div></div>
+          <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('3')" style="color: #2E1651">3</div><div *ngIf="!hasZone('3')" class="symbol symbol-empty"></div></div>
+          <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('4')" style="color: #2E1651">4</div><div *ngIf="!hasZone('4')" class="symbol symbol-empty"></div></div>
+          <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('5')" style="color: #2E1651">5</div><div *ngIf="!hasZone('5')" class="symbol symbol-empty"></div></div>
+          <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('6')" style="color: #2E1651">6</div><div *ngIf="!hasZone('6')" class="symbol symbol-empty"></div></div>
+          <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('7')" style="color: #2E1651">7</div><div *ngIf="!hasZone('7')" class="symbol symbol-empty"></div></div>
+          <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('8')" style="color: #2E1651">8</div><div *ngIf="!hasZone('8')" class="symbol symbol-empty"></div></div>
         </div>
-        <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('1')" style="color: #2E1651">1</div><div *ngIf="!hasZone('1')" class="symbol symbol-empty"></div></div>
-        <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('2')" style="color: #2E1651">2</div><div *ngIf="!hasZone('2')" class="symbol symbol-empty"></div></div>
-        <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('3')" style="color: #2E1651">3</div><div *ngIf="!hasZone('3')" class="symbol symbol-empty"></div></div>
-        <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('4')" style="color: #2E1651">4</div><div *ngIf="!hasZone('4')" class="symbol symbol-empty"></div></div>
-        <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('5')" style="color: #2E1651">5</div><div *ngIf="!hasZone('5')" class="symbol symbol-empty"></div></div>
-        <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('6')" style="color: #2E1651">6</div><div *ngIf="!hasZone('6')" class="symbol symbol-empty"></div></div>
-        <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('7')" style="color: #2E1651">7</div><div *ngIf="!hasZone('7')" class="symbol symbol-empty"></div></div>
-        <div style="align-self: center; justify-self: center;"><div *ngIf="hasZone('8')" style="color: #2E1651">8</div><div *ngIf="!hasZone('8')" class="symbol symbol-empty"></div></div>
+
+      </div>
+
+      <div style="position: absolute; border: 0.3mm solid #2E1651; right: 1mm; padding: 4mm 1mm; width: 57mm; bottom: 16mm; height: 48mm;">
+
+        <div style="display: flex; justify-content: space-around;">
+          <div style="width: 9mm;"><div *ngIf="hasZone('T')" class="symbol symbol-transport"></div><div *ngIf="!hasZone('T')" class="symbol symbol-empty"></div></div>
+          <div style="width: 9mm;"><div *ngIf="hasZone('SKO')" class="symbol symbol-skillout"></div><div *ngIf="!hasZone('SKO')" class="symbol symbol-empty"></div></div>
+          <div style="width: 9mm;"><div *ngIf="hasZone('OSOC')" class="symbol symbol-osoc"></div><div *ngIf="!hasZone('OSOC')" class="symbol symbol-empty"></div></div>
+          <div style="width: 9mm;"><div *ngIf="hasZone('C')" class="symbol symbol-catering"></div><div *ngIf="!hasZone('C')" class="symbol symbol-empty"></div></div>
+          <div style="width: 9mm;"><div *ngIf="hasZone('E')" class="symbol symbol-excursions"></div><div *ngIf="!hasZone('E')" class="symbol symbol-empty"></div></div>
+        </div>
+
+
+        <div style="position: absolute; left: 16mm; bottom: 4mm;">
+          <img src="{{pa.qr_code}}" style="height: 22mm;">
+        </div>
+    
       </div>
 
     </div>
 
-    <div style="position: absolute; border: 0.3mm solid #2E1651; right: 1mm; padding: 4mm 1mm; width: 57mm; bottom: 16mm; height: 48mm;">
+    <div *ngIf="hasAnyZone(['DP1', 'DP2', 'DP3', 'DP4'])">
 
-      <div style="display: flex; justify-content: space-around;">
-        <div style="width: 9mm;"><div *ngIf="hasZone('T')" class="symbol symbol-transport"></div><div *ngIf="!hasZone('T')" class="symbol symbol-empty"></div></div>
-        <div style="width: 9mm;"><div *ngIf="hasZone('SKO')" class="symbol symbol-skillout"></div><div *ngIf="!hasZone('SKO')" class="symbol symbol-empty"></div></div>
-        <div style="width: 9mm;"><div *ngIf="hasZone('OSOC')" class="symbol symbol-osoc"></div><div *ngIf="!hasZone('OSOC')" class="symbol symbol-empty"></div></div>
-        <div style="width: 9mm;"><div *ngIf="hasZone('C')" class="symbol symbol-catering"></div><div *ngIf="!hasZone('C')" class="symbol symbol-empty"></div></div>
-        <div style="width: 9mm;"><div *ngIf="hasZone('E')" class="symbol symbol-excursions"></div><div *ngIf="!hasZone('E')" class="symbol symbol-empty"></div></div>
+      <div style="position: absolute; left: 6mm; right: 6mm; top: 47mm; display: flex; justify-content: space-around;">
+        <div style="width: 20mm;"><div class="icon icon-pink">EXP</div></div>
+        <div style="width: 20mm;"></div>
+        <div style="width: 20mm;"></div>
+        <div style="width: 20mm;"></div>
       </div>
 
+      <div style="position: absolute; display: flex; flex-direction: column; justify-content: space-around; align-items: center; left: 1mm; right: 1mm; bottom: 16mm; height: 52mm;">
 
-      <div style="position: absolute; left: 16mm; bottom: 4mm;">
-        <img src="{{pa.qr_code}}" style="height: 22mm;">
+        <div style="font-weight: 700; font-size: 12mm; line-height: 1; -webkit-print-color-adjust: exact; color: #2E1651 !important;">DAY PASS</div>
+
+        <div style="font-weight: 400; font-size: 8mm; line-height: 1; -webkit-print-color-adjust: exact; color: #2E1651 !important;">
+          <div *ngIf="hasZone('DP1') && !hasAnyZone(['DP2', 'DP3', 'DP4'])">11.09.2024</div>
+          <div *ngIf="hasZone('DP2') && !hasAnyZone(['DP3', 'DP4'])">12.09.2024</div>
+          <div *ngIf="hasZone('DP3') && !hasAnyZone(['DP4'])">13.09.2024</div>
+          <div *ngIf="hasZone('DP4')">14.09.2024</div>
+        </div>
+
+        <div style="padding: 3mm 0;">
+          <img src="{{pa.qr_code}}" style="height: 22mm;">
+        </div>
+
       </div>
-  
+
     </div>
 
     <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type?.color}} !important; height: 14mm; right: 1mm; position: absolute; left: 1mm; bottom: 1mm; display: flex; justify-content: center; align-items: center;">
