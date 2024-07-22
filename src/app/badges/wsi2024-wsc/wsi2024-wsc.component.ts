@@ -29,7 +29,7 @@ export class Wsi2024WscComponent {
     setTimeout(() => { 
       this.showComponent = true;
       setTimeout(() => { 
-        textFit(document.getElementsByClassName('ws-text-fit'));
+        textFit(document.getElementsByClassName('ws-text-fit'), {alignVert: true});
       }, 100);
     }, 100);
   }
