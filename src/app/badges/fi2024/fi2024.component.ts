@@ -27,7 +27,7 @@ export class Fi2024Component implements OnInit {
 
   ngOnInit() {
     this.refreshComponent();
-    this.zoneService.getList(this.currentEvent.id).subscribe(res => {
+    this.zoneService.getList(this.currentEvent.id, {available_person_accreditation: true}).subscribe(res => {
       this.zones = res.zones;
     })
   }

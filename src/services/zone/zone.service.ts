@@ -18,8 +18,12 @@ export class ZoneService extends WsService<any> {
     super();
   }
 
-  getList(eventId: number): Observable<ZoneContainer> {
-    return this.http.get<ZoneContainer>(this.url(eventId)).pipe(share());
+  get(eventId: number, zoneId: number): Observable<Zone> {
+    return this.http.get<Zone>(this.url(eventId) + `/${zoneId}`).pipe(share());
+  }
+
+  getList(eventId: number, params?: {}): Observable<ZoneContainer> {
+    return this.http.get<ZoneContainer>(this.url(eventId), {params}).pipe(share());
   }
 
   create(eventId: number, zone: Zone): Observable<Zone> {

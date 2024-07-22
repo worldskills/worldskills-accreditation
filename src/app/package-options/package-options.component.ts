@@ -38,6 +38,13 @@ export class PackageOptionsComponent extends WsComponent implements OnInit {
           this.packageOptionService.getOptions(this.selectedEvent.id).subscribe(res => {
             this.options = res.options;
             this.loading = false;
+
+            // load zones for each option
+            this.options.forEach(option => {
+              this.packageOptionService.getPackageOptionZones(option.id).subscribe(res => {
+                option.zones = res.zones;
+              });
+            });
           })
         );
       })

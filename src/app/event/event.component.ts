@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgAuthService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {EventService} from "../../services/event/event.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {Event} from "../../types/event";
 import {AppService} from "../../services/app/app.service";
 import {environment} from "../../environments/environment";
@@ -18,7 +18,8 @@ export class EventComponent extends WsComponent implements OnInit {
   appId = environment.worldskillsAppId;
   currentEvent: Event;
   tabs = [
-    {label: 'People', path: 'people', requiredRoles: Object.values(this.appRoles)},
+    {label: 'People', path: 'people', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT, this.appRoles.PRINT]},
+    {label: 'Vehicles', path: 'vehicles', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_VEHICLES]},
     {label: 'Scans', path: 'scans', requiredRoles: [this.appRoles.ADMIN]},
     {label: 'Delegate Types', path: 'delegate-types', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_DELEGATE_TYPES]},
     {label: 'Positions', path: 'positions', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_POSITIONS]},
@@ -53,13 +54,6 @@ export class EventComponent extends WsComponent implements OnInit {
       );
     });
 
-    // set selected tab based on current route
-    const urlSegments = this.router.url.split('/');
-    const selectedTabIndex = this.tabs.findIndex(tab => tab.path === urlSegments[3]);
-    if (selectedTabIndex !== -1) {
-      this.selectedTabIndex = selectedTabIndex;
-    }
-
     // load current user and check permissions
     this.subscribe(
       this.authService.currentUser.subscribe(currentUser => {
@@ -70,6 +64,18 @@ export class EventComponent extends WsComponent implements OnInit {
         this.tabs = this.tabs.filter(tab => {
           return tab.requiredRoles.some(role => UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, role));
         });
+
+        this.router.events.subscribe((event) => {
+          // set selected tab based on current route
+          if (event instanceof NavigationEnd) {
+            const urlSegments = event.url.split('/');
+            const selectedTabIndex = this.tabs.findIndex(tab => tab.path === urlSegments[3]);
+            if (selectedTabIndex !== -1) {
+              this.selectedTabIndex = selectedTabIndex;
+            }
+          }
+        });
+
       })
     )
   }

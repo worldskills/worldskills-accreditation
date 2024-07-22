@@ -32,7 +32,7 @@ export class PackageOptionsFormComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribe(
-      this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
+      this.zoneService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
         this.zones = res.zones;
       }),
       this.packageOptionService.getPackageOptionZones(this.packageOption.id).subscribe(res => {

@@ -14,6 +14,11 @@ import {PositionsComponent} from "./positions/positions.component";
 import {PackageOptionsComponent} from "./package-options/package-options.component";
 import {PersonComponent} from "./person/person.component";
 import {PrintComponent} from "./print/print.component";
+import { VehiclesComponent } from './vehicles/vehicles.component';
+import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
+import { VehicleComponent } from './vehicle/vehicle.component';
+import { VehiclePrintComponent } from './vehicle-print/vehicle-print.component';
+import { EventIndexComponent } from './event-index/event-index.component';
 import {ZoneRequestComponent} from "./zone-request/zone-request.component";
 import {ZoneRequestAllocationComponent} from "./zone-request-allocation/zone-request-allocation.component";
 import {ZoneRequestedComponent} from "./zone-requested/zone-requested.component";
@@ -41,10 +46,18 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'events/:eventId/vehicles/print',
+    data: {
+      roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.PRINT_VEHICLES])
+    },
+    canActivate: [GuardService],
+    component: VehiclePrintComponent,
+  },
+  {
     path: 'events',
     canActivate: [GuardService],
     data: {
-      roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.UPLOAD_PHOTO, ACR_ROLES.EDIT_DELEGATE_TYPES, ACR_ROLES.EDIT_POSITIONS, ACR_ROLES.EDIT_ZONES, ACR_ROLES.PRINT])
+      roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.UPLOAD_PHOTO, ACR_ROLES.EDIT_DELEGATE_TYPES, ACR_ROLES.EDIT_POSITIONS, ACR_ROLES.EDIT_ZONES, ACR_ROLES.PRINT, ACR_ROLES.EDIT_VEHICLES, ACR_ROLES.PRINT_VEHICLES])
     },
     children: [
       {
@@ -61,7 +74,7 @@ const routes: Routes = [
           {
             path: '',
             pathMatch: 'full',
-            redirectTo: 'people'
+            component: EventIndexComponent
           },
           {
             path: 'zone-request-form',
@@ -126,6 +139,33 @@ const routes: Routes = [
             },
             canActivate: [GuardService],
             component: PersonComponent
+          },
+          {
+            path: 'vehicles',
+            data: {
+              breadcrumb: 'Vehicles',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_VEHICLES])
+            },
+            canActivate: [GuardService],
+            component: VehiclesComponent
+          },
+          {
+            path: 'vehicles/add',
+            data: {
+              breadcrumb: 'Add Vehicle',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_VEHICLES])
+            },
+            canActivate: [GuardService],
+            component: VehicleAddComponent
+          },
+          {
+            path: 'vehicles/:vehicleAcrId',
+            data: {
+              breadcrumb: 'Vehicle',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_VEHICLES])
+            },
+            canActivate: [GuardService],
+            component: VehicleComponent
           },
           {
             path: 'scans',

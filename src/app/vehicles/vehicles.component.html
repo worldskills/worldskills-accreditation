@@ -1,0 +1,220 @@
+<div class="row">
+  <div class="col-md-9 vehicle-result">
+    <ng-container *ngIf="!loading; else loadingAnimation">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th class="border-top-0 text-truncate">
+              <input type="checkbox" [(ngModel)]="allChecked" (change)="checkAll()">
+            </th>
+            <th class="border-top-0 text-truncate">
+              <a (click)="$event.preventDefault(); sort('id')">{{'id' | translate}}</a>
+            </th>
+            <th class="border-top-0 text-truncate">
+              <a (click)="$event.preventDefault(); sort('vehicle_group')">{{'vehicle_group' | translate}}</a>
+            </th>
+            <th class="border-top-0 text-truncate">{{'category' | translate}}</th>
+            <th class="border-top-0 text-truncate">{{'zones' | translate}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let accr of result.vehicles">
+            <td>
+              <input type="checkbox" [(ngModel)]="accr.checked">
+            </td>
+            <td class="text-truncate">
+              <a routerLink="{{accr.id}}">
+                {{accr.id}}
+              </a>
+            </td>
+            <td class="text-truncate">
+              <a routerLink="{{accr.id}}">
+                {{accr.vehicle_group?.name}}
+              </a>
+            </td>
+            <td class="text-truncate">
+              {{accr.delegate_type.name}}
+            </td>
+            <td class="text-truncate" style="max-width: 10rem;">
+              <ng-container *ngFor="let zone of accr.zones">
+                <div class="badge mr-1 small" [style.background-color]="zone.color"
+                     [ngbTooltip]="zone.name"
+                     [style.color]="zone.text_color">{{zone.code}}</div>
+              </ng-container>
+            </td>
+          </tr>
+          <tr *ngIf="result?.total_count === 0">
+            <td colspan="5">{{'no_vehicles_found' | translate}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </ng-container>
+
+    <ng-template #loadingAnimation>
+      <div style="margin-bottom: 56px;">
+        <ngx-skeleton-loader
+          count="5"
+          [theme]="{ 'border-radius': '0', width: '100%', height: '44px', 'margin-top': '40px', 'margin-bottom': '0' }"></ngx-skeleton-loader>
+      </div>
+    </ng-template>
+
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="dropdown">
+          <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            Actions
+          </button>
+          <div class="dropdown-menu">
+            <!-- <a class="dropdown-item" (click)="editSelected()" href="#" translate [class.disabled]="!hasSelected()">edit_selected</a> -->
+            <a class="dropdown-item" (click)="printSelected()" href="#" translate [class.disabled]="!hasSelected()">print_selected</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="dropdown pull-right">
+          <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            Per page
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" (click)="changeLimit(10)" href="#">10</a>
+            <a class="dropdown-item" (click)="changeLimit(100)" href="#">100</a>
+            <a class="dropdown-item" (click)="changeLimit(1000)" href="#">1000</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ngb-pagination
+    class="component-pager"
+    [collectionSize]="result?.total_count"
+    [page]="(fetchParams.offset / fetchParams.limit) + 1"
+    [pageSize]="fetchParams.limit"
+    [maxSize]="10"
+    [boundaryLinks]="true"
+    (pageChange)="fetch($event)">
+  </ngb-pagination>
+
+  <p><span class="text-muted">{{'total_results' | translate}}: {{result?.total_count}} {{'vehicles' | translate}}</span></p>
+
+  </div>
+  <div class="col-md-3">
+    
+    <a class="btn btn-primary mb-4" routerLink="add" translate>add_vehicle_pass</a>
+
+    <div class="card">
+      <h5 class="card-header m-0">{{'filter' | translate}}</h5>
+      <div class="card-body">
+        <form class="form-horizontal" (ngSubmit)="submit()" #form="ngForm" novalidate>
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'vehicle_group' | translate}}</label>
+              <ng-select
+                      name="group"
+                      [items]="vehicleGroups"
+                      [ngModel]="fetchParams.group"
+                      bindValue="id"
+                      bindLabel="name"
+                      [loading]="loading"
+                      required
+                    >
+                    </ng-select>
+            </div>
+          </div>
+    
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'category' | translate}}</label>
+              <ng-select
+                name="del_types"
+                [ngModel]="fetchParams.del_types"
+                [multiple]="true"
+                [items]="delegateTypes"
+                bindValue="id"
+                bindLabel="name"
+              >
+                <ng-template ng-label-tmp let-item="item">
+                  <div class="d-inline-block" style="width: 15px; height: 15px; "
+                       [style.background-color]="item.color"></div>
+                  <div class="d-inline-block ml-2">{{item.name}}</div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <div class="d-inline-block" style="width: 15px; height: 15px; "
+                       [style.background-color]="item.color"></div>
+                  <div class="d-inline-block ml-2">{{item.name}}</div>
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+    
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'zone' | translate}}</label>
+              <ng-select
+                name="zone"
+                [ngModel]="fetchParams.zone"
+                [multiple]="true"
+                [items]="zones"
+                bindValue="id"
+                bindLabel="name"
+              >
+                <ng-template ng-label-tmp let-item="item">
+                  <div class="d-inline-block" style="width: 15px; height: 15px; "
+                       [style.background-color]="item.color"></div>
+                  <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <div class="d-inline-block" style="width: 15px; height: 15px; "
+                       [style.background-color]="item.color"></div>
+                  <div class="d-inline-block ml-2">{{item.name}} ({{item.code}})</div>
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'printed' | translate}}?</label>
+              <ng-select
+                [wsSelect]="['value', 'label']"
+                name="printed"
+                [ngModel]="fetchParams.printed"
+                [items]="yesNoSelections"
+              ></ng-select>
+            </div>
+          </div>
+    
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{'distributed' | translate}}?</label>
+              <ng-select
+                [wsSelect]="['value', 'label']"
+                name="distributed"
+                [ngModel]="fetchParams.distributed"
+                [items]="yesNoSelections"
+              ></ng-select>
+            </div>
+          </div>
+    
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-sm btn-primary ml-2 float-right">{{'set_filter' | translate}}</button>
+              <div class="btn-group dropdown float-right">
+                <button type="button" class="btn btn-sm btn-outline-primary"
+                        [disabled]="!hasPrintPermission"
+                        (click)="printPreview()">
+                  {{'print_preview' | translate | titlecase}}
+                </button>
+              </div>
+            </div>
+          </div>
+    
+        </form>
+      </div>
+    </div>
+    
+
+  </div>
+</div>
