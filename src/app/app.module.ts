@@ -58,7 +58,7 @@ import { VehiclePrintComponent } from './vehicle-print/vehicle-print.component';
 import { EventIndexComponent } from './event-index/event-index.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240415180851');
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240723100448');
 }
 
 @NgModule({
