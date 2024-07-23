@@ -20,6 +20,8 @@ export class PositionsComponent extends WsComponent implements OnInit {
   delegateTypes: DelegateType[];
   loading: boolean = false;
 
+  private updatePositionsTimer: any;
+
   constructor(private appService: AppService,
               private posDelTypeService: PositionDelegateTypeService,
               private delTypeService: DelegateTypeService,
@@ -78,14 +80,23 @@ export class PositionsComponent extends WsComponent implements OnInit {
   }
 
   private updatePositionsSort():void {
-    for (let i = 0; i < this.positions.length; i++) {
-      this.positions[i].sort = i + 1;
-    }
 
-    this.posDelTypeService.update(this.selectedEvent.id, {positions: this.positions}).subscribe(res => {
-      this.positions = res.positions;
-      this.toastService.success('Positions are sorted!');
-    });
+    if (this.updatePositionsTimer) {
+      clearTimeout(this.updatePositionsTimer);
+    }
+  
+    this.updatePositionsTimer = setTimeout(() => {
+
+      for (let i = 0; i < this.positions.length; i++) {
+        this.positions[i].sort = i + 1;
+      }
+
+      this.posDelTypeService.update(this.selectedEvent.id, {positions: this.positions}).subscribe(res => {
+        this.positions = res.positions;
+        this.toastService.success('Positions are sorted!');
+      });
+
+    }, 10000); 
   }
 
   onDelTypeChange(selectedDelType: DelegateType, idx: number) {
