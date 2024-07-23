@@ -196,7 +196,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   }
 
   move(allocation: ZoneRequestAllocation, direction: 'UP' | 'DOWN'): void {
-    this.zoneReqAllocService.updateOrder(this.selectedEvent.id, allocation.id, direction).subscribe({
+    this.zoneReqAllocService.updateOrder(this.selectedEvent.id, allocation.id, allocation.version, direction).subscribe({
       next: () => {
         this.toastService.success('Allocation order is updated');
         this.loadAllocations();

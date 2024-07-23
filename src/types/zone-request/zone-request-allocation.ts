@@ -14,6 +14,7 @@ export interface ZoneRequestAllocation {
   allocated_by_person_id: number;
   notification_sent_at: string;
   wristband_distributed_at: string;
+  version: number;
 }
 
 export interface ZoneRequestAllocationContainer {
