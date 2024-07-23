@@ -50,15 +50,15 @@ export class PositionsComponent extends WsComponent implements OnInit {
   }
 
   moveToTop(idx: number, pos: PositionDelegateType) {
-    this.positions[idx] = this.positions[0];
-    this.positions[0] = pos;
+    this.positions.splice(idx, 1);
+    this.positions.splice(0, 0, pos);
 
     this.updatePositionsSort();
   }
 
   moveToBottom(idx: number, pos: PositionDelegateType) {
-    this.positions[idx] = this.positions[this.positions.length - 1];
-    this.positions[this.positions.length - 1] = pos;
+    this.positions.splice(idx, 1);
+    this.positions.push(pos);
 
     this.updatePositionsSort();
   }
