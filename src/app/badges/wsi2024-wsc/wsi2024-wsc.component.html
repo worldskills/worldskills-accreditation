@@ -85,19 +85,15 @@
         <div style="width: 20mm;"></div>
       </div>
 
-      <div style="position: absolute; display: flex; flex-direction: column; justify-content: space-around; align-items: center; left: 1mm; right: 1mm; bottom: 16mm; height: 52mm;">
+      <div style="position: absolute; display: flex; flex-direction: column; justify-content: space-around; align-items: center; left: 1mm; right: 1mm; bottom: 28mm; height: 34mm;">
 
-        <div style="font-weight: 700; font-size: 12mm; line-height: 1; -webkit-print-color-adjust: exact; color: #2E1651 !important;">DAY PASS</div>
+        <div style="font-weight: 700; font-size: 16mm; line-height: 1; -webkit-print-color-adjust: exact; color: #2E1651 !important;">DAY PASS</div>
 
-        <div style="font-weight: 400; font-size: 8mm; line-height: 1; -webkit-print-color-adjust: exact; color: #2E1651 !important;">
+        <div style="font-weight: 400; font-size: 10mm; line-height: 1; -webkit-print-color-adjust: exact; color: #2E1651 !important;">
           <div *ngIf="hasZone('DP1') && !hasAnyZone(['DP2', 'DP3', 'DP4'])">11.09.2024</div>
           <div *ngIf="hasZone('DP2') && !hasAnyZone(['DP3', 'DP4'])">12.09.2024</div>
           <div *ngIf="hasZone('DP3') && !hasAnyZone(['DP4'])">13.09.2024</div>
           <div *ngIf="hasZone('DP4')">14.09.2024</div>
-        </div>
-
-        <div style="padding: 3mm 0;">
-          <img src="{{pa.qr_code}}" style="height: 22mm;">
         </div>
 
       </div>
