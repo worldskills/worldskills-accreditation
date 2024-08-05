@@ -99,6 +99,8 @@ export class PositionsComponent extends WsComponent implements OnInit {
       }
 
       this.posDelTypeService.update(this.selectedEvent.id, {positions: this.positions}).subscribe(res => {
+        clearTimeout(this.updatePositionsTimer);
+
         this.positions = res.positions;
         this.toastService.success('Positions are sorted!');
       });
