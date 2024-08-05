@@ -7,6 +7,7 @@ import {PositionDelegateType} from "../../types/position-delegate-type";
 import {DelegateType} from "../../types/delegate-type";
 import {DelegateTypeService} from "../../services/delegate-type/delegate-type.service";
 import {ToastService} from "angular-toastify";
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-positions',
@@ -75,6 +76,12 @@ export class PositionsComponent extends WsComponent implements OnInit {
   moveDown(idx: number, pos: PositionDelegateType) {
     this.positions[idx] = this.positions[idx + 1];
     this.positions[idx + 1] = pos;
+
+    this.updatePositionsSort();
+  }
+
+  onDrop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.positions, event.previousIndex, event.currentIndex);
 
     this.updatePositionsSort();
   }

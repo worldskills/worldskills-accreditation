@@ -56,6 +56,7 @@ import { VehicleComponent } from './vehicle/vehicle.component';
 import { VehicleBadgeComponent } from './vehicle-badge/vehicle-badge.component';
 import { VehiclePrintComponent } from './vehicle-print/vehicle-print.component';
 import { EventIndexComponent } from './event-index/event-index.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240723100448');
@@ -123,6 +124,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     MatTabsModule,
     FormsModule,
+    DragDropModule,
     NgxSkeletonLoaderModule,
     AngularToastifyModule,
     WebcamModule

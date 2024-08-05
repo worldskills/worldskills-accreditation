@@ -16,8 +16,8 @@
           <th class="border-top-0">{{'sort' | translate}}</th>
         </tr>
         </thead>
-        <tbody>
-        <tr *ngFor="let pos of positions; index as idx">
+        <tbody cdkDropList (cdkDropListDropped)="onDrop($event)">
+        <tr *ngFor="let pos of positions; index as idx" cdkDrag cdkDragLockAxis="y">
           <td>{{pos.position.id}}</td>
           <td>{{pos.position.name.text}}</td>
           <td>
