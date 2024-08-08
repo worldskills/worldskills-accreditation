@@ -10,6 +10,8 @@
   font-size: 5mm;
   width: 210mm;
   height: 297mm;
+  display: flex;
+  flex-direction: column;
 }
 
 @media print {
@@ -17,8 +19,6 @@
     min-width: 100% !important; /* important to override https://github.com/worldskills/bootstrap/blob/main/dist/css/bootstrap.css#L10512*/
   }
   .ws-badge {
-    display: flex;
-    overflow: hidden;
     page-break-after: always;
   }
 }
