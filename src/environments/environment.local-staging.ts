@@ -28,6 +28,7 @@ export const environment = {
     PRINT: 'Print',
     PRINT_VEHICLES: 'PrintVehicles',
     AD_HOC_PRINT: 'AdHocPrint',
-    SET_UP_SCAN_APP: 'SetUpScanApp'
+    SET_UP_SCAN_APP: 'SetUpScanApp',
+    VIEW_SCANS: 'ViewScans',
   }
 };
