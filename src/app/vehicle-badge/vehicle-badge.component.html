@@ -2,8 +2,11 @@
 
   <div style="position: relative; width: 210mm; height: 148mm; -webkit-print-color-adjust: exact; background-color: {{vehicle.delegate_type?.color}} !important; color: {{vehicle.delegate_type?.text_color}} !important;">
 
-    <div style="position: absolute; left: 5mm; top: 4mm; padding: 2mm; -webkit-print-color-adjust: exact; background-color: #fff;">
-      <img src="{{vehicle.qr_code}}" style="height: 20mm;">
+    <div style="position: absolute; left: 5mm; top: 4mm;">
+      <div style="display: inline-block; padding: 2mm; -webkit-print-color-adjust: exact; background-color: #fff;">
+        <img src="{{vehicle.qr_code}}" style="height: 20mm;">
+      </div>
+      <div style="text-align: center; padding-top: 2mm; font-size: 3mm;">{{vehicle.id}}-{{vehicle.random_hash}}</div>
     </div>
 
     <div style="position: absolute; left: 70mm; right: 70mm; top: 5mm; text-align: center; -webkit-print-color-adjust: exact;">
