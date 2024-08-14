@@ -86,6 +86,10 @@ export class ZoneRequestFormComponent extends WsComponent implements OnInit {
     this.router.navigate([`${form.random_hash}/allocate`], {relativeTo: this.route});
   }
 
+  scanFinderVerify(form: ZoneRequestForm): void {
+    this.router.navigate([`${form.random_hash}/finder-verify`], {relativeTo: this.route});
+  }
+
   save(form: ZoneRequestForm): void {
     (form.id > 0 ? this.zoneReqFormService.updateZoneReqForm(this.selectedEvent.id, form.id, form) : this.zoneReqFormService.createZoneReqForm(this.selectedEvent.id, form))
       .subscribe(res => {
