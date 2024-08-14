@@ -56,7 +56,7 @@ export class ZoneRequestAllocationService extends WsService<any> {
   }
 
   updateOrder(eventId: number, zoneRequestAllocationId: number, zoneReqAllocVersion: number, moveDirection: 'UP' | 'DOWN'): Observable<any> {
-    return this.http.put(this.url(eventId) + `/${zoneRequestAllocationId}/order?zone_req_alloc_version=${zoneReqAllocVersion}`, moveDirection);
+    return this.http.put(this.url(eventId) + `/${zoneRequestAllocationId}/order?zone_req_alloc_version=${zoneReqAllocVersion}`, {'move_direction' : moveDirection});
   }
 
   sendZoneAllocatedPendingNotificationEmails(eventId: number, zoneRequestFormId: number): Observable<any> {
