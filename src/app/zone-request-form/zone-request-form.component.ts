@@ -83,11 +83,13 @@ export class ZoneRequestFormComponent extends WsComponent implements OnInit {
   }
 
   allocate(form: ZoneRequestForm): void {
-    this.router.navigate([`${form.random_hash}/allocate`], {relativeTo: this.route});
+    const url = this.router.serializeUrl(this.router.createUrlTree([`${form.random_hash}/allocate`], {relativeTo: this.route}));
+    window.open(url, '_blank');
   }
 
   scanFinderVerify(form: ZoneRequestForm): void {
-    this.router.navigate([`${form.random_hash}/finder-verify`], {relativeTo: this.route});
+    const url = this.router.serializeUrl(this.router.createUrlTree([`${form.random_hash}/finder-verify`], {relativeTo: this.route}));
+    window.open(url, '_blank');
   }
 
   save(form: ZoneRequestForm): void {
