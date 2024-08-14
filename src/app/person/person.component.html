@@ -251,7 +251,7 @@
 
   </div>
   <div class="col-md-8">
-    <div class="alert alert-danger small" *ngIf="!canBePrinted()">{{ 'person_pending_approved_badge_cannot_be_printed' | translate }}</div>
+    <div class="alert alert-danger small" *ngIf="personAcr && !canBePrinted()">{{ 'person_pending_approved_badge_cannot_be_printed' | translate }}</div>
     <div class="alert alert-info small" *ngIf="personAcr?.printed">{{ 'badge_has_been_printed' | translate }}</div>
     <div class="alert alert-warning small"
          *ngIf="personAcr?.distributed">{{ 'badge_has_been_distributed' | translate }}

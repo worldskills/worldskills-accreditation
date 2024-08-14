@@ -8,10 +8,11 @@
   <div class="row">
     <div class="col-md-12">
       <div class="table-responsive-md">
-        <table class="table table-striped">
+        <table class="table table-striped small">
           <colgroup>
             <col style="width: 10%">
-            <col style="width: 55%">
+            <col style="width: 35%">
+            <col style="width: 20%">
             <col style="width: 30%">
             <col style="width: 5%">
           </colgroup>
@@ -19,6 +20,7 @@
           <tr>
             <th class="border-top-0">{{'code' | translate}}</th>
             <th class="border-top-0">{{'name' | translate}}</th>
+            <th class="border-top-0">{{'badge_lines' | translate}}</th>
             <th class="border-top-0">{{'zones' | translate}}</th>
             <th class="border-top-0">{{'action' | translate}}</th>
           </tr>
@@ -27,11 +29,16 @@
           <tr *ngFor="let dt of delegateTypes">
             <td [style.background-color]="dt.color" [style.color]="dt.text_color">{{dt.code}}</td>
             <td>
-              <a class="btn btn-link m-0 p-0" (click)="updateDelType(dt)">{{dt.name}}</a>
+              <a class="btn btn-link btn-sm m-0 p-0" (click)="updateDelType(dt)">{{dt.name}}</a>
               &nbsp;
               <span *ngIf="dt.available_person_accreditation" class="badge badge-secondary">Person</span>
               &nbsp;
               <span *ngIf="dt.available_vehicle_accreditation" class="badge badge-secondary">Vehicle</span>
+            </td>
+            <td class="text-muted">
+              <div>{{dt.line1}}</div>
+              <div>{{dt.line2}}</div>
+              <div>{{dt.line3}}</div>
             </td>
             <td>
               <ng-container *ngFor="let zone of dt.zones">

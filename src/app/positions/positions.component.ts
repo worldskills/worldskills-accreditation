@@ -7,6 +7,7 @@ import {PositionDelegateType} from "../../types/position-delegate-type";
 import {DelegateType} from "../../types/delegate-type";
 import {DelegateTypeService} from "../../services/delegate-type/delegate-type.service";
 import {ToastService} from "angular-toastify";
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-positions',
@@ -19,6 +20,8 @@ export class PositionsComponent extends WsComponent implements OnInit {
   positions: PositionDelegateType[];
   delegateTypes: DelegateType[];
   loading: boolean = false;
+
+  private updatePositionsTimer: any;
 
   constructor(private appService: AppService,
               private posDelTypeService: PositionDelegateTypeService,
@@ -50,15 +53,15 @@ export class PositionsComponent extends WsComponent implements OnInit {
   }
 
   moveToTop(idx: number, pos: PositionDelegateType) {
-    this.positions[idx] = this.positions[0];
-    this.positions[0] = pos;
+    this.positions.splice(idx, 1);
+    this.positions.splice(0, 0, pos);
 
     this.updatePositionsSort();
   }
 
   moveToBottom(idx: number, pos: PositionDelegateType) {
-    this.positions[idx] = this.positions[this.positions.length - 1];
-    this.positions[this.positions.length - 1] = pos;
+    this.positions.splice(idx, 1);
+    this.positions.push(pos);
 
     this.updatePositionsSort();
   }
@@ -77,15 +80,32 @@ export class PositionsComponent extends WsComponent implements OnInit {
     this.updatePositionsSort();
   }
 
-  private updatePositionsSort():void {
-    for (let i = 0; i < this.positions.length; i++) {
-      this.positions[i].sort = i + 1;
-    }
+  onDrop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.positions, event.previousIndex, event.currentIndex);
 
-    this.posDelTypeService.update(this.selectedEvent.id, {positions: this.positions}).subscribe(res => {
-      this.positions = res.positions;
-      this.toastService.success('Positions are sorted!');
-    });
+    this.updatePositionsSort();
+  }
+
+  private updatePositionsSort():void {
+
+    if (this.updatePositionsTimer) {
+      clearTimeout(this.updatePositionsTimer);
+    }
+  
+    this.updatePositionsTimer = setTimeout(() => {
+
+      for (let i = 0; i < this.positions.length; i++) {
+        this.positions[i].sort = i + 1;
+      }
+
+      this.posDelTypeService.update(this.selectedEvent.id, {positions: this.positions}).subscribe(res => {
+        clearTimeout(this.updatePositionsTimer);
+
+        this.positions = res.positions;
+        this.toastService.success('Positions are sorted!');
+      });
+
+    }, 10000); 
   }
 
   onDelTypeChange(selectedDelType: DelegateType, idx: number) {

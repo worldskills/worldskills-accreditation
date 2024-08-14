@@ -30,6 +30,7 @@ export const environment = {
     PRINT_VEHICLES: 'PrintVehicles',
     AD_HOC_PRINT: 'AdHocPrint',
     SET_UP_SCAN_APP: 'SetUpScanApp',
+    VIEW_SCANS: 'ViewScans',
     REQUEST_ZONE: 'RequestZone',
     ALLOCATE_ZONE_REQUEST: 'AllocateZoneRequest',
     VERIFY_ALLOCATION: 'VerifyAllocation',

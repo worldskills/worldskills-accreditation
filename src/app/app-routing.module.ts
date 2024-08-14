@@ -57,7 +57,7 @@ const routes: Routes = [
     path: 'events',
     canActivate: [GuardService],
     data: {
-      roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.UPLOAD_PHOTO, ACR_ROLES.EDIT_DELEGATE_TYPES, ACR_ROLES.EDIT_POSITIONS, ACR_ROLES.EDIT_ZONES, ACR_ROLES.PRINT, ACR_ROLES.EDIT_VEHICLES, ACR_ROLES.PRINT_VEHICLES])
+      roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.UPLOAD_PHOTO, ACR_ROLES.EDIT_DELEGATE_TYPES, ACR_ROLES.EDIT_POSITIONS, ACR_ROLES.EDIT_ZONES, ACR_ROLES.PRINT, ACR_ROLES.EDIT_VEHICLES, ACR_ROLES.PRINT_VEHICLES, ACR_ROLES.VIEW_SCANS])
     },
     children: [
       {
@@ -171,7 +171,7 @@ const routes: Routes = [
             path: 'scans',
             data: {
               breadcrumb: 'Scan',
-              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN])
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.VIEW_SCANS])
             },
             canActivate: [GuardService],
             component: ScansComponent
