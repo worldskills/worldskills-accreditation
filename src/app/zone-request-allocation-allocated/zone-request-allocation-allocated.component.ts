@@ -18,6 +18,7 @@ import {
   ZoneRequestFormPosition,
   ZoneRequestFormPositionType
 } from "../../types/zone-request/zone-request-form-position";
+import {ZoneRequestService} from "../../services/zone-request/zone-request.service";
 
 @Component({
   selector: 'app-zone-request-allocation-allocated',
@@ -59,6 +60,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
 
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
               private zoneReqFormPositionService: ZoneRequestFormPositionService,
+              private zoneReqService: ZoneRequestService,
               private toastService: ToastService) {
     super();
   }
@@ -198,6 +200,8 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
         next: () => {
           this.toastService.success('Allocation is successfully undo');
           this.loadAllocations();
+          // refresh the pending requests list
+          this.zoneReqService.refresh.next(true);
           this.actionState.undo_allocation = false;
         },
         error: (err) => {

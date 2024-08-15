@@ -3,12 +3,14 @@ import {WsService} from "@worldskills/worldskills-angular-lib";
 import {ZoneRequest, ZoneRequestContainer} from "../../types/zone-request/zone-request";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ZoneRequestService extends WsService<any> {
+
+  refresh: Subject<any> = new Subject<boolean>();
 
   readonly url = (eventId: number) => {
     return `${environment.worldskillsApiAccreditation}/events/${eventId}/zone-requests`

@@ -36,6 +36,9 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
 
   ngOnInit(): void {
     this.loadRequests();
+
+    // for other components to refresh the list
+    this.zoneReqService.refresh.subscribe(() => this.loadRequests());
   }
 
   public loadRequests() {
