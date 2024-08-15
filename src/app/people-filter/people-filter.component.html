@@ -139,7 +139,7 @@
       <div class="row mb-2">
         <div class="col-sm-12">
           <button type="submit" class="btn btn-sm btn-primary ml-2 float-right">{{'set_filter' | translate}}</button>
-          <div class="btn-group dropdown float-right">
+          <div class="btn-group dropdown float-right" *ngIf="functionalitiesDisplaySetting.print">
             <button type="button" class="btn btn-sm btn-outline-primary"
                     [disabled]="!hasPrintPermission"
                     (click)="printPreview(false)">

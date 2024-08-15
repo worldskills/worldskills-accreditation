@@ -19,6 +19,13 @@ import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { VehiclePrintComponent } from './vehicle-print/vehicle-print.component';
 import { EventIndexComponent } from './event-index/event-index.component';
+import {ZoneRequestComponent} from "./zone-request/zone-request.component";
+import {ZoneRequestAllocationComponent} from "./zone-request-allocation/zone-request-allocation.component";
+import {ZoneRequestedComponent} from "./zone-requested/zone-requested.component";
+import {ZoneRequestFormComponent} from "./zone-request-form/zone-request-form.component";
+import {
+  ZoneRequestAllocationFinderComponent
+} from "./zone-request-allocation-finder/zone-request-allocation-finder.component";
 
 const ACR_ROLES = environment.appRoles;
 
@@ -62,11 +69,62 @@ const routes: Routes = [
         path: ':eventId',
         component: EventComponent,
         data: {breadcrumb: 'Event'},
+        title: 'WorldSkills Accreditation',
         children: [
           {
             path: '',
             pathMatch: 'full',
             component: EventIndexComponent
+          },
+          {
+            path: 'zone-request-form',
+            data: {
+              breadcrumb: 'Zone Request Form',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.ALLOCATE_ZONE_REQUEST])
+            },
+            title: getTitle('Zone Request Form'),
+            canActivate: [GuardService],
+            component: ZoneRequestFormComponent
+          },
+          {
+            path: 'zone-request-form/:zoneRequestFormHash',
+            data: {
+              breadcrumb: 'Zone Request Form',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.REQUEST_ZONE, ACR_ROLES.ALLOCATE_ZONE_REQUEST])
+            },
+            title: getTitle('Request Zone'),
+            canActivate: [GuardService],
+            component: ZoneRequestComponent
+          },
+          {
+            path: 'zone-request-form/:zoneRequestFormHash/zone-requests/:zoneReqId',
+            data: {
+              breadcrumb: 'Zone Request',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.REQUEST_ZONE, ACR_ROLES.ALLOCATE_ZONE_REQUEST])
+            },
+            title: getTitle('Request Zone'),
+            canActivate: [GuardService],
+            component: ZoneRequestedComponent
+          },
+          {
+            path: 'zone-request-form/:zoneRequestFormHash/allocate',
+            data: {
+              breadcrumb: 'Zone Request Allocation',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.ALLOCATE_ZONE_REQUEST])
+            },
+            title: getTitle('Zone Request Allocation'),
+            canActivate: [GuardService],
+            component: ZoneRequestAllocationComponent
+          },
+          {
+            path: 'zone-request-form/:zoneRequestFormHash/finder-verify',
+            data: {
+              breadcrumb: 'Zone Request Allocation Finder and Verify',
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.ALLOCATE_ZONE_REQUEST, ACR_ROLES.VERIFY_ALLOCATION])
+            },
+            title: getTitle('Zone Request Allocation Finder and Verify'),
+            canActivate: [GuardService],
+            component: ZoneRequestAllocationFinderComponent
           },
           {
             path: 'people',

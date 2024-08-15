@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GenericUtil, NgAuthService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
 import {AppService} from "../../services/app/app.service";
 import {
+  PersonAccreditationSummary,
   PersonAccreditationSummaryContainer,
   PersonAccreditationSummaryReqParams
 } from "../../types/person-accreditation-summary";
@@ -11,12 +12,26 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {combineLatest} from "rxjs";
 import {environment} from "../../environments/environment";
 
+export interface PeopleSearchFunctionalitiesDisplaySetting {
+  print: boolean;
+  person_profile_visit: boolean;
+  select_a_person: boolean;
+}
+
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',
   styleUrls: ['./people.component.css']
 })
 export class PeopleComponent extends WsComponent implements OnInit {
+
+  @Input() functionalitiesDisplaySetting: PeopleSearchFunctionalitiesDisplaySetting = {
+    print: true,
+    person_profile_visit: true,
+    select_a_person: false,
+  }
+  @Input() showMenuTabs = true;
+  @Output() selectedPerson: EventEmitter<PersonAccreditationSummary> = new EventEmitter<PersonAccreditationSummary>();
 
   allChecked = false;
   selectedEvent: Event;
@@ -36,7 +51,7 @@ export class PeopleComponent extends WsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appService.showMenuTabs.next(true);
+    this.appService.showMenuTabs.next(this.showMenuTabs);
     this.fetchParams = this.personAcrService.initialiseFetchParams();
 
     // load current user and check permissions
@@ -152,5 +167,9 @@ export class PeopleComponent extends WsComponent implements OnInit {
         queryParamsHandling: 'merge',
         queryParams
       });
+  }
+
+  selectPerson(personAcr: PersonAccreditationSummary) {
+    this.selectedPerson.emit(personAcr);
   }
 }

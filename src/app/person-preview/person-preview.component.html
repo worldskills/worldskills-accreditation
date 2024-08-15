@@ -1,0 +1,22 @@
+<div class="row mb-2">
+  <div class="col-4" *ngFor="let pi of personAccreditation.person.images">
+    <img src="{{pi.thumbnail}}"
+         ngbTooltip="{{pi.type}} photo of {{personAccreditation.person.first_name}} {{personAccreditation.person.last_name}}"
+         width="100"
+         height="125"
+         class="object-fit-cover"
+         alt="{{pi.type}} photo of {{personAccreditation.person.first_name}} {{personAccreditation.person.last_name}}">
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="small text-muted font-weight-bold my-0 py-0">{{ 'name' | translate }}</label>
+  <p>{{ personAccreditation.person.first_name }} {{ personAccreditation.person.last_name }}</p>
+</div>
+
+<div class="form-group">
+  <label class="small text-muted font-weight-bold my-0 py-0">{{ 'position' | translate }}</label>
+  <div>{{ personAccreditation.person_position.position.name.text }}</div>
+  <div>{{ personAccreditation.person_position.open_field }}</div>
+  <div>{{ personAccreditation.person_position.organization?.name.text }}</div>
+</div>

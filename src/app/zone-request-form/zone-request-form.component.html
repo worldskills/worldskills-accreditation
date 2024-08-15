@@ -1,0 +1,101 @@
+<ng-container *ngIf="!loading; else loadingAnimation">
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button class="btn btn-sm btn-primary"
+              (click)="addNew()">{{ 'add_new_form_request' | translate | titlecase }}
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive-md">
+        <table class="table table-striped">
+          <colgroup>
+            <col style="width: 35%">
+            <col style="width: 35%">
+            <col style="width: 30%">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="border-top-0">{{ 'name' | translate }}</th>
+            <th class="border-top-0">{{ 'header_text' | translate }}</th>
+            <th class="border-top-0">{{ 'action' | translate }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let form of forms">
+            <td>
+              <a class="btn btn-link m-0 p-0" (click)="updateForm(form)">{{ form.name.text }}</a>
+              <br>
+              <span class="badge badge-success" *ngIf="form.open_for_request">OPEN FOR REQUEST</span>
+              <span class="badge badge-dark" *ngIf="!form.open_for_request">CLOSED FOR REQUEST</span>
+            </td>
+            <td>{{ form.header_text.text }}</td>
+            <td>
+              <p class="py-0 my-0">
+                <button type="button" class="btn btn-link btn-sm small" (click)="setupEmail(form)">
+                  <i class="fa fa-inbox"></i> {{ 'Set up email' | translate }}
+                </button>
+              </p>
+              <p class="py-0 my-0">
+                <button type="button" class="btn btn-link btn-sm small" #copyFormBtn
+                        (click)="copyURLToClipboard(form,copyFormBtn)">
+                  <i class="fa fa-link"></i> {{ 'copy_form_link' | translate }}
+                </button>
+              </p>
+              <p class="py-0 my-0">
+                <button type="button" class="btn btn-link btn-sm small" (click)="allocate(form)">
+                  <i class="fa fa-eye"></i> {{ 'view_and_allocate_submissions' | translate }}
+                </button>
+              </p>
+              <p class="py-0 my-0">
+                <button type="button" class="btn btn-link btn-sm small" (click)="scanFinderVerify(form)">
+                  <i class="fa fa-camera"></i> {{ 'scan_finder_verify' | translate }}
+                </button>
+              </p>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <span class="text-muted">{{ 'total_results' | translate }}: {{ forms?.length ?? 0 }}</span>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loadingAnimation>
+  <ngx-skeleton-loader
+    count="10"
+    [theme]="{ 'border-radius': '0', width: '100%', height: '30px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
+</ng-template>
+
+
+<ws-modal [open]="manageForm !== null" (onClose)="manageForm = null" [options]="{size: 'lg'}">
+  <ng-container header>
+    <h4 *ngIf="manageForm?.id === 0">{{ 'add_new_zone_request_form' | translate }}</h4>
+    <h4 *ngIf="manageForm?.id > 0">{{ 'editing' | translate }}: {{ manageForm.name.text }}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-zone-request-form-form *ngIf="manageForm !== null"
+                                [zoneReqForm]="manageForm"
+                                [selectedEvent]="selectedEvent"
+                                (cancelForm)="manageForm = null"
+                                (saveZoneReqForm)="save($event)">
+
+    </app-zone-request-form-form>
+  </ng-container>
+</ws-modal>
+
+<ws-modal [open]="setupEmailForm !== null" (onClose)="setupEmailForm = null" [options]="{size: 'lg'}">
+  <ng-container header>
+    <h4>{{ 'Setup email for' | translate }}: {{ setupEmailForm?.name?.text }}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-zone-request-form-email-setup *ngIf="setupEmailForm !== null"
+                                       [zoneReqForm]="setupEmailForm"
+                                       [selectedEvent]="selectedEvent"
+                                       (cancelForm)="setupEmailForm = null">
+
+    </app-zone-request-form-email-setup>
+  </ng-container>
+</ws-modal>

@@ -49,6 +49,25 @@ import {WebcamModule} from "ngx-webcam";
 import {WebcamCaptureComponent} from './webcam-capture/webcam-capture.component';
 import {Fi2024Component} from './badges/fi2024/fi2024.component';
 import {BaseComponent} from './badges/base/base.component';
+import {ZoneRequestComponent} from './zone-request/zone-request.component';
+import {ZoneRequestAllocationComponent} from './zone-request-allocation/zone-request-allocation.component';
+import {ZoneRequestedComponent} from './zone-requested/zone-requested.component';
+import {ZoneRequestFormComponent} from './zone-request-form/zone-request-form.component';
+import {ZoneRequestFormFormComponent} from './zone-request-form-form/zone-request-form-form.component';
+import {
+  ZoneRequestAllocationPendingComponent
+} from './zone-request-allocation-pending/zone-request-allocation-pending.component';
+import {
+  ZoneRequestAllocationAllocatedComponent
+} from './zone-request-allocation-allocated/zone-request-allocation-allocated.component';
+import {QrScannerComponent} from "./qr-scanner/qr-scanner.component";
+import {PersonPreviewComponent} from './person-preview/person-preview.component';
+import {
+  ZoneRequestAllocationFinderComponent
+} from './zone-request-allocation-finder/zone-request-allocation-finder.component';
+import {
+  ZoneRequestFormEmailSetupComponent
+} from './zone-request-form-email-setup/zone-request-form-email-setup.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { Wsi2024WscComponent } from './badges/wsi2024-wsc/wsi2024-wsc.component';
@@ -103,7 +122,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdhocPrintingComponent,
     WebcamCaptureComponent,
     Fi2024Component,
-    BaseComponent
+    ZoneRequestComponent,
+    ZoneRequestAllocationComponent,
+    ZoneRequestedComponent,
+    ZoneRequestFormComponent,
+    ZoneRequestFormFormComponent,
+    ZoneRequestAllocationPendingComponent,
+    ZoneRequestAllocationAllocatedComponent,
+    BaseComponent,
+    QrScannerComponent,
+    PersonPreviewComponent,
+    ZoneRequestAllocationFinderComponent,
+    ZoneRequestFormEmailSetupComponent
   ],
   imports: [
     BrowserModule,

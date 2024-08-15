@@ -1,0 +1,37 @@
+<hr class="py-0 my-0">
+<h3>{{ 'Zone Request | Allocation Finder and Verify' | translate | titlecase }} <br><span
+  class="text-muted small font-weight-light">{{ currentForm?.name.text }}</span></h3>
+
+<button class="btn btn-success col-sm-12 col-md-12 col-lg-6 col-xl-4" (click)="scan = !scan">
+  <span class="fa fa-camera"></span> Scan Badge
+</button>
+<app-qr-scanner *ngIf="scan" (scanResult)="scanResult($event)"></app-qr-scanner>
+
+<div class="row mt-2" *ngIf="paAllocations?.length > 0">
+  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4">
+    <div class="card card-block border-success mb-2"
+         *ngFor="let alloc of paAllocations">
+      <div class="card-header text-center">
+        <h4 class="p-0 m-0">{{ alloc.allocated_zone.name }}<span
+          class="text-muted"> - {{ alloc.allocated_zone.code }}</span></h4>
+        <h5 class="p-0 m-0">{{ 'individual_spot_label' | translate }}: <b>{{ alloc.allocated_zone_spot_label }}</b></h5>
+
+        <!-- check if user has permission to distribute wristband -->
+        <ng-container *wsUserRole="[roles.ADMIN, roles.ALLOCATE_ZONE_REQUEST]; appId: appId">
+          <p class="mt-2 alert"
+             [ngClass]="alloc.wristband_distributed_at !== null ? 'alert-success' : 'alert-warning'">{{ alloc.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + alloc.wristband_distributed_at) : 'Wristband is not distributed yet' }}</p>
+          <button class="btn btn-small"
+                  [ngClass]="alloc.wristband_distributed_at !== null ? 'btn-outline-primary' : 'btn-primary'"
+                  (click)="updateWristband(alloc.wristband_distributed_at !== null, alloc.id)">
+            <span class="fa fa-hand-grab-o mr-1 align-top" style="font-size: 1.5em"></span>
+            {{ alloc.wristband_distributed_at !== null ? 'Undo distribution' : 'Mark as distributed' }}
+          </button>
+        </ng-container>
+      </div>
+      <div class="card-body">
+        <app-person-preview
+          [personAccreditation]="alloc.zone_request ? alloc.zone_request.person_accreditation : alloc.manual_allocation_to_person_accreditation"></app-person-preview>
+      </div>
+    </div>
+  </div>
+</div>

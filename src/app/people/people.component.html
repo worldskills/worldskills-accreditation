@@ -17,6 +17,7 @@
             <th class="border-top-0 text-truncate">{{'delegate_type' | translate}}</th>
             <th class="border-top-0 text-truncate">{{'zones' | translate}}</th>
             <th class="border-top-0 text-truncate" *ngIf="doesResultHasMember()">{{'member' | translate}}</th>
+            <th class="border-top-0" *ngIf="functionalitiesDisplaySetting.select_a_person">{{'action' | translate}}</th>
           </tr>
           </thead>
           <tbody>
@@ -25,13 +26,13 @@
               <input type="checkbox" [(ngModel)]="personAcr.checked">
             </td>
             <td class="text-truncate">
-              <a routerLink="{{personAcr.id}}">
+              <a [routerLink]="functionalitiesDisplaySetting.person_profile_visit ? personAcr.id +'' : null">
                 <ng-container *ngIf="personAcr.first_name">{{personAcr.first_name}}</ng-container>
                 <ng-container *ngIf="!personAcr.first_name">{{'empty_hint' | translate}}</ng-container>
               </a>
             </td>
             <td class="text-truncate">
-              <a routerLink="{{personAcr.id}}">
+              <a [routerLink]="functionalitiesDisplaySetting.person_profile_visit ? personAcr.id +'' : null">
                 <ng-container *ngIf="personAcr.last_name">{{personAcr.last_name}}</ng-container>
                 <ng-container *ngIf="!personAcr.last_name">{{'empty_hint' | translate}}</ng-container>
               </a>
@@ -47,6 +48,9 @@
               </ng-container>
             </td>
             <td class="text-truncate"><span *ngIf="personAcr.member && doesResultHasMember()">{{personAcr.member.name.text}}</span></td>
+            <td *ngIf="functionalitiesDisplaySetting.select_a_person">
+              <button class="btn btn-sm btn-primary small" (click)="selectPerson(personAcr)">{{'choose_person' | translate}}</button>
+            </td>
           </tr>
           <tr *ngIf="result?.total_count === 0">
             <td colspan="5">{{'no_people_found' | translate}}</td>
@@ -106,6 +110,7 @@
   </div>
   <div class="col-md-3">
     <app-people-filter (filter)="filter($event)"
+                       [functionalitiesDisplaySetting]="functionalitiesDisplaySetting"
                        [hasPrintPermission]="hasPrintPermission"
                        [fetchParams]="fetchParams"></app-people-filter>
   </div>

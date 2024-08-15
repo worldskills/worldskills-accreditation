@@ -8,6 +8,7 @@ export const environment = {
   worldskillsApiOrg: 'https://api.worldskills.org/org',
   worldskillsApiPeople: 'https://api.worldskills.org/people',
   worldskillsApiLogs: 'https://api.worldskills.org/logs',
+  worldskillsAccreditation: 'https://accreditation.worldskills.org',
   worldskillsPeople: 'https://people.worldskills.org',
   worldskillsClientId: 'a95703d1aa96',
   worldskillsAuthorizeUrl: 'https://auth.worldskills.org/oauth/authorize',
@@ -30,5 +31,8 @@ export const environment = {
     AD_HOC_PRINT: 'AdHocPrint',
     SET_UP_SCAN_APP: 'SetUpScanApp',
     VIEW_SCANS: 'ViewScans',
+    REQUEST_ZONE: 'RequestZone',
+    ALLOCATE_ZONE_REQUEST: 'AllocateZoneRequest',
+    VERIFY_ALLOCATION: 'VerifyAllocation',
   }
 };

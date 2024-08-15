@@ -1,0 +1,280 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">{{ 'allocated_requests' | translate | titlecase }}</h5>
+  </div>
+  <div class="card-body">
+    <div *ngIf="allocations?.length - getEmailNotificationSentCount() !== 0" class="small alert alert-warning">
+      {{ allocations?.length - getEmailNotificationSentCount() }} allocations are awaiting notification emails. <span
+      class="btn btn-sm btn-link p-0 m-0" (click)="sendOutstandingNotifEmails()">Click here</span> to send them now.
+    </div>
+
+    <div class="text-muted small">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="mb-2">{{ 'total_zones' | translate }}: {{ allocatableFormZones?.length ?? 0 }}</p>
+          <p class="mb-2">{{ 'total_allocated' | translate }}: {{ allocations?.length ?? 0 }}</p>
+        </div>
+        <div class="col-md-6">
+          <p class="mb-2">{{ 'wristband_distributed' | translate }}: {{ getWristbandDistributedCount() }}
+            / {{ allocations?.length ?? 0 }}</p>
+          <p class="mb-2">{{ 'email_confirmation_sent' | translate }}: {{ getEmailNotificationSentCount() }}
+            / {{ allocations?.length ?? 0 }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3 small">
+      <div class="col-md-6">
+        <label class="small mb-0 font-weight-bold">{{ 'choose_zone' | translate }}</label>
+        <ng-select
+          name="zone"
+          [items]="allocatableZones"
+          bindLabel="name"
+          bindValue="id"
+          placeholder="All Zones"
+          [multiple]="true"
+          [(ngModel)]="filterZones"
+        >
+          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+            <div class="d-inline-block" style="width: 15px; height: 15px; "
+                 [style.background-color]="item.color"></div>
+            <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+            <span class="ng-value-icon right" (click)="clear(item)">×</span>
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item" let-index="index">
+            <div class="d-inline-block" style="width: 15px; height: 15px; "
+                 [style.background-color]="item.color"></div>
+            <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+          </ng-template>
+        </ng-select>
+      </div>
+      <div class="col-md-6">
+        <label class="small mb-0 font-weight-bold">{{ 'name' | translate }}</label>
+        <input type="text" class="form-control" [(ngModel)]="filterPersonName">
+      </div>
+    </div>
+
+    <div class="table-responsive-md">
+      <table class="table table-sm">
+        <colgroup>
+          <col style="width: 20%">
+          <col style="width: 10%">
+          <col style="width: 70%">
+        </colgroup>
+        <thead>
+        <tr>
+          <th>{{ 'zone' | translate | titlecase }}</th>
+          <th>{{ 'quota' | translate | titlecase }}</th>
+          <th>{{ 'organizations' | translate | titlecase }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let zoneReq of filterAllocatableZones(allocatableFormZones)">
+          <td class="small">
+                <span class="badge mr-1" [style.background-color]="zoneReq.zone.color"
+                      [ngbTooltip]="zoneReq.zone.name"
+                      [style.color]="zoneReq.zone.text_color">{{ zoneReq.zone.code }}</span>
+            <br>
+            {{ zoneReq.zone.name }}
+
+            <br>
+            <div class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToZone = zoneReq.zone">Allocate</div>
+          </td>
+          <td>
+            <span class="badge badge-light">{{ getAllocationsForZone(zoneReq.zone)?.length }}
+              / {{ zoneReq.quota }}</span>
+          </td>
+          <td>
+            <ul class="list-unstyled">
+              <li
+                *ngFor="let allocation of getAllocationsForZone(zoneReq.zone); first as isFirst; last as isLast; trackBy: trackByAllocId">
+                <div>
+                  <div class="btn-group" role="group">
+                    <button [disabled]="isFirst"
+                            type="button" class="btn btn-outline-secondary btn-sm p-1 m-0 border-0"
+                            ngbTooltip="{{'move_up' | translate}}" (click)="move(allocation, 'UP')">
+                      <i class="fa fa-arrow-up"></i>
+                    </button>
+                    <button [disabled]="isLast"
+                            type="button" class="btn btn-outline-secondary btn-sm p-1 m-0 border-0"
+                            ngbTooltip="{{'move_down' | translate}}" (click)="move(allocation, 'DOWN')">
+                      <i class="fa fa-arrow-down"></i>
+                    </button>
+                  </div>
+
+                  <span class="badge badge-dark mr-1 mt-1 align-top" style="font-size: 0.8em; background-color: #003764"
+                        ngbTooltip="{{'individual_spot_label' | translate}}">{{ allocation.allocated_zone_spot_label }} </span>
+                  <span class="fa fa-inbox mr-1 align-top"
+                        style="font-size: 1.5em"
+                        [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"
+                        [ngbTooltip]="allocation.notification_sent_at !== null ? ('Email notification was sent at : ' + allocation.notification_sent_at) : 'Email notification is not sent yet' "></span>
+                  <span class="fa fa-hand-grab-o mr-1 align-top"
+                        style="cursor: pointer; font-size: 1.5em"
+                        [ngClass]="allocation.wristband_distributed_at !== null ? 'text-success' : ''"
+                        [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet. Click to mark as distributed.'"
+                        (click)="updateWristband(allocation.wristband_distributed_at !== null, allocation.id)"
+                  ></span>
+                  <span class="fa fa-trash-o mr-1 align-top"
+                        style="cursor: pointer; font-size: 1.5em"
+                        (click)="undoAllocation(allocation)"
+                  ></span>
+                  <span class="badge badge-pill badge-light text-wrap font-weight-lighter text-left"
+                        style="cursor: pointer"
+                        (click)="previewSelectedPersonACR = (allocation.zone_request != null ? allocation.zone_request.person_accreditation.summary : allocation.manual_allocation_to_person_accreditation.summary)">
+                    <ng-container *ngIf="allocation.zone_request != null">
+                      <b>{{ allocation.zone_request.person_accreditation.person_position.organizational_unit }}</b>, {{ allocation.zone_request.person_accreditation.person.first_name + ' ' + allocation.zone_request.person_accreditation.person.last_name }}
+                      <span *ngIf="allocation.zone_request.person_accreditation.person_position.member != null"
+                            [ngbTooltip]="allocation.zone_request.person_accreditation.person_position.member.name.text">- {{ allocation.zone_request.person_accreditation.person_position.member.code }}</span>
+                    </ng-container>
+                    <ng-container *ngIf="allocation.manual_allocation_to_person_accreditation != null">
+                      <b>{{ allocation.manual_allocation_to_person_accreditation.person_position.organizational_unit }}</b>, {{ allocation.manual_allocation_to_person_accreditation.summary.first_name + ' ' + allocation.manual_allocation_to_person_accreditation.summary.last_name }}
+                      <span *ngIf="allocation.manual_allocation_to_person_accreditation.summary.member != null"
+                            [ngbTooltip]="allocation.manual_allocation_to_person_accreditation.summary?.member?.name.text">- {{ allocation.manual_allocation_to_person_accreditation.summary?.member?.code }}</span>
+                    </ng-container>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </td>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<ws-modal [open]="manualAllocationToZone !== null" (onClose)="manualAllocationToZone = null"
+          [options]="{size: 'xl', centered: true}">
+  <ng-container header>
+    <h4>{{ 'manual_allocation' | translate }} to {{ manualAllocationToZone?.name }}</h4>
+  </ng-container>
+  <ng-container body>
+    <button class="btn btn-sm"
+            [ngClass]="manualAllocationMode === 'SELECT_EXISTING_PERSON' ? 'btn-primary' : 'btn-outline-primary' "
+            (click)="manualAllocationMode = 'SELECT_EXISTING_PERSON'">Select existing person
+    </button>
+    <button class="btn btn-sm ml-1"
+            [ngClass]="manualAllocationMode === 'CREATE_NEW_PERSON' ? 'btn-primary' : 'btn-outline-primary'"
+            (click)="manualAllocationMode = 'CREATE_NEW_PERSON'">Create new person
+    </button>
+
+    <ng-container [ngSwitch]="manualAllocationMode">
+      <ng-container *ngSwitchCase="'SELECT_EXISTING_PERSON'">
+        <h4 class="alert alert-info">Please select a person to allocate to this zone.</h4>
+        <app-people
+          *ngIf="manualAllocationToPerson === null"
+          [functionalitiesDisplaySetting]="functionalitiesDisplaySetting"
+          [showMenuTabs]="false"
+          (selectedPerson)="selectedPerson($event)"></app-people>
+        <div *ngIf="manualAllocationToPerson !== null">
+          <b>Selected person: </b>
+          <p class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToPerson = null">Change</p>
+          <div class="row">
+            <div class="col-md-3">
+              <p
+                class="p-m m-0">{{ manualAllocationToPerson?.first_name + ' ' + manualAllocationToPerson?.last_name }}</p>
+            </div>
+            <div class="col-md-6">
+              <app-person-badge-preview style="zoom: 0.5" *ngIf="manualAllocationToPerson"
+                                        [selectedEvent]="selectedEvent"
+                                        [person]="manualAllocationToPerson"></app-person-badge-preview>
+            </div>
+          </div>
+          <p>
+            <button class="btn btn-sm btn-primary mt-2"
+                    (click)="allocate(manualAllocationToPerson, manualAllocationToZone)">{{ 'allocate' | translate }}
+            </button>
+          </p>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="'CREATE_NEW_PERSON'">
+        <h4 class="alert alert-info">Please create a new person to allocate to this zone.</h4>
+
+        <form class="form-horizontal" [ngClass]="{'was-validated': this.newPersonForm.submitted}"
+              (ngSubmit)="saveNewPerson()" #newPersonForm="ngForm" novalidate>
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'first_name' | translate }}</label>
+              <input
+                type="text"
+                class="form-control"
+                name="first_name"
+                [ngModel]=""
+                required
+                data-1p-ignore>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'last_name' | translate }}</label>
+              <input
+                type="text"
+                class="form-control"
+                name="last_name"
+                [ngModel]=""
+                required
+                data-1p-ignore>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'email_address' | translate }}</label>
+              <input
+                type="text"
+                class="form-control"
+                name="email_address"
+                [ngModel]=""
+                required
+                data-1p-ignore>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'position' | translate }}</label>
+              <ng-select
+                name="zoneReqFormPosition"
+                bindLabel="position.name.text"
+                [items]="manualAllocationAssignablePositions"
+                [ngModel]="manualAllocationAssignablePositions?.length === 1 ? manualAllocationAssignablePositions[0] : null"
+                required
+              ></ng-select>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'organizational_unit' | translate }}</label>
+              <input
+                type="text"
+                class="form-control"
+                name="organizational_unit"
+                [ngModel]=""
+                required
+                data-1p-ignore>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-sm btn-primary ml-2 float-right">{{ 'save' | translate }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ws-modal>
+
+<ws-modal [open]="previewSelectedPersonACR !== null" (onClose)="previewSelectedPersonACR = null"
+          [options]="{size: 'lg', centered: true}">
+  <ng-container header>
+    <h4>{{ 'badge_preview' | translate }}</h4>
+  </ng-container>
+  <ng-container body>
+    <app-person-badge-preview *ngIf="previewSelectedPersonACR"
+                              [selectedEvent]="selectedEvent"
+                              [person]="previewSelectedPersonACR"
+                              style="zoom: 0.8"
+    ></app-person-badge-preview>
+  </ng-container>
+</ws-modal>

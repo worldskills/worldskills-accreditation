@@ -1,0 +1,68 @@
+<hr class="py-0 my-0">
+<h3>{{ 'zone_request_allocation' | translate | titlecase }} <br><span
+  class="text-muted small font-weight-light">{{ currentForm?.name.text }}</span></h3>
+
+<!--<div class="row text-right mb-2">-->
+<!--  <div class="col-md-12">-->
+<!--    <button class="btn btn-sm btn-outline-primary" (click)="wristbandDistributionScanning = true">-->
+<!--      <i class="fa fa-qrcode"></i> {{ 'distribute_wristband' | translate }}-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="row">
+  <div class="col-md-6">
+    <app-zone-request-allocation-pending *ngIf="!!selectedEvent && !!currentForm"
+                                         [selectedEvent]="selectedEvent"
+                                         [zones]="zones"
+                                         [currentForm]="currentForm"
+                                         [allocatableZones]="allocatableZones">
+    </app-zone-request-allocation-pending>
+  </div>
+  <div class="col-md-6">
+    <app-zone-request-allocation-allocated *ngIf="!!selectedEvent && !!currentForm"
+                                           [selectedEvent]="selectedEvent"
+                                           [zones]="zones"
+                                           [currentForm]="currentForm"
+                                           [allocatableZones]="allocatableZones"
+                                           [allocatableFormZones]="allocatableFormZones">
+    </app-zone-request-allocation-allocated>
+  </div>
+</div>
+
+<ws-modal [open]="wristbandDistributionScanning"
+          (onClose)="wristbandDistributionScanning = false; wristbandScanDistributed = []"
+          [options]="{size: 'lg'}">
+  <ng-container header>
+    <h4>{{ 'distribute_wristband' | translate }}</h4>
+  </ng-container>
+  <ng-container body *ngIf="wristbandDistributionScanning">
+
+    <div class="row">
+      <div class="col-md-12">
+        <app-qr-scanner (scanResult)="scanResult($event)"></app-qr-scanner>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="wristbandScanDistributed.length > 0">
+      <div class="col-md-12">
+        <div class="d-flex flex-row flex-nowrap overflow-y-scroll">
+          <div class="card card-block mx-2 border-success" style="min-width: 200px;"
+               *ngFor="let alloc of wristbandScanDistributed">
+            <div class="card-header">
+              <span class="badge badge-success">{{ 'wristband_distributed' | translate | titlecase }}</span>
+              <h4>{{ alloc.allocated_zone.name }}<span class="text-muted"> - {{ alloc.allocated_zone.code }}</span></h4>
+              <h5 class="mt-0">{{ 'individual_spot_label' | translate }}: <b>{{ alloc.allocated_zone_spot_label }}</b>
+              </h5>
+            </div>
+            <div class="card-body">
+              <app-person-preview
+                [personAccreditation]="alloc.zone_request ? alloc.zone_request.person_accreditation : alloc.manual_allocation_to_person_accreditation"></app-person-preview>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+</ws-modal>

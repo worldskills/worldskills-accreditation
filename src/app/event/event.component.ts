@@ -25,8 +25,10 @@ export class EventComponent extends WsComponent implements OnInit {
     {label: 'Positions', path: 'positions', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_POSITIONS]},
     {label: 'Package Options', path: 'package-options', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_PACKAGE_OPTIONS]},
     {label: 'Zones', path: 'zones', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_ZONES]},
+    {label: 'Zone Request Form', path: 'zone-request-form', requiredRoles: [this.appRoles.ADMIN, this.appRoles.ALLOCATE_ZONE_REQUEST]},
   ];
   selectedTabIndex = 0;
+  showEventNameHeader = true;
   showMenuTabs = true;
   setupScanApp: boolean;
   hasAdHocPrintPermission = false;
@@ -42,6 +44,7 @@ export class EventComponent extends WsComponent implements OnInit {
 
   ngOnInit(): void {
     this.appService.showMenuTabs.subscribe(showMenuTabs => setTimeout(() => (this.showMenuTabs = showMenuTabs)));
+    this.appService.showEventNameHeader.subscribe(showEventNameHeader => setTimeout(() => (this.showEventNameHeader = showEventNameHeader)));
     this.route.params.subscribe(({eventId}) => {
       this.subscribe(
         this.eventService.get(eventId).subscribe(event => {
