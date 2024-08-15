@@ -75,7 +75,7 @@
 
     <div class="row mb-2">
       <div class="col-sm-12 text-center">
-        <button type="submit" class="btn btn-primary" [disabled]="!zoneReqForm.open_for_request">{{ 'submit_request' | translate }}</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!zoneReqForm.open_for_request || loading">{{ 'submit_request' | translate }}</button>
       </div>
     </div>
   </form>

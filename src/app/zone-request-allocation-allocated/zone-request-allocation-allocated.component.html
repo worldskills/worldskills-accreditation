@@ -90,12 +90,12 @@
                 *ngFor="let allocation of getAllocationsForZone(zoneReq.zone); first as isFirst; last as isLast; trackBy: trackByAllocId">
                 <div>
                   <div class="btn-group" role="group">
-                    <button [disabled]="isFirst"
+                    <button [disabled]="isFirst || actionState.move_up_down"
                             type="button" class="btn btn-outline-secondary btn-sm p-1 m-0 border-0"
                             ngbTooltip="{{'move_up' | translate}}" (click)="move(allocation, 'UP')">
                       <i class="fa fa-arrow-up"></i>
                     </button>
-                    <button [disabled]="isLast"
+                    <button [disabled]="isLast || actionState.move_up_down"
                             type="button" class="btn btn-outline-secondary btn-sm p-1 m-0 border-0"
                             ngbTooltip="{{'move_down' | translate}}" (click)="move(allocation, 'DOWN')">
                       <i class="fa fa-arrow-down"></i>
@@ -108,16 +108,18 @@
                         style="font-size: 1.5em"
                         [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"
                         [ngbTooltip]="allocation.notification_sent_at !== null ? ('Email notification was sent at : ' + allocation.notification_sent_at) : 'Email notification is not sent yet' "></span>
-                  <span class="fa fa-hand-grab-o mr-1 align-top"
-                        style="cursor: pointer; font-size: 1.5em"
-                        [ngClass]="allocation.wristband_distributed_at !== null ? 'text-success' : ''"
-                        [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet. Click to mark as distributed.'"
-                        (click)="updateWristband(allocation.wristband_distributed_at !== null, allocation.id)"
-                  ></span>
-                  <span class="fa fa-trash-o mr-1 align-top"
-                        style="cursor: pointer; font-size: 1.5em"
-                        (click)="undoAllocation(allocation)"
-                  ></span>
+                  <button class="btn btn-sm border-0 p-0 m-0 fa fa-hand-grab-o mr-1 align-top"
+                          style="cursor: pointer; font-size: 1.5em"
+                          [ngClass]="allocation.wristband_distributed_at !== null ? 'text-success' : ''"
+                          [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet. Click to mark as distributed.'"
+                          (click)="updateWristband(allocation.wristband_distributed_at !== null, allocation.id)"
+                          [disabled]="actionState.wristband_distribution"
+                  ></button>
+                  <button class="btn btn-sm border-0 p-0 m-0 fa fa-trash-o mr-1 align-top"
+                          style="cursor: pointer; font-size: 1.5em"
+                          (click)="undoAllocation(allocation)"
+                          [disabled]="actionState.undo_allocation"
+                  ></button>
                   <span class="badge badge-pill badge-light text-wrap font-weight-lighter text-left"
                         style="cursor: pointer"
                         (click)="previewSelectedPersonACR = (allocation.zone_request != null ? allocation.zone_request.person_accreditation.summary : allocation.manual_allocation_to_person_accreditation.summary)">

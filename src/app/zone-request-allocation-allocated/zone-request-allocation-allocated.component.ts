@@ -51,6 +51,12 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   filterZones: number[];
   filterPersonName: string;
 
+  actionState = {
+    wristband_distribution: false,
+    move_up_down: false,
+    undo_allocation: false
+  }
+
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
               private zoneReqFormPositionService: ZoneRequestFormPositionService,
               private toastService: ToastService) {
@@ -124,13 +130,16 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   }
 
   updateWristband(isDistributed: boolean, zoneReqAllocId: number): void {
+    this.actionState.wristband_distribution = true;
     this.zoneReqAllocService.updateWristbandDistribution(this.selectedEvent.id, zoneReqAllocId, !isDistributed).subscribe({
       next: () => {
         this.toastService.success(!isDistributed ? 'Wristband marked as distributed!' : 'Wristband distribution removed');
         this.loadAllocations();
+        this.actionState.wristband_distribution = false;
       },
       error: (err) => {
         this.toastService.error(err?.error?.user_msg ?? 'Error updating wristband distribution');
+        this.actionState.wristband_distribution = false;
       }
     });
   }
@@ -183,26 +192,33 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   undoAllocation(allocation: ZoneRequestAllocation): void {
     if (confirm('Are you sure to undo the allocation for this person?')) {
       const notify = confirm('Do you want to send email notification to the person?');
+
+      this.actionState.undo_allocation = true;
       this.zoneReqAllocService.undoAllocation(this.selectedEvent.id, allocation.id, notify).subscribe({
         next: () => {
           this.toastService.success('Allocation is successfully undo');
           this.loadAllocations();
+          this.actionState.undo_allocation = false;
         },
         error: (err) => {
           this.toastService.error(err?.error?.user_msg ?? 'Error undo allocation');
+          this.actionState.undo_allocation = false;
         }
       });
     }
   }
 
   move(allocation: ZoneRequestAllocation, direction: 'UP' | 'DOWN'): void {
+    this.actionState.move_up_down = true;
     this.zoneReqAllocService.updateOrder(this.selectedEvent.id, allocation.id, allocation.version, direction).subscribe({
       next: () => {
         this.toastService.success('Allocation order is updated');
         this.loadAllocations();
+        this.actionState.move_up_down = false;
       },
       error: (err) => {
         this.toastService.error(err?.error?.user_msg ?? 'Error moving allocation');
+        this.actionState.move_up_down = false;
       }
     });
   }
