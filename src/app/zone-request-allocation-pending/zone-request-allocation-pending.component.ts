@@ -28,6 +28,11 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
   pendingReqZones: Zone[] = [];
   pendingReqZone: Zone;
 
+  actionState = {
+    allocate: false,
+    deny: false,
+  }
+
   constructor(private zoneReqService: ZoneRequestService,
               private zoneReqAllocService: ZoneRequestAllocationService,
               private toastService: ToastService) {
@@ -102,26 +107,37 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
   }
 
   allocate(zoneRequest: ZoneRequest, zone: Zone) {
+    if (GenericUtil.isNullOrUndefined(zone)) {
+      this.toastService.error('Please select a Zone to allocate the request!');
+      return;
+    }
+
+    this.actionState.allocate = true;
     this.zoneReqAllocService.allocateRequestToZone(this.selectedEvent.id, zoneRequest.zone_request_form.id, zone.id, zoneRequest).subscribe(res => {
       this.toastService.success('Request allocated to a Zone successfully!');
       // refresh the pending requests list
       this.loadRequests();
       // refresh the allocated requests list
       this.zoneReqAllocService.refresh.next(true);
+      this.actionState.allocate = false;
     }, err => {
       this.toastService.error(err.error.user_msg ?? 'Failed to allocate request to a Zone!');
+      this.actionState.allocate = false;
     });
   }
 
   deny(zoneRequest: ZoneRequest): void {
     if (confirm('Are you sure to deny this request?')) {
+      this.actionState.deny = true;
       this.zoneReqAllocService.denyRequest(this.selectedEvent.id, zoneRequest).subscribe({
         next: () => {
           this.toastService.success('Request is denied!');
           // refresh the pending requests list
           this.loadRequests();
+          this.actionState.deny = false;
         }, error: (err) => {
           this.toastService.error(err?.error?.user_msg ?? 'Error denying the request');
+          this.actionState.deny = false;
         }
       })
     }

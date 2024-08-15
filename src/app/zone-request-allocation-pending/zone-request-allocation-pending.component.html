@@ -118,8 +118,12 @@
                   </ng-template>
                 </ng-select>
                 <div class="text-right">
-                  <button class="btn btn-sm btn-warning mt-2 mr-2" (click)="deny(req)">{{ 'deny' | translate }}</button>
-                  <button class="btn btn-sm btn-primary mt-2" (click)="allocate(req, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>
+                  <button class="btn btn-sm btn-warning mt-2 mr-2"
+                          [disabled]="actionState.deny"
+                          (click)="deny(req)">{{ 'deny' | translate }}</button>
+                  <button class="btn btn-sm btn-primary mt-2"
+                          [disabled]="actionState.allocate"
+                          (click)="allocate(req, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>
                 </div>
               </div>
             </td>
