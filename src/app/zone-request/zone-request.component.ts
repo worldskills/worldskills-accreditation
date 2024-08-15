@@ -82,6 +82,8 @@ export class ZoneRequestComponent extends WsComponent implements OnInit {
           }
         })
       );
+    } else {
+      this.toastService.error('Please fill all required fields!');
     }
   }
 }
