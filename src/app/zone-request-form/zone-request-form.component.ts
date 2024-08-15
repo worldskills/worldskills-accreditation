@@ -72,7 +72,7 @@ export class ZoneRequestFormComponent extends WsComponent implements OnInit {
   }
 
   copyURLToClipboard(form: ZoneRequestForm, copyFormBtn: HTMLButtonElement): void {
-    this.clipboard.copy(`${environment.worldskillsAccreditation}events/${this.selectedEvent.id}/zone-request-form/${form.random_hash}`);
+    this.clipboard.copy(`${environment.worldskillsAccreditation}/events/${this.selectedEvent.id}/zone-request-form/${form.random_hash}`);
 
     // change button content to 'Copied!' for a short time
     const prevBtnContent = copyFormBtn.innerHTML;
