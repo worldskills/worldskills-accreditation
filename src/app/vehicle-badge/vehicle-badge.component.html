@@ -1,6 +1,6 @@
 <div class="ws-badge" *ngIf="showComponent; else loadingAnimation">
 
-  <div style="position: relative; width: 210mm; height: 148mm; -webkit-print-color-adjust: exact; background-color: {{vehicle.delegate_type?.color}} !important; color: {{vehicle.delegate_type?.text_color}} !important;">
+  <div style="position: relative; width: 200mm; height: 138mm; margin: 5mm; -webkit-print-color-adjust: exact; background-color: {{vehicle.delegate_type?.color}} !important; color: {{vehicle.delegate_type?.text_color}} !important;">
 
     <div style="position: absolute; left: 5mm; top: 4mm;">
       <div style="display: inline-block; padding: 2mm; -webkit-print-color-adjust: exact; background-color: #fff;">
@@ -50,9 +50,9 @@
     </div>
 
   </div>
-  <div style="position: relative; width: 210mm; height: 148mm; display: flex; justify-content: center; align-items: center;">
-      <img *ngIf="!hasZone('MOL')" src="assets/badges/wsi2024-wsc-vehicle/map-eurexpo.png" style="width: 210mm; height: 140mm; object-fit: contain;">
-      <img *ngIf="hasZone('MOL')" src="assets/badges/wsi2024-wsc-vehicle/map-ol.png" style="width: 210mm; height: 140mm; object-fit: contain;">
+  <div style="position: relative; width: 200mm; height: 138mm; margin: 5mm;  display: flex; justify-content: center; align-items: center;">
+      <img *ngIf="!hasZone('MOL')" src="assets/badges/wsi2024-wsc-vehicle/map-eurexpo.png" style="width: 200mm; height: 138mm; object-fit: contain;">
+      <img *ngIf="hasZone('MOL')" src="assets/badges/wsi2024-wsc-vehicle/map-ol.png" style="width: 200mm; height: 138mm; object-fit: contain;">
   </div>
 
 </div>
