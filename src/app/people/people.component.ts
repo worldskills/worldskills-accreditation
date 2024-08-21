@@ -39,6 +39,8 @@ export class PeopleComponent extends WsComponent implements OnInit {
   result: PersonAccreditationSummaryContainer;
   loading = false;
   showEditSelectedForm = false;
+  showZones = false;
+  showLines = false;
 
   hasPrintPermission = false;
 
