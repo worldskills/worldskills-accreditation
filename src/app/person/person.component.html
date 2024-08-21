@@ -226,7 +226,7 @@
             <div class="form-group" *ngIf="selectedEvent.require_host_approval">
               <label class="small text-muted font-weight-bold my-0 py-0">{{ 'host_info_status' | translate }}</label>
               <p>
-                <ng-template *ngIf="personAcr.summary.host_info_status; else elseBlock">{{ personAcr.summary.host_info_status }}</ng-template>
+                <em *ngIf="personAcr.summary.host_info_status; else elseBlock">{{ personAcr.summary.host_info_status }}</em>
                 <ng-template #elseBlock><em>Unknown</em></ng-template>
               </p>
             </div>
