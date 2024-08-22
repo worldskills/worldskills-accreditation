@@ -65,11 +65,11 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
   scanResult(paID: number): void {
     const updateWristband = (zoneReqAllocId: number) => this.zoneReqAllocationService.updateWristbandDistribution(this.selectedEvent.id, zoneReqAllocId, true).subscribe({
       next: () => {
-        this.toastService.success('Wristband distributed successfully');
+        this.toastService.success('AccessID distributed successfully');
         this.zoneReqAllocationService.refresh.next(true);
       },
       error: (err) => {
-        this.toastService.error(err?.error?.user_msg ?? 'Failed to distribute wristband');
+        this.toastService.error(err?.error?.user_msg ?? 'Failed to distribute AccessID');
       }
     });
 
@@ -79,7 +79,7 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
         res.allocations.forEach(allocation => {
           // check if the wristband is already distributed
           if (!GenericUtil.isNullOrUndefined(allocation.wristband_distributed_at)) {
-            this.toastService.warn('Wristband was already distributed for this person');
+            this.toastService.warn('AccessID was already distributed for this person');
           } else {
             updateWristband(allocation.id);
             this.wristbandScanDistributed = [allocation, ...this.wristbandScanDistributed];

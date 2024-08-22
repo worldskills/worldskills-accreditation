@@ -65,7 +65,7 @@ export class ZoneRequestAllocationFinderComponent extends WsComponent implements
   updateWristband(isDistributed: boolean, zoneReqAllocId: number): void {
     this.zoneReqAllocService.updateWristbandDistribution(this.selectedEvent.id, zoneReqAllocId, !isDistributed).subscribe({
       next: (res) => {
-        this.toastService.success(!isDistributed ? 'Wristband marked as distributed!' : 'Wristband distribution removed');
+        this.toastService.success(!isDistributed ? 'AccessID marked as distributed!' : 'AccessID distribution removed');
 
         // update paAllocations list
         for (let i = this.paAllocations.length - 1; i >= 0; i--) {
@@ -76,7 +76,7 @@ export class ZoneRequestAllocationFinderComponent extends WsComponent implements
         }
       },
       error: (err) => {
-        this.toastService.error(err?.error?.user_msg ?? 'Error updating wristband distribution');
+        this.toastService.error(err?.error?.user_msg ?? 'Error updating AccessID distribution');
       }
     });
   }

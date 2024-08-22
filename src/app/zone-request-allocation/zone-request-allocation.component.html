@@ -5,7 +5,7 @@
 <!--<div class="row text-right mb-2">-->
 <!--  <div class="col-md-12">-->
 <!--    <button class="btn btn-sm btn-outline-primary" (click)="wristbandDistributionScanning = true">-->
-<!--      <i class="fa fa-qrcode"></i> {{ 'distribute_wristband' | translate }}-->
+<!--      <i class="fa fa-qrcode"></i> {{ 'distribute_access_id' | translate }}-->
 <!--    </button>-->
 <!--  </div>-->
 <!--</div>-->
@@ -34,7 +34,7 @@
           (onClose)="wristbandDistributionScanning = false; wristbandScanDistributed = []"
           [options]="{size: 'lg'}">
   <ng-container header>
-    <h4>{{ 'distribute_wristband' | translate }}</h4>
+    <h4>{{ 'distribute_access_id' | translate }}</h4>
   </ng-container>
   <ng-container body *ngIf="wristbandDistributionScanning">
 
@@ -50,7 +50,7 @@
           <div class="card card-block mx-2 border-success" style="min-width: 200px;"
                *ngFor="let alloc of wristbandScanDistributed">
             <div class="card-header">
-              <span class="badge badge-success">{{ 'wristband_distributed' | translate | titlecase }}</span>
+              <span class="badge badge-success">{{ 'access_id_distributed' | translate | titlecase }}</span>
               <h4>{{ alloc.allocated_zone.name }}<span class="text-muted"> - {{ alloc.allocated_zone.code }}</span></h4>
               <h5 class="mt-0">{{ 'individual_spot_label' | translate }}: <b>{{ alloc.allocated_zone_spot_label }}</b>
               </h5>

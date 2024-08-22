@@ -15,7 +15,7 @@
           <p class="mb-2">{{ 'total_allocated' | translate }}: {{ allocations?.length ?? 0 }}</p>
         </div>
         <div class="col-md-6">
-          <p class="mb-2">{{ 'wristband_distributed' | translate }}: {{ getWristbandDistributedCount() }}
+          <p class="mb-2">{{ 'access_id_distributed' | translate }}: {{ getWristbandDistributedCount() }}
             / {{ allocations?.length ?? 0 }}</p>
           <p class="mb-2">{{ 'email_confirmation_sent' | translate }}: {{ getEmailNotificationSentCount() }}
             / {{ allocations?.length ?? 0 }}</p>
@@ -108,10 +108,10 @@
                         style="font-size: 1.5em"
                         [ngClass]="allocation.notification_sent_at !== null ? 'text-success' : ''"
                         [ngbTooltip]="allocation.notification_sent_at !== null ? ('Email notification was sent at : ' + allocation.notification_sent_at) : 'Email notification is not sent yet' "></span>
-                  <button class="btn btn-sm border-0 p-0 m-0 fa fa-hand-grab-o mr-1 align-top"
+                  <button class="btn btn-sm border-0 p-0 m-0 fa fa-id-card-o mr-1 align-top"
                           style="cursor: pointer; font-size: 1.5em"
                           [ngClass]="allocation.wristband_distributed_at !== null ? 'text-success' : ''"
-                          [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + allocation.wristband_distributed_at) : 'Wristband is not distributed yet. Click to mark as distributed.'"
+                          [ngbTooltip]="allocation.wristband_distributed_at !== null ? ('AccessID was distributed at : ' + allocation.wristband_distributed_at) : 'AccessID is not distributed yet. Click to mark as distributed.'"
                           (click)="updateWristband(allocation.wristband_distributed_at !== null, allocation.id)"
                           [disabled]="actionState.wristband_distribution"
                   ></button>

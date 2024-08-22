@@ -135,12 +135,12 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     this.actionState.wristband_distribution = true;
     this.zoneReqAllocService.updateWristbandDistribution(this.selectedEvent.id, zoneReqAllocId, !isDistributed).subscribe({
       next: () => {
-        this.toastService.success(!isDistributed ? 'Wristband marked as distributed!' : 'Wristband distribution removed');
+        this.toastService.success(!isDistributed ? 'AccessID marked as distributed!' : 'AccessID distribution removed');
         this.loadAllocations();
         this.actionState.wristband_distribution = false;
       },
       error: (err) => {
-        this.toastService.error(err?.error?.user_msg ?? 'Error updating wristband distribution');
+        this.toastService.error(err?.error?.user_msg ?? 'Error updating AccessID distribution');
         this.actionState.wristband_distribution = false;
       }
     });

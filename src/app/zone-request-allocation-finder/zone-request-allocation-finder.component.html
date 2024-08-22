@@ -16,14 +16,14 @@
           class="text-muted"> - {{ alloc.allocated_zone.code }}</span></h4>
         <h5 class="p-0 m-0">{{ 'individual_spot_label' | translate }}: <b>{{ alloc.allocated_zone_spot_label }}</b></h5>
 
-        <!-- check if user has permission to distribute wristband -->
+        <!-- check if user has permission to distribute AccessID -->
         <ng-container *wsUserRole="[roles.ADMIN, roles.ALLOCATE_ZONE_REQUEST]; appId: appId">
           <p class="mt-2 alert"
-             [ngClass]="alloc.wristband_distributed_at !== null ? 'alert-success' : 'alert-warning'">{{ alloc.wristband_distributed_at !== null ? ('Wristband was distributed at : ' + alloc.wristband_distributed_at) : 'Wristband is not distributed yet' }}</p>
+             [ngClass]="alloc.wristband_distributed_at !== null ? 'alert-success' : 'alert-warning'">{{ alloc.wristband_distributed_at !== null ? ('AccessID was distributed at : ' + alloc.wristband_distributed_at) : 'AccessID is not distributed yet' }}</p>
           <button class="btn btn-small"
                   [ngClass]="alloc.wristband_distributed_at !== null ? 'btn-outline-primary' : 'btn-primary'"
                   (click)="updateWristband(alloc.wristband_distributed_at !== null, alloc.id)">
-            <span class="fa fa-hand-grab-o mr-1 align-top" style="font-size: 1.5em"></span>
+            <span class="fa fa-id-card-o mr-1 align-top" style="font-size: 1.5em"></span>
             {{ alloc.wristband_distributed_at !== null ? 'Undo distribution' : 'Mark as distributed' }}
           </button>
         </ng-container>
