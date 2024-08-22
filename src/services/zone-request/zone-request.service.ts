@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {WsService} from "@worldskills/worldskills-angular-lib";
-import {ZoneRequest, ZoneRequestContainer} from "../../types/zone-request/zone-request";
+import {HttpUtil, ObjectUtil, WsService} from "@worldskills/worldskills-angular-lib";
+import {ZoneRequest, ZoneRequestContainer, ZoneRequestReqParams} from "../../types/zone-request/zone-request";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {Observable, Subject} from "rxjs";
+import {Observable, share, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +30,16 @@ export class ZoneRequestService extends WsService<any> {
 
   getRequests(eventId: number, zoneReqFormId: number): Observable<ZoneRequestContainer> {
     return this.http.get<ZoneRequestContainer>(this.url(eventId) + `/form/${zoneReqFormId}`);
+  }
+
+  exportZoneRequests(eventId: number, zoneReqFormId: number, params?: ZoneRequestReqParams): Observable<any> {
+    let httpParams = HttpUtil.objectToParams(ObjectUtil.stripNullOrUndefined(params || {}));
+
+    httpParams = httpParams.set('export', 'true');
+
+    return this.http.get(this.url(eventId) + "/form/" + zoneReqFormId, {
+      responseType: 'arraybuffer',
+      params: httpParams
+    }).pipe(share());
   }
 }

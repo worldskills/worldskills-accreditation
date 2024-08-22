@@ -7,6 +7,7 @@ import {ZoneRequest} from "../../types/zone-request/zone-request";
 import {ZoneRequestService} from "../../services/zone-request/zone-request.service";
 import {ZoneRequestAllocationService} from "../../services/zone-request-allocation/zone-request-allocation.service";
 import {ToastService} from "angular-toastify";
+import * as moment from "moment/moment";
 
 @Component({
   selector: 'app-zone-request-allocation-pending',
@@ -144,5 +145,18 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
         }
       })
     }
+  }
+
+  exportZoneRequests() : void{
+    // export to file
+    this.zoneReqService.exportZoneRequests(this.selectedEvent.id, this.currentForm.id)
+      .subscribe(response => {
+        const objectURL = window.URL.createObjectURL(new Blob([response], {type: 'application/octet-stream'}));
+        const downloadLink = document.createElement('a');
+        downloadLink.href = objectURL;
+        downloadLink.setAttribute('download', `${this.selectedEvent.name.text}_${this.currentForm.name.text}_zone_requests_${moment().format("yyyyMMDDHHmmss")}.xlsx`);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+      });
   }
 }

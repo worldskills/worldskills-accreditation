@@ -1,6 +1,7 @@
 import {PersonAccreditation} from "../person-accreditation";
 import {Zone} from "../zone";
 import {ZoneRequestForm} from "./zone-request-form";
+import {FetchParams} from "@worldskills/worldskills-angular-lib";
 
 export interface ZoneRequest {
   id?: number;
@@ -14,4 +15,11 @@ export interface ZoneRequest {
 
 export interface ZoneRequestContainer {
   zone_requests: ZoneRequest[];
+}
+
+export interface ZoneRequestReqParams extends FetchParams {
+  allocated?: boolean;
+  zone_id?: number;
+  org_id?: number;
+  export?: boolean;
 }
