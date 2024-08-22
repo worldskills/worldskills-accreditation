@@ -64,11 +64,14 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
         this.sortPendingRequests('org-asc');
 
         // get unique org names from pending requests for filters
-        this.pendingReqOrgNames = [...(new Set(res.zone_requests.map(req => req.person_accreditation.person_position.organizational_unit)))];
+        this.pendingReqOrgNames = [];
+        [...(new Set(this.pendingRequests.map(req => req.person_accreditation.person_position.organizational_unit).filter(ou => !GenericUtil.isNullOrUndefined(ou))))].forEach(ou => {
+          this.pendingReqOrgNames.push(ou);
+        });
 
         // get unique zones from pending requests for filters
         this.pendingReqZones = [];
-        [...(new Set(res.zone_requests.map(req => req.first_choice_zone.id)))].forEach(zoneId => {
+        [...(new Set(this.pendingRequests.map(req => req.first_choice_zone.id)))].forEach(zoneId => {
           this.pendingReqZones.push(this.zones.find(zone => zone.id === zoneId));
         });
       })
