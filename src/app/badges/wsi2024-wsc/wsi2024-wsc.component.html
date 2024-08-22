@@ -1,12 +1,12 @@
 <div class="ws-badge" *ngIf="showComponent">
 
-    <div style="position: relative; width: 116mm; height: 133mm; margin: 2mm; margin-top: 25mm;">
+    <div style="position: relative; width: 112mm; height: 130mm; margin: 3mm 4mm; margin-top: 25mm;">
 
-    <div style="position: absolute; top: 4mm; left: 4mm;">
+    <div style="position: absolute; top: 4mm; left: 2mm;">
       <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" style="width: 30mm; height: 40mm;"/>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 4mm; width: 76mm; height: 18mm; font-weight: 700; font-size: 28px; line-height: 1.2; text-transform: uppercase;" class="ws-text-fit">
+    <div style="position: absolute; left: 37mm; top: 4mm; width: 76mm; height: 18mm; font-weight: 700; font-size: 28px; line-height: 1.2; text-transform: uppercase;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #2E1651 !important;">
         {{pa.first_name || "&nbsp;"}}
       </div>
@@ -15,15 +15,15 @@
       </div>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 23mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 23px; line-height: 1.3;" class="ws-text-fit">
+    <div style="position: absolute; left: 37mm; top: 23mm; width: 76mm; height: 8mm; font-weight: 400; font-size: 23px; line-height: 1.3;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[0]}}</div>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 31mm; width: 76mm; height: 7mm; font-weight: 400; font-size: 20px; line-height: 1.3;" class="ws-text-fit">
+    <div style="position: absolute; left: 37mm; top: 31mm; width: 76mm; height: 7mm; font-weight: 400; font-size: 20px; line-height: 1.3;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #2E1651 !important;">{{pa.lines[1]}}</div>
     </div>
 
-    <div style="position: absolute; left: 39mm; top: 38mm; width: 76mm; height: 7mm; font-weight: 400; font-size: 20px; line-height: 1.3;" class="ws-text-fit">
+    <div style="position: absolute; left: 37mm; top: 38mm; width: 76mm; height: 7mm; font-weight: 400; font-size: 20px; line-height: 1.3;" class="ws-text-fit">
       <div style="-webkit-print-color-adjust: exact; color: #D51067 !important;">{{pa.lines[2]}}</div>
     </div>
 
@@ -36,7 +36,7 @@
         <div style="width: 20mm;"><div *ngIf="hasZone('FPT')" class="icon icon-pink">FPT</div></div>
       </div>
 
-      <div style="position: absolute; display: flex; border: 0.3mm solid #2E1651; left: 1mm; padding: 1mm 2mm; width: 56mm; bottom: 16mm; height: 48mm;">
+      <div style="position: absolute; display: flex; border: 0.3mm solid #2E1651; left: 0; padding: 1mm 2mm; width: 55mm; bottom: 16mm; height: 46mm;">
 
         <div style="flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); text-align: center; font-size: 10mm; font-weight: 600; -webkit-print-color-adjust: exact;">
           <div style="align-self: center; justify-self: center;">
@@ -57,7 +57,7 @@
 
       </div>
 
-      <div style="position: absolute; border: 0.3mm solid #2E1651; right: 1mm; padding: 4mm 1mm; width: 57mm; bottom: 16mm; height: 48mm;">
+      <div style="position: absolute; display: flex; flex-direction: column; border: 0.3mm solid #2E1651; right: 0; padding: 4mm 1mm; width: 55mm; bottom: 16mm; height: 46mm;">
 
         <div style="display: flex; justify-content: space-around;">
           <div style="width: 9mm;"><div *ngIf="hasZone('T')" class="symbol symbol-transport"></div><div *ngIf="!hasZone('T')" class="symbol symbol-empty"></div></div>
@@ -68,7 +68,7 @@
         </div>
 
 
-        <div style="position: absolute; left: 16mm; bottom: 4mm;">
+        <div style="display: flex; justify-content: space-around; align-items: end; flex-grow: 1;">
           <img src="{{pa.qr_code}}" style="height: 22mm;">
         </div>
     
@@ -100,7 +100,7 @@
 
     </div>
 
-    <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type?.color}} !important; height: 14mm; right: 1mm; position: absolute; left: 1mm; bottom: 1mm; display: flex; justify-content: center; align-items: center;">
+    <div style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type?.color}} !important; height: 14mm; right: 0; position: absolute; left: 0; bottom: 0; display: flex; justify-content: center; align-items: center;">
       <div style="flex-grow: 1; text-align: center;">
         <div style="white-space: nowrap; font-weight: 700; font-size: 6mm; -webkit-print-color-adjust: exact; color: {{pa.delegate_type?.text_color}} !important;">{{pa.delegate_type?.code}}</div>
       </div>
