@@ -28,7 +28,15 @@
       </div>
 
       <div style="display: flex; justify-content: space-around; text-align: center;">
+        <div *ngIf="hasZone('P_PRO')" style="font-size: 30mm; font-weight: 700;">P PROTOCOL</div>
+      </div>
+
+      <div style="display: flex; justify-content: space-around; text-align: center;">
         <div *ngIf="hasZone('P0_SPP')" style="font-size: 30mm; font-weight: 700;">P0 SPP</div>
+      </div>
+
+      <div style="display: flex; justify-content: space-around; text-align: center;">
+        <div *ngIf="hasZone('P_VIP')" style="font-size: 30mm; font-weight: 700;">P5</div>
       </div>
 
       <div style="display: flex; justify-content: space-around; text-align: center;">
@@ -53,6 +61,18 @@
 
       <div style="display: flex; justify-content: space-around; text-align: center;">
         <div *ngIf="hasZone('AO')" style="font-size: 30mm; font-weight: 700;">ACCESS<br>ONLY</div>
+      </div>
+
+      <div style="display: flex; justify-content: space-around; text-align: center;">
+        <div *ngIf="hasZone('OL_P4')" style="font-size: 30mm; font-weight: 700;">CER-P4</div>
+      </div>
+
+      <div style="display: flex; justify-content: space-around; text-align: center;">
+        <div *ngIf="hasZone('OL_P8')" style="font-size: 30mm; font-weight: 700;">CER-P8</div>
+      </div>
+
+      <div style="display: flex; justify-content: space-around; text-align: center;">
+        <div *ngIf="hasZone('OL_P9')" style="font-size: 30mm; font-weight: 700;">CER-P9</div>
       </div>
 
     </div>
