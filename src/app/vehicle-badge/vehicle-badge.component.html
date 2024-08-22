@@ -48,6 +48,10 @@
       </div>
 
       <div style="display: flex; justify-content: space-around; text-align: center;">
+        <div *ngIf="hasZone('PM')" style="font-size: 30mm; font-weight: 700;">Mobility<br>Parking</div>
+      </div>
+
+      <div style="display: flex; justify-content: space-around; text-align: center;">
         <div *ngIf="hasZone('AO')" style="font-size: 30mm; font-weight: 700;">ACCESS<br>ONLY</div>
       </div>
 
