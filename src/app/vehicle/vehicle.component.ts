@@ -153,7 +153,7 @@ export class VehicleComponent extends WsComponent implements OnInit {
     const urlTree = this.router.createUrlTree(['../print'], {relativeTo: this.route, queryParams: {id: this.vehicleAcr.id}});
     const url = this.router.serializeUrl(urlTree);
     if (this.vehicleAcr.printed) {
-      if (confirm('This accreditation badge has already been printed. If the badge has been lost, it should be marked as invalid before reprinting ("Invalidate badge"). Proceed with printing without invalidating the badge?')) {
+      if (confirm('This Vehicle Pass has already been printed. If the Vehicle Pass has been lost, it should be marked as invalid before reprinting ("Invalidate badge"). Proceed with printing without invalidating the Vehicle Pass?')) {
         window.open(url, '_blank');
       }
     } else {
@@ -166,7 +166,7 @@ export class VehicleComponent extends WsComponent implements OnInit {
   }
 
   invalidateBadge(): void {
-    if (confirm('This will generate a new random code for the QR code. Any existing badge will no longer be valid. Proceed?')) {
+    if (confirm('This will generate a new random code for the QR code. Any existing Vehicle Pass will no longer be valid. Proceed?')) {
       this.vehicleService.invalidateBadge(this.selectedEvent.id, this.vehicleAcr.id).subscribe(_ => {
         this.toastService.success('New random code for QR code generated.');
 
@@ -178,7 +178,7 @@ export class VehicleComponent extends WsComponent implements OnInit {
 
   markAsDistributed(): void {
     this.vehicleService.markAsDistributed(this.selectedEvent.id, this.vehicleAcr.id).subscribe(_ => {
-      this.toastService.success('Vehicle accreditation marked as distributed');
+      this.toastService.success('Vehicle Pass marked as distributed');
 
       // reload vehicle accreditation
       this.subscribe(this.loadVehicleAccreditation(this.vehicleAcr.id));

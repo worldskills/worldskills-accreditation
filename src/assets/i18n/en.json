@@ -1,4 +1,6 @@
 {
+  "vehicle_badge_has_been_printed": "This Vehicle Pass has already been printed.",
+  "vehicle_badge_has_been_distributed": "This Vehicle Pass has already been marked as distributed.",
   "show_zones": "Show zones",
   "show_badge_lines": "Show badge lines",
   "no_permission_to_edit_vehicle_msg": "You don't have permission to edit",
