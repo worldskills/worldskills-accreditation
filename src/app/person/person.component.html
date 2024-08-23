@@ -190,6 +190,11 @@
             </div>
 
             <div class="form-group">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'date_of_birth' | translate }}</label>
+              <p>{{ (personAcr.summary.date_of_birth | date:'dd.MM.yyyy') || '-' }}</p>
+            </div>
+
+            <div class="form-group">
               <label class="small text-muted font-weight-bold my-0 py-0">{{ 'position' | translate }}</label>
               <div>{{ personAcr.person_position?.position.name.text }}</div>
               <div>{{ personAcr.person_position?.open_field }}</div>
