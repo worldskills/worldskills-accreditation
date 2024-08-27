@@ -53,6 +53,10 @@ export class PackageOptionsComponent extends WsComponent implements OnInit {
 
   save(value: { option: PackageOption, zones: Zone[] }) {
     this.packageOptionService.updatePackageOptionZones(value.option.id, {zones: value.zones}).subscribe(res => {
+
+      // update zones for the option
+      this.options.find(o => o.id === value.option.id).zones = res.zones;
+
       this.managePackageOption = null;
       this.toastService.success('Package Option is saved!');
     });
