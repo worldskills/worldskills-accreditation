@@ -1,15 +1,15 @@
 @page {
   padding: 0;
   margin: 0;
-  size: a4 !important; /* important to override this https://github.com/worldskills/bootstrap/blob/main/dist/css/bootstrap.css#L10509 */
+  size: a4 landscape !important; /* important to override this https://github.com/worldskills/bootstrap/blob/main/dist/css/bootstrap.css#L10509 */
 }
 
 .ws-badge {
   font-family: FrutigerLTW04, Frutiger, Arial, sans-serif;
   font-weight: 300;
   font-size: 5mm;
-  width: 210mm;
-  height: 297mm;
+  width: 297mm;
+  height: 210mm;
   display: flex;
   flex-direction: column;
 }
