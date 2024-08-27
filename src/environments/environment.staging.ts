@@ -34,5 +34,6 @@ export const environment = {
     REQUEST_ZONE: 'RequestZone',
     ALLOCATE_ZONE_REQUEST: 'AllocateZoneRequest',
     VERIFY_ALLOCATION: 'VerifyAllocation',
+    VIEW_ACCREDITATIONS: 'ViewAccreditations',
   }
 };

@@ -72,6 +72,7 @@ const routes: Routes = [
           ACR_ROLES.REQUEST_ZONE,
           ACR_ROLES.ALLOCATE_ZONE_REQUEST,
           ACR_ROLES.VERIFY_ALLOCATION,
+          ACR_ROLES.VIEW_ACCREDITATIONS,
         ]
       )
     },
@@ -151,7 +152,7 @@ const routes: Routes = [
             path: 'people/:personAcrId',
             data: {
               breadcrumb: 'Person',
-              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.UPLOAD_PHOTO, ACR_ROLES.PRINT])
+              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT, ACR_ROLES.UPLOAD_PHOTO, ACR_ROLES.PRINT, ACR_ROLES.VIEW_ACCREDITATIONS])
             },
             canActivate: [GuardService],
             component: PersonComponent
