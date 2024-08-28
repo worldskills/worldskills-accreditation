@@ -1,6 +1,10 @@
 <div class="card w-100">
   <div class="card-header">
-    <h5 class="card-title">{{ 'pending_requests' | translate | titlecase }}</h5>
+    <h5 class="card-title">
+      {{ 'pending_requests' | translate | titlecase }}
+
+      <button class="btn btn-sm btn-link small float-right" (click)="exportZoneRequests()"><span class="fa fa-file-excel-o"></span> Export to spreadsheet</button>
+    </h5>
   </div>
   <div class="card-body">
     <div class="row mb-3">
