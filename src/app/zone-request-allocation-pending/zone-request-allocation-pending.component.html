@@ -86,7 +86,7 @@
         </tr>
         </thead>
         <tbody>
-        <ng-container *ngFor="let req of pendingRequests">
+        <ng-container *ngFor="let req of pendingRequests; trackBy: trackByPendingReqId">
           <tr>
             <td class="border-bottom-0" rowspan="2">{{ req.person_accreditation.person_position?.organizational_unit ?? '-' }}</td>
             <td

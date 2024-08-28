@@ -166,4 +166,8 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
         this.toastService.error('Failed to export Zone Requests');
       });
   }
+
+  trackByPendingReqId(idx: number, zr: ZoneRequest): number {
+    return zr.id;
+  }
 }
