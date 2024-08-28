@@ -22,7 +22,7 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
   @Input() allocatableZones: Zone[];
 
   pendingRequests: ZoneRequest[];
-  pendingReqsSorting: 'org-asc' | 'org-desc' | 'name-asc' | 'name-desc' | 'first-choice-asc' | 'first-choice-desc' | 'second-choice-asc' | 'second-choice-desc';
+  pendingReqsSorting: 'country-asc' | 'country-desc' | 'org-asc' | 'org-desc' | 'name-asc' | 'name-desc' | 'first-choice-asc' | 'first-choice-desc' | 'second-choice-asc' | 'second-choice-desc';
   // for filtering pending requests
   pendingReqOrgNames: string[] = [];
   pendingReqOrgName: string;
@@ -86,6 +86,10 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
     return this.pendingRequests.sort((a, b) => {
       try {
         switch (sorting) {
+          case "country-asc":
+            return a.person_accreditation.person?.country?.name?.text?.localeCompare(b.person_accreditation?.person?.country?.name?.text);
+          case "country-desc":
+            return b.person_accreditation.person?.country?.name?.text?.localeCompare(a.person_accreditation?.person?.country?.name?.text);
           case "org-asc":
             return a.person_accreditation.person_position.organizational_unit.localeCompare(b.person_accreditation.person_position.organizational_unit);
           case "org-desc":

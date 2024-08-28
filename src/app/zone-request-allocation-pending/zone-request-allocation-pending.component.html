@@ -48,13 +48,21 @@
     <div>
       <table class="table table-sm">
         <colgroup>
-          <col style="width: 40%">
+          <col style="width: 20%">
+          <col style="width: 20%">
           <col style="width: 20%">
           <col style="width: 20%">
           <col style="width: 20%">
         </colgroup>
         <thead>
         <tr>
+          <th class="small font-weight-bold">
+            <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingReqsSorting === 'country-asc' ? 'country-desc' : 'country-asc')">
+              {{'country' | translate}}&nbsp;
+              <ng-container *ngIf="pendingReqsSorting !== 'country-asc'">&darr;</ng-container>
+              <ng-container *ngIf="pendingReqsSorting !== 'country-desc'">&uarr;</ng-container>
+            </a>
+          </th>
           <th class="small font-weight-bold">
             <a href="#" (click)="$event.preventDefault(); sortPendingRequests(pendingReqsSorting === 'org-asc' ? 'org-desc' : 'org-asc')">
               {{'organization' | translate}}&nbsp;
@@ -88,6 +96,7 @@
         <tbody>
         <ng-container *ngFor="let req of pendingRequests; trackBy: trackByPendingReqId">
           <tr>
+            <td class="border-bottom-0" rowspan="2">{{ req.person_accreditation.person?.country?.name?.text ?? '-' }}</td>
             <td class="border-bottom-0" rowspan="2">{{ req.person_accreditation.person_position?.organizational_unit ?? '-' }}</td>
             <td
               class="border-bottom-0">{{ req.person_accreditation.person.first_name }} {{ req.person_accreditation.person.last_name }}
