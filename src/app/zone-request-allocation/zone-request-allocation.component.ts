@@ -23,6 +23,7 @@ export class ZoneRequestAllocationComponent extends WsComponent implements OnIni
   selectedEvent: Event;
   currentForm: ZoneRequestForm;
   loading = false;
+  viewFocusMode: 'DEFAULT' | 'PENDING' | 'ALLOCATED' = 'DEFAULT';
   zones: Zone[];
   allocatableZones: Zone[];
   allocatableFormZones: ZoneRequestFormZone[];

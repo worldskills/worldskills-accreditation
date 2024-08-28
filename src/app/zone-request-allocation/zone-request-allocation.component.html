@@ -10,8 +10,27 @@
 <!--  </div>-->
 <!--</div>-->
 
+<div class="row small mb-2">
+  <div class="col-md-12">
+    {{ 'focus_mode' | translate }}:
+    <br>
+    <button class="btn btn-sm btn-outline-dark mr-1"
+            [ngClass]="{'active': viewFocusMode === 'DEFAULT'}"
+            (click)="viewFocusMode = 'DEFAULT'">{{ 'default' | translate }}
+    </button>
+    <button class="btn btn-sm btn-outline-dark mr-1"
+            [ngClass]="{'active': viewFocusMode === 'PENDING'}"
+            (click)="viewFocusMode = 'PENDING'">{{ 'pending_requests' | translate }}
+    </button>
+    <button class="btn btn-sm btn-outline-dark mr-1"
+            [ngClass]="{'active': viewFocusMode === 'ALLOCATED'}"
+            (click)="viewFocusMode = 'ALLOCATED'">{{ 'allocated_requests' | translate }}
+    </button>
+  </div>
+</div>
+
 <div class="row">
-  <div class="col-md-6">
+  <div [ngClass]="viewFocusMode === 'PENDING' ? 'col-md-8': viewFocusMode === 'ALLOCATED' ? 'd-none' : 'col-md-6'">
     <app-zone-request-allocation-pending *ngIf="!!selectedEvent && !!currentForm"
                                          [selectedEvent]="selectedEvent"
                                          [zones]="zones"
@@ -19,7 +38,7 @@
                                          [allocatableZones]="allocatableZones">
     </app-zone-request-allocation-pending>
   </div>
-  <div class="col-md-6">
+  <div [ngClass]="viewFocusMode === 'PENDING' ? 'col-md-4': viewFocusMode === 'ALLOCATED' ? 'col-md-12' : 'col-md-6'">
     <app-zone-request-allocation-allocated *ngIf="!!selectedEvent && !!currentForm"
                                            [selectedEvent]="selectedEvent"
                                            [zones]="zones"
