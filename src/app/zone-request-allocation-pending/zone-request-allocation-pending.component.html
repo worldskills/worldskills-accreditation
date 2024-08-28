@@ -3,7 +3,9 @@
     <h5 class="card-title">
       {{ 'pending_requests' | translate | titlecase }}
 
-      <button class="btn btn-sm btn-link small float-right" (click)="exportZoneRequests()"><span class="fa fa-file-excel-o"></span> Export to spreadsheet</button>
+      <button class="btn btn-sm btn-link small float-right"
+              [disabled]="actionState.exportRequests"
+              (click)="exportZoneRequests()"><span class="fa fa-file-excel-o"></span> Export to spreadsheet</button>
     </h5>
   </div>
   <div class="card-body">

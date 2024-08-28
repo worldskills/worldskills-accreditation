@@ -32,6 +32,7 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
   actionState = {
     allocate: false,
     deny: false,
+    exportRequests: false
   }
 
   constructor(private zoneReqService: ZoneRequestService,
@@ -147,7 +148,8 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
     }
   }
 
-  exportZoneRequests() : void{
+  exportZoneRequests(): void {
+    this.actionState.exportRequests = true;
     // export to file
     this.zoneReqService.exportZoneRequests(this.selectedEvent.id, this.currentForm.id)
       .subscribe(response => {
@@ -157,6 +159,11 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
         downloadLink.setAttribute('download', `${this.selectedEvent.name.text}_${this.currentForm.name.text}_zone_requests_${moment().format("yyyyMMDDHHmmss")}.xlsx`);
         document.body.appendChild(downloadLink);
         downloadLink.click();
+
+        this.actionState.exportRequests = false;
+      }, error => {
+        this.actionState.exportRequests = false;
+        this.toastService.error('Failed to export Zone Requests');
       });
   }
 }
