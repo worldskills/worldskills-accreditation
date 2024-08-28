@@ -58,29 +58,24 @@
       <table class="table table-sm">
         <colgroup>
           <col style="width: 20%">
-          <col style="width: 10%">
-          <col style="width: 70%">
+          <col style="width: 80%">
         </colgroup>
         <thead>
         <tr>
           <th>{{ 'zone' | translate | titlecase }}</th>
-          <th>{{ 'quota' | translate | titlecase }}</th>
           <th>{{ 'organizations' | translate | titlecase }}</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let zoneReq of filterAllocatableZones(allocatableFormZones)">
-          <td class="small">
-                <span class="badge mr-1" [style.background-color]="zoneReq.zone.color"
-                      [ngbTooltip]="zoneReq.zone.name"
-                      [style.color]="zoneReq.zone.text_color">{{ zoneReq.zone.code }}</span>
-            <br>
-            {{ zoneReq.zone.name }}
-
-            <br>
-            <div class="btn btn-sm btn-link p-0 m-0" (click)="manualAllocationToZone = zoneReq.zone">Allocate</div>
-          </td>
           <td>
+            <span class="d-inline-block"
+                  style="width: 10px; height: 10px; "
+                  [style.background-color]="zoneReq.zone.color"
+                  [ngbTooltip]="zoneReq.zone.code"></span><span class="small ml-1">{{ zoneReq.zone.name }}</span>
+            <br>
+            <div class="btn btn-sm btn-link p-0 m-0 small" (click)="manualAllocationToZone = zoneReq.zone">Allocate</div>
+
             <span class="badge badge-light">{{ getAllocationsForZone(zoneReq.zone)?.length }}
               / {{ zoneReq.quota }}</span>
           </td>
