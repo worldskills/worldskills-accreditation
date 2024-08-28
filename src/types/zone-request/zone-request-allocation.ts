@@ -20,3 +20,7 @@ export interface ZoneRequestAllocation {
 export interface ZoneRequestAllocationContainer {
   allocations: ZoneRequestAllocation[];
 }
+
+export interface ZoneRequestAllocationDirectEditOrderView {
+  spot_label: number;
+}

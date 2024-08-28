@@ -55,6 +55,7 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
   actionState = {
     wristband_distribution: false,
     move_up_down: false,
+    direct_edit_order: false,
     undo_allocation: false
   }
 
@@ -267,5 +268,25 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     } else {
       this.toastService.error('Please fill all required fields');
     }
+  }
+
+  updateSpotLabel(changeState: any, allocation: ZoneRequestAllocation): void {
+    this.actionState.direct_edit_order = true;
+    this.zoneReqAllocService.directEditOrder(this.selectedEvent.id, allocation.id, allocation.version, {
+      spot_label: changeState.target.value
+    }).subscribe({
+      next: () => {
+        this.toastService.success('Allocation spot label is updated');
+        this.loadAllocations();
+        this.actionState.direct_edit_order = false;
+      },
+      error: (err) => {
+        this.toastService.error(err?.error?.user_msg ?? 'Error editing spot label');
+        this.actionState.direct_edit_order = false;
+
+        // update the text field back to its original value
+        changeState.target.value = allocation.allocated_zone_spot_label;
+      }
+    });
   }
 }

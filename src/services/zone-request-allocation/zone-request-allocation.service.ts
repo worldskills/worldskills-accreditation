@@ -3,7 +3,10 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {WsService} from "@worldskills/worldskills-angular-lib";
 import {Observable, Subject} from "rxjs";
-import {ZoneRequestAllocationContainer} from "../../types/zone-request/zone-request-allocation";
+import {
+  ZoneRequestAllocationContainer,
+  ZoneRequestAllocationDirectEditOrderView
+} from "../../types/zone-request/zone-request-allocation";
 import {ZoneRequest} from "../../types/zone-request/zone-request";
 import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";
 import {Person} from "../../types/person";
@@ -57,6 +60,10 @@ export class ZoneRequestAllocationService extends WsService<any> {
 
   updateOrder(eventId: number, zoneRequestAllocationId: number, zoneReqAllocVersion: number, moveDirection: 'UP' | 'DOWN'): Observable<any> {
     return this.http.put(this.url(eventId) + `/${zoneRequestAllocationId}/order?zone_req_alloc_version=${zoneReqAllocVersion}`, {'move_direction' : moveDirection});
+  }
+
+  directEditOrder(eventId: number, zoneRequestAllocationId: number, zoneReqAllocVersion: number, view: ZoneRequestAllocationDirectEditOrderView): Observable<any> {
+    return this.http.put(this.url(eventId) + `/${zoneRequestAllocationId}/direct_edit_order?zone_req_alloc_version=${zoneReqAllocVersion}`, view);
   }
 
   sendZoneAllocatedPendingNotificationEmails(eventId: number, zoneRequestFormId: number): Observable<any> {
