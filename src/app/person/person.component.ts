@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgAuthService, UploadService, UserRoleUtil, WsComponent} from "@worldskills/worldskills-angular-lib";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PersonAccreditationService} from "../../services/person-accreditation/person-accreditation.service";
@@ -33,6 +33,8 @@ export class PersonComponent extends WsComponent implements OnInit {
   delegateTypes: DelegateType[];
   zones: Zone[] = [];
   logs: Log[] = [];
+
+  @ViewChild("badgeLines") badgeLines: ElementRef;
 
   // upload ACR photo variables
   overrideACRPhoto: File;
@@ -184,6 +186,10 @@ export class PersonComponent extends WsComponent implements OnInit {
   overrideBadgeLines(event: any) {
     event.preventDefault();
     this.personAcr.lines = this.personAcr.summary.lines.join('\n');
+    // focus
+    setTimeout(() => {
+      this.badgeLines.nativeElement.focus();
+    });
   }
 
   onBadgeLinesChange(lines: string) {
