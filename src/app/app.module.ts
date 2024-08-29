@@ -78,7 +78,7 @@ import { EventIndexComponent } from './event-index/event-index.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240823131425');
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240829112714');
 }
 
 @NgModule({

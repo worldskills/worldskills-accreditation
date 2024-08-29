@@ -181,6 +181,11 @@ export class PersonComponent extends WsComponent implements OnInit {
     this.updatePersonAccreditation();
   }
 
+  overrideBadgeLines(event: any) {
+    event.preventDefault();
+    this.personAcr.lines = this.personAcr.summary.lines.join('\n');
+  }
+
   onBadgeLinesChange(lines: string) {
     this.badgeLinesChange.next(lines);
   }
