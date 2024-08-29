@@ -71,7 +71,7 @@
 
             <div class="row mb-2">
               <div class="col-sm-12">
-                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'badge_lines' | translate }} <a *ngIf="!personAcr.lines" (click)="overrideBadgeLines($event)" href="#">{{ 'override_badge_lines' | translate }}</a></label>
+                <label class="small text-muted font-weight-bold my-0 py-0">{{ 'badge_lines' | translate }} <a *ngIf="hasEditPermission && !personAcr.lines" (click)="overrideBadgeLines($event)" href="#">{{ 'override_badge_lines' | translate }}</a></label>
                 <textarea class="form-control" rows="3" [ngModel]="personAcr.lines"
                           [disabled]="!hasEditPermission"
                           (ngModelChange)="onBadgeLinesChange($event)" #badgeLines></textarea>
