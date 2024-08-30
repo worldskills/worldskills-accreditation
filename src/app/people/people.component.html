@@ -116,6 +116,7 @@
   </div>
   <div class="col-md-3">
     <app-people-filter (filter)="filter($event)"
+                       (clear)="clearFilter()"
                        [functionalitiesDisplaySetting]="functionalitiesDisplaySetting"
                        [hasPrintPermission]="hasPrintPermission"
                        [fetchParams]="fetchParams"></app-people-filter>

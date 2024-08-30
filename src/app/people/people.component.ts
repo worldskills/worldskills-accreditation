@@ -156,6 +156,11 @@ export class PeopleComponent extends WsComponent implements OnInit {
     this.updateSearchQueryParams();
   }
 
+  clearFilter() {
+    this.fetchParams = this.personAcrService.initialiseFetchParams();
+    this.updateSearchQueryParams();
+  }
+
   private updateSearchQueryParams(): void {
     const queryParams: Params = this.personAcrService.buildQueryParams(this.fetchParams);
 

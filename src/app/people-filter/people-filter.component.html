@@ -1,5 +1,8 @@
 <div class="card">
-  <h5 class="card-header m-0">{{'filter' | translate}}</h5>
+  <div class="card-header">
+    <a (click)="clearFilter($event)" href="#" class="small pull-right font-weight-normal">{{'clear_filter' | translate}}</a>
+    <h5 class="my-0">{{'filter' | translate}}</h5>
+  </div>
   <div class="card-body">
     <form class="form-horizontal" (ngSubmit)="submit()" #form="ngForm" novalidate>
       <div class="row mb-2">

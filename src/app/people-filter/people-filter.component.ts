@@ -24,6 +24,7 @@ import {PeopleSearchFunctionalitiesDisplaySetting} from "../people/people.compon
 export class PeopleFilterComponent extends WsComponent implements OnInit {
 
   @Output() filter = new EventEmitter<PersonAccreditationSummaryReqParams>();
+  @Output() clear = new EventEmitter();
   @Input() fetchParams: PersonAccreditationSummaryReqParams;
   @Input() hasPrintPermission: boolean;
   @Input() functionalitiesDisplaySetting: PeopleSearchFunctionalitiesDisplaySetting;
@@ -82,6 +83,11 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
 
   submit(): void {
     this.filter.emit({...this.fetchParams, ...this.form.value});
+  }
+
+  clearFilter(event: any): void {
+    event.preventDefault();
+    this.clear.emit();
   }
 
   printPreview(twoBadgesPerPage: boolean): void {
