@@ -38,10 +38,10 @@
                 <ng-container *ngIf="!personAcr.last_name">{{'empty_hint' | translate}}</ng-container>
               </a>
             </td>
-            <td class="text-truncate">
-              <div class="badge" [style.background-color]="personAcr.delegate_type.color" [style.color]="personAcr.delegate_type.text_color">{{personAcr.delegate_type.name}}</div>
+            <td class="text-truncate" style="max-width: 10rem;">
+              <div class="badge" [ngbTooltip]="personAcr.delegate_type.name" [style.background-color]="personAcr.delegate_type.color" [style.color]="personAcr.delegate_type.text_color">{{personAcr.delegate_type.name}}</div>
             </td>
-            <td class="text-truncate" style="max-width: 10rem;" *ngIf="showZones">
+            <td class="text-truncate" style="max-width: 14rem;" *ngIf="showZones">
               <ng-container *ngFor="let zone of personAcr.zones">
                 <div class="badge mr-1 small" [style.background-color]="zone.color"
                      [ngbTooltip]="zone.name"
