@@ -60,7 +60,7 @@
     <div class="col-md-6">
 
       <div class="card mb-4">
-        <h2 class="card-header h5 mt-0 mb-0">{{'zone_quotas'|translate}}</h2>
+        <h2 class="card-header h5 mt-0 mb-0">{{'zone_quotas'|translate}} <small *ngIf="loadingQuota > 0" class="text-muted font-weight-normal">{{'loading'|translate}}...</small></h2>
         <div class="card-body">
             
           <div *ngFor="let zone of zones" class="mb-2">
