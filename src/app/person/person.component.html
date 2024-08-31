@@ -197,7 +197,7 @@
             -->
 
             <ng-container *ngIf="personRegistration">
-              <ng-container *ngFor="let hostInfoItem of hostInfo.items">
+              <ng-container *ngFor="let hostInfoItem of hostInfo?.items">
                 <div class="form-group" *ngIf="hostInfoItem.custom_field.field_type === 'TEXT'">
                   <label class="small text-muted font-weight-bold my-0 py-0">{{ hostInfoItem.custom_field.name.text }}</label>
                   <ng-container *ngFor="let item of personRegistration.person_host_info?.items">
