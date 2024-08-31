@@ -189,10 +189,29 @@
               <p>{{ personAcr.person.first_name }} {{ personAcr.person.last_name }}</p>
             </div>
 
+            <!--
             <div class="form-group">
               <label class="small text-muted font-weight-bold my-0 py-0">{{ 'date_of_birth' | translate }}</label>
               <p>{{ (personAcr.summary.date_of_birth | date:'dd.MM.yyyy') || '-' }}</p>
             </div>
+            -->
+
+            <ng-container *ngIf="personRegistration">
+              <ng-container *ngFor="let hostInfoItem of hostInfo.items">
+                <div class="form-group" *ngIf="hostInfoItem.custom_field.field_type === 'TEXT'">
+                  <label class="small text-muted font-weight-bold my-0 py-0">{{ hostInfoItem.custom_field.name.text }}</label>
+                  <ng-container *ngFor="let item of personRegistration.person_host_info?.items">
+                    <p *ngIf="item.host_info_item_id == hostInfoItem.id">{{ item.custom_field_data?.string_value }}</p>
+                  </ng-container>
+                </div>
+                <div class="form-group" *ngIf="hostInfoItem.custom_field.field_type === 'DATE_OF_BIRTH'">
+                  <label class="small text-muted font-weight-bold my-0 py-0">{{ hostInfoItem.custom_field.name.text }}</label>
+                  <ng-container *ngFor="let item of personRegistration.person_host_info?.items">
+                    <p *ngIf="item.host_info_item_id == hostInfoItem.id">{{ item.custom_field_data?.date_value | date:'dd.MM.yyyy' }}</p>
+                  </ng-container>
+                </div>
+              </ng-container>
+            </ng-container>
 
             <div class="form-group">
               <label class="small text-muted font-weight-bold my-0 py-0">{{ 'position' | translate }}</label>

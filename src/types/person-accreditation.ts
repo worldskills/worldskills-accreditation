@@ -7,6 +7,7 @@ import {Image} from "./image";
 import {PackageOptionZone} from "./package-option-zone";
 import {Zone} from "./zone";
 import {PersonAccreditationSummary} from "./person-accreditation-summary";
+import { PersonRegistration } from "./person-registration";
 
 export interface PersonAccreditation {
   id: number;
@@ -21,6 +22,7 @@ export interface PersonAccreditation {
   lines: string;
   printed: Date;
   image: Image;
+  registration: PersonRegistration;
   package_option_zones: PackageOptionZone[];
   zones_add: Zone[];
   zones_remove: Zone[];
