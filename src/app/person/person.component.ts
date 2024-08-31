@@ -59,6 +59,7 @@ export class PersonComponent extends WsComponent implements OnInit {
   hasPrintPermission = false;
   hasAdminPermission = false;
   hasUploadPhotoPermission = true;
+  hasRegistrationsManageBookingsPermission = false;
   hasLogsPermission = false;
 
   constructor(private appService: AppService,
@@ -106,11 +107,16 @@ export class PersonComponent extends WsComponent implements OnInit {
           })
         );
 
-        this.registrationsService.getHostInfo(this.selectedEvent.id).subscribe(hostInfo => {
-          this.hostInfo = hostInfo;
-        });
+        this.hasRegistrationsManageBookingsPermission = UserRoleUtil.userHasRoles(currentUser, appConfig.worldskillsRegistrationsAppId, 'Admin', 'ManageBookings');
+        if (this.hasRegistrationsManageBookingsPermission) {
+          // fetch host info
+          this.registrationsService.getHostInfo(this.selectedEvent.id).subscribe(hostInfo => {
+            this.hostInfo = hostInfo;
+          });
+        }
 
-        if (UserRoleUtil.userHasRoles(currentUser, appConfig.worldskillsLogsAppId, 'Admin', 'ViewLogs')) {
+        this.hasLogsPermission = UserRoleUtil.userHasRoles(currentUser, appConfig.worldskillsLogsAppId, 'Admin', 'ViewLogs');
+        if (this.hasLogsPermission) {
           // fetch logs
           const params = {
             ws_entity: this.selectedEvent.ws_entity.id,
@@ -167,9 +173,11 @@ export class PersonComponent extends WsComponent implements OnInit {
   private loadPersonAccreditation(personAcrId: number) {
     return this.personAccreditationService.getPersonAccreditation(this.selectedEvent.id, personAcrId).subscribe(person => {
       this.personAcr = person;
-      this.registrationsService.getRegisteredGroupPerson(this.selectedEvent.id, this.personAcr.registration.group_id, this.personAcr.registration.id).subscribe(registeredPerson => {
-        this.personRegistration = registeredPerson;
-      });
+      if (this.hasRegistrationsManageBookingsPermission) {
+        this.registrationsService.getRegisteredGroupPerson(this.selectedEvent.id, this.personAcr.registration.group_id, this.personAcr.registration.id).subscribe(registeredPerson => {
+          this.personRegistration = registeredPerson;
+        });
+      }
     });
   }
 
