@@ -107,7 +107,7 @@ export class PersonComponent extends WsComponent implements OnInit {
           })
         );
 
-        this.hasRegistrationsManageBookingsPermission = UserRoleUtil.userHasRoles(currentUser, appConfig.worldskillsRegistrationsAppId, 'Admin', 'ManageBookings');
+        this.hasRegistrationsManageBookingsPermission = UserRoleUtil.userHasRoles(currentUser, appConfig.worldskillsRegistrationsAppId, 'Admin', 'ViewRegistrations');
         if (this.hasRegistrationsManageBookingsPermission) {
           // fetch host info
           this.registrationsService.getHostInfo(this.selectedEvent.id).subscribe(hostInfo => {
