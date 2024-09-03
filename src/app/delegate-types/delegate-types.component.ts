@@ -66,11 +66,20 @@ export class DelegateTypesComponent extends WsComponent implements OnInit {
   }
 
   save(dt: DelegateType): void {
-    (dt.id === 0 ? this.delTypeService.create(this.selectedEvent.id, dt) : this.delTypeService.update(this.selectedEvent.id, dt)).subscribe(res => {
-      this.loadData();
-      this.manageDelType = null;
-      this.toastService.success('Delegate Type is saved!');
-    });
+    if (dt.id === 0) {
+      this.delTypeService.create(this.selectedEvent.id, dt).subscribe(res => {
+        this.loadData();
+        this.manageDelType = null;
+        this.toastService.success('Delegate Type is saved!');
+      });
+    } else {
+      this.delTypeService.update(this.selectedEvent.id, dt).subscribe(res => {
+        const index = this.delegateTypes.findIndex(d => d.id === dt.id);
+        this.delegateTypes[index] = dt;
+        this.manageDelType = null;
+        this.toastService.success('Delegate Type is saved!');
+      });
+    }
   }
 
   deleteDelType(dt: DelegateType): void {

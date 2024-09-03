@@ -41,6 +41,7 @@ export class PeopleComponent extends WsComponent implements OnInit {
   showEditSelectedForm = false;
   showZones = false;
   showLines = false;
+  showMember = false;
 
   hasPrintPermission = false;
 
@@ -150,12 +151,13 @@ export class PeopleComponent extends WsComponent implements OnInit {
     return this.selectedPeople?.length > 0;
   }
 
-  doesResultHasMember(): boolean {
-    return this.result.people.filter(p => !GenericUtil.isNullOrUndefined(p.member)).length > 0;
-  }
-
   filter(params: PersonAccreditationSummaryReqParams) {
     this.fetchParams = {...params};
+    this.updateSearchQueryParams();
+  }
+
+  clearFilter() {
+    this.fetchParams = this.personAcrService.initialiseFetchParams();
     this.updateSearchQueryParams();
   }
 

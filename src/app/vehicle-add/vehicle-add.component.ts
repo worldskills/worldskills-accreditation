@@ -23,6 +23,7 @@ export class VehicleAddComponent extends WsComponent implements OnInit {
   private selectedEvent: Event;
 
   loading = false;
+  loadingQuota = 0;
 
   delegateTypes: DelegateType[];
   vehicleGroups: VehicleGroup[];
@@ -65,9 +66,11 @@ export class VehicleAddComponent extends WsComponent implements OnInit {
 
             // loop zones and load usage
             this.zones.forEach(zone => {
+              this.loadingQuota++;
               this.subscribe(
                 this.zoneService.get(this.selectedEvent.id, zone.id).subscribe(res => {
                   zone.usage = res.usage;
+                  this.loadingQuota--;
                 })
               )
             });

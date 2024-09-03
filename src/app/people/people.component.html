@@ -17,43 +17,43 @@
             <th class="border-top-0 text-truncate">{{'delegate_type' | translate}}</th>
             <th class="border-top-0 text-truncate" *ngIf="showZones">{{'zones' | translate}}</th>
             <th class="border-top-0 text-truncate" *ngIf="showLines">{{'badge_lines' | translate}}</th>
-            <th class="border-top-0 text-truncate" *ngIf="doesResultHasMember()">{{'member' | translate}}</th>
+            <th class="border-top-0 text-truncate" *ngIf="showMember">{{'member' | translate}}</th>
             <th class="border-top-0" *ngIf="functionalitiesDisplaySetting.select_a_person">{{'action' | translate}}</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let personAcr of result.people">
-            <td>
+            <td style="width: 2rem;">
               <input type="checkbox" [(ngModel)]="personAcr.checked">
             </td>
-            <td class="text-truncate">
+            <td class="text-truncate" style="width: 12rem;">
               <a [routerLink]="functionalitiesDisplaySetting.person_profile_visit ? personAcr.id +'' : null">
                 <ng-container *ngIf="personAcr.first_name">{{personAcr.first_name}}</ng-container>
                 <ng-container *ngIf="!personAcr.first_name">{{'empty_hint' | translate}}</ng-container>
               </a>
             </td>
-            <td class="text-truncate">
+            <td class="text-truncate" style="width: 14rem;">
               <a [routerLink]="functionalitiesDisplaySetting.person_profile_visit ? personAcr.id +'' : null">
                 <ng-container *ngIf="personAcr.last_name">{{personAcr.last_name}}</ng-container>
                 <ng-container *ngIf="!personAcr.last_name">{{'empty_hint' | translate}}</ng-container>
               </a>
             </td>
-            <td class="text-truncate">
-              <div class="badge" [style.background-color]="personAcr.delegate_type.color" [style.color]="personAcr.delegate_type.text_color">{{personAcr.delegate_type.name}}</div>
+            <td class="text-truncate" style="max-width: 10rem;">
+              <div class="badge" [ngbTooltip]="personAcr.delegate_type.name" [style.background-color]="personAcr.delegate_type.color" [style.color]="personAcr.delegate_type.text_color">{{personAcr.delegate_type.name}}</div>
             </td>
-            <td class="text-truncate" style="max-width: 10rem;" *ngIf="showZones">
+            <td class="text-truncate" style="max-width: 16rem;" *ngIf="showZones">
               <ng-container *ngFor="let zone of personAcr.zones">
                 <div class="badge mr-1 small" [style.background-color]="zone.color"
                      [ngbTooltip]="zone.name"
                      [style.color]="zone.text_color">{{zone.code}}</div>
               </ng-container>
             </td>
-            <td *ngIf="showLines" style="max-width: 12rem;">
+            <td *ngIf="showLines" style="max-width: 16rem;">
               <div class="text-truncate">{{personAcr.lines[0]}}</div>
               <div class="text-truncate">{{personAcr.lines[1]}}</div>
               <div class="text-truncate">{{personAcr.lines[2]}}</div>
             </td>
-            <td class="text-truncate"><span *ngIf="personAcr.member && doesResultHasMember()">{{personAcr.member.name.text}}</span></td>
+            <td *ngIf="showMember" class="text-truncate"><span *ngIf="personAcr.member">{{personAcr.member.name.text}}</span></td>
             <td *ngIf="functionalitiesDisplaySetting.select_a_person">
               <button class="btn btn-sm btn-primary small" (click)="selectPerson(personAcr)">{{'choose_person' | translate}}</button>
             </td>
@@ -116,6 +116,7 @@
   </div>
   <div class="col-md-3">
     <app-people-filter (filter)="filter($event)"
+                       (clear)="clearFilter()"
                        [functionalitiesDisplaySetting]="functionalitiesDisplaySetting"
                        [hasPrintPermission]="hasPrintPermission"
                        [fetchParams]="fetchParams"></app-people-filter>
@@ -126,6 +127,10 @@
     <div class="form-check pl-4">
       <input type="checkbox" class="form-check-input" [(ngModel)]="showLines" id="showLines">
       <label class="form-check-label small" for="showLines">{{'show_badge_lines' | translate}}</label>
+    </div>
+    <div class="form-check pl-4">
+      <input type="checkbox" class="form-check-input" [(ngModel)]="showMember" id="showMember">
+      <label class="form-check-label small" for="showMember">{{'show_member' | translate}}</label>
     </div>
   </div>
 </div>
