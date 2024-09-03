@@ -96,7 +96,14 @@
         <tbody>
         <ng-container *ngFor="let req of pendingRequests; trackBy: trackByPendingReqId">
           <tr>
-            <td class="border-bottom-0" rowspan="2">{{ req.person_accreditation.person?.country?.name?.text ?? '-' }}</td>
+            <td class="border-bottom-0" rowspan="2">
+              {{ req.person_accreditation.person?.country?.name?.text ?? '-' }}
+
+              <ng-container *ngIf="selectedEvent.require_host_approval">
+                <p class="small text-muted">BGC status: <br><b>{{ req.person_accreditation?.summary?.host_info_status }}</b></p>
+              </ng-container>
+
+            </td>
             <td class="border-bottom-0" rowspan="2">{{ req.person_accreditation.person_position?.organizational_unit ?? '-' }}</td>
             <td
               class="border-bottom-0">{{ req.person_accreditation.person.first_name }} {{ req.person_accreditation.person.last_name }}
