@@ -43,6 +43,7 @@
       <div *ngIf="hasZone('OL_P4')" style="font-size: 40mm; font-weight: 700;">CER-P4</div>
       <div *ngIf="hasZone('OL_P8')" style="font-size: 40mm; font-weight: 700;">CER-P8</div>
       <div *ngIf="hasZone('OL_P9')" style="font-size: 40mm; font-weight: 700;">CER-P9</div>
+      <div *ngIf="hasZone('OL_P10')" style="font-size: 40mm; font-weight: 700;">CER-P10</div>
       <div *ngIf="hasZone('OL_PG')" style="font-size: 40mm; font-weight: 700;">P. Gare Navettes Sud</div>
 
     </div>
@@ -65,8 +66,9 @@
 <div class="ws-badge" *ngIf="showComponent; else loadingAnimation">
 
   <div style="position: relative; margin: 5mm;">
-      <img *ngIf="!hasAnyZone(['OL_P4', 'OL_P8', 'OL_P9', 'OL_PG'])" src="assets/badges/wsi2024-wsc-vehicle/map-eurexpo.jpg" style="width: 287mm; height: 200mm; object-fit: contain;">
+      <img *ngIf="!hasAnyZone(['OL_P4', 'OL_P8', 'OL_P9', 'OL_P10', 'OL_PG'])" src="assets/badges/wsi2024-wsc-vehicle/map-eurexpo.jpg" style="width: 287mm; height: 200mm; object-fit: contain;">
       <img *ngIf="hasAnyZone(['OL_P4', 'OL_P8', 'OL_P9', 'OL_PG'])" src="assets/badges/wsi2024-wsc-vehicle/map-ol.jpg" style="width: 287mm; height: 200mm; object-fit: contain;">
+      <img *ngIf="hasAnyZone(['OL_P10'])" src="assets/badges/wsi2024-wsc-vehicle/map-ol-p10.png" style="width: 287mm; height: 200mm; object-fit: contain;">
   </div>
 
 </div>
