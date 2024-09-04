@@ -30,6 +30,7 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
   pendingReqZone: Zone;
 
   actionState = {
+    loadRequests: false,
     allocate: false,
     deny: false,
     exportRequests: false
@@ -49,6 +50,7 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
   }
 
   public loadRequests() {
+    this.actionState.loadRequests = true;
     this.subscribe(
       this.zoneReqService.getRequests(this.selectedEvent.id, this.currentForm.id).subscribe(res => {
         // load pending requests from API
@@ -76,6 +78,8 @@ export class ZoneRequestAllocationPendingComponent extends WsComponent implement
         [...(new Set(this.pendingRequests.map(req => req.first_choice_zone.id)))].forEach(zoneId => {
           this.pendingReqZones.push(this.zones.find(zone => zone.id === zoneId));
         });
+
+        this.actionState.loadRequests = false;
       })
     )
   }
