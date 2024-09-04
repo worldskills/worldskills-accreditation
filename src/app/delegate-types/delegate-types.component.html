@@ -10,14 +10,18 @@
       <div class="table-responsive-md">
         <table class="table table-striped small">
           <colgroup>
+            <col style="width: 3%">
             <col style="width: 10%">
             <col style="width: 35%">
             <col style="width: 20%">
-            <col style="width: 30%">
+            <col style="width: 27%">
             <col style="width: 5%">
           </colgroup>
           <thead>
           <tr>
+            <th class="border-top-0 text-truncate">
+              <input type="checkbox" [(ngModel)]="allChecked" (change)="checkAll()">
+            </th>
             <th class="border-top-0">{{'code' | translate}}</th>
             <th class="border-top-0">{{'name' | translate}}</th>
             <th class="border-top-0">{{'badge_lines' | translate}}</th>
@@ -27,6 +31,9 @@
           </thead>
           <tbody>
           <tr *ngFor="let dt of delegateTypes">
+            <td>
+              <input type="checkbox" [(ngModel)]="dt.checked">
+            </td>
             <td [style.background-color]="dt.color" [style.color]="dt.text_color">{{dt.code}}</td>
             <td>
               <a class="btn btn-link btn-sm m-0 p-0" (click)="updateDelType(dt)">{{dt.name}}</a>
@@ -56,7 +63,7 @@
           </tbody>
         </table>
       </div>
-      <span class="text-muted">{{'total_results' | translate}}: {{delegateTypes.length}}</span>
+
     </div>
   </div>
 </ng-container>
@@ -67,6 +74,21 @@
     [theme]="{ 'border-radius': '0', width: '100%', height: '30px', 'margin-bottom': '15px' }"></ngx-skeleton-loader>
 </ng-template>
 
+<p><span class="text-muted">{{'total_results' | translate}}: {{delegateTypes?.length}}</span></p>
+
+<div class="row">
+  <div class="col-lg-9">
+    <div class="dropdown">
+      <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        Actions
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" (click)="editSelected()" href="#" translate [class.disabled]="!hasSelected()">edit_selected</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <ws-modal [open]="manageDelType !== null" (onClose)="manageDelType = null" [options]="{size: 'lg'}">
   <ng-container header>
     <h4 *ngIf="manageDelType?.id === 0">{{'add_new_delegate_type' | translate}}</h4>
@@ -76,5 +98,46 @@
     <app-delegate-types-form *ngIf="manageDelType !== null"
                              [delType]="manageDelType" [selectedEvent]="selectedEvent"
                              (cancelForm)="manageDelType = null" (saveDelType)="save($event)"></app-delegate-types-form>
+  </ng-container>
+</ws-modal>
+
+<ws-modal [open]="showEditSelectedForm" (onClose)="showEditSelectedForm = false" [options]="{size: 'l'}">
+  <ng-container header>
+    <h4>{{'edit_selected' | translate}}</h4>
+  </ng-container>
+  <ng-container body>
+    <form class="form-horizontal" (ngSubmit)="submitEditSelect(); showEditSelectedForm = false;" #editSelectedForm="ngForm" novalidate>
+  
+      <div class="row mb-2">
+          <div class="col-sm-12">
+              <label class="small font-weight-bold my-0 py-0">{{'add_zones' | translate}}</label>
+              <ng-select
+                  name="addZones"
+                  [(ngModel)]="addZones"
+                  [items]="zones"
+                  [multiple]="true"
+                  [disabled]="loadingEditSelected"
+              >
+                  <ng-template ng-label-tmp let-item="item">
+                      <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
+                      <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                  </ng-template>
+                  <ng-template ng-option-tmp let-item="item" let-index="index">
+                      <div class="d-inline-block" style="width: 15px; height: 15px;" [style.background-color]="item.color"></div>
+                      <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                  </ng-template>
+              </ng-select>
+          </div>
+      </div>
+      <div class="row mt-4 mb-2 text-right">
+          <div class="col-sm-12">
+              <button type="submit" class="btn btn-sm btn-primary" [disabled]="loadingEditSelected">{{'apply' | translate}}</button>
+              <button type="button" class="btn btn-sm btn-outline-primary ml-2" (click)="showEditSelectedForm = false" [disabled]="loadingEditSelected">{{'cancel' | translate}}</button>
+          </div>
+      </div>
+  
+      <ws-spinner *ngIf="loadingEditSelected"></ws-spinner>
+  
+    </form>
   </ng-container>
 </ws-modal>

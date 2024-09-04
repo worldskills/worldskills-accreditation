@@ -12,6 +12,7 @@ export interface DelegateType {
   available_person_accreditation?: boolean;
   available_vehicle_accreditation?: boolean;
   zones: Zone[];
+  checked?: boolean;
 }
 
 export interface DelegateTypeContainer {
