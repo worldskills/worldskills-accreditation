@@ -46,9 +46,9 @@
     <hr class="my-2">
     <p class="text-muted small">{{ 'total_requests' | translate }}: {{ pendingRequests?.length }}</p>
     <div>
-      <table class="table table-sm">
+      <table class="table table-sm table-responsive">
         <colgroup>
-          <col style="width: 20%">
+          <col style="width: 10%">
           <col style="width: 20%">
           <col style="width: 20%">
           <col style="width: 20%">
@@ -104,7 +104,7 @@
               </ng-container>
 
             </td>
-            <td class="border-bottom-0" rowspan="2">{{ req.person_accreditation.person_position?.organizational_unit ?? '-' }}</td>
+            <td class="border-bottom-0">{{ req.person_accreditation.person_position?.organizational_unit ?? '-' }}</td>
             <td
               class="border-bottom-0">{{ req.person_accreditation.person.first_name }} {{ req.person_accreditation.person.last_name }}
             </td>
@@ -116,7 +116,7 @@
             </td>
           </tr>
           <tr>
-            <td colspan="3" class="border-top-0 border-bottom-0 small">
+            <td colspan="4" class="border-top-0 border-bottom-0 small">
               <div class="text-muted">
                 <b>{{ 'objective' | translate | titlecase }}</b>:
                 {{ req.objective }}
