@@ -1,6 +1,12 @@
 <div class="card">
   <div class="card-header">
-    <h5 class="card-title">{{ 'allocated_requests' | translate | titlecase }}</h5>
+    <h5 class="card-title">
+      {{ 'allocated_requests' | translate | titlecase }}
+
+      <button class="btn btn-sm btn-link small float-right"
+              [disabled]="actionState.export_allocations"
+              (click)="exportZoneAllocations()"><span class="fa fa-file-excel-o"></span> Export to spreadsheet</button>
+    </h5>
   </div>
   <div class="card-body">
     <div *ngIf="allocations?.length - getEmailNotificationSentCount() !== 0" class="small alert alert-warning">

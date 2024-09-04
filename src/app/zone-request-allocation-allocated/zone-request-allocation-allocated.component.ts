@@ -19,6 +19,7 @@ import {
   ZoneRequestFormPositionType
 } from "../../types/zone-request/zone-request-form-position";
 import {ZoneRequestService} from "../../services/zone-request/zone-request.service";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-zone-request-allocation-allocated',
@@ -56,7 +57,8 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
     wristband_distribution: false,
     move_up_down: false,
     direct_edit_order: false,
-    undo_allocation: false
+    undo_allocation: false,
+    export_allocations: false,
   }
 
   constructor(private zoneReqAllocService: ZoneRequestAllocationService,
@@ -288,5 +290,24 @@ export class ZoneRequestAllocationAllocatedComponent extends WsComponent impleme
         changeState.target.value = allocation.allocated_zone_spot_label;
       }
     });
+  }
+
+  exportZoneAllocations(): void {
+    this.actionState.export_allocations = true;
+    // export to file
+    this.zoneReqAllocService.exportZoneAllocations(this.selectedEvent.id, this.currentForm.id)
+      .subscribe(response => {
+        const objectURL = window.URL.createObjectURL(new Blob([response], {type: 'application/octet-stream'}));
+        const downloadLink = document.createElement('a');
+        downloadLink.href = objectURL;
+        downloadLink.setAttribute('download', `${this.selectedEvent.name.text}_${this.currentForm.name.text}_zone_allocations_${moment().format("yyyyMMDDHHmmss")}.xlsx`);
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+
+        this.actionState.export_allocations = false;
+      }, error => {
+        this.actionState.export_allocations = false;
+        this.toastService.error('Failed to export Zone Allocations');
+      });
   }
 }
