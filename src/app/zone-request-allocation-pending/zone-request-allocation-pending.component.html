@@ -94,72 +94,80 @@
         </tr>
         </thead>
         <tbody>
-        <ng-container *ngFor="let req of pendingRequests; trackBy: trackByPendingReqId">
-          <tr>
-            <td class="border-bottom-0" rowspan="2">
-              {{ req.person_accreditation.person?.country?.name?.text ?? '-' }}
+        <ng-container *ngIf="!actionState.loadRequests; else loadingSkeleton">
+          <ng-container *ngFor="let req of pendingRequests; trackBy: trackByPendingReqId">
+            <tr>
+              <td class="border-bottom-0" rowspan="2">
+                {{ req.person_accreditation.person?.country?.name?.text ?? '-' }}
 
-              <ng-container *ngIf="selectedEvent.require_host_approval">
-                <p class="small text-muted">BGC status: <br><b>{{ req.person_accreditation?.summary?.host_info_status }}</b></p>
-              </ng-container>
+                <ng-container *ngIf="selectedEvent.require_host_approval">
+                  <p class="small text-muted">BGC status:
+                    <br><b>{{ req.person_accreditation?.summary?.host_info_status }}</b></p>
+                </ng-container>
 
-            </td>
-            <td class="border-bottom-0">{{ req.person_accreditation.person_position?.organizational_unit ?? '-' }}</td>
-            <td
-              class="border-bottom-0">{{ req.person_accreditation.person.first_name }} {{ req.person_accreditation.person.last_name }}
-            </td>
-            <td class="border-bottom-0">
-              <span [class.alert-warning]="req.first_choice_zone?.id === pendingReqZone?.id">{{ req.first_choice_zone.name }}</span>
-            </td>
-            <td class="border-bottom-0">
-              <span [class.alert-warning]="req.second_choice_zone !== null && req.second_choice_zone?.id === pendingReqZone?.id">{{ req.second_choice_zone?.name ?? '-' }}</span>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="4" class="border-top-0 border-bottom-0 small">
-              <div class="text-muted">
-                <b>{{ 'objective' | translate | titlecase }}</b>:
-                {{ req.objective }}
-                <br>
-                <ng-select
-                  name="zone"
-                  [items]="allocatableZones"
-                  bindLabel="name"
-                  placeholder="Allocate to zone"
-                  #allocateZoneDropdown
-                >
-                  <ng-template ng-label-tmp let-item="item">
-                    <div class="d-inline-block" style="width: 15px; height: 15px; "
-                         [style.background-color]="item.color"></div>
-                    <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
-                  </ng-template>
-                  <ng-template ng-option-tmp let-item="item" let-index="index">
-                    <div class="d-inline-block" style="width: 15px; height: 15px; "
-                         [style.background-color]="item.color"></div>
-                    <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
-                  </ng-template>
-                </ng-select>
-                <div class="text-right">
-                  <button class="btn btn-sm btn-warning mt-2 mr-2"
-                          [disabled]="actionState.deny"
-                          (click)="deny(req)">{{ 'deny' | translate }}</button>
-                  <button class="btn btn-sm btn-primary mt-2"
-                          [disabled]="actionState.allocate"
-                          (click)="allocate(req, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}</button>
+              </td>
+              <td class="border-bottom-0">{{ req.person_accreditation.person_position?.organizational_unit ?? '-' }}
+              </td>
+              <td
+                class="border-bottom-0">{{ req.person_accreditation.person.first_name }} {{ req.person_accreditation.person.last_name }}
+              </td>
+              <td class="border-bottom-0">
+                <span
+                  [class.alert-warning]="req.first_choice_zone?.id === pendingReqZone?.id">{{ req.first_choice_zone.name }}</span>
+              </td>
+              <td class="border-bottom-0">
+                <span
+                  [class.alert-warning]="req.second_choice_zone !== null && req.second_choice_zone?.id === pendingReqZone?.id">{{ req.second_choice_zone?.name ?? '-' }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" class="border-top-0 border-bottom-0 small">
+                <div class="text-muted">
+                  <b>{{ 'objective' | translate | titlecase }}</b>:
+                  {{ req.objective }}
+                  <br>
+                  <ng-select
+                    name="zone"
+                    [items]="allocatableZones"
+                    bindLabel="name"
+                    placeholder="Allocate to zone"
+                    #allocateZoneDropdown
+                  >
+                    <ng-template ng-label-tmp let-item="item">
+                      <div class="d-inline-block" style="width: 15px; height: 15px; "
+                           [style.background-color]="item.color"></div>
+                      <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                      <div class="d-inline-block" style="width: 15px; height: 15px; "
+                           [style.background-color]="item.color"></div>
+                      <div class="d-inline-block ml-2">{{ item.name }} ({{ item.code }})</div>
+                    </ng-template>
+                  </ng-select>
+                  <div class="text-right">
+                    <button class="btn btn-sm btn-warning mt-2 mr-2"
+                            [disabled]="actionState.deny"
+                            (click)="deny(req)">{{ 'deny' | translate }}
+                    </button>
+                    <button class="btn btn-sm btn-primary mt-2"
+                            [disabled]="actionState.allocate"
+                            (click)="allocate(req, allocateZoneDropdown.selectedValues[0])">{{ 'save' | translate }}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          </ng-container>
         </ng-container>
-        <ng-container *ngIf="actionState.loadRequests">
+        <ng-template #loadingSkeleton>
           <tr>
             <td colspan="5">
-                <ngx-skeleton-loader
-                  count="5"
-                  [theme]="{ 'border-radius': '0', width: '100%', height: '35px', 'margin-top': '5px', 'margin-bottom': '0' }"></ngx-skeleton-loader>
+              <ngx-skeleton-loader
+                count="5"
+                [theme]="{ 'border-radius': '0', width: '100%', height: '35px', 'margin-top': '5px', 'margin-bottom': '0' }"></ngx-skeleton-loader>
             </td>
           </tr>
-        </ng-container>
+        </ng-template>
         </tbody>
       </table>
     </div>
