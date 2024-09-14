@@ -247,6 +247,11 @@
               </p>
             </div>
 
+            <div class="form-group" *ngIf="personAcr.registration">
+              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'registration_group_name' | translate }}</label>
+              <p>{{ personAcr.registration.group_name || '-' }}</p>
+            </div>
+
             <div class="form-group" *ngIf="selectedEvent.require_host_approval">
               <label class="small text-muted font-weight-bold my-0 py-0">{{ 'host_info_status' | translate }}</label>
               <p>
