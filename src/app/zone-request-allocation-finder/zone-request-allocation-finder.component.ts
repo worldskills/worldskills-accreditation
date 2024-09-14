@@ -53,6 +53,12 @@ export class ZoneRequestAllocationFinderComponent extends WsComponent implements
     this.zoneReqAllocService.getAllocationsForPersonAccreditation(this.selectedEvent.id, this.currentForm.id, paID).subscribe({
       next: res => {
         this.scan = false;
+
+        if (res.allocations?.length === 0) {
+          this.toastService.info('No allocations found for the scanned QR code');
+          return;
+        }
+
         // push to the top of the list
         this.paAllocations.unshift(...res.allocations);
       },
