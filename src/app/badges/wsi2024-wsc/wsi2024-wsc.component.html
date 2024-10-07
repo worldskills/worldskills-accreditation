@@ -57,7 +57,7 @@
 
       </div>
 
-      <div style="position: absolute; display: flex; flex-direction: column; border: 0.3mm solid #2E1651; right: 0; padding: 4mm 1mm; width: 55mm; bottom: 16mm; height: 46mm;">
+      <div style="position: absolute; display: flex; flex-direction: column; border: 0.3mm solid #2E1651; right: 0; padding: 4mm 1mm 0 1mm; width: 55mm; bottom: 16mm; height: 46mm;">
 
         <div style="display: flex; justify-content: space-around;">
           <div style="width: 9mm;"><div *ngIf="hasZone('T')" class="symbol symbol-transport"></div><div *ngIf="!hasZone('T')" class="symbol symbol-empty"></div></div>
@@ -68,8 +68,8 @@
         </div>
 
 
-        <div style="display: flex; justify-content: space-around; align-items: end; flex-grow: 1;">
-          <img src="{{pa.qr_code}}" style="height: 22mm;">
+        <div style="display: flex; justify-content: space-around; align-items: center; flex-grow: 1;">
+          <img src="{{pa.qr_code}}" style="height: 30mm;">
         </div>
     
       </div>
