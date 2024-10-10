@@ -25,7 +25,7 @@
     "@ngx-translate/core": "14.0.0",
     "@ngx-translate/http-loader": "7.0.0",
     "@popperjs/core": "^2.11.8",
-    "@sentry/browser": "^7.53.0",
+    "@sentry/browser": "^8.33.0",
     "@worldskills/bootstrap": "^4.9.1",
     "@worldskills/worldskills-angular-lib": "^13.0.0",
     "angular-oauth2-oidc": "^15.0.1",
