@@ -76,28 +76,6 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
 
   private resetFilter(selectedEvent: Event): void {
     this.fetchParams = this.scanService.initialiseFetchParams(selectedEvent);
-
-    // set default date filter value
-    const eventStart = new Date(selectedEvent.start_date);
-    const eventEnd = new Date(selectedEvent.end_date);
-    this.from = new Datetime({
-      year: eventStart.getFullYear(),
-      month: eventStart.getMonth() + 1,
-      day: eventStart.getDate(),
-      hour: 0,
-      minute: 0,
-      second: 0,
-      timeZoneOffset: 0
-    });
-    this.to = new Datetime({
-      year: eventEnd.getFullYear(),
-      month: eventEnd.getMonth() + 1,
-      day: eventEnd.getDate(),
-      hour: 23,
-      minute: 59,
-      second: 59,
-      timeZoneOffset: 0
-    });
   }
 
   submit(): void {
@@ -109,8 +87,12 @@ export class ScansFilterComponent extends WsComponent implements OnInit {
   }
 
   private getFetchParams() {
-    this.fetchParams.from = this.fixDateFormat(this.from.toString());
-    this.fetchParams.to = this.fixDateFormat(this.to.toString());
+    if (this.from) {
+      this.fetchParams.from = this.fixDateFormat(this.from.toString());
+    }
+    if (this.to) {
+      this.fetchParams.to = this.fixDateFormat(this.to.toString());
+    }
 
     return {...this.fetchParams, ...this.form?.value};
   }

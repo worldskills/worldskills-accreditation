@@ -20,9 +20,6 @@ import { LogsService } from '../../services/logs/logs.service';
 import { Log } from '../../types/log';
 import { appConfig } from '../app.config';
 import { PeopleService } from 'src/services/people/people.service';
-import { RegistrationsService } from 'src/services/registrations/registrations.service';
-import { PersonRegistration } from 'src/types/person-registration';
-import { RegistrationPerson } from 'src/types/registration-person';
 
 @Component({
   selector: 'app-person',
@@ -47,7 +44,6 @@ export class PersonComponent extends WsComponent implements OnInit {
 
   // override person acr
   personAcr: PersonAccreditation;
-  personRegistration: RegistrationPerson;
   hostInfo: any;
   savingPersonAcr = false;
   firstNameChange: Subject<string> = new Subject<string>();
@@ -59,7 +55,6 @@ export class PersonComponent extends WsComponent implements OnInit {
   hasPrintPermission = false;
   hasAdminPermission = false;
   hasUploadPhotoPermission = true;
-  hasRegistrationsManageBookingsPermission = false;
   hasLogsPermission = false;
 
   constructor(private appService: AppService,
@@ -68,7 +63,6 @@ export class PersonComponent extends WsComponent implements OnInit {
               private personAccreditationService: PersonAccreditationService,
               private delegateTypeService: DelegateTypeService,
               private zoneService: ZoneService,
-              private registrationsService: RegistrationsService,
               private logsService: LogsService,
               private peopleService: PeopleService,
               private location: Location,
@@ -106,14 +100,6 @@ export class PersonComponent extends WsComponent implements OnInit {
             this.zones = res.zones;
           })
         );
-
-        this.hasRegistrationsManageBookingsPermission = UserRoleUtil.userHasRoles(currentUser, appConfig.worldskillsRegistrationsAppId, 'Admin', 'ViewRegistrations');
-        if (this.hasRegistrationsManageBookingsPermission) {
-          // fetch host info
-          this.registrationsService.getHostInfo(this.selectedEvent.id).subscribe(hostInfo => {
-            this.hostInfo = hostInfo;
-          });
-        }
 
         this.hasLogsPermission = UserRoleUtil.userHasRoles(currentUser, appConfig.worldskillsLogsAppId, 'Admin', 'ViewLogs');
         if (this.hasLogsPermission) {
@@ -173,11 +159,6 @@ export class PersonComponent extends WsComponent implements OnInit {
   private loadPersonAccreditation(personAcrId: number) {
     return this.personAccreditationService.getPersonAccreditation(this.selectedEvent.id, personAcrId).subscribe(person => {
       this.personAcr = person;
-      if (this.hasRegistrationsManageBookingsPermission) {
-        this.registrationsService.getRegisteredGroupPerson(this.selectedEvent.id, this.personAcr.registration.group_id, this.personAcr.registration.id).subscribe(registeredPerson => {
-          this.personRegistration = registeredPerson;
-        });
-      }
     });
   }
 

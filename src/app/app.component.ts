@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     });
 
     this.wsi.serviceConfigSubject.next({
-      appCode: [environment.worldskillsAppId, appConfig.worldskillsLogsAppId, appConfig.worldskillsRegistrationsAppId],
+      appCode: [environment.worldskillsAppId, appConfig.worldskillsLogsAppId],
       apiEndpoint: environment.worldskillsApi
     });
 
