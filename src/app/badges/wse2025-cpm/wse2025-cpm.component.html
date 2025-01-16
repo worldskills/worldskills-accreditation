@@ -1,0 +1,43 @@
+<div class="wse-badge">
+
+    <img src="assets/badges/wse2025-cpm/header_accreditation.png" style="width: 105mm; height: 35mm;">
+
+    <div class="wse-grid">
+        <div class="wse-grid-photo">
+            <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="width: 100%;">
+        </div>
+
+        <div class="wse-grid-info">
+            <div class="wse-name ws-text-fit">
+                <div>{{pa.first_name}}</div>
+                <div>{{pa.last_name}}</div>
+            </div>
+
+            <div class="wse-lines ws-text-fit">
+                <div class="wse-secondary">{{pa.lines[0]}}</div>
+                <div>{{pa.lines[1] || "&nbsp;"}}</div>
+                <div class="wse-secondary">{{pa.lines[2] || "&nbsp;"}}</div>
+            </div>
+        </div>
+
+        <div class="wse-grid-aaa">
+            <img src="assets/badges/wse2025-cpm/AAA.png" class="wse-aaa">
+        </div>
+
+        <div class="wse-grid-zones">
+            <div class="wse-zones-grid">
+                <div><img *ngIf="hasZone('C')" src="assets/badges/wse2025-cpm/Catering_text.png" class="wse-zone"></div>
+                <div><img *ngIf="hasZone('SKT')" src="assets/badges/wse2025-cpm/Skills_Village_Tour_text.png" class="wse-zone"></div>
+                <div><img *ngIf="hasZone('T')" src="assets/badges/wse2025-cpm/Transport_text.png" class="wse-zone"></div>
+                <div><img *ngIf="hasZone('VT')" src="assets/badges/wse2025-cpm/Venue_Tour_text.png" class="wse-zone"></div>
+                <div><img *ngIf="hasZone('W')" src="assets/badges/wse2025-cpm/Workshops_text.png" class="wse-zone"></div>
+            </div>
+            <img src="{{pa.qr_code}}" class="wse-qrcode">
+        </div>
+
+        <div class="wse-grid-delegate-type" style="background-color: {{pa.delegate_type.color}} !important; color: {{pa.delegate_type.text_color}} !important;">
+            {{pa.delegate_type.code}}
+        </div>
+    </div>
+
+</div>

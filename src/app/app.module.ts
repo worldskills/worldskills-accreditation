@@ -76,6 +76,7 @@ import { VehicleBadgeComponent } from './vehicle-badge/vehicle-badge.component';
 import { VehiclePrintComponent } from './vehicle-print/vehicle-print.component';
 import { EventIndexComponent } from './event-index/event-index.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { Wse2025CpmComponent } from './badges/wse2025-cpm/wse2025-cpm.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240905174532');
@@ -113,6 +114,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     Wsi2023GaComponent,
     Wsi2024CpwComponent,
     Wsi2024WscComponent,
+    Wse2025CpmComponent,
     SetupScanAppComponent,
     VehicleComponent,
     VehicleAddComponent,
