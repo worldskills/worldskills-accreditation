@@ -1,10 +1,10 @@
 <div class="wse-badge">
 
-    <img src="assets/badges/wse2025-cpm/header_accreditation.png" style="width: 105mm; height: 35mm;">
+    <img class="wse-header" src="assets/badges/wse2025-cpm/header_accreditation.png">
 
     <div class="wse-grid">
         <div class="wse-grid-photo">
-            <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="width: 100%;">
+            <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="">
         </div>
 
         <div class="wse-grid-info">
@@ -21,7 +21,7 @@
         </div>
 
         <div class="wse-grid-aaa">
-            <img src="assets/badges/wse2025-cpm/AAA.png" class="wse-aaa">
+            <img *ngIf="hasZone('AAA')" src="assets/badges/wse2025-cpm/AAA.png" class="wse-aaa">
         </div>
 
         <div class="wse-grid-zones">
