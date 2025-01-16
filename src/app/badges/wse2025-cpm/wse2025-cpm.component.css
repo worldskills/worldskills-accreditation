@@ -1,12 +1,12 @@
 @page {
   padding: 0;
   margin: 0;
-  size: 105mm 148mm !important;
+  size: 111mm 154mm !important;
 }
 
 .wse-badge {
-  width: 105mm;
-  height: 148mm;
+  width: 111mm;
+  height: 154mm;
   background-color: #E7D9CF;
   font-weight: 500;
   font-size: 4mm;
@@ -25,17 +25,17 @@
 }
 
 .wse-header {
-  width: 105mm;
-  height: 35mm;
+  width: 111mm;
+  height: 37mm;
 }
 
 .wse-grid {
-  padding: 3mm 5mm;
+  padding: 4mm 10mm;
   display: grid; 
   grid-template-columns: 3fr 7fr;
   grid-template-rows: repeat(4, auto); 
   grid-column-gap: 5mm;
-  grid-row-gap: 2mm;
+  grid-row-gap: 3mm;
   grid-template-areas: 
     "photo info"
     "aaa ."
@@ -45,7 +45,7 @@
 
 .wse-grid-photo {
   grid-area: photo;
-  height: 37mm;
+  height: 35mm;
 }
 
 .wse-grid-photo img {
@@ -93,7 +93,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 4mm;
-  grid-row-gap: 2mm;
+  grid-row-gap: 1mm;
 }
 
 .wse-zone {
@@ -107,15 +107,15 @@
 
 .wse-qrcode {
   display: block;
-  width: 38mm;
-  height: 38mm;
+  width: 37mm;
+  height: 37mm;
 }
 
 .wse-grid-delegate-type {
   grid-area: delegate-type;
   font-weight: 800;
-  font-size: 6mm;
-  line-height: 14mm;
+  font-size: 5mm;
+  line-height: 12mm;
   text-transform: uppercase;
   text-align: center;
   -webkit-print-color-adjust: exact;
