@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {WorldskillsAngularLibModule, WsHttpInterceptor} from "@worldskills/worldskills-angular-lib";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {HTTP_INTERCEPTORS, HttpClient} from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClient } from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {OAuthModule} from "angular-oauth2-oidc";
 import {ErrorInterceptor} from "../interceptors/error-interceptor";
@@ -82,6 +82,15 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240905174532');
 }
 
+export const appTranslationConfig = TranslateModule.forRoot({
+  loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+  },
+  isolate: true // isolate property is the key point to remember/
+});
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -141,14 +150,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     OAuthModule.forRoot(),
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
+    appTranslationConfig,
     WorldskillsAngularLibModule,
     NgSelectModule,
     NgbPagination,

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {WsService} from "@worldskills/worldskills-angular-lib";
 import {Observable} from "rxjs";
 import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";

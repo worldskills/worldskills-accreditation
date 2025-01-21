@@ -15,7 +15,7 @@ import {Location} from "@angular/common";
 import {ToastService} from "angular-toastify";
 import {ImageService} from "../../services/image/image.service";
 import {Image} from "../../types/image";
-import {HttpEventType} from "@angular/common/http";
+import { HttpEventType } from "@angular/common/http";
 import { LogsService } from '../../services/logs/logs.service';
 import { Log } from '../../types/log';
 import { appConfig } from '../app.config';

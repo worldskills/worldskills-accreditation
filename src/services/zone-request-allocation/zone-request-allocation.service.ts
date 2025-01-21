@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import {WsService} from "@worldskills/worldskills-angular-lib";
 import {Observable, share, Subject} from "rxjs";
 import {

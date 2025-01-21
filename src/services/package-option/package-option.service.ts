@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {WsService} from "@worldskills/worldskills-angular-lib";
 import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Observable, of, share} from "rxjs";
 import {PackageOptionContainer} from "../../types/package-option";
 import {ZoneContainer} from "../../types/zone";
