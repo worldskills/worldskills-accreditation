@@ -18,7 +18,8 @@ import { combineLatest } from 'rxjs';
   selector: 'app-print',
   templateUrl: './print.component.html',
   styleUrls: ['../../styles/badge.css', './print.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class PrintComponent extends WsComponent implements OnInit {
 

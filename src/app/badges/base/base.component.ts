@@ -7,7 +7,8 @@ declare var textFit: any;
 @Component({
   selector: 'badge-base', // TODO: Change the selector to match the name of the badge
   templateUrl: './base.component.html',
-  styleUrls: ['../../../styles/badge.css'] // TODO: If the badge has a different style, change the path to the correct file
+  styleUrls: ['../../../styles/badge.css'], // TODO: If the badge has a different style, change the path to the correct file
+  standalone: false
 })
 export class BaseComponent {
 

@@ -18,7 +18,8 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
-  styleUrls: ['./vehicles.component.css']
+  styleUrls: ['./vehicles.component.css'],
+  standalone: false
 })
 export class VehiclesComponent extends WsComponent implements OnInit {
 

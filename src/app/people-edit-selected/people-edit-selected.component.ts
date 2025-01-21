@@ -11,7 +11,8 @@ import { ToastService } from 'angular-toastify';
 @Component({
   selector: 'app-people-edit-selected',
   templateUrl: './people-edit-selected.component.html',
-  styleUrls: ['./people-edit-selected.component.css']
+  styleUrls: ['./people-edit-selected.component.css'],
+  standalone: false
 })
 export class PeopleEditSelectedComponent {
 

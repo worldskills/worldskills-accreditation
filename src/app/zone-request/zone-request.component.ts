@@ -16,7 +16,8 @@ import {NgForm} from "@angular/forms";
 @Component({
   selector: 'app-zone-request',
   templateUrl: './zone-request.component.html',
-  styleUrls: ['./zone-request.component.css']
+  styleUrls: ['./zone-request.component.css'],
+  standalone: false
 })
 export class ZoneRequestComponent extends WsComponent implements OnInit {
 

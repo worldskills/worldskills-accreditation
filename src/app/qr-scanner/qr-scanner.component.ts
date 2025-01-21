@@ -5,7 +5,8 @@ import {WsComponent} from "@worldskills/worldskills-angular-lib";
 @Component({
   selector: 'app-qr-scanner',
   templateUrl: './qr-scanner.component.html',
-  styleUrls: ['./qr-scanner.component.css']
+  styleUrls: ['./qr-scanner.component.css'],
+  standalone: false
 })
 export class QrScannerComponent extends WsComponent implements OnInit, OnDestroy {
 

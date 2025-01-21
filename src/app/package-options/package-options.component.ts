@@ -10,7 +10,8 @@ import {ToastService} from "angular-toastify";
 @Component({
   selector: 'app-package-options',
   templateUrl: './package-options.component.html',
-  styleUrls: ['./package-options.component.css']
+  styleUrls: ['./package-options.component.css'],
+  standalone: false
 })
 export class PackageOptionsComponent extends WsComponent implements OnInit {
 

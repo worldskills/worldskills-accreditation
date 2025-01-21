@@ -10,7 +10,8 @@ import {NgForm} from "@angular/forms";
 @Component({
   selector: 'app-package-options-form',
   templateUrl: './package-options-form.component.html',
-  styleUrls: ['./package-options-form.component.css']
+  styleUrls: ['./package-options-form.component.css'],
+  standalone: false
 })
 export class PackageOptionsFormComponent extends WsComponent implements OnInit {
 

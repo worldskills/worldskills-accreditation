@@ -24,7 +24,8 @@ import { PeopleService } from 'src/services/people/people.service';
 @Component({
   selector: 'app-person',
   templateUrl: './person.component.html',
-  styleUrls: ['./person.component.css']
+  styleUrls: ['./person.component.css'],
+  standalone: false
 })
 export class PersonComponent extends WsComponent implements OnInit {
 

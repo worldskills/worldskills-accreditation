@@ -5,7 +5,8 @@ import {AppService} from "../../services/app/app.service";
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  styleUrls: ['./settings.component.css'],
+  standalone: false
 })
 export class SettingsComponent extends WsComponent implements OnInit {
 

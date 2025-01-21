@@ -18,7 +18,8 @@ import { VehicleService } from '../../services/vehicle/vehicle.service';
 @Component({
   selector: 'app-vehicle',
   templateUrl: './vehicle.component.html',
-  styleUrls: ['./vehicle.component.css']
+  styleUrls: ['./vehicle.component.css'],
+  standalone: false
 })
 export class VehicleComponent extends WsComponent implements OnInit {
 

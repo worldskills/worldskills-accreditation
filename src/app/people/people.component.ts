@@ -21,7 +21,8 @@ export interface PeopleSearchFunctionalitiesDisplaySetting {
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',
-  styleUrls: ['./people.component.css']
+  styleUrls: ['./people.component.css'],
+  standalone: false
 })
 export class PeopleComponent extends WsComponent implements OnInit {
 

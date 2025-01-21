@@ -9,7 +9,8 @@ import {NgForm} from "@angular/forms";
 @Component({
   selector: 'app-delegate-types-form',
   templateUrl: './delegate-types-form.component.html',
-  styleUrls: ['./delegate-types-form.component.css']
+  styleUrls: ['./delegate-types-form.component.css'],
+  standalone: false
 })
 export class DelegateTypesFormComponent extends WsComponent implements OnInit {
 

@@ -10,7 +10,8 @@ import {Event} from "../../types/event";
   selector: 'app-person-badge-preview',
   templateUrl: './person-badge-preview.component.html',
   styleUrls: ['./person-badge-preview.component.css', '../../styles/badge.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class PersonBadgePreviewComponent extends WsComponent implements OnInit {
 

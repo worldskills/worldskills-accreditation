@@ -15,7 +15,8 @@ import {createDownloadLink} from "../../utils/FileUtil";
 @Component({
   selector: 'app-adhoc-printing',
   templateUrl: './adhoc-printing.component.html',
-  styleUrls: ['./adhoc-printing.component.css']
+  styleUrls: ['./adhoc-printing.component.css'],
+  standalone: false
 })
 export class AdhocPrintingComponent extends WsComponent implements OnInit {
 

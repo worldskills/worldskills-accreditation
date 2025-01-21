@@ -12,7 +12,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-positions',
   templateUrl: './positions.component.html',
-  styleUrls: ['./positions.component.css']
+  styleUrls: ['./positions.component.css'],
+  standalone: false
 })
 export class PositionsComponent extends WsComponent implements OnInit {
 
@@ -91,7 +92,7 @@ export class PositionsComponent extends WsComponent implements OnInit {
     if (this.updatePositionsTimer) {
       clearTimeout(this.updatePositionsTimer);
     }
-  
+
     this.updatePositionsTimer = setTimeout(() => {
 
       for (let i = 0; i < this.positions.length; i++) {
@@ -105,7 +106,7 @@ export class PositionsComponent extends WsComponent implements OnInit {
         this.toastService.success('Positions are sorted!');
       });
 
-    }, 10000); 
+    }, 10000);
   }
 
   onDelTypeChange(selectedDelType: DelegateType, idx: number) {

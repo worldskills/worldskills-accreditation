@@ -7,7 +7,8 @@ declare var textFit: any;
 @Component({
   selector: 'badge-wsi2024-cpw',
   templateUrl: './wsi2024-cpw.component.html',
-  styleUrls: ['./wsi2024-cpw.component.css']
+  styleUrls: ['./wsi2024-cpw.component.css'],
+  standalone: false
 })
 export class Wsi2024CpwComponent {
   @Input() pa: PersonAccreditationSummary;
@@ -21,14 +22,14 @@ export class Wsi2024CpwComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['pa']) {
       this.refreshComponent();
-    } 
+    }
   }
 
   refreshComponent() {
     this.showComponent = false;
-    setTimeout(() => { 
+    setTimeout(() => {
       this.showComponent = true;
-      setTimeout(() => { 
+      setTimeout(() => {
         textFit(document.getElementsByClassName('ws-text-fit'), {multiLine: true});
       }, 100);
     }, 100);

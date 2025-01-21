@@ -9,7 +9,8 @@ declare var textFit: any;
 @Component({
   selector: 'badge-fi2024',
   templateUrl: './fi2024.component.html',
-  styleUrls: ['./fi2024.component.css']
+  styleUrls: ['./fi2024.component.css'],
+  standalone: false
 })
 export class Fi2024Component implements OnInit {
 
@@ -35,14 +36,14 @@ export class Fi2024Component implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['pa']) {
       this.refreshComponent();
-    } 
+    }
   }
 
   refreshComponent() {
     this.showComponent = false;
-    setTimeout(() => { 
+    setTimeout(() => {
       this.showComponent = true;
-      setTimeout(() => { 
+      setTimeout(() => {
         textFit(document.getElementsByClassName('ws-text-fit'), {multiLine: true});
       }, 100);
     }, 100);

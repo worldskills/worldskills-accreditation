@@ -12,7 +12,8 @@ import {ToastService} from "angular-toastify";
 @Component({
   selector: 'app-zone-request-form',
   templateUrl: './zone-request-form.component.html',
-  styleUrls: ['./zone-request-form.component.css']
+  styleUrls: ['./zone-request-form.component.css'],
+  standalone: false
 })
 export class ZoneRequestFormComponent extends WsComponent implements OnInit {
 

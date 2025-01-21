@@ -16,7 +16,8 @@ import { ZoneService } from 'src/services/zone/zone.service';
 
 @Component({
   selector: 'app-vehicle-add',
-  templateUrl: './vehicle-add.component.html'
+  templateUrl: './vehicle-add.component.html',
+  standalone: false
 })
 export class VehicleAddComponent extends WsComponent implements OnInit {
 

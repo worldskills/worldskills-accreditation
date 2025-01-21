@@ -5,7 +5,8 @@ import {Event} from "../../../types/event";
 @Component({
   selector: 'badge-wsi2023-ga',
   templateUrl: './wsi2023-ga.component.html',
-  styleUrls: ['../../../styles/badge.css']
+  styleUrls: ['../../../styles/badge.css'],
+  standalone: false
 })
 export class Wsi2023GaComponent {
 
