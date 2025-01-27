@@ -25,13 +25,13 @@
           <tr *ngFor="let scan of result?.scans">
             <td>{{ scan.timestamp | date:'dd.MM.yyyy HH:mm' }}</td>
             <td>
-              <a [routerLink]="['../people', scan.accreditation.id]">
+              <a [routerLink]="['../', 'people', scan.accreditation.id]">
                 <ng-container *ngIf="scan.accreditation.first_name">{{ scan.accreditation.first_name }}</ng-container>
                 <ng-container *ngIf="!scan.accreditation.first_name">{{ 'empty_hint' | translate }}</ng-container>
               </a>
             </td>
             <td>
-              <a [routerLink]="['../people', scan.accreditation.id]">
+              <a [routerLink]="['../', 'people', scan.accreditation.id]">
                 <ng-container *ngIf="scan.accreditation.last_name">{{ scan.accreditation.last_name }}</ng-container>
                 <ng-container *ngIf="!scan.accreditation.last_name">{{ 'empty_hint' | translate }}</ng-container>
               </a>
