@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {WsService,} from '@worldskills/worldskills-angular-lib';
 import {Image} from '../../types/image';
-import {HttpRequest} from '@angular/common/http';
+import { HttpRequest } from '@angular/common/http';
 
 import {environment} from '../../environments/environment';
 

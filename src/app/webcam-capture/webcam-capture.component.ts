@@ -7,7 +7,8 @@ import * as moment from "moment/moment";
 @Component({
   selector: 'app-webcam-capture',
   templateUrl: './webcam-capture.component.html',
-  styleUrls: ['./webcam-capture.component.css']
+  styleUrls: ['./webcam-capture.component.css'],
+  standalone: false
 })
 export class WebcamCaptureComponent extends WsComponent implements OnInit {
 

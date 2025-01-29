@@ -24,7 +24,8 @@ import * as moment from "moment";
 @Component({
   selector: 'app-zone-request-allocation-allocated',
   templateUrl: './zone-request-allocation-allocated.component.html',
-  styleUrls: ['./zone-request-allocation-allocated.component.css']
+  styleUrls: ['./zone-request-allocation-allocated.component.css'],
+  standalone: false
 })
 export class ZoneRequestAllocationAllocatedComponent extends WsComponent implements OnInit {
 

@@ -12,7 +12,8 @@ import * as moment from "moment";
 @Component({
   selector: 'app-scans',
   templateUrl: './scans.component.html',
-  styleUrls: ['./scans.component.css']
+  styleUrls: ['./scans.component.css'],
+  standalone: false
 })
 export class ScansComponent extends WsComponent implements OnInit {
 

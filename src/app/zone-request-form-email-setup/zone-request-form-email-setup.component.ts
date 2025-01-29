@@ -10,7 +10,8 @@ import {ZoneRequestFormEmailService} from "../../services/zone-request-form-emai
 @Component({
   selector: 'app-zone-request-form-email-setup',
   templateUrl: './zone-request-form-email-setup.component.html',
-  styleUrls: ['./zone-request-form-email-setup.component.css']
+  styleUrls: ['./zone-request-form-email-setup.component.css'],
+  standalone: false
 })
 export class ZoneRequestFormEmailSetupComponent extends WsComponent implements OnInit {
 

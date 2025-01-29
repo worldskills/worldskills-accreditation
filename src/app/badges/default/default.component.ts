@@ -5,7 +5,8 @@ import {Event} from "../../../types/event";
 @Component({
   selector: 'badge-default',
   templateUrl: './default.component.html',
-  styleUrls: ['../../../styles/badge.css']
+  styleUrls: ['../../../styles/badge.css'],
+  standalone: false
 })
 export class DefaultComponent {
   @Input() pa: PersonAccreditationSummary;

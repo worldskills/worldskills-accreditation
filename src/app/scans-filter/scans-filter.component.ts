@@ -17,7 +17,8 @@ import {ScanService} from "../../services/scan/scan.service";
 @Component({
   selector: 'app-scans-filter',
   templateUrl: './scans-filter.component.html',
-  styleUrls: ['./scans-filter.component.css']
+  styleUrls: ['./scans-filter.component.css'],
+  standalone: false
 })
 export class ScansFilterComponent extends WsComponent implements OnInit {
 

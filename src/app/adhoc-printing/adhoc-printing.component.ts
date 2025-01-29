@@ -8,14 +8,15 @@ import {Zone} from "../../types/zone";
 import {Event} from "../../types/event";
 import {PersonAccreditationSummary} from "../../types/person-accreditation-summary";
 import * as XLSX from 'xlsx';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {share} from "rxjs";
 import {createDownloadLink} from "../../utils/FileUtil";
 
 @Component({
   selector: 'app-adhoc-printing',
   templateUrl: './adhoc-printing.component.html',
-  styleUrls: ['./adhoc-printing.component.css']
+  styleUrls: ['./adhoc-printing.component.css'],
+  standalone: false
 })
 export class AdhocPrintingComponent extends WsComponent implements OnInit {
 

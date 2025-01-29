@@ -5,7 +5,8 @@ import {Event} from "../../types/event";
 @Component({
   selector: 'app-badges-determiner',
   templateUrl: './badges-determiner.component.html',
-  styleUrls: ['./badges-determiner.component.css']
+  styleUrls: ['./badges-determiner.component.css'],
+  standalone: false
 })
 export class BadgesDeterminerComponent {
 

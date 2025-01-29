@@ -7,7 +7,8 @@ import {Event, EventConfig} from "../../types/event";
 @Component({
   selector: 'app-setup-scan-app',
   templateUrl: './setup-scan-app.component.html',
-  styleUrls: ['./setup-scan-app.component.css']
+  styleUrls: ['./setup-scan-app.component.css'],
+  standalone: false
 })
 export class SetupScanAppComponent extends WsComponent implements OnInit {
 

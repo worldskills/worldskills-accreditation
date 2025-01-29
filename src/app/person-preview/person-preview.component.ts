@@ -5,7 +5,8 @@ import {WsComponent} from "@worldskills/worldskills-angular-lib";
 @Component({
   selector: 'app-person-preview',
   templateUrl: './person-preview.component.html',
-  styleUrls: ['./person-preview.component.css']
+  styleUrls: ['./person-preview.component.css'],
+  standalone: false
 })
 export class PersonPreviewComponent extends WsComponent implements OnInit {
 

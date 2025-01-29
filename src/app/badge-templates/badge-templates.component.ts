@@ -5,7 +5,8 @@ import {WsComponent} from "@worldskills/worldskills-angular-lib";
 @Component({
   selector: 'app-badge-templates',
   templateUrl: './badge-templates.component.html',
-  styleUrls: ['./badge-templates.component.css']
+  styleUrls: ['./badge-templates.component.css'],
+  standalone: false
 })
 export class BadgeTemplatesComponent extends WsComponent implements OnInit {
 

@@ -6,6 +6,7 @@ import {environment} from "../../environments/environment";
 @Component({
   selector: 'app-event-index',
   template: '',
+  standalone: false
 })
 export class EventIndexComponent extends WsComponent implements OnInit {
 

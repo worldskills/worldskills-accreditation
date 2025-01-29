@@ -15,7 +15,7 @@ import {Location} from "@angular/common";
 import {ToastService} from "angular-toastify";
 import {ImageService} from "../../services/image/image.service";
 import {Image} from "../../types/image";
-import {HttpEventType} from "@angular/common/http";
+import { HttpEventType } from "@angular/common/http";
 import { LogsService } from '../../services/logs/logs.service';
 import { Log } from '../../types/log';
 import { appConfig } from '../app.config';
@@ -24,7 +24,8 @@ import { PeopleService } from 'src/services/people/people.service';
 @Component({
   selector: 'app-person',
   templateUrl: './person.component.html',
-  styleUrls: ['./person.component.css']
+  styleUrls: ['./person.component.css'],
+  standalone: false
 })
 export class PersonComponent extends WsComponent implements OnInit {
 

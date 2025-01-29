@@ -16,7 +16,8 @@ import {ZoneRequestAllocation} from "../../types/zone-request/zone-request-alloc
 @Component({
   selector: 'app-zone-request-allocation',
   templateUrl: './zone-request-allocation.component.html',
-  styleUrls: ['./zone-request-allocation.component.css']
+  styleUrls: ['./zone-request-allocation.component.css'],
+  standalone: false
 })
 export class ZoneRequestAllocationComponent extends WsComponent implements OnInit {
 

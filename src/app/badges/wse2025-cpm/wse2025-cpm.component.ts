@@ -9,7 +9,8 @@ declare var textFit: any;
 @Component({
   selector: 'badge-wse2025-cpm',
   templateUrl: './wse2025-cpm.component.html',
-  styleUrls: ['./wse2025-cpm.component.css']
+  styleUrls: ['./wse2025-cpm.component.css'],
+  standalone: false
 })
 export class Wse2025CpmComponent implements OnInit {
 
@@ -31,14 +32,14 @@ export class Wse2025CpmComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['pa']) {
       this.refreshComponent();
-    } 
+    }
   }
 
   refreshComponent() {
     this.showComponent = false;
-    setTimeout(() => { 
+    setTimeout(() => {
       this.showComponent = true;
-      setTimeout(() => { 
+      setTimeout(() => {
         textFit(document.getElementsByClassName('ws-text-fit'), {multiLine: true});
       }, 100);
     }, 100);

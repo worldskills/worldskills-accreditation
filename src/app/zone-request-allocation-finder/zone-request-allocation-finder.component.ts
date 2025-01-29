@@ -14,7 +14,8 @@ import {environment} from "../../environments/environment";
 @Component({
   selector: 'app-zone-request-allocation-finder',
   templateUrl: './zone-request-allocation-finder.component.html',
-  styleUrls: ['./zone-request-allocation-finder.component.css']
+  styleUrls: ['./zone-request-allocation-finder.component.css'],
+  standalone: false
 })
 export class ZoneRequestAllocationFinderComponent extends WsComponent implements OnInit {
 

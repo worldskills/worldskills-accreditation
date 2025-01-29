@@ -11,7 +11,8 @@ import {ToastService} from "angular-toastify";
 @Component({
   selector: 'app-zone-requested',
   templateUrl: './zone-requested.component.html',
-  styleUrls: ['./zone-requested.component.css']
+  styleUrls: ['./zone-requested.component.css'],
+  standalone: false
 })
 export class ZoneRequestedComponent extends WsComponent implements OnInit {
 

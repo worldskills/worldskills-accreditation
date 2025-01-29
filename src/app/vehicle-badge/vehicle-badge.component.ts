@@ -7,7 +7,8 @@ declare var textFit: any;
 @Component({
   selector: 'app-vehicle-badge',
   templateUrl: './vehicle-badge.component.html',
-  styleUrls: ['./vehicle-badge.component.css']
+  styleUrls: ['./vehicle-badge.component.css'],
+  standalone: false
 })
 export class VehicleBadgeComponent {
 
@@ -22,14 +23,14 @@ export class VehicleBadgeComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['vehicle']) {
       this.refreshComponent();
-    } 
+    }
   }
 
   refreshComponent() {
     this.showComponent = false;
-    setTimeout(() => { 
+    setTimeout(() => {
       this.showComponent = true;
-      setTimeout(() => { 
+      setTimeout(() => {
         textFit(document.getElementsByClassName('ws-text-fit'));
       }, 100);
     }, 100);

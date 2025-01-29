@@ -19,6 +19,7 @@
             "polyfills": [
               "zone.js"
             ],
+            "aot": false,
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -113,10 +114,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "worldskills-accreditation:build:prod"
+              "buildTarget": "worldskills-accreditation:build:prod"
             },
             "development": {
-              "browserTarget": "worldskills-accreditation:build:development"
+              "buildTarget": "worldskills-accreditation:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -124,7 +125,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "worldskills-accreditation:build"
+            "buildTarget": "worldskills-accreditation:build"
           }
         },
         "test": {

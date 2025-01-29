@@ -9,7 +9,8 @@ import {environment} from "../../environments/environment";
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  styleUrls: ['./event.component.css'],
+  standalone: false
 })
 export class EventComponent extends WsComponent implements OnInit {
 

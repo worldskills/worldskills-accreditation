@@ -6,7 +6,8 @@ import {EventContainer} from "../../types/event";
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css']
+  styleUrls: ['./events.component.css'],
+  standalone: false
 })
 export class EventsComponent extends WsComponent implements OnInit {
 

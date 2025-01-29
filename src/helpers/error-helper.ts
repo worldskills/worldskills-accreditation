@@ -1,4 +1,4 @@
-import {HttpErrorResponse} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import {GenericUtil} from '@worldskills/worldskills-angular-lib';
 import {APIError} from "../types/api-error";
 

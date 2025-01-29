@@ -7,7 +7,8 @@ import {Zone} from "../../types/zone";
 @Component({
   selector: 'app-zones-form',
   templateUrl: './zones-form.component.html',
-  styleUrls: ['./zones-form.component.css']
+  styleUrls: ['./zones-form.component.css'],
+  standalone: false
 })
 export class ZonesFormComponent extends WsComponent implements OnInit {
 

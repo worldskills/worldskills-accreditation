@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpUtil, ObjectUtil, WsService} from "@worldskills/worldskills-angular-lib";
 import {ZoneRequest, ZoneRequestContainer, ZoneRequestReqParams} from "../../types/zone-request/zone-request";
 import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Observable, share, Subject} from "rxjs";
 
 @Injectable({

@@ -19,7 +19,8 @@ import {PeopleSearchFunctionalitiesDisplaySetting} from "../people/people.compon
 @Component({
   selector: 'app-people-filter',
   templateUrl: './people-filter.component.html',
-  styleUrls: ['./people-filter.component.css']
+  styleUrls: ['./people-filter.component.css'],
+  standalone: false
 })
 export class PeopleFilterComponent extends WsComponent implements OnInit {
 
