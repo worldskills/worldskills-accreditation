@@ -68,12 +68,7 @@ import {
 import {
   ZoneRequestFormEmailSetupComponent
 } from './zone-request-form-email-setup/zone-request-form-email-setup.component';
-import { VehiclesComponent } from './vehicles/vehicles.component';
-import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
 import { Wsi2024WscComponent } from './badges/wsi2024-wsc/wsi2024-wsc.component';
-import { VehicleComponent } from './vehicle/vehicle.component';
-import { VehicleBadgeComponent } from './vehicle-badge/vehicle-badge.component';
-import { VehiclePrintComponent } from './vehicle-print/vehicle-print.component';
 import { EventIndexComponent } from './event-index/event-index.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Wse2025CpmComponent } from './badges/wse2025-cpm/wse2025-cpm.component';
@@ -126,11 +121,6 @@ export const appTranslationConfig = TranslateModule.forRoot({
     Wsi2024WscComponent,
     Wse2025CpmComponent,
     SetupScanAppComponent,
-    VehicleComponent,
-    VehicleAddComponent,
-    VehicleBadgeComponent,
-    VehiclePrintComponent,
-    VehiclesComponent,
     AdhocPrintingComponent,
     WebcamCaptureComponent,
     Fi2024Component,

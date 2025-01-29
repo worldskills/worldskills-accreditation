@@ -6,8 +6,6 @@ export interface Zone {
   text_color: string;
   quota?: number;
   usage?: number;
-  available_person_accreditation?: boolean;
-  available_vehicle_accreditation?: boolean;
   sort: number;
 }
 

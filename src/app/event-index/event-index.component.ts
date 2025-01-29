@@ -25,15 +25,11 @@ export class EventIndexComponent extends WsComponent implements OnInit {
       this.authService.currentUser.subscribe(currentUser => {
         const hasEditPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.EDIT);
         const hasPrintPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.PRINT);
-        const hasEditVehiclePermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.EDIT_VEHICLES);
-        const hasPrintVehiclePermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.PRINT_VEHICLES);
         const hasAllocateZoneRequestPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.ALLOCATE_ZONE_REQUEST);
         const hasViewAccreditationsPermission = UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, environment.appRoles.ADMIN, environment.appRoles.VIEW_ACCREDITATIONS);
 
         if (hasEditPermission || hasPrintPermission || hasViewAccreditationsPermission) {
           this.router.navigate(['people'], {relativeTo: this.route});
-        } else if (hasEditVehiclePermission || hasPrintVehiclePermission) {
-          this.router.navigate(['vehicles'], {relativeTo: this.route});
         } else if(hasAllocateZoneRequestPermission){
           this.router.navigate(['zone-request-form'], {relativeTo: this.route});
         } else {

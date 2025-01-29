@@ -20,7 +20,6 @@ export class EventComponent extends WsComponent implements OnInit {
   currentEvent: Event;
   tabs = [
     {label: 'People', path: 'people', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT, this.appRoles.PRINT, this.appRoles.VIEW_ACCREDITATIONS]},
-    {label: 'Vehicles', path: 'vehicles', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_VEHICLES]},
     {label: 'Scans', path: 'scans', requiredRoles: [this.appRoles.ADMIN, this.appRoles.VIEW_SCANS]},
     {label: 'Delegate Types', path: 'delegate-types', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_DELEGATE_TYPES]},
     {label: 'Positions', path: 'positions', requiredRoles: [this.appRoles.ADMIN, this.appRoles.EDIT_POSITIONS]},

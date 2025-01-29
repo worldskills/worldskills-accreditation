@@ -28,10 +28,6 @@
             <td [style.background-color]="zone.color" [style.color]="zone.text_color">{{zone.code}}</td>
             <td>
               <a class="btn btn-link m-0 p-0" (click)="updateZone(zone)">{{zone.name}}</a>
-              &nbsp;
-              <span *ngIf="zone.available_person_accreditation" class="badge badge-secondary">Person</span>
-              &nbsp;
-              <span *ngIf="zone.available_vehicle_accreditation" class="badge badge-secondary">Vehicle</span>
             </td>
             <td>
               <div class="btn-group" role="group">
