@@ -77,6 +77,7 @@ import { VehiclePrintComponent } from './vehicle-print/vehicle-print.component';
 import { EventIndexComponent } from './event-index/event-index.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Wse2025CpmComponent } from './badges/wse2025-cpm/wse2025-cpm.component';
+import { Fi2025Component } from './badges/fi2025/fi2025.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240905174532');
@@ -133,6 +134,7 @@ export const appTranslationConfig = TranslateModule.forRoot({
     AdhocPrintingComponent,
     WebcamCaptureComponent,
     Fi2024Component,
+    Fi2025Component,
     ZoneRequestComponent,
     ZoneRequestAllocationComponent,
     ZoneRequestedComponent,
