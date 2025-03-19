@@ -27,7 +27,6 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "node_modules/@worldskills/worldskills-angular-lib/assets/styles/font.css",
               "node_modules/@worldskills/worldskills-angular-lib/assets/styles/index.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@worldskills/bootstrap/dist/css/bootstrap.css",
