@@ -1,6 +1,5 @@
 export const environment = {
   production: true,
-  fontTrackingCode: true,
   worldskillsAppId: 2100,
   worldskillsApi: 'https://api.worldskills.org',
   worldskillsApiAccreditation: 'https://api.worldskills.org/accreditation',
