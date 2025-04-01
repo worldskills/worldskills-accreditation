@@ -1,0 +1,60 @@
+<div class="ws-badge">
+
+  <div style="display: flex; height: 148mm;">
+    <div style="flex: 1; display: flex; min-width: 0;">
+      <div>
+        <div style="padding: 4mm 6mm; height: 148mm; overflow: hidden; -webkit-print-color-adjust: exact !important; background-image: url('/assets/badges/wsi2025-ciw/background.png') !important; background-size: contain !important; background-repeat: no-repeat !important; background-position: bottom !important;">
+
+          <div style="display: flex; justify-content: space-between; height: 17mm; margin-bottom: 7mm; margin-top: 5mm">
+            <div class="align-bottom align-text-bottom align-content-end" style="color: #0164B1">
+              <p class="py-0 my-0 align-text-bottom font-weight-bold text-justify" style="font-size: 6mm; text-align: justify;">2025 基础设施筹备会</p>
+              <p class="py-0 my-0 align-text-bottom font-weight-bold text-justify" style="font-size: 2.3mm; text-align: justify;">COMPETITION INFRASTRUCTURE WORKSHOP 2025</p>
+            </div>
+            <div>
+              <img src="assets/badges/wsi2025-ciw/Logo_WS_Shanghai2026_Black_RGB.png" style="width: 27mm">
+            </div>
+          </div>
+
+          <div style="border: 0.6mm solid #0164B1; border-radius: 15px; left: 0; padding: 5mm; width: 100%; bottom: 16mm; background-color:rgba(255, 255, 255, 0.75);">
+            <div>
+              <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="height: 40mm; padding-bottom: 10px">
+            </div>
+
+            <h2 style="-webkit-print-color-adjust: exact; margin-top: 0; margin-bottom: 0; padding-bottom: 5px">
+              {{ pa.first_name }} {{ pa.last_name }}
+            </h2>
+
+            <div style="overflow: hidden; padding-right: 2mm;">
+              <div class="ws-badge-line">{{ pa.lines[0] }}</div>
+              <div class="ws-badge-line">{{ pa.lines[1] }}</div>
+              <div class="ws-badge-line">{{ pa.lines[2] }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="flex: 1; display: flex; font-size: 3mm;">
+      <div style="padding: 5mm; flex: 1; display: flex; flex-flow: column;">
+
+        <div style="flex: 1 1 auto;">
+
+        </div>
+
+        <div>
+          <p>
+            {{currentEvent.name.text}}
+            <br>
+            {{currentEvent.start_date | date:'dd.MM.yyyy'}} - {{currentEvent.end_date | date:'dd.MM.yyyy'}}
+          </p>
+
+          <hr>
+
+          <p>{{'accreditation_badge_disclaimer_info' | translate}}</p>
+
+          <p><span>{{'generated_on' | translate}}</span>: {{currentDate | date:'dd.MM.yyyy HH:mm'}}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

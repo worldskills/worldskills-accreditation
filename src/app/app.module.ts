@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {WorldskillsAngularLibModule, WsHttpInterceptor} from "@worldskills/worldskills-angular-lib";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import { HTTP_INTERCEPTORS, HttpClient } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {OAuthModule} from "angular-oauth2-oidc";
 import {ErrorInterceptor} from "../interceptors/error-interceptor";
@@ -68,11 +68,12 @@ import {
 import {
   ZoneRequestFormEmailSetupComponent
 } from './zone-request-form-email-setup/zone-request-form-email-setup.component';
-import { Wsi2024WscComponent } from './badges/wsi2024-wsc/wsi2024-wsc.component';
-import { EventIndexComponent } from './event-index/event-index.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { Wse2025CpmComponent } from './badges/wse2025-cpm/wse2025-cpm.component';
-import { Fi2025Component } from './badges/fi2025/fi2025.component';
+import {Wsi2024WscComponent} from './badges/wsi2024-wsc/wsi2024-wsc.component';
+import {EventIndexComponent} from './event-index/event-index.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {Wse2025CpmComponent} from './badges/wse2025-cpm/wse2025-cpm.component';
+import {Fi2025Component} from './badges/fi2025/fi2025.component';
+import {Wsi2025CiwComponent} from "./badges/wsi2025-ciw/wsi2025-ciw.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240905174532');
@@ -119,6 +120,7 @@ export const appTranslationConfig = TranslateModule.forRoot({
     Wsi2023GaComponent,
     Wsi2024CpwComponent,
     Wsi2024WscComponent,
+    Wsi2025CiwComponent,
     Wse2025CpmComponent,
     SetupScanAppComponent,
     AdhocPrintingComponent,
