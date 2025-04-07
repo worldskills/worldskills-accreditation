@@ -16,8 +16,17 @@
           </div>
 
           <div style="border: 0.6mm solid #0164B1; border-radius: 15px; left: 0; padding: 5mm; width: 100%; bottom: 16mm; background-color:rgba(255, 255, 255, 0.75);">
-            <div>
-              <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="height: 40mm; padding-bottom: 10px">
+
+            <div style="display: flex; justify-content: space-between;">
+
+              <div>
+                <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="height: 40mm; padding-bottom: 10px">
+              </div>
+
+              <div>
+                <img src="{{pa.qr_code}}" style="flex: 1; height: 40mm;">
+              </div>
+
             </div>
 
             <h2 style="-webkit-print-color-adjust: exact; margin-top: 0; margin-bottom: 0; padding-bottom: 5px">
