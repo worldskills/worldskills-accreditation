@@ -5,7 +5,7 @@ import {Event} from "../../../types/event";
 @Component({
   selector: 'badge-wsi2025-ciw',
   templateUrl: './wsi2025-ciw.component.html',
-  styleUrls: ['../../../styles/badge.css'],
+  styleUrls: ['./wsi2025-ciw.component.css'],
   standalone: false
 })
 export class Wsi2025CiwComponent {
