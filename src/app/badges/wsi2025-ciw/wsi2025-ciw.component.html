@@ -29,16 +29,11 @@
 
             </div>
 
-            <div style="height: 15mm; font-weight: 700; font-size: 28px; line-height: 1.2; " class="ws-text-fit">
-              <div style="-webkit-print-color-adjust: exact;">
-                {{pa.first_name || "&nbsp;"}}
-              </div>
-              <div style="-webkit-print-color-adjust: exact;">
-                {{pa.last_name || "&nbsp;"}}
-              </div>
+            <div style="height: 15mm; font-weight: 700; font-size: 7mm; line-height: 1.2; -webkit-print-color-adjust: exact;" class="ws-text-fit">
+              {{pa.first_name}} {{pa.last_name}}
             </div>
 
-            <div style="overflow: hidden; padding-right: 2mm; height: 22mm; font-size: 28px; " class="ws-text-fit">
+            <div style="overflow: hidden; padding-right: 2mm; height: 22mm; font-size: 4mm; " class="ws-text-fit">
               <div class="ws-badge-line">{{ pa.lines[0] }}</div>
               <div class="ws-badge-line">{{ pa.lines[1] }}</div>
               <div class="ws-badge-line">{{ pa.lines[2] }}</div>
