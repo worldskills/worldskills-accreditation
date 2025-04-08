@@ -31,7 +31,8 @@ export class Wsi2025CiwComponent {
     setTimeout(() => {
       this.showComponent = true;
       setTimeout(() => {
-        textFit(document.getElementsByClassName('ws-text-fit'), {alignVert: true});
+        textFit(document.getElementsByClassName('ws-text-fit-name'), {maxFontSize: 30});
+        textFit(document.getElementsByClassName('ws-text-fit-lines'), {detectMultiLine: false, maxFontSize: 22});
       }, 100);
     }, 100);
   }
