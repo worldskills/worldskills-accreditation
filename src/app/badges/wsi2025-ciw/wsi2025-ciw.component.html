@@ -1,4 +1,4 @@
-<div class="ws-badge">
+<div class="ws-badge" *ngIf="showComponent">
 
   <div style="display: flex; height: 125mm;">
     <div style="flex: 1; display: flex; min-width: 0;">
@@ -20,20 +20,25 @@
             <div style="display: flex; justify-content: space-between;">
 
               <div>
-                <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="height: 40mm; padding-bottom: 10px">
+                <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="height: 35mm; padding-bottom: 10px">
               </div>
 
               <div>
-                <img src="{{pa.qr_code}}" style="flex: 1; height: 40mm;">
+                <img src="{{pa.qr_code}}" style="flex: 1; height: 35mm;">
               </div>
 
             </div>
 
-            <h2 style="-webkit-print-color-adjust: exact; margin-top: 0; margin-bottom: 0; padding-bottom: 5px">
-              {{ pa.first_name }} {{ pa.last_name }}
-            </h2>
+            <div style="height: 17mm; font-weight: 700; font-size: 28px; line-height: 1.2; text-transform: uppercase;" class="ws-text-fit">
+              <div style="-webkit-print-color-adjust: exact;">
+                {{pa.first_name || "&nbsp;"}}
+              </div>
+              <div style="-webkit-print-color-adjust: exact;">
+                {{pa.last_name || "&nbsp;"}}
+              </div>
+            </div>
 
-            <div style="overflow: hidden; padding-right: 2mm;">
+            <div style="overflow: hidden; padding-right: 2mm; height: 18mm; font-size: 28px; " class="ws-text-fit">
               <div class="ws-badge-line">{{ pa.lines[0] }}</div>
               <div class="ws-badge-line">{{ pa.lines[1] }}</div>
               <div class="ws-badge-line">{{ pa.lines[2] }}</div>
