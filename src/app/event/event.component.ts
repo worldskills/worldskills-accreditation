@@ -65,19 +65,24 @@ export class EventComponent extends WsComponent implements OnInit {
           return tab.requiredRoles.some(role => UserRoleUtil.userHasRoles(currentUser, environment.worldskillsAppId, role));
         });
 
+        // set selected tab based on current route
+        this.updateSelectedTabIndex(this.router.url);
         this.router.events.subscribe((event) => {
-          // set selected tab based on current route
           if (event instanceof NavigationEnd) {
-            const urlSegments = event.url.split('/');
-            const selectedTabIndex = this.tabs.findIndex(tab => tab.path === urlSegments[3]);
-            if (selectedTabIndex !== -1) {
-              this.selectedTabIndex = selectedTabIndex;
-            }
+            this.updateSelectedTabIndex(event.url);
           }
         });
 
       })
     )
+  }
+
+  updateSelectedTabIndex(url: string): void {
+    const urlSegments = url.split('/');
+    const selectedTabIndex = this.tabs.findIndex(tab => tab.path === urlSegments[3]);
+    if (selectedTabIndex !== -1) {
+      this.selectedTabIndex = selectedTabIndex;
+    }
   }
 
   navigate(selectedTab: any): void {
