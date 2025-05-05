@@ -1,0 +1,27 @@
+@page {
+    size: A4;
+}
+
+.ws-header {
+    display: flex;
+    align-items: center;
+}
+
+.ws-event-name {
+    flex-grow: 1;
+    font-weight: 400;
+}
+
+.ws-logo {
+    padding-left: 1em;
+}
+
+.ws-images {
+    height: 44mm;
+}
+
+.ws-name {
+    flex-grow: 1;
+    font-family: 'Inria Serif', serif;
+    height: 12mm;
+}

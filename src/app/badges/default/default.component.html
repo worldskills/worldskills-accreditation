@@ -1,22 +1,19 @@
-<div class="ws-badge">
+<div class="ws-badge" *ngIf="showComponent">
   <div style="display: flex; height: 148mm; overflow: hidden;">
 
     <div style="flex: 1;">
-      <div style="padding: 5mm;">
+      <div style="display: flex; flex-flow: column; padding: 5mm;">
 
         <div
           style="-webkit-print-color-adjust: exact !important; background-color: #003764 !important; padding: 0.8em;">
 
-          <div class="ws-header row" style="align-items: center;">
-            <div class="ws-event-name col-9">
-              <div style="font-weight: 400;">
-                <div
-                  style="-webkit-print-color-adjust: exact !important; overflow: hidden; max-height: 3em; padding-right: 1em; color: #fff !important;">
-                  {{currentEvent.name.text}}
-                </div>
+          <div class="ws-header">
+            <div class="ws-event-name">
+              <div style="-webkit-print-color-adjust: exact !important; height: 2em; color: #fff !important;" class="ws-text-fit">
+                {{currentEvent.name.text}}
               </div>
             </div>
-            <div class="ws-logo col-3">
+            <div class="ws-logo">
               <img src="assets/badges/default/logo.svg" width="68" height="40" alt="WorldSkills" />
             </div>
           </div>
@@ -27,7 +24,7 @@
           style="-webkit-print-color-adjust: exact !important; background-color: #003764 !important; height: 2px; width: 100%; margin-top: 2px; margin-bottom: 0.6em;">
         </div>
 
-        <div class="row">
+        <div class="row ws-images">
           <div class="col-5">
 
             <p>
@@ -45,14 +42,14 @@
           </div>
         </div>
 
-        <h3
-          style="-webkit-print-color-adjust: exact; margin-top: 0; margin-bottom: 0.8em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #003764 !important; font-family: 'Inria Serif', serif;">
+        <h3 class="ws-name ws-text-fit"
+          style="-webkit-print-color-adjust: exact; margin-top: 0; margin-bottom: 0.8em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #003764 !important;">
           {{pa.first_name}} {{pa.last_name}}
         </h3>
 
         <div
           style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type.color}} !important; padding: 18px 12px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400;">
-            <div style="color: {{pa.delegate_type.text_color}} !important;overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700;">{{pa.lines[0]}}</div>
+            <div style="color: {{pa.delegate_type.text_color}} !important;overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;">{{pa.lines[0]}}</div>
             
 
         </div>
@@ -62,7 +59,7 @@
           <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{pa.lines[2]}}</div>
         </div>
 
-        <div style="overflow: hidden; max-height: 76px; margin: 0.8em 0;">
+        <div style="overflow: hidden; max-height: 76px; margin: 0.8em 0;" *ngIf="pa.zones.length > 0">
           <span *ngFor="let zone of pa.zones">
             <span
               style="-webkit-print-color-adjust: exact; display: inline-block; padding: 6px 12px; margin-right: 6px; margin-bottom: 6px; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important;">{{ zone.code }}</span>
@@ -76,13 +73,15 @@
       <div style="padding: 5mm; flex: 1; display: flex; flex-flow: column;">
 
         <div style="flex: 1 1 auto;">
-          <h5 style="font-size: 10px; font-weight: 400;">{{'access_to_zones' | translate}}</h5>
-          <p>
-            <span *ngFor="let zone of pa.zones">
-                {{zone.code}} - {{zone.name}}
-              <br/>
-            </span>
-          </p>
+          <div *ngIf="pa.zones.length > 0">
+            <h5 style="font-size: 10px; font-weight: 400;">{{'access_to_zones' | translate}}</h5>
+            <p>
+              <span *ngFor="let zone of pa.zones">
+                  {{zone.code}} - {{zone.name}}
+                <br/>
+              </span>
+            </p>
+          </div>
         </div>
 
         <div>
