@@ -17,11 +17,20 @@
 }
 
 .ws-images {
-    height: 44mm;
+    height: 43mm;
 }
 
 .ws-name {
-    flex-grow: 1;
+    margin: 0;
     font-family: 'Inria Serif', serif;
-    height: 12mm;
+    height: 18mm;
+    text-align: center;
+}
+
+.ws-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.8em;
+    text-align: center;
 }

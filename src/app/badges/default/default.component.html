@@ -43,23 +43,18 @@
         </div>
 
         <h3 class="ws-name ws-text-fit"
-          style="-webkit-print-color-adjust: exact; margin-top: 0; margin-bottom: 0.8em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #003764 !important;">
+          style="-webkit-print-color-adjust: exact; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #003764 !important;">
           {{pa.first_name}} {{pa.last_name}}
         </h3>
 
-        <div
-          style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type.color}} !important; padding: 18px 12px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400;">
-            <div style="color: {{pa.delegate_type.text_color}} !important;overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;">{{pa.lines[0]}}</div>
-            
-
+        <div class="ws-lines"
+          style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type.color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400;">
+            <div style="color: {{pa.delegate_type.text_color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600;">{{pa.lines[0]}}</div>
+          <div style="color: {{pa.delegate_type.text_color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{pa.lines[1]}}</div>
+          <div style="color: {{pa.delegate_type.text_color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{pa.lines[2]}}</div>
         </div>
 
-        <div style="-webkit-print-color-adjust: exact; padding: 16px 12px; border: solid {{pa.delegate_type.color}}; border-width: 0 0 2px 0; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400; margin-bottom: 1em;">
-          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{pa.lines[1]}}</div>
-          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{pa.lines[2]}}</div>
-        </div>
-
-        <div style="overflow: hidden; max-height: 76px; margin: 0.8em 0;" *ngIf="pa.zones.length > 0">
+        <div style="overflow: hidden; height: 12mm; margin: 0.8em 0;">
           <span *ngFor="let zone of pa.zones">
             <span
               style="-webkit-print-color-adjust: exact; display: inline-block; padding: 6px 12px; margin-right: 6px; margin-bottom: 6px; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important;">{{ zone.code }}</span>
