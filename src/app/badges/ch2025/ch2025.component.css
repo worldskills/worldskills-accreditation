@@ -1,0 +1,113 @@
+@page {
+  margin: 0;
+  size: 88mm 56mm landscape;
+}
+
+.ws-badge {
+  font-family: 'Frutiger LT Com', Arial, sans-serif;
+  font-weight: 300;
+  color: #111 !important;
+}
+
+.ws-card {
+  width: 88mm;
+  height: 56mm;
+  overflow: hidden;
+}
+
+.ws-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ws-logo img {
+  width: 34mm;
+}
+
+.ws-card-top-content {
+  width: 100%;
+  padding: 6mm 8mm 0 8mm;
+}
+
+.ws-photo {
+  display: flex;
+  justify-content: flex-end;
+  height: 34mm;
+}
+
+.ws-photo img {
+  height: 34mm;
+}
+
+.ws-name {
+  margin-top: 4mm;
+  font-weight: 600;
+  font-size: 6mm;
+  line-height: 1;
+  height: 5mm;
+  text-align: right;
+}
+
+.ws-lines {
+  font-weight: 400;
+  font-size: 6mm;
+  line-height: 1;
+  height: 5mm;
+  text-align: right;
+}
+
+.ws-card-bottom-content {
+  width: 100%;
+}
+
+.ws-delegate-type {
+  font-size: 18mm;
+  height: 24mm;
+  line-height: 36mm;
+  padding-top: 0;
+  padding-left: 5mm;
+  font-weight: 800;
+  font-family: 'Frutiger LT Pro', Arial, sans-serif;
+}
+
+.ws-zones {
+  height: 3.2cm;
+  padding: 0.4cm 0.6cm;
+  font-size: 0.9cm;
+  line-height: 0.9cm;
+  font-weight: 800;
+  background-image: url('../../../assets/badges/ch2025/pattern.svg') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-blend-mode: overlay;
+}
+
+.ws-zone {
+  display: inline-block;
+  width: 1.35cm;
+  text-align: center;
+  padding: 0;
+  margin: 0 0.3cm 0.3cm 0;
+}
+
+@media screen {
+  .ws-badge {
+    width: 85mm;
+    height: 124mm;
+  }
+
+  .ws-card-top {
+    margin-top: 6.8mm;
+  }
+
+  .ws-card-bottom {
+    margin-top: 5.5mm;
+  }
+}
+
+@media print {
+  .ws-logo {
+    display: none;
+  }
+}

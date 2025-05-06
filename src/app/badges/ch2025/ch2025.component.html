@@ -1,0 +1,39 @@
+<div class="ws-badge" *ngIf="showComponent">
+  <div class="ws-card ws-card-top">
+
+    <div class="ws-logo">
+      <img src="assets/badges/ch2025/logo.svg" alt="SwissSkills 2025" />
+    </div>
+
+    <div class="ws-card-top-content">
+      <div class="ws-photo">
+        <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" />
+      </div>
+
+      <div class="ws-name ws-text-fit">
+        {{pa.first_name}} {{pa.last_name}}
+      </div>
+
+      <div class="ws-lines ws-text-fit">
+        <div>{{pa.lines[0]}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ws-card ws-card-bottom">
+    <div class="ws-card-bottom-content">
+
+      <div class="ws-delegate-type" style="color: {{pa.delegate_type.color}} !important;">
+          {{pa.delegate_type.code}}
+      </div>
+
+      <div class="ws-zones" style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type.color}} !important;">
+        <span *ngFor="let zone of zones" style="{{(hasZone(zone.code) || (zone.code == '3' && pa.custom_field_data['99'] == '96')) ? 'display: inline;' : 'display: none;'}}">
+          <span class="ws-zone" style="-webkit-print-color-adjust: exact; background-color: {{ zone.color }} !important; color: {{ zone.text_color }} !important;">{{ zone.code }}</span>
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
