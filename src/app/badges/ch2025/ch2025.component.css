@@ -91,6 +91,10 @@
   margin: 0 0.3cm 0.3cm 0;
 }
 
+.ws-zone img {
+  vertical-align: baseline;
+}
+
 @media screen {
   .ws-badge {
     width: 85mm;

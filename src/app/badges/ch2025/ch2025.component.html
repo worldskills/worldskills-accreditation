@@ -28,7 +28,10 @@
       </div>
 
       <div class="ws-zones" style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type.color}} !important;">
-        <span *ngFor="let zone of zones" class="ws-zone" style="-webkit-print-color-adjust: exact; background-color: {{ zone.color }} !important; color: {{ zone.text_color }} !important; {{(hasZone(zone.code) || (zone.code == '3' && pa.custom_field_data['224'] == '2157')) ? 'visibility: visible;' : 'visibility: hidden;'}}">{{ zone.code }}</span>
+        <span *ngFor="let zone of zones" class="ws-zone" style="-webkit-print-color-adjust: exact; background-color: {{ zone.color }} !important; color: {{ zone.text_color }} !important; {{(hasZone(zone.code) || (zone.code == '3' && pa.custom_field_data['224'] == '2157')) ? 'visibility: visible;' : 'visibility: hidden;'}}">
+          <img src="assets/badges/ch2025/ceremony.svg" alt="C" height="22" *ngIf="zone.code == 'C'" />
+          <span *ngIf="zone.code !== 'C'">{{ zone.code }}</span>
+        </span>
       </div>
     </div>
 
