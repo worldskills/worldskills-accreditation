@@ -1,27 +1,29 @@
 <div class="ws-badge" *ngIf="showComponent">
   <div style="display: flex; height: 148mm; overflow: hidden;">
 
-    <div style="flex: 1;">
-      <div style="display: flex; flex-flow: column; padding: 5mm;">
+    <div style="flex: 1; display: flex;">
+      <div style="flex: 1; display: flex; flex-flow: column; justify-content: space-around; padding: 5mm;">
 
-        <div
-          style="-webkit-print-color-adjust: exact !important; background-color: #003764 !important; padding: 0.8em;">
+        <div>
+          <div
+            style="-webkit-print-color-adjust: exact !important; background-color: #003764 !important; padding: 0.8em;">
 
-          <div class="ws-header">
-            <div class="ws-event-name">
-              <div style="-webkit-print-color-adjust: exact !important; height: 2em; color: #fff !important;" class="ws-text-fit">
-                {{currentEvent.name.text}}
+            <div class="ws-header">
+              <div class="ws-event-name">
+                <div style="-webkit-print-color-adjust: exact !important; height: 2em; color: #fff !important;" class="ws-text-fit">
+                  {{currentEvent.name.text}}
+                </div>
+              </div>
+              <div class="ws-logo">
+                <img src="assets/badges/default/logo.svg" width="68" height="40" alt="WorldSkills" />
               </div>
             </div>
-            <div class="ws-logo">
-              <img src="assets/badges/default/logo.svg" width="68" height="40" alt="WorldSkills" />
-            </div>
+
           </div>
 
-        </div>
-
-        <div
-          style="-webkit-print-color-adjust: exact !important; background-color: #003764 !important; height: 2px; width: 100%; margin-top: 2px; margin-bottom: 0.6em;">
+          <div
+            style="-webkit-print-color-adjust: exact !important; background-color: #003764 !important; height: 2px; width: 100%; margin-top: 2px; margin-bottom: 0.6em;">
+          </div>
         </div>
 
         <div class="row ws-images">
@@ -54,7 +56,7 @@
           <div style="color: {{pa.delegate_type.text_color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{pa.lines[2]}}</div>
         </div>
 
-        <div style="overflow: hidden; height: 12mm; margin: 0.8em 0;">
+        <div style="overflow: hidden; height: 12mm; margin: 0.8em 0;" *ngIf="pa.zones.length > 0">
           <span *ngFor="let zone of pa.zones">
             <span
               style="-webkit-print-color-adjust: exact; display: inline-block; padding: 6px 12px; margin-right: 6px; margin-bottom: 6px; background-color: {{zone.color}} !important; color: {{zone.text_color}} !important;">{{ zone.code }}</span>
