@@ -28,9 +28,7 @@
       </div>
 
       <div class="ws-zones" style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type.color}} !important;">
-        <span *ngFor="let zone of zones" style="{{(hasZone(zone.code) || (zone.code == '3' && pa.custom_field_data['99'] == '96')) ? 'display: inline;' : 'display: none;'}}">
-          <span class="ws-zone" style="-webkit-print-color-adjust: exact; background-color: {{ zone.color }} !important; color: {{ zone.text_color }} !important;">{{ zone.code }}</span>
-        </span>
+        <span *ngFor="let zone of zones" class="ws-zone" style="-webkit-print-color-adjust: exact; background-color: {{ zone.color }} !important; color: {{ zone.text_color }} !important; {{(hasZone(zone.code) || (zone.code == '3' && pa.custom_field_data['224'] == '2157')) ? 'visibility: visible;' : 'visibility: hidden;'}}">{{ zone.code }}</span>
       </div>
     </div>
 
