@@ -9,11 +9,14 @@
 
 .ws-event-name {
     flex-grow: 1;
-    font-weight: 400;
+    font-weight: 600;
+    line-height: 1.4;
+    text-transform: uppercase;
+    overflow-wrap: normal;
 }
 
 .ws-logo {
-    padding-left: 1em;
+    padding-left: 2em;
 }
 
 .ws-images {
