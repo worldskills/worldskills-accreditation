@@ -71,6 +71,7 @@ import {
 import {Wsi2024WscComponent} from './badges/wsi2024-wsc/wsi2024-wsc.component';
 import {EventIndexComponent} from './event-index/event-index.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { Wse2025Component } from './badges/wse2025/wse2025.component';
 import {Wse2025CpmComponent} from './badges/wse2025-cpm/wse2025-cpm.component';
 import {Fi2025Component} from './badges/fi2025/fi2025.component';
 import {Wsi2025CiwComponent} from "./badges/wsi2025-ciw/wsi2025-ciw.component";
@@ -122,6 +123,7 @@ export const appTranslationConfig = TranslateModule.forRoot({
     Wsi2024CpwComponent,
     Wsi2024WscComponent,
     Wsi2025CiwComponent,
+    Wse2025Component,
     Wse2025CpmComponent,
     SetupScanAppComponent,
     AdhocPrintingComponent,
