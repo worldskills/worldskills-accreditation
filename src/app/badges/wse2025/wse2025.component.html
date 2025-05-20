@@ -11,10 +11,9 @@
                 <div>{{pa.last_name}}</div>
             </div>
 
-            <div class="wse-lines ws-text-fit">
-                <div>{{pa.lines[0]}}</div>
-                <div>{{pa.lines[1] || "&nbsp;"}}</div>
-                <div>{{pa.lines[2] || "&nbsp;"}}</div>
+            <div class="wse-lines">
+                <div class="wse-line ws-text-fit">{{pa.lines[1]}}</div>
+                <div class="wse-line ws-text-fit">{{pa.lines[2]}}</div>
             </div>
         </div>
 
@@ -52,8 +51,8 @@
 
     </div>
 
-    <div class="wse-delegate-type" style="background-color: {{pa.delegate_type.color}} !important; color: {{pa.delegate_type.text_color}} !important;">
-        {{pa.delegate_type.name}}
+    <div class="wse-delegate-type ws-text-fit" style="background-color: {{pa.delegate_type.color}} !important; color: {{pa.delegate_type.text_color}} !important;">
+        {{pa.lines[0]}}
     </div>
 
 </div>

@@ -60,12 +60,16 @@
 .wse-name {
   font-weight: 900;
   line-height: 1.1;
-  height: 14mm;
+  height: 16mm;
 }
 
 .wse-lines {
   line-height: 1.3;
   height: 18mm;
+}
+
+.wse-line {
+  height: 5.5mm;
 }
 
 .wse-grid-tickets {
@@ -151,6 +155,7 @@
   margin: 0 4.8mm 4.8mm 5mm;
   border-radius: 0 0 2.8mm 2.8mm;
   line-height: 14mm;
+  height: 14mm;
   text-transform: uppercase;
   text-align: center;
   -webkit-print-color-adjust: exact;
