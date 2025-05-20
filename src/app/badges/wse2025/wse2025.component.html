@@ -1,0 +1,59 @@
+<div class="wse-badge">
+
+    <div class="wse-grid">
+        <div class="wse-grid-photo">
+            <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="">
+        </div>
+
+        <div class="wse-grid-info">
+            <div class="wse-name ws-text-fit">
+                <div>{{pa.first_name}}</div>
+                <div>{{pa.last_name}}</div>
+            </div>
+
+            <div class="wse-lines ws-text-fit">
+                <div>{{pa.lines[0]}}</div>
+                <div>{{pa.lines[1] || "&nbsp;"}}</div>
+                <div>{{pa.lines[2] || "&nbsp;"}}</div>
+            </div>
+        </div>
+
+        <div class="wse-grid-tickets">
+            <div class="wse-ticket"><div class="wse-ticket-label" *ngIf="hasZone('WR')">WR</div></div>
+            <div class="wse-ticket"><div class="wse-ticket-label" *ngIf="hasZone('OC')">OC</div></div>
+            <div class="wse-ticket"><div class="wse-ticket-label" *ngIf="hasZone('CC')">CC</div></div>
+            <div class="wse-ticket"><div class="wse-ticket-label" *ngIf="hasZone('FP')">FP</div></div>
+            <div class="wse-ticket"><div class="wse-ticket-label" *ngIf="hasZone('GA')">GA</div></div>
+        </div>
+
+        <div class="wse-grid-services">
+            <div class="wse-service"><img *ngIf="hasZone('C')" src="assets/badges/wse2025/wse2025-catering.png"></div>
+            <div class="wse-service"><img *ngIf="hasZone('T')" src="assets/badges/wse2025/wse2025-transport.png"></div>
+            <div class="wse-service"><img *ngIf="hasZone('PCM')" src="assets/badges/wse2025/wse2025-pre-ceremony-dinner.png"></div>
+            <div class="wse-service"><img *ngIf="hasZone('SO')" src="assets/badges/wse2025/wse2025-skill-out.png"></div>
+            <div class="wse-service"><img *ngIf="hasZone('VIPR')" src="assets/badges/wse2025/wse2025-vip-reception.png"></div>
+        </div>
+
+        <div class="wse-grid-zones">
+            <div class="wse-zones-grid">
+                <div class="wse-zone wse-zone-label">Zones</div>
+                <div class="wse-zone"><span *ngIf="hasZone('0')">0</span></div>
+                <div class="wse-zone"><span *ngIf="hasZone('1')">1</span></div>
+                <div class="wse-zone"><span *ngIf="hasZone('2')">2</span></div>
+                <div class="wse-zone"><span *ngIf="hasZone('3')">3</span></div>
+                <div class="wse-zone"><span *ngIf="hasZone('4')">4</span></div>
+                <div class="wse-zone"><span *ngIf="hasZone('5')">5</span></div>
+                <div class="wse-zone"><span *ngIf="hasZone('6')">6</span></div>
+            </div>
+
+            <div class="wse-grid-qrcode" style="background-image: url({{pa.qr_code}})">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="wse-delegate-type" style="background-color: {{pa.delegate_type.color}} !important; color: {{pa.delegate_type.text_color}} !important;">
+        {{pa.delegate_type.name}}
+    </div>
+
+</div>
