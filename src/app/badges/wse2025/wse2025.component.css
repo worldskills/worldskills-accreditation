@@ -154,9 +154,11 @@
   font-size: 6mm;
   margin: 0 4.8mm 4.8mm 5mm;
   border-radius: 0 0 2.8mm 2.8mm;
-  line-height: 14mm;
-  height: 14mm;
+  padding: 1mm 0;
+  height: 12mm;
   text-transform: uppercase;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   -webkit-print-color-adjust: exact;
 }
