@@ -122,33 +122,33 @@
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0.3mm;
   grid-row-gap: 0.3mm;
-  background-color: #731C18;
-  border: 0.3mm solid #731C18;
+  background-image: url('../../../assets/badges/wse2025/wse2025-grid.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .wse-zone {
   text-align: center;
   text-transform: uppercase;
   color: #731C18;
-  background-color: #fff;
   font-weight: 900;
   font-size: 6mm;
+  line-height: 10mm
 }
 
 .wse-zone-label {
   font-size: 2.6mm;
-  line-height: 9mm;
 }
 
 .wse-grid-qrcode {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-size: 28mm 28mm;
+  background-size: 30mm 30mm;
   background-position: 50% 50%;
   margin-left: 4mm;
-  width: 20mm;
-  height: 20mm;
+  width: 21mm;
+  height: 21mm;
 }
 
 .wse-delegate-type {
