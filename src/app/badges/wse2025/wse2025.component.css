@@ -59,6 +59,7 @@
 
 .wse-name {
   font-weight: 900;
+  font-size: 6mm;
   line-height: 1.1;
   height: 16mm;
 }
@@ -151,11 +152,11 @@
 
 .wse-delegate-type {
   font-weight: 900;
-  font-size: 6mm;
+  font-size: 4.5mm;
   margin: 0 4.8mm 4.8mm 5mm;
   border-radius: 0 0 2.8mm 2.8mm;
-  padding: 1mm 0;
-  height: 12mm;
+  padding: 1.5mm 0 2mm 0;
+  height: 10.5mm;
   text-transform: uppercase;
   display: flex;
   align-items: center;
