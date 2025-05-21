@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import {PersonAccreditationSummary} from "../../../types/person-accreditation-summary";
 import {Event} from "../../../types/event";
-import {Zone} from "../../../types/zone";
 import {ZoneService} from '../../../services/zone/zone.service';
 
 declare var textFit: any;
@@ -17,16 +16,12 @@ export class Wse2025Component implements OnInit {
   @Input() pa: PersonAccreditationSummary;
   @Input() currentEvent: Event
   showComponent = true;
-  zones: Zone[] = [];
 
   constructor(private zoneService: ZoneService) {
   }
 
   ngOnInit() {
     this.refreshComponent();
-    this.zoneService.getList(this.currentEvent.id, {available_person_accreditation: true}).subscribe(res => {
-      this.zones = res.zones;
-    })
   }
 
   ngOnChanges(changes: SimpleChanges) {
