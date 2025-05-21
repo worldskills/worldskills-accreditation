@@ -81,12 +81,13 @@
 
 .wse-ticket {
   width: 14mm;
+  display: flex;
 }
 
 .wse-ticket-label {
-  padding: 0 4mm;
+  flex: 1;
   background-image: url('../../../assets/badges/wse2025/wse2025-ticket.png');
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   color: #731C18;
   font-weight: 900;
