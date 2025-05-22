@@ -54,6 +54,7 @@
   line-height: 1;
   height: 5mm;
   text-align: right;
+  text-wrap: balance;
 }
 
 .ws-card-bottom-content {
