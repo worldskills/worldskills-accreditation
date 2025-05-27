@@ -39,7 +39,7 @@
               </a>
             </td>
             <td class="text-truncate" style="max-width: 10rem;">
-              <div class="badge" [ngbTooltip]="personAcr.delegate_type.name" [style.background-color]="personAcr.delegate_type.color" [style.color]="personAcr.delegate_type.text_color">{{personAcr.delegate_type.name}}</div>
+              <div class="badge" [ngbTooltip]="personAcr.position.name.text" [style.background-color]="personAcr.position.color" [style.color]="personAcr.position.text_color">{{personAcr.position.name.text}}</div>
             </td>
             <td class="text-truncate" style="max-width: 16rem;" *ngIf="showZones">
               <ng-container *ngFor="let zone of personAcr.zones">

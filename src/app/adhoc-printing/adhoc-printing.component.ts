@@ -47,7 +47,7 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
         // load data based on selected event
         this.subscribe(
           this.delegateTypeService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
-            this.delegateTypes = res.delegate_types;
+            this.delegateTypes = res.positions;
           }),
           this.zoneService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
             this.zones = res.zones;
@@ -68,7 +68,6 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
       lines: [],
       email_address: '',
       date_of_birth: null,
-      position: '',
       details: '',
       skill: null,
       sector: null,
@@ -77,7 +76,7 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
       organization: '',
       group_name: '',
       image: null,
-      delegate_type: null,
+      position: null,
       host_info_status: null,
       random_hash: '',
       qr_code: '',
@@ -152,12 +151,11 @@ export class AdhocPrintingComponent extends WsComponent implements OnInit {
           first_name: firstname,
           last_name: lastname,
           lines: badgeLines.split('\n'),
-          delegate_type: delType,
           id: null,
           person_id: null,
           email_address: null,
           date_of_birth: null,
-          position: null,
+          position: delType,
           details: null,
           skill: null,
           sector: null,

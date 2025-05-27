@@ -1,8 +1,7 @@
 import {Person} from "./person";
 import {Event} from "./event";
 import {PersonPosition} from "./person-position";
-import {PositionDelegateType} from "./position-delegate-type";
-import {DelegateType} from "./delegate-type";
+import {Position} from "./position";
 import {Image} from "./image";
 import {PackageOptionZone} from "./package-option-zone";
 import {Zone} from "./zone";
@@ -17,8 +16,7 @@ export interface PersonAccreditation {
   random_hash: string;
   event: Event;
   person_position: PersonPosition;
-  position_delegate_type: PositionDelegateType;
-  delegate_type: DelegateType;
+  position: Position;
   lines: string;
   printed: Date;
   image: Image;

@@ -20,6 +20,7 @@ import { LogsService } from '../../services/logs/logs.service';
 import { Log } from '../../types/log';
 import { appConfig } from '../app.config';
 import { PeopleService } from 'src/services/people/people.service';
+import { Position } from '../../types/position';
 
 @Component({
   selector: 'app-person',
@@ -31,7 +32,7 @@ export class PersonComponent extends WsComponent implements OnInit {
 
   readonly peopleURL = environment.worldskillsPeople;
   selectedEvent: Event;
-  delegateTypes: DelegateType[];
+  delegateTypes: Position[];
   zones: Zone[] = [];
   logs: Log[] = [];
 
@@ -95,7 +96,7 @@ export class PersonComponent extends WsComponent implements OnInit {
         this.subscribe(
           this.loadPersonAccreditation(personAcrId),
           this.delegateTypeService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
-            this.delegateTypes = res.delegate_types;
+            this.delegateTypes = res.positions;
           }),
           this.zoneService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
             this.zones = res.zones;
@@ -181,8 +182,8 @@ export class PersonComponent extends WsComponent implements OnInit {
     this.lastNameChange.next(lastName);
   }
 
-  onDelTypeChange(dt: DelegateType) {
-    this.personAcr.delegate_type = dt;
+  onDelTypeChange(position: Position) {
+    this.personAcr.position = position;
     this.updatePersonAccreditation();
   }
 

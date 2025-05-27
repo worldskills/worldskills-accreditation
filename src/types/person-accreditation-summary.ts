@@ -3,7 +3,7 @@ import {Sector} from "./sector";
 import {Member} from "./member";
 import {Country} from "./country";
 import {Image} from "./image";
-import {DelegateType} from "./delegate-type";
+import {Position} from "./position";
 import {Zone} from "./zone";
 import {FetchParams} from "@worldskills/worldskills-angular-lib";
 
@@ -15,7 +15,6 @@ export interface PersonAccreditationSummary {
   lines: string[];
   email_address: string;
   date_of_birth: Date;
-  position: string;
   details: string;
   skill: Skill;
   sector: Sector;
@@ -24,7 +23,7 @@ export interface PersonAccreditationSummary {
   organization: string;
   group_name: string;
   image: Image;
-  delegate_type: DelegateType;
+  position: Position;
   host_info_status: string;
   random_hash: string;
   qr_code: string;

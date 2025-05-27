@@ -4,7 +4,7 @@
     <div style="flex: 1; min-width: 0;">
 
       <div style="padding: 4mm;">
-        <div style="padding: 4mm 0 4mm 6mm; height: 120mm; overflow: hidden; -webkit-print-color-adjust: exact !important; background-image: url('/assets/badges/wsi2022/background-{{ pa.delegate_type.color.substring(1) || 'blue' }}.png') !important; background-size: contain !important; background-repeat: no-repeat !important; background-position: bottom !important;">
+        <div style="padding: 4mm 0 4mm 6mm; height: 120mm; overflow: hidden; -webkit-print-color-adjust: exact !important; background-image: url('/assets/badges/wsi2022/background-{{ pa.position.color.substring(1) || 'blue' }}.png') !important; background-size: contain !important; background-repeat: no-repeat !important; background-position: bottom !important;">
           <div style="display: flex; justify-content: space-between; height: 44mm;">
             <div>
               <img *ngIf="pa.image" src="{{pa.image.thumbnail}}_accreditation" alt="" style="height: 40mm;">
@@ -33,9 +33,9 @@
       </div>
 
       <div
-        style="-webkit-print-color-adjust: exact !important; background-color: {{pa.delegate_type.color}} !important; height: 20mm; display: flex; align-items: center;">
+        style="-webkit-print-color-adjust: exact !important; background-color: {{pa.position.color}} !important; height: 20mm; display: flex; align-items: center;">
         <div class="ws-overflow"
-             style="flex-grow: 1; text-align: center; font-size: 6mm; font-weight: 700; color: {{pa.delegate_type.text_color}} !important;">{{pa.delegate_type.name}}</div>
+             style="flex-grow: 1; text-align: center; font-size: 6mm; font-weight: 700; color: {{pa.position.text_color}} !important;">{{pa.position.name.text}}</div>
       </div>
     </div>
   </div>

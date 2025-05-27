@@ -61,7 +61,7 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
         // load all filter options based on selected event
         this.subscribe(
           this.delegateTypeService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
-            this.delegateTypes = res.delegate_types;
+            this.delegateTypes = res.positions;
           }),
           this.skillService.getSkills(this.selectedEvent.id).subscribe(res => {
             this.skills = res.skills;

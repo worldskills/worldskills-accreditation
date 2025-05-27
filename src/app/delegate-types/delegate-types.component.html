@@ -30,7 +30,7 @@
             </td>
             <td [style.background-color]="dt.color" [style.color]="dt.text_color">{{dt.code}}</td>
             <td>
-              <a class="btn btn-link btn-sm m-0 p-0" (click)="updateDelType(dt)">{{dt.name}}</a>
+              <a class="btn btn-link btn-sm m-0 p-0" (click)="updateDelType(dt)">{{dt.name.text}}</a>
             </td>
             <td class="text-muted">
               <div>{{dt.line1}}</div>
@@ -82,7 +82,7 @@
 <ws-modal [open]="manageDelType !== null" (onClose)="manageDelType = null" [options]="{size: 'lg'}">
   <ng-container header>
     <h4 *ngIf="manageDelType?.id === 0">{{'add_new_delegate_type' | translate}}</h4>
-    <h4 *ngIf="manageDelType?.id > 0">{{'editing' | translate}}: {{manageDelType.name}}</h4>
+    <h4 *ngIf="manageDelType?.id > 0">{{'editing' | translate}}: {{manageDelType.name.text}}</h4>
   </ng-container>
   <ng-container body>
     <app-delegate-types-form *ngIf="manageDelType !== null"

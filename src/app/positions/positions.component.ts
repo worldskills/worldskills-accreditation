@@ -46,7 +46,7 @@ export class PositionsComponent extends WsComponent implements OnInit {
             this.loading = false;
           }),
           this.delTypeService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
-            this.delegateTypes = res.delegate_types;
+            this.delegateTypes = res.positions;
           })
         );
       })

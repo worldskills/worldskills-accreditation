@@ -50,10 +50,10 @@
         </h3>
 
         <div class="ws-lines"
-          style="-webkit-print-color-adjust: exact; background-color: {{pa.delegate_type.color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400;">
-            <div style="color: {{pa.delegate_type.text_color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600;">{{pa.lines[0]}}</div>
-          <div style="color: {{pa.delegate_type.text_color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{pa.lines[1]}}</div>
-          <div style="color: {{pa.delegate_type.text_color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{pa.lines[2]}}</div>
+          style="-webkit-print-color-adjust: exact; background-color: {{pa.position.color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400;">
+            <div style="color: {{pa.position.text_color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600;">{{pa.lines[0]}}</div>
+          <div style="color: {{pa.position.text_color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{pa.lines[1]}}</div>
+          <div style="color: {{pa.position.text_color}} !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{pa.lines[2]}}</div>
         </div>
 
         <div style="overflow: hidden; height: 12mm; margin: 0.8em 0;" *ngIf="pa.zones.length > 0">

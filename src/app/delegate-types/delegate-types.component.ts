@@ -53,7 +53,7 @@ export class DelegateTypesComponent extends WsComponent implements OnInit {
     this.loading = true;
     this.subscribe(
       this.delTypeService.getList(this.selectedEvent.id).subscribe(res => {
-        this.delegateTypes = res.delegate_types;
+        this.delegateTypes = res.positions;
         this.loading = false;
       }),
       this.zoneService.getList(this.selectedEvent.id).subscribe(res => {
@@ -108,31 +108,24 @@ export class DelegateTypesComponent extends WsComponent implements OnInit {
     this.manageDelType = {
       id: 0,
       code: '',
-      name: '',
+      name: null,
       line1: '',
       line2: '',
       line3: '',
       color: '',
       text_color: '',
-      zones: []
+      zones: [],
+      wsEntity: null
     }
   }
 
   save(dt: DelegateType): void {
-    if (dt.id === 0) {
-      this.delTypeService.create(this.selectedEvent.id, dt).subscribe(res => {
-        this.loadData();
-        this.manageDelType = null;
-        this.toastService.success('Delegate Type is saved!');
-      });
-    } else {
-      this.delTypeService.update(this.selectedEvent.id, dt).subscribe(res => {
-        const index = this.delegateTypes.findIndex(d => d.id === dt.id);
-        this.delegateTypes[index] = dt;
-        this.manageDelType = null;
-        this.toastService.success('Delegate Type is saved!');
-      });
-    }
+    this.delTypeService.update(this.selectedEvent.id, dt).subscribe(res => {
+      const index = this.delegateTypes.findIndex(d => d.id === dt.id);
+      this.delegateTypes[index] = dt;
+      this.manageDelType = null;
+      this.toastService.success('Delegate Type is saved!');
+    });
   }
 
   deleteDelType(dt: DelegateType): void {
