@@ -202,13 +202,8 @@
               <div>{{ personAcr.person_position?.organization?.name.text }}</div>
               <div>{{ personAcr.person_position?.skill?.skill_number }} {{ personAcr.person_position?.skill?.name.text }}</div>
               <div>{{ personAcr.person_position?.member?.name.text }}</div>
-            </div>
-
-            <div class="form-group">
-              <label class="small text-muted font-weight-bold my-0 py-0">{{ 'delegate_type' | translate }}</label>
-              <div>{{ personAcr.position_delegate_type?.delegate_type.name }}</div>
               <div>
-                <ng-container *ngFor="let zone of personAcr.position_delegate_type?.delegate_type.zones">
+                <ng-container *ngFor="let zone of personAcr.person_position?.position.zones">
                   <span class="badge mr-1 small" [style.background-color]="zone.color"
                         [ngbTooltip]="zone.name"
                         [style.color]="zone.text_color">{{ zone.code }}</span>
