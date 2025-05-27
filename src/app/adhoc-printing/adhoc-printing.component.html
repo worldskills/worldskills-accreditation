@@ -27,18 +27,18 @@
         <ng-select
           name="delegate_type"
           [items]="delegateTypes"
-          [(ngModel)]="personEdit.delegate_type"
+          [(ngModel)]="personEdit.position"
           bindLabel="name"
         >
           <ng-template ng-label-tmp let-item="item">
             <div class="d-inline-block" style="width: 15px; height: 15px; "
                  [style.background-color]="item.color"></div>
-            <div class="d-inline-block ml-2">{{ item.name }}</div>
+            <div class="d-inline-block ml-2">{{ item.name.text }}</div>
           </ng-template>
           <ng-template ng-option-tmp let-item="item" let-index="index">
             <div class="d-inline-block" style="width: 15px; height: 15px; "
                  [style.background-color]="item.color"></div>
-            <div class="d-inline-block ml-2">{{ item.name }}</div>
+            <div class="d-inline-block ml-2">{{ item.name.text }}</div>
           </ng-template>
         </ng-select>
       </div>
