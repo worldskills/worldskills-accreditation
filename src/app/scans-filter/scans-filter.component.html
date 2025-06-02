@@ -10,7 +10,7 @@
             [ngModel]="fetchParams.delegate_type"
             [items]="delegateTypes"
             bindValue="id"
-            bindLabel="name"
+            bindLabel="name.text"
           >
             <ng-template ng-label-tmp let-item="item">
               <div class="d-inline-block" style="width: 15px; height: 15px; " [style.background-color]="item.color"></div>

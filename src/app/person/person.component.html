@@ -50,7 +50,7 @@
                 <ng-select
                   name="del_types"
                   [items]="delegateTypes"
-                  bindLabel="name"
+                  bindLabel="name.text"
                   [ngModel]="personAcr.position"
                   (change)="onDelTypeChange($event)"
                   [disabled]="!hasEditPermission"
