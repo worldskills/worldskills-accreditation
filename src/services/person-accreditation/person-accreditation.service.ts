@@ -90,6 +90,7 @@ export class PersonAccreditationService extends WsService<any> {
       zone: [],
       printed: null,
       distributed: null,
+      overridden: null,
       photo: null,
       del_types: [],
       offset: 0,
@@ -158,6 +159,12 @@ export class PersonAccreditationService extends WsService<any> {
       queryParams['distributed'] = fetchParams.distributed;
     } else {
       queryParams['distributed'] = null;
+    }
+
+    if (!GenericUtil.isNullOrUndefined(fetchParams.overridden)) {
+      queryParams['overridden'] = fetchParams.overridden;
+    } else {
+      queryParams['overridden'] = null;
     }
 
     if (!GenericUtil.isNullOrUndefined(fetchParams.photo)) {
@@ -231,6 +238,10 @@ export class PersonAccreditationService extends WsService<any> {
 
     if ('distributed' in params && !GenericUtil.isNullOrUndefined(params['distributed'])) {
       fetchParams.distributed = params['distributed'] === 'true';
+    }
+
+    if ('overridden' in params && !GenericUtil.isNullOrUndefined(params['overridden'])) {
+      fetchParams.overridden = params['overridden'] === 'true';
     }
 
     if ('photo' in params && !GenericUtil.isNullOrUndefined(params['photo'])) {

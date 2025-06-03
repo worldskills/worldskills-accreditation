@@ -141,6 +141,18 @@
 
       <div class="row mb-2">
         <div class="col-sm-12">
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'overridden' | translate}}?</label>
+          <ng-select
+            [wsSelect]="['value', 'label']"
+            name="overridden"
+            [ngModel]="fetchParams.overridden"
+            [items]="yesNoSelections"
+          ></ng-select>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
           <button type="submit" class="btn btn-sm btn-primary ml-2 float-right">{{'set_filter' | translate}}</button>
           <div class="btn-group dropdown float-right" *ngIf="functionalitiesDisplaySetting.print">
             <button type="button" class="btn btn-sm btn-outline-primary"
