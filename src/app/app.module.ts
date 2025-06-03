@@ -78,7 +78,7 @@ import {Wsi2025CiwComponent} from "./badges/wsi2025-ciw/wsi2025-ciw.component";
 import { Ch2025Component } from './badges/ch2025/ch2025.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20240905174532');
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json?v=20250603092719');
 }
 
 export const appTranslationConfig = TranslateModule.forRoot({
