@@ -287,6 +287,7 @@
       <div class="card-body p-2 m-0">
         <app-person-badge-preview
           style="zoom: 0.9"
+          *ngIf="!savingPersonAcr"
           [selectedEvent]="selectedEvent"
           [person]="personAcr.summary"></app-person-badge-preview>
       </div>
