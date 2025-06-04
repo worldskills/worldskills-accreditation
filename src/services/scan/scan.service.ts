@@ -28,7 +28,7 @@ export class ScanService extends WsService<any> {
       to: null,
       eventId: selectedEvent.id,
       zone: null,
-      delegate_type: null,
+      position: null,
       member: null,
       accreditation: null,
       offset: 0,

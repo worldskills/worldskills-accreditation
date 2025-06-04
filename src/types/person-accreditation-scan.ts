@@ -17,7 +17,7 @@ export interface PersonAccreditationScanContainer {
 export interface PersonAccreditationScanReqParams extends FetchParams {
   eventId: number;
   zone: number;
-  delegate_type: number;
+  position: number;
   member: number;
   accreditation: number;
   from: string;

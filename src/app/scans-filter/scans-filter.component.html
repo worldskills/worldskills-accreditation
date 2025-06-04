@@ -4,10 +4,10 @@
     <form class="form-horizontal" (ngSubmit)="submit()" #form="ngForm" novalidate>
       <div class="row mb-2">
         <div class="col-sm-12">
-          <label class="small text-muted font-weight-bold my-0 py-0">{{'delegate_type' | translate}}</label>
+          <label class="small text-muted font-weight-bold my-0 py-0">{{'position' | translate}}</label>
           <ng-select
-            name="delegate_type"
-            [ngModel]="fetchParams.delegate_type"
+            name="position"
+            [ngModel]="fetchParams.position"
             [items]="delegateTypes"
             bindValue="id"
             bindLabel="name.text"

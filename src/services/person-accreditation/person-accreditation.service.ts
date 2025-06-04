@@ -92,7 +92,7 @@ export class PersonAccreditationService extends WsService<any> {
       distributed: null,
       overridden: null,
       photo: null,
-      del_types: [],
+      positions: [],
       offset: 0,
       limit: 10
     }
@@ -173,10 +173,10 @@ export class PersonAccreditationService extends WsService<any> {
       queryParams['photo'] = null;
     }
 
-    if (!GenericUtil.isNullOrUndefined(fetchParams.del_types)) {
-      queryParams['del_types'] = fetchParams.del_types;
+    if (!GenericUtil.isNullOrUndefined(fetchParams.positions)) {
+      queryParams['positions'] = fetchParams.positions;
     } else {
-      queryParams['del_types'] = null;
+      queryParams['positions'] = null;
     }
 
     if (!GenericUtil.isNullOrUndefined(fetchParams.offset)) {
@@ -248,12 +248,12 @@ export class PersonAccreditationService extends WsService<any> {
       fetchParams.photo = params['photo'] === 'true';
     }
 
-    if ('del_types' in params && !GenericUtil.isNullOrUndefined(params['del_types'])) {
-      const delTypes = params['del_types'];
-      if (typeof delTypes === 'string') {
-        fetchParams.del_types = [+delTypes];
+    if ('positions' in params && !GenericUtil.isNullOrUndefined(params['positions'])) {
+      const positions = params['positions'];
+      if (typeof positions === 'string') {
+        fetchParams.positions = [+positions];
       } else {
-        fetchParams.del_types = (delTypes as []).map(dt => +dt);
+        fetchParams.positions = (positions as []).map(p => +p);
       }
     }
 
