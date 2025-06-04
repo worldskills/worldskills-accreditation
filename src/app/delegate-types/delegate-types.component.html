@@ -6,10 +6,9 @@
           <colgroup>
             <col style="width: 3%">
             <col style="width: 10%">
-            <col style="width: 35%">
-            <col style="width: 20%">
+            <col style="width: 30%">
             <col style="width: 27%">
-            <col style="width: 5%">
+            <col style="width: 30%">
           </colgroup>
           <thead>
           <tr>
@@ -20,7 +19,6 @@
             <th class="border-top-0">{{'name' | translate}}</th>
             <th class="border-top-0">{{'badge_lines' | translate}}</th>
             <th class="border-top-0">{{'zones' | translate}}</th>
-            <th class="border-top-0">{{'action' | translate}}</th>
           </tr>
           </thead>
           <tbody>
@@ -43,11 +41,6 @@
                      [ngbTooltip]="zone.name"
                      [style.color]="zone.text_color">{{zone.code}}</div>
               </ng-container>
-            </td>
-            <td>
-              <button class="btn btn-sm btn-outline-danger" (click)="deleteDelType(dt)">
-                <i class="fa fa-trash"></i>
-              </button>
             </td>
           </tr>
           </tbody>
