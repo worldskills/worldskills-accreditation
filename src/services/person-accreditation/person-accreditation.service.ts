@@ -13,7 +13,7 @@ import {Params} from "@angular/router";
 import {isEmpty} from "../../utils/StringUtil";
 import {Image} from "../../types/image";
 import { Event } from '../../types/event';
-import { DelegateType } from 'src/types/delegate-type';
+import { Position } from '../../types/position';
 import { Zone } from 'src/types/zone';
 
 @Injectable({
@@ -43,10 +43,10 @@ export class PersonAccreditationService extends WsService<any> {
     return this.http.put<PersonAccreditation>(`${this.url(eventId)}/${personAccreditationId}`, personAccreditation).pipe(share());
   }
 
-  batchUpdateAccreditations(eventId: number, personAccreditationIds: number[], delegateType: DelegateType, zonesAdd: Zone[], zonesRemove: Zone[], distributed: boolean): Observable<any> {
+  batchUpdateAccreditations(eventId: number, personAccreditationIds: number[], position: Position, zonesAdd: Zone[], zonesRemove: Zone[], distributed: boolean): Observable<any> {
     return this.http.put(`${this.url(eventId)}/batch`, {
       ids: personAccreditationIds,
-      delegate_type: delegateType,
+      position: position,
       zones_add: zonesAdd,
       zones_remove: zonesRemove,
       distributed,
