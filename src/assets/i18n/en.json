@@ -3,6 +3,7 @@
   "registration_group_name": "Registration Group Name",
   "clear_filter": "Clear",
   "override_badge_lines": "Override",
+  "override_position": "Override Position",
   "date_of_birth": "Date of birth",
   "show_zones": "Show zones",
   "show_badge_lines": "Show badge lines",

@@ -153,22 +153,13 @@ const routes: Routes = [
             component: ScansComponent
           },
           {
-            path: 'delegate-types',
+            path: 'positions',
             data: {
-              breadcrumb: 'Delegate Types',
+              breadcrumb: 'Positions',
               roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_DELEGATE_TYPES])
             },
             canActivate: [GuardService],
             component: DelegateTypesComponent
-          },
-          {
-            path: 'positions',
-            data: {
-              breadcrumb: 'Positions',
-              roles: forAppCode(environment.worldskillsAppId, [ACR_ROLES.ADMIN, ACR_ROLES.EDIT_POSITIONS])
-            },
-            canActivate: [GuardService],
-            component: PositionsComponent
           },
           {
             path: 'package-options',
