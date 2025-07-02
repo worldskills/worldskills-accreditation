@@ -63,6 +63,9 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
           this.delegateTypeService.getList(this.selectedEvent.id, {available_person_accreditation: true}).subscribe(res => {
             this.delegateTypes = res.positions;
           }),
+          this.memberService.getMembers({member_of: this.selectedEvent.member_id, offset: 0, limit: 999, sort: '1058'}).subscribe(res => {
+            this.members = res.members;
+          }),
           this.skillService.getSkills(this.selectedEvent.id).subscribe(res => {
             this.skills = res.skills;
             // combined label
@@ -74,10 +77,6 @@ export class PeopleFilterComponent extends WsComponent implements OnInit {
             this.zones = res.zones;
           })
         );
-      }),
-      // load non-event based data
-      this.memberService.getWSIMembers().subscribe(res => {
-        this.members = res.members;
       })
     );
   }
