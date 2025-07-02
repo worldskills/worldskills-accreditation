@@ -7,6 +7,9 @@
   font-family: 'Frutiger LT Com', Arial, sans-serif;
   font-weight: 300;
   color: #111 !important;
+  width: 88mm;
+  display: block;
+  height: auto;
 }
 
 .ws-card {
