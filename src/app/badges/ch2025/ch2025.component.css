@@ -65,9 +65,9 @@
 }
 
 .ws-delegate-type {
-  font-size: 18mm;
-  height: 24mm;
-  line-height: 36mm;
+  font-size: 20mm;
+  height: 23mm;
+  line-height: 33mm;
   padding-top: 0;
   padding-left: 5mm;
   font-weight: 800;
@@ -75,7 +75,7 @@
 }
 
 .ws-zones {
-  height: 3.2cm;
+  height: 33mm;
   padding: 0.4cm 0.6cm;
   font-size: 0.8cm;
   line-height: 1cm;
