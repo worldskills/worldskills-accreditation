@@ -28,7 +28,7 @@
       </div>
 
       <div class="ws-zones" style="-webkit-print-color-adjust: exact; background-color: {{pa.position.color}} !important;">
-        <span *ngFor="let zone of zones" class="ws-zone" style="-webkit-print-color-adjust: exact; background-color: {{ zone.color }} !important; color: {{ zone.text_color }} !important; {{(hasZone(zone.code) || (zone.code == '3' && pa.custom_field_data['224'] == '2157')) ? 'display: none;' : 'display: inline-block;'}}">
+        <span *ngFor="let zone of zones" class="ws-zone" style="-webkit-print-color-adjust: exact; background-color: {{ zone.color }} !important; color: {{ zone.text_color }} !important; {{(hasZone(zone.code) || (zone.code == '3' && pa.custom_field_data['224'] == '2157')) ? 'display: inline-block;' : 'display: none;'}}">
           @if (zone.code == 'C') {
             <img src="assets/badges/ch2025/ceremony.svg" alt="C" height="22" />
           } @else if (zone.code == '+') {
