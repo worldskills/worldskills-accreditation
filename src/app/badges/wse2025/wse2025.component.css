@@ -67,10 +67,8 @@
 .wse-lines {
   line-height: 1.3;
   height: 18mm;
-}
-
-.wse-line {
-  height: 5.5mm;
+  padding-top: 1mm;
+  padding-bottom: 5mm;
 }
 
 .wse-grid-tickets {
