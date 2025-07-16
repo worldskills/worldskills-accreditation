@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   worldskillsAppId: 2100,
   worldskillsApi: 'https://api.worldskills.show',
-  worldskillsApiAccreditation: 'https://api.worldskills.show/accreditation',
+  worldskillsApiAccreditation: 'https://api.worldskills.show/registrations/accreditation',
   worldskillsApiImages: 'https://api.worldskills.show/images',
   worldskillsApiOrg: 'https://api.worldskills.show/org',
   worldskillsApiPeople: 'https://api.worldskills.show/people',
