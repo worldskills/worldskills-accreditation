@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  worldskillsAppId: 2100,
+  worldskillsAppId: 2700,
   worldskillsApi: 'http://localhost:8080',
   worldskillsApiAccreditation: 'http://localhost:8080/registrations/accreditation',
   worldskillsApiImages: 'http://localhost:8080/images',
