@@ -29,7 +29,7 @@
                 <input type="text" class="form-control"
                       [ngModel]="personAcr.first_name"
                       (ngModelChange)="onFirstNameChange($event)"
-                      [disabled]="!hasEditPermission"
+                      [disabled]="!hasEditPermission || personAcr.deleted"
                       [placeholder]="personAcr.person.first_name"
                       data-1p-ignore>
               </div>
@@ -38,7 +38,7 @@
                 <input type="text" class="form-control"
                       [ngModel]="personAcr.last_name"
                       (ngModelChange)="onLastNameChange($event)"
-                      [disabled]="!hasEditPermission"
+                      [disabled]="!hasEditPermission || personAcr.deleted"
                       [placeholder]="personAcr.person.last_name"
                       data-1p-ignore>
               </div>
@@ -53,7 +53,7 @@
                   bindLabel="name.text"
                   [ngModel]="personAcr.position"
                   (change)="onDelTypeChange($event)"
-                  [disabled]="!hasEditPermission"
+                  [disabled]="!hasEditPermission || personAcr.deleted"
                 >
                   <ng-template ng-label-tmp let-item="item">
                     <div class="d-inline-block" style="width: 15px; height: 15px; "
@@ -73,7 +73,7 @@
               <div class="col-sm-12">
                 <label class="small text-muted font-weight-bold my-0 py-0">{{ 'badge_lines' | translate }} <a *ngIf="hasEditPermission && !personAcr.lines" (click)="overrideBadgeLines($event)" href="#">{{ 'override_badge_lines' | translate }}</a></label>
                 <textarea class="form-control" rows="3" [ngModel]="personAcr.lines"
-                          [disabled]="!hasEditPermission"
+                          [disabled]="!hasEditPermission || personAcr.deleted"
                           (ngModelChange)="onBadgeLinesChange($event)" #badgeLines></textarea>
               </div>
             </div>
@@ -86,7 +86,7 @@
                   <div class="col-md-12">
                     <div class="btn-group">
                       <button class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
-                              [disabled]="!hasEditPermission || getZonesToAdd().length === 0"
+                              [disabled]="!hasEditPermission || personAcr.deleted || getZonesToAdd().length === 0"
                               id="addZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
                               aria-expanded="false">
                         {{ 'add_zone' | translate }}
@@ -99,7 +99,7 @@
                     </div>
                     <div class="btn-group ml-2">
                       <button class="btn btn-sm btn-outline-dark dropdown-toggle" href="#" role="button"
-                              [disabled]="!hasEditPermission || getZonesToRemove().length === 0"
+                              [disabled]="!hasEditPermission || personAcr.deleted || getZonesToRemove().length === 0"
                               id="removeZoneDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
                               aria-expanded="false">
                         {{ 'remove_zone' | translate }}
@@ -131,7 +131,7 @@
 
             <p class="text-muted small text-right" *ngIf="savingPersonAcr">{{ 'saving' | translate }}...</p>
             <p class="text-muted small text-right"
-               *ngIf="hasEditPermission && !savingPersonAcr">{{ 'changes_saved_automatically'| translate }}</p>
+               *ngIf="hasEditPermission && !personAcr.deleted && !savingPersonAcr">{{ 'changes_saved_automatically'| translate }}</p>
           </div>
           <div class="card-body" *ngIf="!personAcr">
             <ngx-skeleton-loader
@@ -169,7 +169,7 @@
               </div>
             </div>
 
-            <div class="row mb-3" *ngIf="hasUploadPhotoPermission">
+            <div class="row mb-3" *ngIf="hasUploadPhotoPermission && !personAcr.deleted">
               <div class="col-sm-12">
                 <p class="small text-muted font-weight-bold my-0 py-0">{{ 'accreditation_photo' | translate | titlecase }}</p>
                 <div class="btn-group">
@@ -258,6 +258,7 @@
   <div class="col-md-8">
     <div class="alert alert-danger small" *ngIf="personAcr && !canBePrinted()">{{ 'person_pending_approved_badge_cannot_be_printed' | translate }}</div>
     <div class="alert alert-info small" *ngIf="personAcr?.printed">{{ 'badge_has_been_printed' | translate }}</div>
+    <div class="alert alert-danger small" *ngIf="personAcr?.deleted">{{ 'accreditation_deleted' | translate }}</div>
     <div class="alert alert-warning small"
          *ngIf="personAcr?.distributed">{{ 'badge_has_been_distributed' | translate }}
     </div>
@@ -266,11 +267,11 @@
         <h5 class="card-title">{{ 'preview_badge' | translate | titlecase }}
           <div class="btn-group dropdown float-right">
             <button type="button" class="btn btn-sm btn-primary" (click)="printPreview()"
-                    [disabled]="!hasPrintPermission || !canBePrinted()">
+                    [disabled]="!hasPrintPermission || !canBePrinted() || personAcr?.deleted">
               {{ 'print_preview' | translate | titlecase }}
             </button>
             <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [disabled]="!canBePrinted() || personAcr?.deleted"></button>
             <div class="dropdown-menu">
               <button class="dropdown-item"
                       [disabled]="(!hasEditPermission && !hasPrintPermission) || !!personAcr.distributed"
